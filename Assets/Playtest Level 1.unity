@@ -369,7 +369,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 490942322}
+  m_TargetTexture: {fileID: 1490952267}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -1303,28 +1303,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 473247689}
---- !u!84 &490942322
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 432
-  m_Height: 270
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    m_FilterMode: 1
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapMode: 1
 --- !u!1 &502451563
 GameObject:
   m_ObjectHideFlags: 0
@@ -2555,7 +2533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0804604541e50642ba3332124b34b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dist: 0.3
+  dist: 0.5
   cameraAngle: 45
   rotationSpeed: 0.3
   direction: 0
@@ -3073,8 +3051,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 1220671588}
   outlineCamera: {fileID: 44313355}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 490942322}
-  extraRenderTexture: {fileID: 1937062317}
+  renderTexture: {fileID: 1490952267}
+  extraRenderTexture: {fileID: 1375992264}
 --- !u!1 &1279919875
 GameObject:
   m_ObjectHideFlags: 0
@@ -3413,6 +3391,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &1375992264
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 432
+  m_Height: 270
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapMode: 1
 --- !u!1 &1381438881
 GameObject:
   m_ObjectHideFlags: 0
@@ -3867,6 +3867,28 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1476697843}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!84 &1490952267
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 432
+  m_Height: 270
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapMode: 1
 --- !u!1 &1507950718
 GameObject:
   m_ObjectHideFlags: 0
@@ -4820,28 +4842,6 @@ Transform:
   m_Father: {fileID: 1652670998}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &1937062317
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 432
-  m_Height: 270
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapMode: 1
 --- !u!1 &1940142998
 GameObject:
   m_ObjectHideFlags: 0
@@ -4875,7 +4875,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 41.99994, y: 44}
+  m_AnchoredPosition: {x: 7.4000244, y: 44}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1940143000
@@ -4904,7 +4904,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 145
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -4928,8 +4928,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac95ac77a16c5f46a417b238a122807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yourturnColor: {r: 0.015686275, g: 0.85490197, b: 0.57254905, a: 1}
-  enemyturnColor: {r: 0.9137255, g: 0, b: 0.015686275, a: 1}
+  yourturnColor: {r: 0.90588236, g: 0.7921569, b: 0.007843138, a: 1}
+  enemyturnColor: {r: 0.5568628, g: 0, b: 0.80784315, a: 1}
   yourturn: Your Turn
   enemyturn: Enemy Turn
 --- !u!1 &1944401624

@@ -56,17 +56,17 @@ public class CameraController : MonoBehaviour
         //Rotations
         if (Input.GetKeyDown(KeyCode.Q) && !isRotating)
         {
-            StartCoroutine(RotateMe(Vector3.up * -90, rotationSpeed));
+            StartCoroutine(RotateMe(Vector3.up * -90, rotationSpeed, -90f));
             rotateCounterClockwise();
         }
         if (Input.GetKeyDown(KeyCode.E) && !isRotating)
         {
-            StartCoroutine(RotateMe(Vector3.up * 90, rotationSpeed));
+            StartCoroutine(RotateMe(Vector3.up * 90, rotationSpeed, 90f));
             rotateClockwise();
         }
     }
 
-    IEnumerator RotateMe(Vector3 byAngles, float inTime)
+    IEnumerator RotateMe(Vector3 byAngles, float inTime, float degrees)
     {
         isRotating = true;
         var fromAngle = transform.rotation;
@@ -77,6 +77,8 @@ public class CameraController : MonoBehaviour
             yield return null;
         }
 
+        transform.rotation = fromAngle;
+        transform.Rotate(0, degrees, 0);
         isRotating = false;
     }
 

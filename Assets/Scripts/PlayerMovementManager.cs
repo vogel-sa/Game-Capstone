@@ -1,9 +1,11 @@
 ﻿using cakeslice;
 using Pathfinding;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovementManager : MonoBehaviour {
+public class PlayerMovementManager : MonoBehaviour
+{
 
     private static object _lock = new object();
     private static PlayerMovementManager _instance;
@@ -11,11 +13,11 @@ public class PlayerMovementManager : MonoBehaviour {
     {
         get
         {
-            lock(_lock)
+            lock (_lock)
             {
                 if (!_instance)
                 {
-                    var inst = (PlayerMovementManager)FindObjectOfType(typeof(PlayerMovementManager));
+                    var inst = FindObjectOfType(typeof(PlayerMovementManager)) as PlayerMovementManager;
                     _instance = inst ? inst : new GameObject().AddComponent<PlayerMovementManager>();
                 }
             }
@@ -39,7 +41,7 @@ public class PlayerMovementManager : MonoBehaviour {
     private int highlightedColor = 1; // This should correspond to 0, 1, or 2 in the camera's outlineEffect component.
 
     private List<GraphNode> nodes = null;
-    
+
     private Mesh cursor;
 
     private Vector3 cursorPosition;
@@ -47,7 +49,11 @@ public class PlayerMovementManager : MonoBehaviour {
     private int[] cursorCoordinates = { 0, 0 };
 
     private Outline lastUpdateOutline;
+
     private int notHighlightedColor;
+
+    private bool controlsEnabled = true; // Is the character moving? If so, lock controls and turn off quads.
+    private ABPath path;
 
     void Awake()
     {
@@ -71,56 +77,58 @@ public class PlayerMovementManager : MonoBehaviour {
             quads[i] = quad;
         }
     }
-	
-	// Update is called once per frame
-	void Update()
+
+    // Update is called once per frame
+    void Update()
     {
         if (selected)
         {
             Vector3 newPos;
-            if (Input.GetKeyDown(KeyCode.W))
+            if (controlsEnabled)
             {
-                newPos = cursorPosition + new Vector3(0, 0, 1);
+                if (Input.GetKeyDown(KeyCode.W))
+                {
+                    newPos = cursorPosition + new Vector3(0, 0, 1);
 
-                if (Mathf.Abs(cursorCoordinates[0]) + Mathf.Abs(cursorCoordinates[1] + 1) <= range && AstarData.active.GetNearest(newPos).node.Walkable)
-                {
-                    cursorPosition = newPos;
-                    cursorCoordinates[1]++;
+                    if (Mathf.Abs(cursorCoordinates[0]) + Mathf.Abs(cursorCoordinates[1] + 1) <= range && AstarData.active.GetNearest(newPos).node.Walkable)
+                    {
+                        cursorPosition = newPos;
+                        cursorCoordinates[1]++;
+                    }
                 }
-            }
-            // Region is just near-duplicate code of the above if block.
-            // TODO: clean this up later.
-            #region 
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                newPos = cursorPosition + new Vector3(-1, 0, 0);
-                if (Mathf.Abs(cursorCoordinates[0] - 1) + Mathf.Abs(cursorCoordinates[1]) <= range && AstarData.active.GetNearest(newPos).node.Walkable)
+                // Region is just near-duplicate code of the above if block.
+                // TODO: clean this up later.
+                #region 
+                if (Input.GetKeyDown(KeyCode.A))
                 {
-                    cursorCoordinates[0]--;
-                    cursorPosition = newPos;
+                    newPos = cursorPosition + new Vector3(-1, 0, 0);
+                    if (Mathf.Abs(cursorCoordinates[0] - 1) + Mathf.Abs(cursorCoordinates[1]) <= range && AstarData.active.GetNearest(newPos).node.Walkable)
+                    {
+                        cursorCoordinates[0]--;
+                        cursorPosition = newPos;
+                    }
                 }
-            }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                newPos = cursorPosition + new Vector3(0, 0, -1);
-                if (Mathf.Abs(cursorCoordinates[0]) + Mathf.Abs(cursorCoordinates[1] - 1) <= range && AstarData.active.GetNearest(newPos).node.Walkable)
+                if (Input.GetKeyDown(KeyCode.S))
                 {
-                    cursorPosition = newPos;
-                    cursorCoordinates[1]--;
+                    newPos = cursorPosition + new Vector3(0, 0, -1);
+                    if (Mathf.Abs(cursorCoordinates[0]) + Mathf.Abs(cursorCoordinates[1] - 1) <= range && AstarData.active.GetNearest(newPos).node.Walkable)
+                    {
+                        cursorPosition = newPos;
+                        cursorCoordinates[1]--;
+                    }
                 }
-            }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                newPos = cursorPosition + new Vector3(1, 0, 0);
-                if (Mathf.Abs(cursorCoordinates[0] + 1) + Mathf.Abs(cursorCoordinates[1]) <= range && AstarData.active.GetNearest(newPos).node.Walkable)
+                if (Input.GetKeyDown(KeyCode.D))
                 {
-                    cursorPosition = newPos;
-                    cursorCoordinates[0]++;
+                    newPos = cursorPosition + new Vector3(1, 0, 0);
+                    if (Mathf.Abs(cursorCoordinates[0] + 1) + Mathf.Abs(cursorCoordinates[1]) <= range && AstarData.active.GetNearest(newPos).node.Walkable)
+                    {
+                        cursorPosition = newPos;
+                        cursorCoordinates[0]++;
+                    }
                 }
+                #endregion
             }
-            #endregion
 
-            // TODO: Draw the cursor.
             if (selected)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -132,18 +140,37 @@ public class PlayerMovementManager : MonoBehaviour {
                     if (lastUpdateOutline) lastUpdateOutline.color = notHighlightedColor;
                     outline.color = highlightedColor;
                     lastUpdateOutline = outline;
+
+                    if (controlsEnabled && Input.GetMouseButtonDown(0))
+                    {
+                        // Get path from path manager.
+                        var path = PathManager.Instance.getPath(selected.transform.position, AstarData.active.GetNearest(hit.point).position, PathManager.CharacterFaction.ALLY);
+                        this.path = path;
+                        // Call movement routine and wait.
+                    }
+
                 }
             }
-
-            // TODO: Add character movement/pathfinding
-            if (Input.GetKeyDown(KeyCode.Space))
+        }
+        #if DEBUG
+        if (path != null)
+        {
+            for (int i = 0; i < path.vectorPath.Count - 1; i++)
             {
-                var node = AstarData.active.GetNearest(cursorPosition).node;
-                var seeker = selected.GetComponent<Seeker>();//.StartPath(transform.position, cursorPosition - new Vector3(0, 3, 0));
-                Path path = seeker.StartPath(transform.position, cursorPosition - new Vector3(0, 3, 0));
+                Debug.DrawLine(path.vectorPath[i], path.vectorPath[i + 1], Color.red);
             }
         }
-	}
+        #endif
+    }
+    private IEnumerable moveCharacter(ABPath path)
+    {
+        // Draw the path in the scene view
+        for (int i = 0; i < path.vectorPath.Count - 1; i++)
+        {
+            Debug.DrawLine(path.vectorPath[i], path.vectorPath[i + 1], Color.red);
+        }
+        yield return null;
+    }
 
     public void Select(Transform t)
     {

@@ -143,10 +143,18 @@ public class PlayerMovementManager : MonoBehaviour
 
                     if (controlsEnabled && Input.GetMouseButtonDown(0))
                     {
-                        // Get path from path manager.
-                        var path = PathManager.Instance.getPath(selected.transform.position, AstarData.active.GetNearest(hit.point).position, PathManager.CharacterFaction.ALLY);
-                        this.path = path;
-                        // Call movement routine and wait.
+                        Vector3 hitPos = AstarData.active.GetNearest(hit.point).position;
+                        if (!Physics.Raycast(new Ray(hitPos, Vector3.up), 1, 1 << LayerMask.NameToLayer("Player")))
+                        {
+                            // Get path from path manager.
+                            var path = PathManager.Instance.getPath(selected.transform.position, hitPos, PathManager.CharacterFaction.ALLY);
+                            this.path = path;
+                            // Call movement routine and wait.
+                        }
+                        else
+                        {
+                            Debug.Log("Space occupied.");
+                        }
                     }
 
                 }

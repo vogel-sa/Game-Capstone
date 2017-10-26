@@ -31,7 +31,7 @@ public class RaycastIfInLightCone : MonoBehaviour
     {
         for (int i = 0; i <= segments; i++)
         {
-            Vector3 direction = (Quaternion.AngleAxis(i - angle / 2, Vector3.up) * transform.forward).normalized;
+            Vector3 direction = (Quaternion.AngleAxis((i * angle / segments) - angle / 2, Vector3.up) * transform.forward).normalized;
             Debug.DrawRay(transform.position, direction * range, Color.blue);
         }
     } 

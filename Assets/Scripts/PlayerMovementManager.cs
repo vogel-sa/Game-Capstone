@@ -57,7 +57,6 @@ public class PlayerMovementManager : MonoBehaviour
 
     void Awake()
     {
-        cursor = PrimitiveHelper.GetPrimitiveMesh(PrimitiveType.Sphere);
         Vector3 quadRotation = new Vector3(90, 0, 0);
         for (int i = 0; i < 100; i++)
         {
@@ -83,52 +82,6 @@ public class PlayerMovementManager : MonoBehaviour
     {
         if (selected)
         {
-            Vector3 newPos;
-            if (controlsEnabled)
-            {
-                if (Input.GetKeyDown(KeyCode.W))
-                {
-                    newPos = cursorPosition + new Vector3(0, 0, 1);
-
-                    if (Mathf.Abs(cursorCoordinates[0]) + Mathf.Abs(cursorCoordinates[1] + 1) <= range && AstarData.active.GetNearest(newPos).node.Walkable)
-                    {
-                        cursorPosition = newPos;
-                        cursorCoordinates[1]++;
-                    }
-                }
-                // Region is just near-duplicate code of the above if block.
-                // TODO: clean this up later.
-                #region 
-                if (Input.GetKeyDown(KeyCode.A))
-                {
-                    newPos = cursorPosition + new Vector3(-1, 0, 0);
-                    if (Mathf.Abs(cursorCoordinates[0] - 1) + Mathf.Abs(cursorCoordinates[1]) <= range && AstarData.active.GetNearest(newPos).node.Walkable)
-                    {
-                        cursorCoordinates[0]--;
-                        cursorPosition = newPos;
-                    }
-                }
-                if (Input.GetKeyDown(KeyCode.S))
-                {
-                    newPos = cursorPosition + new Vector3(0, 0, -1);
-                    if (Mathf.Abs(cursorCoordinates[0]) + Mathf.Abs(cursorCoordinates[1] - 1) <= range && AstarData.active.GetNearest(newPos).node.Walkable)
-                    {
-                        cursorPosition = newPos;
-                        cursorCoordinates[1]--;
-                    }
-                }
-                if (Input.GetKeyDown(KeyCode.D))
-                {
-                    newPos = cursorPosition + new Vector3(1, 0, 0);
-                    if (Mathf.Abs(cursorCoordinates[0] + 1) + Mathf.Abs(cursorCoordinates[1]) <= range && AstarData.active.GetNearest(newPos).node.Walkable)
-                    {
-                        cursorPosition = newPos;
-                        cursorCoordinates[0]++;
-                    }
-                }
-                #endregion
-            }
-
             if (selected)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -200,7 +153,6 @@ public class PlayerMovementManager : MonoBehaviour
         {
             quads[count].SetActive(true);
             quads[count].transform.position = (Vector3)node.position + new Vector3(0, .01f, 0);
-            //Graphics.DrawMesh(quad, (Vector3)node.position + new Vector3(0, .1f, 0), Quaternion.Euler(90, 0, 0), mat, LayerMask.NameToLayer("Outline"));
             count++;
         }
         selected = t;

@@ -1,9 +1,11 @@
 ﻿using cakeslice;
 using Pathfinding;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovementManager : MonoBehaviour {
+public class PlayerMovementManager : MonoBehaviour
+{
 
     private static object _lock = new object();
     private static PlayerMovementManager _instance;
@@ -11,11 +13,11 @@ public class PlayerMovementManager : MonoBehaviour {
     {
         get
         {
-            lock(_lock)
+            lock (_lock)
             {
                 if (!_instance)
                 {
-                    var inst = (PlayerMovementManager)FindObjectOfType(typeof(PlayerMovementManager));
+                    var inst = FindObjectOfType(typeof(PlayerMovementManager)) as PlayerMovementManager;
                     _instance = inst ? inst : new GameObject().AddComponent<PlayerMovementManager>();
                 }
             }
@@ -28,9 +30,8 @@ public class PlayerMovementManager : MonoBehaviour {
     private static int quadsInUse = 0;
 
     private Transform selected { get; set; }
-
-    [SerializeField]
-    private int range = 5;
+    
+    private int range;
     [SerializeField]
     private float cursorHeight = 3f;
     [SerializeField]
@@ -39,7 +40,7 @@ public class PlayerMovementManager : MonoBehaviour {
     private int highlightedColor = 1; // This should correspond to 0, 1, or 2 in the camera's outlineEffect component.
 
     private List<GraphNode> nodes = null;
-    
+
     private Mesh cursor;
 
     private Vector3 cursorPosition;
@@ -47,11 +48,16 @@ public class PlayerMovementManager : MonoBehaviour {
     private int[] cursorCoordinates = { 0, 0 };
 
     private Outline lastUpdateOutline;
+
     private int notHighlightedColor;
+
+    private bool controlsEnabled = true; // Is the character moving? If so, lock controls and turn off quads.
+    private ABPath path;
 
     void Awake()
     {
-        cursor = PrimitiveHelper.GetPrimitiveMesh(PrimitiveType.Sphere);
+        range = GetComponent<PlayerCharacterStats>().GetMovementRange();
+        Debug.Log(range);
         Vector3 quadRotation = new Vector3(90, 0, 0);
         for (int i = 0; i < 100; i++)
         {
@@ -71,56 +77,12 @@ public class PlayerMovementManager : MonoBehaviour {
             quads[i] = quad;
         }
     }
-	
-	// Update is called once per frame
-	void Update()
+
+    // Update is called once per frame
+    void Update()
     {
         if (selected)
         {
-            Vector3 newPos;
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                newPos = cursorPosition + new Vector3(0, 0, 1);
-
-                if (Mathf.Abs(cursorCoordinates[0]) + Mathf.Abs(cursorCoordinates[1] + 1) <= range && AstarData.active.GetNearest(newPos).node.Walkable)
-                {
-                    cursorPosition = newPos;
-                    cursorCoordinates[1]++;
-                }
-            }
-            // Region is just near-duplicate code of the above if block.
-            // TODO: clean this up later.
-            #region 
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                newPos = cursorPosition + new Vector3(-1, 0, 0);
-                if (Mathf.Abs(cursorCoordinates[0] - 1) + Mathf.Abs(cursorCoordinates[1]) <= range && AstarData.active.GetNearest(newPos).node.Walkable)
-                {
-                    cursorCoordinates[0]--;
-                    cursorPosition = newPos;
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                newPos = cursorPosition + new Vector3(0, 0, -1);
-                if (Mathf.Abs(cursorCoordinates[0]) + Mathf.Abs(cursorCoordinates[1] - 1) <= range && AstarData.active.GetNearest(newPos).node.Walkable)
-                {
-                    cursorPosition = newPos;
-                    cursorCoordinates[1]--;
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                newPos = cursorPosition + new Vector3(1, 0, 0);
-                if (Mathf.Abs(cursorCoordinates[0] + 1) + Mathf.Abs(cursorCoordinates[1]) <= range && AstarData.active.GetNearest(newPos).node.Walkable)
-                {
-                    cursorPosition = newPos;
-                    cursorCoordinates[0]++;
-                }
-            }
-            #endregion
-
-            // TODO: Draw the cursor.
             if (selected)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -132,18 +94,44 @@ public class PlayerMovementManager : MonoBehaviour {
                     if (lastUpdateOutline) lastUpdateOutline.color = notHighlightedColor;
                     outline.color = highlightedColor;
                     lastUpdateOutline = outline;
+
+                    if (controlsEnabled && Input.GetMouseButtonDown(0))
+                    {
+                        Vector3 hitPos = AstarData.active.GetNearest(hit.point).position;
+                        if (!Physics.Raycast(new Ray(hitPos, Vector3.up), 1, 1 << LayerMask.NameToLayer("Player"))) // Check if occupied.
+                        {
+                            var path = PathManager.Instance.getPath(selected.transform.position, hitPos, PathManager.CharacterFaction.ALLY);
+                            this.path = path;
+                            // Call movement routine and wait.
+                        }
+                        else
+                        {
+                            Debug.Log("Space occupied.");
+                        }
+                    }
+
                 }
             }
-
-            // TODO: Add character movement/pathfinding
-            if (Input.GetKeyDown(KeyCode.Space))
+        }
+        #if DEBUG
+        if (path != null)
+        {
+            for (int i = 0; i < path.vectorPath.Count - 1; i++)
             {
-                var node = AstarData.active.GetNearest(cursorPosition).node;
-                var seeker = selected.GetComponent<Seeker>();//.StartPath(transform.position, cursorPosition - new Vector3(0, 3, 0));
-                Path path = seeker.StartPath(transform.position, cursorPosition - new Vector3(0, 3, 0));
+                Debug.DrawLine(path.vectorPath[i], path.vectorPath[i + 1], Color.red);
             }
         }
-	}
+        #endif
+    }
+    private IEnumerable moveCharacter(ABPath path)
+    {
+        // Draw the path in the scene view
+        for (int i = 0; i < path.vectorPath.Count - 1; i++)
+        {
+            Debug.DrawLine(path.vectorPath[i], path.vectorPath[i + 1], Color.red);
+        }
+        yield return null;
+    }
 
     public void Select(Transform t)
     {
@@ -166,7 +154,6 @@ public class PlayerMovementManager : MonoBehaviour {
         {
             quads[count].SetActive(true);
             quads[count].transform.position = (Vector3)node.position + new Vector3(0, .01f, 0);
-            //Graphics.DrawMesh(quad, (Vector3)node.position + new Vector3(0, .1f, 0), Quaternion.Euler(90, 0, 0), mat, LayerMask.NameToLayer("Outline"));
             count++;
         }
         selected = t;

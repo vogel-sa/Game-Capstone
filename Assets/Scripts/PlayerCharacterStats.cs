@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class PlayerCharacterStats : MonoBehaviour
+public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
 {
     [SerializeField]
     //Name of Player Character
@@ -22,53 +22,34 @@ public class PlayerCharacterStats : MonoBehaviour
     /// </summary>
     private int dmgMitigation = 0;
     [SerializeField]
-    //Number of squares a player is able to move in a single turn
+    ///Number of squares a player is able to move in a single turn
     private int movementRange;
-    //Indicator whether or not this character has moved or not
+    ///Indicator whether or not this character has moved or not
     public bool hasMoved;
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    /// <summary>
+    /// Number of Actions a character has in a turn. Default at turn start is 1,
+    /// Every attack on the bar costs 1. Free Actions cost 0.
+    /// </summary>
+    [SerializeField]
+    private int actionsleft;
 
 
-    public int getMovementRange()
+
+    public int GetMovementRange()
     {
         return movementRange;
     }
 
-    /// <summary>
-    /// Returns whether this player character's hp has reached zero
-    /// </summary>
-    /// <returns></returns>
     public bool IsDead()
     {
         return currHP <= 0;
     }
 
-    /// <summary>
-    /// Permanently changes the damage mitigation value
-    /// </summary>
-    /// <param name="value"> value to change the damage mitigation to to</param>
     public void ChangeMitigationValue(int value)
     {
         dmgMitigation = value;
     }
 
-    /// <summary>
-    /// Reduces the HP of this player character by the given amount
-    /// FACTORING in only personal damage mitigation and not outside factors
-    /// </summary>
-    /// <param name="damage"></param>
-    /// <returns>dmg taken after self-mitigation calculated</returns>
     public int TakeDamage(int damage)
     {
         if (dmgMitigation >= damage)
@@ -79,5 +60,12 @@ public class PlayerCharacterStats : MonoBehaviour
 
         currHP = Math.Max(currHP - dmgtaken, 0);
         return dmgtaken;
+    }
+
+    public void OnTurnStart()
+    {
+        hasMoved = false;
+        actionsleft = 1;
+
     }
 }

@@ -23,12 +23,16 @@ public class AnimationTest : MonoBehaviour {
 			animator.SetFloat ("Speed", 0);
 		}
 		if(Input.GetKey(KeyCode.D)){
-			transform.Rotate(Vector3.up * Time.deltaTime*50);
+			transform.Rotate(Vector3.up * Time.deltaTime*100);
 		}
 		if(Input.GetKey(KeyCode.A)){
-			transform.Rotate(Vector3.down * Time.deltaTime*50);
+			transform.Rotate(Vector3.down * Time.deltaTime*100);
 		}
-	
+
+		if (Input.GetMouseButtonDown (0)) {
+			animator.SetTrigger ("Fire");
+		}
+
 	}
 
 }

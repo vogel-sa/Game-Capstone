@@ -1476,7 +1476,12 @@ MonoBehaviour:
 
     S  - Idle Animation (speed set to 0)
 
-    A & D - Rotation'
+    (Can lerp between animations)
+
+
+    A & D - Rotation
+
+    Left click - Fire'
 --- !u!222 &718330885
 CanvasRenderer:
   m_ObjectHideFlags: 0

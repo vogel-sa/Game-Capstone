@@ -30,8 +30,7 @@ public class PlayerMovementManager : MonoBehaviour
     private static int quadsInUse = 0;
 
     private Transform selected { get; set; }
-
-    private ICharacterStats selectedCharacterStats;
+    public ICharacterStats selectedCharacterStats;
 
     private int range;
     [SerializeField]
@@ -58,8 +57,6 @@ public class PlayerMovementManager : MonoBehaviour
 
     void Awake()
     {
-        range = GetComponent<PlayerCharacterStats>().GetMovementRange();
-        Debug.Log(range);
         Vector3 quadRotation = new Vector3(90, 0, 0);
         for (int i = 0; i < 100; i++)
         {
@@ -138,6 +135,8 @@ public class PlayerMovementManager : MonoBehaviour
     public void Select(Transform t, ICharacterStats stats)
     {
         selectedCharacterStats = stats;
+        range = selectedCharacterStats.GetMovementRange();
+
         Debug.Log("Character name is now:" + stats.getCharacterName());
 
         for (int i = 0; i < quads.Length; i++)

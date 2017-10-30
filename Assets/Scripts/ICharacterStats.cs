@@ -38,7 +38,7 @@ public interface ICharacterStats
     /// Returns this character's designated base portrait
     /// </summary>
     /// <returns></returns>
-    Sprite getCharacterPortrait();
+    Texture2D getCharacterPortrait();
 
     /// <summary>
     /// returns character's name

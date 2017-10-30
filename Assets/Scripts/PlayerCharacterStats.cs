@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
 {
@@ -34,7 +35,7 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
     private int actionsleft;
 
     [SerializeField]
-    Sprite portrait;
+    Texture2D portrait;
 
 
 
@@ -72,7 +73,7 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
 
     }
 
-    public Sprite getCharacterPortrait()
+    public Texture2D getCharacterPortrait()
     {
         return portrait;
     }

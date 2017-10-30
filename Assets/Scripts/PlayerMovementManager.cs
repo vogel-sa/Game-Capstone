@@ -30,7 +30,9 @@ public class PlayerMovementManager : MonoBehaviour
     private static int quadsInUse = 0;
 
     private Transform selected { get; set; }
-    
+
+    private ICharacterStats selectedCharacterStats;
+
     private int range;
     [SerializeField]
     private float cursorHeight = 3f;
@@ -133,8 +135,11 @@ public class PlayerMovementManager : MonoBehaviour
         yield return null;
     }
 
-    public void Select(Transform t)
+    public void Select(Transform t, ICharacterStats stats)
     {
+        selectedCharacterStats = stats;
+        Debug.Log("Character name is now:" + stats.getCharacterName());
+
         for (int i = 0; i < quads.Length; i++)
         {
             quads[i].SetActive(false);

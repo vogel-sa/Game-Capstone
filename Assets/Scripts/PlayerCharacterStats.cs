@@ -33,6 +33,9 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
     [SerializeField]
     private int actionsleft;
 
+    [SerializeField]
+    Sprite portrait;
+
 
 
     public int GetMovementRange()
@@ -67,5 +70,15 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
         hasMoved = false;
         actionsleft = 1;
 
+    }
+
+    public Sprite getCharacterPortrait()
+    {
+        return portrait;
+    }
+
+    public string getCharacterName()
+    {
+        return name;
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using UnityEngine.UI;
+using UnityEngine;
 
 public interface ICharacterStats
 {
@@ -31,5 +33,17 @@ public interface ICharacterStats
     /// Handles all onTurn start effects, such as resetting movement flags and action count
     /// </summary>
     void OnTurnStart();
+
+    /// <summary>
+    /// Returns this character's designated base portrait
+    /// </summary>
+    /// <returns></returns>
+    Sprite getCharacterPortrait();
+
+    /// <summary>
+    /// returns character's name
+    /// </summary>
+    /// <returns></returns>
+    string getCharacterName();
 
 }

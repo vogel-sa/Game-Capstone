@@ -19,7 +19,10 @@ public class ClickSelectCharacter : MonoBehaviour {
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.transform.tag.Equals("Player"))
-                    PlayerMovementManager.Instance.Select(hit.transform);
+                {
+                    ICharacterStats stats = hit.transform.GetComponentInParent<PlayerCharacterStats>();
+                    PlayerMovementManager.Instance.Select(hit.transform, stats);
+                }
             }
         }
 	}

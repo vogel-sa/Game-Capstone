@@ -16,7 +16,13 @@ public class TurnManager : MonoBehaviour {
 		}
 	}
 
-	string currentTurn = "player";
+    public enum GAMESTATE
+    {
+        PLAYERTURN,
+        ENEMYTURN
+    }
+
+    GAMESTATE currentTurn;
 
 	int soldierLeft; //soldiers didn't move
 	List<GameObject> playerList;
@@ -44,12 +50,12 @@ public class TurnManager : MonoBehaviour {
 	public void OnTurnEnd(){
 		switch (currentTurn) {
 
-		case "player":
-			currentTurn = "enemy";
+		case GAMESTATE.ENEMYTURN:
+			currentTurn = GAMESTATE.PLAYERTURN;
 			break;
 
-		case "enemy":
-			currentTurn = "player";
+		case GAMESTATE.PLAYERTURN:
+			currentTurn = GAMESTATE.ENEMYTURN;
 			break;
 		}
 

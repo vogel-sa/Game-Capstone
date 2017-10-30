@@ -40,6 +40,15 @@ public class AnimationTest : MonoBehaviour {
 			animator.SetTrigger ("Fire");
 		}
 
+		//cover animation state trigger
+		if (Input.GetKeyDown(KeyCode.C)) {
+			if (animator.GetBool ("Cover")) {
+				animator.SetBool ("Cover", false);
+			} else {
+				animator.SetBool ("Cover", true);
+			}
+		}
+
 
 
 	}

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: f3c3f6ac1b748f7418bb463d68c36be6
-timeCreated: 1509333330
+guid: f6bf2562696aa7c409b57eaab605ce1e
+timeCreated: 1509335233
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -141,7 +141,7 @@ ModelImporter:
     400130: mixamorig:Spine1
     400132: mixamorig:Spine2
     400134: //RootNode
-    7400000: Stand To Cover
+    7400000: Cover To Stand
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -167,10 +167,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Stand To Cover
+      name: Cover To Stand
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 38
+      lastFrame: 45
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -179,12 +179,12 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
+      loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 1
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
+      keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000

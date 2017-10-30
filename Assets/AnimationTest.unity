@@ -1438,7 +1438,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -284.5, y: 55.5}
+  m_AnchoredPosition: {x: -270.8, y: 55.5}
   m_SizeDelta: {x: 321, y: 159}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &718330884
@@ -1482,7 +1482,9 @@ MonoBehaviour:
 
     A & D - Rotation
 
-    Left click - Fire'
+    Left click - Fire
+
+    X - grenade'
 --- !u!222 &718330885
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3978,7 +3980,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 5b43880384f7e354bab07477bee8c7fe, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5b43880384f7e354bab07477bee8c7fe, type: 3}

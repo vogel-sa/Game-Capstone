@@ -48,6 +48,9 @@ public class AnimationTest : MonoBehaviour {
 				animator.SetBool ("Cover", true);
 			}
 		}
+		if (Input.GetKeyDown (KeyCode.X)) {
+			animator.SetTrigger ("Grenade");
+		}
 
 
 

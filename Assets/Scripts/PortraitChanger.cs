@@ -7,6 +7,7 @@ public class PortraitChanger : MonoBehaviour {
 
     private ICharacterStats selectedCharacter;
     RawImage raw;
+    Text name;
    
     
 
@@ -14,6 +15,7 @@ public class PortraitChanger : MonoBehaviour {
 	void Awake () {
         selectedCharacter = PlayerMovementManager.Instance.selectedCharacterStats;
         raw = GetComponent <RawImage>();
+        name = GetComponentInChildren<Text>();
 	}
 	
 	// Update is called once per frame
@@ -21,12 +23,13 @@ public class PortraitChanger : MonoBehaviour {
 		if (selectedCharacter != PlayerMovementManager.Instance.selectedCharacterStats)
         {
             selectedCharacter = PlayerMovementManager.Instance.selectedCharacterStats;
-            changeTexture();
+            changeSelected();
         }
 	}
 
-    private void changeTexture()
+    private void changeSelected()
     {
         raw.texture = selectedCharacter.getCharacterPortrait();
+        name.text = selectedCharacter.getCharacterName();
     }
 }

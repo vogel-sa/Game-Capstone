@@ -3968,7 +3968,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100138, guid: 5b43880384f7e354bab07477bee8c7fe, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 5b43880384f7e354bab07477bee8c7fe, type: 3}
       propertyPath: m_Controller
@@ -4110,7 +4110,7 @@ GameObject:
   - component: {fileID: 1855644512}
   m_Layer: 0
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

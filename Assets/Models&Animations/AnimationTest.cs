@@ -36,7 +36,7 @@ public class AnimationTest : MonoBehaviour {
 
 
 		//fire animation state trigger
-		if (Input.GetMouseButtonDown (0)) {
+		if (Input.GetKeyDown(KeyCode.F)) {
 			animator.SetTrigger ("Fire");
 		}
 

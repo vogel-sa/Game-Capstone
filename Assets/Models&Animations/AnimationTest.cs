@@ -5,7 +5,8 @@ using UnityEngine;
 public class AnimationTest : MonoBehaviour {
 
 	Animator animator;
-
+	[SerializeField]
+	float speed = 0;
 	private string animState;
 	// Use this for initialization
 	void Start () {
@@ -15,23 +16,31 @@ public class AnimationTest : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		animator.SetFloat ("Speed", speed);
 
-		if(Input.GetKey(KeyCode.W)){
-				animator.SetFloat ("Speed", 1);
+		//variables for walk-run animation transition: speed
+			if (Input.GetKey (KeyCode.W)) {
+			if(speed  < 1)
+				speed += 3 * Time.deltaTime;
 			}
-		if(Input.GetKey(KeyCode.S)){
-			animator.SetFloat ("Speed", 0);
-		}
-		if(Input.GetKey(KeyCode.D)){
-			transform.Rotate(Vector3.up * Time.deltaTime*100);
-		}
-		if(Input.GetKey(KeyCode.A)){
-			transform.Rotate(Vector3.down * Time.deltaTime*100);
-		}
+			if (Input.GetKey (KeyCode.S)) {
+			if(speed > 0)
+				speed-= 3 * Time.deltaTime;
+			}
+			if (Input.GetKey (KeyCode.D)) {
+				transform.Rotate (Vector3.up * Time.deltaTime * 100);
+			}
+			if (Input.GetKey (KeyCode.A)) {
+				transform.Rotate (Vector3.down * Time.deltaTime * 100);
+			}
 
+
+		//fire animation state trigger
 		if (Input.GetMouseButtonDown (0)) {
 			animator.SetTrigger ("Fire");
 		}
+
+
 
 	}
 

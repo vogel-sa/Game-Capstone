@@ -1251,6 +1251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 683ab0f45a41ac04e959f0fa34f68fcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
 --- !u!1 &618504653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1472,11 +1473,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'W - Start running animation (speed set to 1)
+  m_Text: 'W - increase speed
 
-    S  - Idle Animation (speed set to 0)
+    S  - decrease speed
 
-    (Can lerp between animations)
+    (transitions between animations walk-run)
 
 
     A & D - Rotation

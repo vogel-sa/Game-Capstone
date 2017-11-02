@@ -33,13 +33,12 @@ public class PlayerMovementManager : MonoBehaviour
     }
 
     // Static pool of quads from which to pull for outline purposes.
-    private static GameObject[] quads = new GameObject[100];
+    private static GameObject[] quads = new GameObject[300];
     private static int quadsInUse = 0;
 
     private Transform selected;
     public PlayerCharacterStats selectedCharacterStats { get; set; }
 
-    private int range;
     [SerializeField]
     private Material mat;
     [SerializeField]
@@ -58,7 +57,7 @@ public class PlayerMovementManager : MonoBehaviour
     void Awake()
     {
         Vector3 quadRotation = new Vector3(90, 0, 0);
-        for (int i = 0; i < 100; i++)
+		for (int i = 0; i < quads.Length; i++)
         {
 
             var quad = PrimitiveHelper.CreatePrimitive(PrimitiveType.Quad, false);
@@ -157,24 +156,24 @@ public class PlayerMovementManager : MonoBehaviour
         {
             quads[i].SetActive(false);
         }
-        var modifier = new RaycastModifier();
-        modifier.raycastOffset = Vector3.up;
+        var modifier = new GameObject().AddComponent<RaycastModifier>();
+            modifier.raycastOffset = Vector3.up;
         modifier.Apply(path);
         var finished = false;
         var positionEnumeration = (from node in path.vectorPath
-                                  orderby path.vectorPath.IndexOf(node)
-                                  select (Vector3)node).ToArray();
+                                   orderby path.vectorPath.IndexOf(node)
+                                   select (Vector3)node).ToArray();
         var arr = new Vector3[positionEnumeration.Count() + 2];
         positionEnumeration.CopyTo(arr, 1);
         arr[0] = arr[1];
         arr[arr.Length - 1] = arr[arr.Length - 2];
         var spline = new LTSpline(arr);
-
+		Destroy (modifier.gameObject);
 
         LeanTween.moveSpline(selected.gameObject, spline, spline.distance / moveSpeed).
             setOnComplete(() => finished = true). // May want to fiddle with animation states here.
             setEase(LeanTweenType.linear).
-            setOrientToPath(true); 
+            setOrientToPath(true);
         //.setOnStart()
 
         yield return new WaitUntil(() => finished);
@@ -187,7 +186,6 @@ public class PlayerMovementManager : MonoBehaviour
     public void Select(Transform t, PlayerCharacterStats stats)
     {
         selectedCharacterStats = stats;
-        range = selectedCharacterStats.MovementRange;
         if (stats.hasMoved) return;
         Debug.Log("Character name is now:" + stats.Name);
 

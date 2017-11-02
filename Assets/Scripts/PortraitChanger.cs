@@ -7,7 +7,7 @@ public class PortraitChanger : MonoBehaviour {
 
     private ICharacterStats selectedCharacter;
     RawImage raw;
-    Text name;
+    Text Name { get; set; }
    
     
 
@@ -15,7 +15,7 @@ public class PortraitChanger : MonoBehaviour {
 	void Awake () {
         selectedCharacter = PlayerMovementManager.Instance.selectedCharacterStats;
         raw = GetComponent <RawImage>();
-        name = GetComponentInChildren<Text>();
+        Name = GetComponentInChildren<Text>();
 	}
 	
 	// Update is called once per frame
@@ -30,6 +30,6 @@ public class PortraitChanger : MonoBehaviour {
     private void changeSelected()
     {
         raw.texture = selectedCharacter.Portrait;
-        name.text = selectedCharacter.Name;
+        Name.text = selectedCharacter.Name;
     }
 }

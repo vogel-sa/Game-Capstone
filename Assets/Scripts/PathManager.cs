@@ -1,5 +1,4 @@
 ﻿using Pathfinding;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,6 +22,7 @@ public class PathManager : MonoBehaviour {
                 {
                     var inst = FindObjectOfType(typeof(PathManager)) as PathManager;
                     _instance = inst ? inst : new GameObject().AddComponent<PathManager>();
+                    _instance.Init();
                 }
             }
             return _instance;
@@ -33,17 +33,19 @@ public class PathManager : MonoBehaviour {
     public List<SingleNodeBlocker> enemies = new List<SingleNodeBlocker>();
     public List<SingleNodeBlocker> allies = new List<SingleNodeBlocker>();
 
-    BlockManager.TraversalProvider allyTraversalProvider;
-    BlockManager.TraversalProvider enemyTraversalProvider;
+    public BlockManager.TraversalProvider allyTraversalProvider { get; private set; }
+    public BlockManager.TraversalProvider enemyTraversalProvider { get; private set; }
 
     // Use this for initialization
-    void Start () {
+    void Init () {
         // TODO: Build list of blockers for allies and enemies.
         var bm = GetComponent<BlockManager>();
         blockManager = bm ? bm : gameObject.AddComponent<BlockManager>();
 
+
         foreach (var blocker in FindObjectsOfType<SingleNodeBlocker>())
         {
+
             blocker.manager = blockManager;
             blocker.BlockAtCurrentPosition();
             switch (blocker.tag)
@@ -62,7 +64,6 @@ public class PathManager : MonoBehaviour {
     {
         var path = ABPath.Construct(start, end, null);
         path.traversalProvider = team == CharacterFaction.ALLY ? allyTraversalProvider : enemyTraversalProvider;
-
         AstarPath.StartPath(path);
         path.BlockUntilCalculated();
 

@@ -18,10 +18,15 @@ public class ClickSelectCharacter : MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform.tag.Equals("Player"))
+                if (hit.transform.tag == "Player")
                 {
-                    ICharacterStats stats = hit.transform.GetComponentInParent<PlayerCharacterStats>();
-                    PlayerMovementManager.Instance.Select(hit.transform, stats);
+                    var obj = hit.transform;
+                    while (obj.parent && obj.parent.tag == "Player")
+                    {
+                        obj = obj.parent;
+                    }
+                    var stats = obj.GetComponentInParent<PlayerCharacterStats>();
+                    PlayerMovementManager.Instance.Select(obj, stats);
                 }
             }
         }

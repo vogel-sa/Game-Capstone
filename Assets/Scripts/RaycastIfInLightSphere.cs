@@ -39,6 +39,7 @@ public class RaycastIfInLightSphere : MonoBehaviour
             if (RaySweep(col))
             {
                 col.GetComponent<MeshRenderer>().enabled = true;
+                col.GetComponent<cakeslice.Outline>().enabled = true;
             }
         }
     }
@@ -48,6 +49,7 @@ public class RaycastIfInLightSphere : MonoBehaviour
         if (col.transform.tag.Equals("Enemy"))
         {
             col.GetComponent<MeshRenderer>().enabled = false;
+            col.GetComponent<cakeslice.Outline>().enabled = false;
         }
     }
 

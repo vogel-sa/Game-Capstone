@@ -161,7 +161,9 @@ namespace Pathfinding {
 		 *
 		 * \warning This method is not thread safe. Only use it from the Unity thread (i.e normal game code).
 		 */
-		public static List<GraphNode> BFS (GraphNode seed, int depth, int tagMask = -1) {
+		public static List<GraphNode> BFS (GraphNode seed, int depth, int tagMask = -1, System.Func<GraphNode, bool> walkableDefinition = null) {
+            if (walkableDefinition == null)
+                walkableDefinition = (n) => true;
 			BFSQueue = BFSQueue ?? new Queue<GraphNode>();
 			var que = BFSQueue;
 
@@ -181,7 +183,7 @@ namespace Pathfinding {
 			System.Action<GraphNode> callback;
 			if (tagMask == -1) {
 				callback = node => {
-					if (node.Walkable && !map.ContainsKey(node)) {
+					if (node.Walkable && walkableDefinition(node) && !map.ContainsKey(node)) {
 						map.Add(node, currentDist+1);
 						result.Add(node);
 						que.Enqueue(node);
@@ -189,7 +191,7 @@ namespace Pathfinding {
 				};
 			} else {
 				callback = node => {
-					if (node.Walkable && ((tagMask >> (int)node.Tag) & 0x1) != 0 && !map.ContainsKey(node)) {
+					if (node.Walkable && walkableDefinition(node) && ((tagMask >> (int)node.Tag) & 0x1) != 0 && !map.ContainsKey(node)) {
 						map.Add(node, currentDist+1);
 						result.Add(node);
 						que.Enqueue(node);

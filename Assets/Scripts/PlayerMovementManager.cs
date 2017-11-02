@@ -1,8 +1,10 @@
 ﻿using cakeslice;
 using Pathfinding;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DentedPixel;
 
 public class PlayerMovementManager : MonoBehaviour
 {
@@ -25,16 +27,18 @@ public class PlayerMovementManager : MonoBehaviour
         }
     }
 
+    private struct BoolWrapper
+    {
+        public bool val { get; set; }
+    }
+
     // Static pool of quads from which to pull for outline purposes.
-    private static GameObject[] quads = new GameObject[100];
+    private static GameObject[] quads = new GameObject[300];
     private static int quadsInUse = 0;
 
-    private Transform selected { get; set; }
-    public ICharacterStats selectedCharacterStats;
+    private Transform selected;
+    public PlayerCharacterStats selectedCharacterStats { get; set; }
 
-    private int range;
-    [SerializeField]
-    private float cursorHeight = 3f;
     [SerializeField]
     private Material mat;
     [SerializeField]
@@ -42,24 +46,20 @@ public class PlayerMovementManager : MonoBehaviour
 
     private List<GraphNode> nodes = null;
 
-    private Mesh cursor;
-
-    private Vector3 cursorPosition;
-
-    private int[] cursorCoordinates = { 0, 0 };
-
     private Outline lastUpdateOutline;
 
     private int notHighlightedColor;
 
     private bool controlsEnabled = true; // Is the character moving? If so, lock controls and turn off quads.
     private ABPath path;
+    private float moveSpeed = 5f;
 
     void Awake()
     {
         Vector3 quadRotation = new Vector3(90, 0, 0);
-        for (int i = 0; i < 100; i++)
+		for (int i = 0; i < quads.Length; i++)
         {
+
             var quad = PrimitiveHelper.CreatePrimitive(PrimitiveType.Quad, false);
             var col = quad.AddComponent<BoxCollider>();
             col.size = new Vector3(1, .01f, 1);
@@ -82,8 +82,7 @@ public class PlayerMovementManager : MonoBehaviour
     {
         if (selected)
         {
-            if (selected)
-            {
+            
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (lastUpdateOutline) lastUpdateOutline.color = notHighlightedColor;
@@ -94,14 +93,14 @@ public class PlayerMovementManager : MonoBehaviour
                     outline.color = highlightedColor;
                     lastUpdateOutline = outline;
 
-                    if (controlsEnabled && Input.GetMouseButtonDown(0))
+                    if (controlsEnabled && Input.GetMouseButtonDown(0) && !selectedCharacterStats.hasMoved)
                     {
                         Vector3 hitPos = AstarData.active.GetNearest(hit.point).position;
                         if (!Physics.Raycast(new Ray(hitPos, Vector3.up), 1, 1 << LayerMask.NameToLayer("Player"))) // Check if occupied.
                         {
                             var path = PathManager.Instance.getPath(selected.transform.position, hitPos, PathManager.CharacterFaction.ALLY);
                             this.path = path;
-                            // Call movement routine and wait.
+                            StartCoroutine(MoveCharacter(path));
                         }
                         else
                         {
@@ -109,6 +108,23 @@ public class PlayerMovementManager : MonoBehaviour
                         }
                     }
 
+                }
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.transform.tag == "Player")
+                    {
+                        var obj = hit.transform;
+                        while (obj.parent && obj.parent.tag == "Player")
+                        {
+                            obj = obj.parent;
+                        }
+                    var stats = obj.GetComponentInParent<PlayerCharacterStats>();
+                    Select(obj, stats);
                 }
             }
         }
@@ -122,32 +138,68 @@ public class PlayerMovementManager : MonoBehaviour
         }
         #endif
     }
-    private IEnumerable moveCharacter(ABPath path)
+
+    private IEnumerator MoveCharacter(ABPath path)
     {
-        // Draw the path in the scene view
+        #if DEBUG
         for (int i = 0; i < path.vectorPath.Count - 1; i++)
         {
             Debug.DrawLine(path.vectorPath[i], path.vectorPath[i + 1], Color.red);
         }
-        yield return null;
+        #endif
+        if (path.path.Count < 2)
+        {
+            throw new System.ArgumentException("Path must be at least length 2");
+        }
+        controlsEnabled = false;
+        for (int i = 0; i < quads.Length; i++)
+        {
+            quads[i].SetActive(false);
+        }
+        var modifier = new GameObject().AddComponent<RaycastModifier>();
+            modifier.raycastOffset = Vector3.up;
+        modifier.Apply(path);
+        var finished = false;
+        var positionEnumeration = (from node in path.vectorPath
+                                   orderby path.vectorPath.IndexOf(node)
+                                   select (Vector3)node).ToArray();
+        var arr = new Vector3[positionEnumeration.Count() + 2];
+        positionEnumeration.CopyTo(arr, 1);
+        arr[0] = arr[1];
+        arr[arr.Length - 1] = arr[arr.Length - 2];
+        var spline = new LTSpline(arr);
+		Destroy (modifier.gameObject);
+
+        LeanTween.moveSpline(selected.gameObject, spline, spline.distance / moveSpeed).
+            setOnComplete(() => finished = true). // May want to fiddle with animation states here.
+            setEase(LeanTweenType.linear).
+            setOrientToPath(true);
+        //.setOnStart()
+
+        yield return new WaitUntil(() => finished);
+        controlsEnabled = true;
+        // TODO: Fix the heirarchy for stats.
+        selectedCharacterStats.hasMoved = true;
+        selected.GetComponent<SingleNodeBlocker>().BlockAtCurrentPosition();
     }
 
-    public void Select(Transform t, ICharacterStats stats)
+    public void Select(Transform t, PlayerCharacterStats stats)
     {
         selectedCharacterStats = stats;
-        range = selectedCharacterStats.GetMovementRange();
-
-        Debug.Log("Character name is now:" + stats.getCharacterName());
+        if (stats.hasMoved) return;
+        Debug.Log("Character name is now:" + stats.Name);
 
         for (int i = 0; i < quads.Length; i++)
         {
             quads[i].SetActive(false);
         }
-        cursorPosition = new Vector3(t.position.x, 3, t.position.z);
-        cursorCoordinates = new int[] { 0, 0 };
         Debug.Log("select");
         // Get list of traversable nodes within range.
-        nodes = PathUtilities.BFS(AstarData.active.GetNearest(t.position).node, range);
+        var blocked = from blocker in PathManager.Instance.enemies
+                      select AstarData.active.GetNearest(blocker.transform.position).node;
+        nodes = PathUtilities.BFS(AstarData.active.GetNearest(t.position).node,
+            stats.MovementRange,
+            walkableDefinition: (n) => !blocked.Contains(n));
         // Shouldn't ever need too many quads.
         int count = 0;
         if (nodes.Count > quads.Length)
@@ -162,4 +214,5 @@ public class PlayerMovementManager : MonoBehaviour
         }
         selected = t;
     }
+
 }

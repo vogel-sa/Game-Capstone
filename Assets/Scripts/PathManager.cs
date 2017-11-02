@@ -62,7 +62,6 @@ public class PathManager : MonoBehaviour {
     {
         var path = ABPath.Construct(start, end, null);
         path.traversalProvider = team == CharacterFaction.ALLY ? allyTraversalProvider : enemyTraversalProvider;
-
         AstarPath.StartPath(path);
         path.BlockUntilCalculated();
 

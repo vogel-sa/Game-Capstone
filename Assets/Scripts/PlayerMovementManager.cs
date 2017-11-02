@@ -143,11 +143,13 @@ public class PlayerMovementManager : MonoBehaviour
         {
             throw new System.ArgumentException("Path must be at least length 2");
         }
-
+        var modifier = new RaycastModifier();
+        modifier.raycastOffset = Vector3.up;
+        modifier.Apply(path);
         var finished = false;
-        var positionEnumeration = (from node in path.path
-                                  orderby path.path.IndexOf(node)
-                                  select (Vector3)node.position).ToArray();
+        var positionEnumeration = (from node in path.vectorPath
+                                  orderby path.vectorPath.IndexOf(node)
+                                  select (Vector3)node).ToArray();
         var arr = new Vector3[positionEnumeration.Count() + 2];
         positionEnumeration.CopyTo(arr, 1);
         arr[0] = arr[1];
@@ -167,9 +169,9 @@ public class PlayerMovementManager : MonoBehaviour
     public void Select(Transform t, ICharacterStats stats)
     {
         selectedCharacterStats = stats;
-        range = selectedCharacterStats.GetMovementRange();
+        range = selectedCharacterStats.MovementRange;
 
-        Debug.Log("Character name is now:" + stats.getCharacterName());
+        Debug.Log("Character name is now:" + stats.Name);
 
         for (int i = 0; i < quads.Length; i++)
         {

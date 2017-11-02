@@ -10,5 +10,6 @@ public class DisableRendererBeforeCollisionDetection : MonoBehaviour {
 	void FixedUpdate()
     {
         GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<cakeslice.Outline>().enabled = false;
 	}
 }

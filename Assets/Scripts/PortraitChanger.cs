@@ -29,7 +29,7 @@ public class PortraitChanger : MonoBehaviour {
 
     private void changeSelected()
     {
-        raw.texture = selectedCharacter.getCharacterPortrait();
-        name.text = selectedCharacter.getCharacterName();
+        raw.texture = selectedCharacter.Portrait;
+        name.text = selectedCharacter.Name;
     }
 }

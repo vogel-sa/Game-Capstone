@@ -1,8 +1,10 @@
 ﻿using cakeslice;
 using Pathfinding;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DentedPixel;
 
 public class PlayerMovementManager : MonoBehaviour
 {
@@ -23,6 +25,11 @@ public class PlayerMovementManager : MonoBehaviour
             }
             return _instance;
         }
+    }
+
+    private struct BoolWrapper
+    {
+        public bool val { get; set; }
     }
 
     // Static pool of quads from which to pull for outline purposes.
@@ -54,6 +61,7 @@ public class PlayerMovementManager : MonoBehaviour
 
     private bool controlsEnabled = true; // Is the character moving? If so, lock controls and turn off quads.
     private ABPath path;
+    private float moveSpeed = 5f;
 
     void Awake()
     {
@@ -101,7 +109,7 @@ public class PlayerMovementManager : MonoBehaviour
                         {
                             var path = PathManager.Instance.getPath(selected.transform.position, hitPos, PathManager.CharacterFaction.ALLY);
                             this.path = path;
-                            // Call movement routine and wait.
+                            StartCoroutine(MoveCharacter(path));
                         }
                         else
                         {
@@ -122,14 +130,38 @@ public class PlayerMovementManager : MonoBehaviour
         }
         #endif
     }
-    private IEnumerable moveCharacter(ABPath path)
+
+    private IEnumerator MoveCharacter(ABPath path)
     {
-        // Draw the path in the scene view
+        #if DEBUG
         for (int i = 0; i < path.vectorPath.Count - 1; i++)
         {
             Debug.DrawLine(path.vectorPath[i], path.vectorPath[i + 1], Color.red);
         }
-        yield return null;
+        #endif
+        if (path.path.Count < 2)
+        {
+            throw new System.ArgumentException("Path must be at least length 2");
+        }
+
+        var finished = false;
+        var positionEnumeration = (from node in path.path
+                                  orderby path.path.IndexOf(node)
+                                  select (Vector3)node.position).ToArray();
+        var arr = new Vector3[positionEnumeration.Count() + 2];
+        positionEnumeration.CopyTo(arr, 1);
+        arr[0] = arr[1];
+        arr[arr.Length - 1] = arr[arr.Length - 2];
+        var spline = new LTSpline(arr);
+
+
+        LeanTween.moveSpline(selected.gameObject, spline, spline.distance / moveSpeed).
+            setOnComplete(() => finished = true). // May want to fiddle with animation states here.
+            setEase(LeanTweenType.linear).
+            setOrientToPath(true); 
+        //.setOnStart()
+
+        yield return new WaitUntil(() => finished);
     }
 
     public void Select(Transform t, ICharacterStats stats)

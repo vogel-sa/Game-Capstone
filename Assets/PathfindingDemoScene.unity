@@ -515,14 +515,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f1181aceedd279439c37654b88ffa44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Dummy
-  maxHP: 10
-  currHP: 10
-  dmgMitigation: 0
-  movementRange: 5
+  _name: Dummy
+  _maxHP: 10
+  _currHP: 10
+  _mitigationValue: 0
+  _movementRange: 5
   hasMoved: 0
-  actionsleft: 2
-  portrait: {fileID: 0}
+  _actionsleft: 2
+  _portrait: {fileID: 0}
 --- !u!114 &156955663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1347,30 +1347,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &466950185
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 550
-  m_Height: 344
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapMode: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &473247689
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,6 +1421,30 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 473247689}
+--- !u!84 &656648383
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 550
+  m_Height: 344
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapMode: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &681834382
 GameObject:
   m_ObjectHideFlags: 0
@@ -1740,7 +1740,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 1097124794}
+  m_TargetTexture: {fileID: 1795078920}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -2426,30 +2426,6 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!84 &1097124794
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 550
-  m_Height: 344
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    m_FilterMode: 1
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapMode: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1107905911
 GameObject:
   m_ObjectHideFlags: 0
@@ -2851,8 +2827,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 1220671588}
   outlineCamera: {fileID: 921524927}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 1097124794}
-  extraRenderTexture: {fileID: 466950185}
+  renderTexture: {fileID: 1795078920}
+  extraRenderTexture: {fileID: 656648383}
 --- !u!114 &1220671591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4447,6 +4423,30 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!84 &1795078920
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 550
+  m_Height: 344
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapMode: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1854127757
 GameObject:
   m_ObjectHideFlags: 0

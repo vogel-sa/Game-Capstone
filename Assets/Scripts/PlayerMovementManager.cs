@@ -68,6 +68,7 @@ public class PlayerMovementManager : MonoBehaviour
         Vector3 quadRotation = new Vector3(90, 0, 0);
         for (int i = 0; i < 100; i++)
         {
+
             var quad = PrimitiveHelper.CreatePrimitive(PrimitiveType.Quad, false);
             var col = quad.AddComponent<BoxCollider>();
             col.size = new Vector3(1, .01f, 1);
@@ -181,7 +182,11 @@ public class PlayerMovementManager : MonoBehaviour
         cursorCoordinates = new int[] { 0, 0 };
         Debug.Log("select");
         // Get list of traversable nodes within range.
-        nodes = PathUtilities.BFS(AstarData.active.GetNearest(t.position).node, range);
+        var blocked = from blocker in PathManager.Instance.enemies
+                      select AstarData.active.GetNearest(blocker.transform.position).node;
+        nodes = PathUtilities.BFS(AstarData.active.GetNearest(t.position).node,
+            stats.MovementRange,
+            walkableDefinition: (n) => !blocked.Contains(n));
         // Shouldn't ever need too many quads.
         int count = 0;
         if (nodes.Count > quads.Length)
@@ -196,4 +201,5 @@ public class PlayerMovementManager : MonoBehaviour
         }
         selected = t;
     }
+
 }

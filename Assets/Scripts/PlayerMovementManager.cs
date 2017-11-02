@@ -36,24 +36,16 @@ public class PlayerMovementManager : MonoBehaviour
     private static GameObject[] quads = new GameObject[100];
     private static int quadsInUse = 0;
 
-    private Transform selected { get; set; }
-    public ICharacterStats selectedCharacterStats;
+    private Transform selected;
+    public PlayerCharacterStats selectedCharacterStats { get; set; }
 
     private int range;
-    [SerializeField]
-    private float cursorHeight = 3f;
     [SerializeField]
     private Material mat;
     [SerializeField]
     private int highlightedColor = 1; // This should correspond to 0, 1, or 2 in the camera's outlineEffect component.
 
     private List<GraphNode> nodes = null;
-
-    private Mesh cursor;
-
-    private Vector3 cursorPosition;
-
-    private int[] cursorCoordinates = { 0, 0 };
 
     private Outline lastUpdateOutline;
 
@@ -91,8 +83,7 @@ public class PlayerMovementManager : MonoBehaviour
     {
         if (selected)
         {
-            if (selected)
-            {
+            
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (lastUpdateOutline) lastUpdateOutline.color = notHighlightedColor;
@@ -103,7 +94,7 @@ public class PlayerMovementManager : MonoBehaviour
                     outline.color = highlightedColor;
                     lastUpdateOutline = outline;
 
-                    if (controlsEnabled && Input.GetMouseButtonDown(0))
+                    if (controlsEnabled && Input.GetMouseButtonDown(0) && !selectedCharacterStats.hasMoved)
                     {
                         Vector3 hitPos = AstarData.active.GetNearest(hit.point).position;
                         if (!Physics.Raycast(new Ray(hitPos, Vector3.up), 1, 1 << LayerMask.NameToLayer("Player"))) // Check if occupied.
@@ -118,6 +109,23 @@ public class PlayerMovementManager : MonoBehaviour
                         }
                     }
 
+                }
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.transform.tag == "Player")
+                    {
+                        var obj = hit.transform;
+                        while (obj.parent && obj.parent.tag == "Player")
+                        {
+                            obj = obj.parent;
+                        }
+                    var stats = obj.GetComponentInParent<PlayerCharacterStats>();
+                    Select(obj, stats);
                 }
             }
         }
@@ -144,6 +152,11 @@ public class PlayerMovementManager : MonoBehaviour
         {
             throw new System.ArgumentException("Path must be at least length 2");
         }
+        controlsEnabled = false;
+        for (int i = 0; i < quads.Length; i++)
+        {
+            quads[i].SetActive(false);
+        }
         var modifier = new RaycastModifier();
         modifier.raycastOffset = Vector3.up;
         modifier.Apply(path);
@@ -165,21 +178,23 @@ public class PlayerMovementManager : MonoBehaviour
         //.setOnStart()
 
         yield return new WaitUntil(() => finished);
+        controlsEnabled = true;
+        // TODO: Fix the heirarchy for stats.
+        selectedCharacterStats.hasMoved = true;
+        selected.GetComponent<SingleNodeBlocker>().BlockAtCurrentPosition();
     }
 
-    public void Select(Transform t, ICharacterStats stats)
+    public void Select(Transform t, PlayerCharacterStats stats)
     {
         selectedCharacterStats = stats;
         range = selectedCharacterStats.MovementRange;
-
+        if (stats.hasMoved) return;
         Debug.Log("Character name is now:" + stats.Name);
 
         for (int i = 0; i < quads.Length; i++)
         {
             quads[i].SetActive(false);
         }
-        cursorPosition = new Vector3(t.position.x, 3, t.position.z);
-        cursorCoordinates = new int[] { 0, 0 };
         Debug.Log("select");
         // Get list of traversable nodes within range.
         var blocked = from blocker in PathManager.Instance.enemies

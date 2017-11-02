@@ -25,7 +25,7 @@ public class ClickSelectCharacter : MonoBehaviour {
                     {
                         obj = obj.parent;
                     }
-                    ICharacterStats stats = obj.GetComponentInParent<PlayerCharacterStats>();
+                    var stats = obj.GetComponentInParent<PlayerCharacterStats>();
                     PlayerMovementManager.Instance.Select(obj, stats);
                 }
             }

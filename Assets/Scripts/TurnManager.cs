@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour {
 
@@ -29,6 +30,8 @@ public class TurnManager : MonoBehaviour {
 	List<PlayerCharacterStats> playerList;
 	List<GameObject> enemyList;
 
+    ChangeTurnText TurnText;  //Replace with smarter implementation
+
 	void Awake(){
 		theInstance = this;
 
@@ -36,6 +39,12 @@ public class TurnManager : MonoBehaviour {
             if (x.GetComponent<PlayerCharacterStats>() != null)
             {
                 playerList.Add(x.GetComponent<PlayerCharacterStats>());
+            }
+
+            //REPLACE WITH SMARTER IMPLEMENTATION
+            if (GameObject.Find("Turn Type") != null)
+            {
+                TurnText = GameObject.Find("Turn Type").GetComponent<ChangeTurnText>();
             }
         }
 	}
@@ -47,7 +56,7 @@ public class TurnManager : MonoBehaviour {
 
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && currentTurn == GAMESTATE.ENEMYTURN)
         {
             SwitchTurn();
         }
@@ -63,7 +72,14 @@ public class TurnManager : MonoBehaviour {
         }
 	}
 
+    private void OnEnemyTurnStart()
+    {
+        PlayerMovementManager.Instance.enabled = false;
+    }
+
 	public void SwitchTurn(){
+
+        TurnText.switchText();
 
         switch (currentTurn) {
 
@@ -77,13 +93,25 @@ public class TurnManager : MonoBehaviour {
 		case GAMESTATE.PLAYERTURN:
                 {
                     currentTurn = GAMESTATE.ENEMYTURN;
-                    PlayerMovementManager.Instance.enabled = false;
+                    OnEnemyTurnStart();
                     break;
                 }
+                
 		}
 
 		Debug.Log ("End Current Turn");
 	}
+
+    /// <summary>
+    /// Checks if all players have moved, then auto ends the players turn if ALL player characters have moved
+    /// </summary>
+    public void AutoEndTurnCheck()
+    {
+        if (HaveAllPlayersMoved())
+        {
+            SwitchTurn();
+        }
+    }
 
 	private bool HaveAllPlayersMoved(){
 

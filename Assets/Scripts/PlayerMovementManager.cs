@@ -180,6 +180,7 @@ public class PlayerMovementManager : MonoBehaviour
         controlsEnabled = true;
         // TODO: Fix the heirarchy for stats.
         selectedCharacterStats.hasMoved = true;
+        TurnManager.instance.AutoEndTurnCheck();
         selected.GetComponent<SingleNodeBlocker>().BlockAtCurrentPosition();
     }
 

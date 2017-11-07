@@ -18,23 +18,21 @@ public class ChangeTurnText : MonoBehaviour {
 
     private Text text;
 
+    
+
 	// Use this for initialization
 	void Start () {
         text = GetComponent<Text>();
-
         text.text = yourturn;
         text.color = yourturnColor;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.Space))
-        {
-            switchText();
-        }
+
 	}
 
-    private void switchText()
+    public void switchText()
     {
         if (text.text == yourturn)
         {

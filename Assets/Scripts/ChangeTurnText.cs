@@ -17,19 +17,26 @@ public class ChangeTurnText : MonoBehaviour {
     private string enemyturn = "Enemy turn";
 
     private Text text;
-
-    
+    TurnManager.GAMESTATE state;
+    TurnManager manager;
 
 	// Use this for initialization
 	void Start () {
         text = GetComponent<Text>();
         text.text = yourturn;
         text.color = yourturnColor;
+
+        manager = TurnManager.instance;
+        state = manager.currentTurn;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+        if (manager.currentTurn != state)
+        {
+            switchText();
+        }
 	}
 
     public void switchText()
@@ -38,11 +45,13 @@ public class ChangeTurnText : MonoBehaviour {
         {
             text.text = enemyturn;
             text.color = enemyturnColor;
+            state = TurnManager.GAMESTATE.ENEMYTURN;
         }
         else
         {
             text.text = yourturn;
             text.color = yourturnColor;
+            state = TurnManager.GAMESTATE.PLAYERTURN;
         }
     }
 }

@@ -23,14 +23,12 @@ public class TurnManager : MonoBehaviour {
         ENEMYTURN
     }
 
-    GAMESTATE currentTurn;
+    public GAMESTATE currentTurn;
 
 	int soldierLeft; //soldiers didn't move
     [SerializeField]
 	List<PlayerCharacterStats> playerList;
 	List<GameObject> enemyList;
-
-    ChangeTurnText TurnText;  //Replace with smarter implementation
 
 	void Awake(){
 		theInstance = this;
@@ -39,12 +37,6 @@ public class TurnManager : MonoBehaviour {
             if (x.GetComponent<PlayerCharacterStats>() != null)
             {
                 playerList.Add(x.GetComponent<PlayerCharacterStats>());
-            }
-
-            //REPLACE WITH SMARTER IMPLEMENTATION
-            if (GameObject.Find("Turn Type") != null)
-            {
-                TurnText = GameObject.Find("Turn Type").GetComponent<ChangeTurnText>();
             }
         }
 	}
@@ -77,9 +69,10 @@ public class TurnManager : MonoBehaviour {
         PlayerMovementManager.Instance.enabled = false;
     }
 
+    /// <summary>
+    /// Switches the Current turn to the Other turn
+    /// </summary>
 	public void SwitchTurn(){
-
-        TurnText.switchText();
 
         switch (currentTurn) {
 
@@ -98,9 +91,15 @@ public class TurnManager : MonoBehaviour {
                 }
                 
 		}
-
-		Debug.Log ("End Current Turn");
 	}
+
+    public void EndPlayerTurn()
+    {
+        if (currentTurn == GAMESTATE.PLAYERTURN)
+        {
+            SwitchTurn();
+        }
+    }
 
     /// <summary>
     /// Checks if all players have moved, then auto ends the players turn if ALL player characters have moved

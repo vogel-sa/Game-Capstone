@@ -25,61 +25,76 @@ public class TurnManager : MonoBehaviour {
     GAMESTATE currentTurn;
 
 	int soldierLeft; //soldiers didn't move
-	List<GameObject> playerList;
+    [SerializeField]
+	List<PlayerCharacterStats> playerList;
 	List<GameObject> enemyList;
 
 	void Awake(){
 		theInstance = this;
+
+        foreach (var x in GameObject.FindGameObjectsWithTag("Player")) {
+            if (x.GetComponent<PlayerCharacterStats>() != null)
+            {
+                playerList.Add(x.GetComponent<PlayerCharacterStats>());
+            }
+        }
 	}
 
 	void Start () {
-		UpdateAllCombatMembers ();
+		//UpdateAllCombatMembers ();
 	}
 	
 
 	void Update () {
-		
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SwitchTurn();
+        }
+    }
+
+	private void OnPlayerTurnStart(){
+
+        PlayerMovementManager.Instance.enabled = true;
+
+        foreach (var players in playerList)
+        {
+            players.hasMoved = false;
+        }
 	}
 
-	public void OnTurnStart(){
-		
-		Debug.Log ("Start New Turn");
-		Debug.Log ("Now is " + currentTurn + "'s turn");
-	}
+	public void SwitchTurn(){
 
-	public void OnTurnEnd(){
-		switch (currentTurn) {
+        switch (currentTurn) {
 
 		case GAMESTATE.ENEMYTURN:
-			currentTurn = GAMESTATE.PLAYERTURN;
-			break;
+                {
+                    currentTurn = GAMESTATE.PLAYERTURN;
+                    OnPlayerTurnStart();
+                    break;
+                }
 
 		case GAMESTATE.PLAYERTURN:
-			currentTurn = GAMESTATE.ENEMYTURN;
-			break;
+                {
+                    currentTurn = GAMESTATE.ENEMYTURN;
+                    PlayerMovementManager.Instance.enabled = false;
+                    break;
+                }
 		}
 
 		Debug.Log ("End Current Turn");
 	}
 
-	void AutoEndTurnCheck(){
-		//checking if all soldiers have moved, if so, Auto-end turn
-		/*
-		if(){
-		OnTurnEnd ();
-		}
-		*/
+	private bool HaveAllPlayersMoved(){
+
+        foreach (var playerchars in playerList)
+        {
+            if (!playerchars.hasMoved)
+            {
+                return false;
+            }
+        }
+        return true;
 	}
 
-	public void UpdateAllCombatMembers(){
-		//Call this to update the player list and enemy list
-		//Call this at:
-		//The start of the battle
-		//New member has entered the battle
-		Debug.Log("TurnManager updated all Combat members");
-		playerList = new List<GameObject>();
-		playerList.AddRange(GameObject.FindGameObjectsWithTag("Player"));
-		enemyList = new List<GameObject>();
-		enemyList.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
-	}
 }

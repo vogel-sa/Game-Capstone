@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour {
 
@@ -22,64 +23,105 @@ public class TurnManager : MonoBehaviour {
         ENEMYTURN
     }
 
-    GAMESTATE currentTurn;
+    public GAMESTATE currentTurn;
 
 	int soldierLeft; //soldiers didn't move
-	List<GameObject> playerList;
+    [SerializeField]
+	List<PlayerCharacterStats> playerList;
 	List<GameObject> enemyList;
 
 	void Awake(){
 		theInstance = this;
+
+        foreach (var x in GameObject.FindGameObjectsWithTag("Player")) {
+            if (x.GetComponent<PlayerCharacterStats>() != null)
+            {
+                playerList.Add(x.GetComponent<PlayerCharacterStats>());
+            }
+        }
 	}
 
 	void Start () {
-		UpdateAllCombatMembers ();
+		//UpdateAllCombatMembers ();
 	}
 	
 
 	void Update () {
-		
+
+        if (Input.GetKeyDown(KeyCode.Space) && currentTurn == GAMESTATE.ENEMYTURN)
+        {
+            SwitchTurn();
+        }
+    }
+
+	private void OnPlayerTurnStart(){
+
+        PlayerMovementManager.Instance.enabled = true;
+
+        foreach (var players in playerList)
+        {
+            players.hasMoved = false;
+        }
 	}
 
-	public void OnTurnStart(){
-		
-		Debug.Log ("Start New Turn");
-		Debug.Log ("Now is " + currentTurn + "'s turn");
-	}
+    private void OnEnemyTurnStart()
+    {
+        PlayerMovementManager.Instance.enabled = false;
+    }
 
-	public void OnTurnEnd(){
-		switch (currentTurn) {
+    /// <summary>
+    /// Switches the Current turn to the Other turn
+    /// </summary>
+	public void SwitchTurn(){
+
+        switch (currentTurn) {
 
 		case GAMESTATE.ENEMYTURN:
-			currentTurn = GAMESTATE.PLAYERTURN;
-			break;
+                {
+                    currentTurn = GAMESTATE.PLAYERTURN;
+                    OnPlayerTurnStart();
+                    break;
+                }
 
 		case GAMESTATE.PLAYERTURN:
-			currentTurn = GAMESTATE.ENEMYTURN;
-			break;
+                {
+                    currentTurn = GAMESTATE.ENEMYTURN;
+                    OnEnemyTurnStart();
+                    break;
+                }
+                
 		}
-
-		Debug.Log ("End Current Turn");
 	}
 
-	void AutoEndTurnCheck(){
-		//checking if all soldiers have moved, if so, Auto-end turn
-		/*
-		if(){
-		OnTurnEnd ();
-		}
-		*/
+    public void EndPlayerTurn()
+    {
+        if (currentTurn == GAMESTATE.PLAYERTURN)
+        {
+            SwitchTurn();
+        }
+    }
+
+    /// <summary>
+    /// Checks if all players have moved, then auto ends the players turn if ALL player characters have moved
+    /// </summary>
+    public void AutoEndTurnCheck()
+    {
+        if (HaveAllPlayersMoved())
+        {
+            SwitchTurn();
+        }
+    }
+
+	private bool HaveAllPlayersMoved(){
+
+        foreach (var playerchars in playerList)
+        {
+            if (!playerchars.hasMoved)
+            {
+                return false;
+            }
+        }
+        return true;
 	}
 
-	public void UpdateAllCombatMembers(){
-		//Call this to update the player list and enemy list
-		//Call this at:
-		//The start of the battle
-		//New member has entered the battle
-		Debug.Log("TurnManager updated all Combat members");
-		playerList = new List<GameObject>();
-		playerList.AddRange(GameObject.FindGameObjectsWithTag("Player"));
-		enemyList = new List<GameObject>();
-		enemyList.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
-	}
 }

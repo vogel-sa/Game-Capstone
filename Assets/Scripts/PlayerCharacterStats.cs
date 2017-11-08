@@ -46,6 +46,15 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
 
         set
         {
+            if (CurrHP + value > _maxHP)
+            {
+                _currHP = _maxHP;
+            }
+            else if (CurrHP - value < 0)
+            {
+                _currHP = 0;
+            }
+    
             _currHP = value;
         }
     }
@@ -79,6 +88,10 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
 
         set
         {
+            if (value <= 0)
+            {
+                throw new ArgumentException("Movement Range cannot be less than 1");
+            }
             _movementRange = value;
         }
     }

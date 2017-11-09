@@ -23,8 +23,8 @@ public class Abilities : MonoBehaviour {
         }
     }
 
-    public void BasicShootAbility() { StartCoroutine(_basicShootAbility()); }
-    private IEnumerator _basicShootAbility()
+    public void BasicShootAbility(PlayerCharacterStats stats) { StartCoroutine(_basicShootAbility(stats)); }
+    private IEnumerator _basicShootAbility(PlayerCharacterStats stats)
     {
         Debug.Log("Bang");
         yield return null;

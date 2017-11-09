@@ -40,13 +40,14 @@ public class ButtonAbilitySelector : MonoBehaviour {
         for (int i = 0; i < _buttons.Length; i++)
         {
             abilities[i] = PlayerMovementManager.Instance.SelectedCharacterStats.Abilities[i];
-            // TODO: Change image, change script to call.
+
             _buttons[i].onClick.RemoveAllListeners();
             var e = abilities[i];
             _buttons[i].onClick.AddListener(delegate
             {
                 e.Invoke();
             });
+            // TODO: Change button sprite, change ability data.
         }
 	}
 }

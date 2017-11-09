@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
 {
+	#region
     [SerializeField]
     string _name;
     public string Name
@@ -131,7 +132,7 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
             _portrait = value;
         }
     }
-
+	#endregion
     [SerializeField]
     UnityEvent[] _abilities;
     public UnityEvent[] Abilities

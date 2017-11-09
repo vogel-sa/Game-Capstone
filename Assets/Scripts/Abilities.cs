@@ -26,7 +26,21 @@ public class Abilities : MonoBehaviour {
     public void BasicShootAbility(PlayerCharacterStats stats) { StartCoroutine(_basicShootAbility(stats)); }
     private IEnumerator _basicShootAbility(PlayerCharacterStats stats)
     {
+        LineRenderer aimLine = new GameObject().AddComponent<LineRenderer>();
+
+        
+
+        yield return null; //Wait 1 frame.
+        
+		// TODO: Control Ability (exit using escape)
+		while(!Input.GetMouseButtonDown(0))
+        {
+            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            aimLine.SetPositions(new Vector3[] { stats.transform.position, mousePos/* TODO: Change to be just a line in the correct direction. */ });
+        }
+        // TODO: Animation
         Debug.Log("Bang");
+        yield return new WaitForSeconds(.5f);
         yield return null;
     }
 }

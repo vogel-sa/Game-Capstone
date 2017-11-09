@@ -36,8 +36,12 @@ public class PlayerMovementManager : MonoBehaviour
     private static GameObject[] quads = new GameObject[300];
     private static int quadsInUse = 0;
 
+    public delegate void SelectAction();
+    public event SelectAction OnSelect;
+
     private Transform selected;
-    public PlayerCharacterStats selectedCharacterStats { get; set; }
+
+    public PlayerCharacterStats SelectedCharacterStats { get; private set; }
 
     [SerializeField]
     private Material mat;
@@ -93,7 +97,7 @@ public class PlayerMovementManager : MonoBehaviour
                     outline.color = highlightedColor;
                     lastUpdateOutline = outline;
 
-                    if (controlsEnabled && Input.GetMouseButtonDown(0) && !selectedCharacterStats.hasMoved)
+                    if (controlsEnabled && Input.GetMouseButtonDown(0) && !SelectedCharacterStats.hasMoved)
                     {
                         Vector3 hitPos = AstarData.active.GetNearest(hit.point).position;
                         if (!Physics.Raycast(new Ray(hitPos, Vector3.up), 1, 1 << LayerMask.NameToLayer("Player"))) // Check if occupied.
@@ -179,14 +183,14 @@ public class PlayerMovementManager : MonoBehaviour
         yield return new WaitUntil(() => finished);
         controlsEnabled = true;
         // TODO: Fix the heirarchy for stats.
-        selectedCharacterStats.hasMoved = true;
+        SelectedCharacterStats.hasMoved = true;
         TurnManager.instance.AutoEndTurnCheck();
         selected.GetComponent<SingleNodeBlocker>().BlockAtCurrentPosition();
     }
 
     public void Select(Transform t, PlayerCharacterStats stats)
     {
-        selectedCharacterStats = stats;
+        SelectedCharacterStats = stats;
         if (stats.hasMoved) return;
         Debug.Log("Character name is now:" + stats.Name);
 
@@ -214,6 +218,7 @@ public class PlayerMovementManager : MonoBehaviour
             count++;
         }
         selected = t;
+        OnSelect();
     }
 
 }

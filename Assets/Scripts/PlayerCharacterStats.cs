@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
 {
@@ -131,6 +132,15 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
         }
     }
 
+    [SerializeField]
+    UnityEvent[] _abilities;
+    public UnityEvent[] Abilities
+    {
+        get
+        {
+            return _abilities;
+        }
+    }
 
     public bool IsDead()
     {
@@ -155,4 +165,5 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
         Actionsleft = 1;
 
     }
+    
 }

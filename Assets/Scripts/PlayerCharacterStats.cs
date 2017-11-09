@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
 {
+    #region
     [SerializeField]
     string _name;
     public string Name
@@ -130,7 +131,16 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
             _portrait = value;
         }
     }
+    #endregion
 
+    #region
+    //[SerializeField]
+    //Add UnityEvents
+    [SerializeField]
+    Sprite[] abilitySprites;
+    [SerializeField]
+    AbilityData[] abilityData;
+    #endregion
 
     public bool IsDead()
     {

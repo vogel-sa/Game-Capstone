@@ -23,9 +23,8 @@ public class TurnManager : MonoBehaviour {
         ENEMYTURN
     }
 
-    public GAMESTATE currentTurn;
+    public GAMESTATE currentTurn { get; private set;}
 
-	int soldierLeft; //soldiers didn't move
     [SerializeField]
 	List<PlayerCharacterStats> playerList;
 	List<GameObject> enemyList;

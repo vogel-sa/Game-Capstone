@@ -26,21 +26,28 @@ public class Abilities : MonoBehaviour {
     public void BasicShootAbility(PlayerCharacterStats stats) { StartCoroutine(_basicShootAbility(stats)); }
     private IEnumerator _basicShootAbility(PlayerCharacterStats stats)
     {
-        LineRenderer aimLine = new GameObject().AddComponent<LineRenderer>();
+        PlayerMovementManager.Instance.SetQuadsEnabled(false);
+        var range = 5f;
 
-        
-
-        yield return null; //Wait 1 frame.
-        
-		// TODO: Control Ability (exit using escape)
-		while(!Input.GetMouseButtonDown(0))
+        GameObject aimLine = Instantiate(Resources.Load<GameObject>("AimLine"));
+        aimLine.transform.position = stats.transform.position + Vector3.up / 2;
+        // TODO: Control Ability (exit using escape)
+        do
         {
-            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            aimLine.SetPositions(new Vector3[] { stats.transform.position, mousePos/* TODO: Change to be just a line in the correct direction. */ });
-        }
-        // TODO: Animation
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+            {
+                var v = hit.point;
+                aimLine.transform.LookAt(new Vector3(hit.point.x, aimLine.transform.position.y, hit.point.z));
+            }
+            yield return null;
+        } while (!Input.GetMouseButtonDown(0));
+
+        Destroy(aimLine.gameObject);
+        // TODO: Animation of ability
         Debug.Log("Bang");
-        yield return new WaitForSeconds(.5f);
-        yield return null;
+        yield return new WaitForSeconds(.5f);// Change to wait until animation over, possibly wait for enemy reaction (i.e. reaction shot, death anim, etc.);
+        PlayerMovementManager.Instance.SetQuadsEnabled(true);
     }
 }

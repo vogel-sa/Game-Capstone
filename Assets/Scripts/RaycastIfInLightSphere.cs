@@ -10,6 +10,8 @@ public class RaycastIfInLightSphere : MonoBehaviour
     private int segments = 90;
     [SerializeField]
     private float lightIntensity = 2;
+    [SerializeField]
+    LayerMask raycastIgnore;
 
     void Start()
     {
@@ -60,7 +62,7 @@ public class RaycastIfInLightSphere : MonoBehaviour
         for (int i = 0; i < segments; i++)
         {
             Vector3 direction = (Quaternion.AngleAxis(i * 360 / segments, Vector3.up) * transform.forward).normalized;
-            Physics.Raycast(transform.position, direction, out hit, range);
+            Physics.Raycast(transform.position, direction, out hit, range, ~raycastIgnore);
             if (hit.collider && hit.collider.Equals(col)) return true;
         }
         return false;

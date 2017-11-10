@@ -29,7 +29,8 @@ public class ButtonAbilitySelector : MonoBehaviour {
 
     void OnDisable()
     {
-        PlayerMovementManager.Instance.OnSelect -= ChangeAbilityButtons;
+        if (PlayerMovementManager.Instance)
+            PlayerMovementManager.Instance.OnSelect -= ChangeAbilityButtons;
     }
 
     // Update is called once per frame

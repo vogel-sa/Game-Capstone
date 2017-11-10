@@ -11,11 +11,16 @@ public class PathManager : MonoBehaviour {
     };
 
     private static object _lock = new object();
+    private static bool applicationIsQuitting = false;
     private static PathManager _instance;
     public static PathManager Instance
     {
         get
         {
+            if (applicationIsQuitting)
+            {
+                return null;
+            }
             lock (_lock)
             {
                 if (!_instance)
@@ -58,6 +63,11 @@ public class PathManager : MonoBehaviour {
 
         allyTraversalProvider = new BlockManager.TraversalProvider(blockManager, BlockManager.BlockMode.OnlySelector, enemies);
         enemyTraversalProvider = new BlockManager.TraversalProvider(blockManager, BlockManager.BlockMode.OnlySelector, allies);
+    }
+
+    void OnDestroy()
+    {
+        applicationIsQuitting = true;
     }
 
     public ABPath getPath(Vector3 start, Vector3 end, CharacterFaction team)

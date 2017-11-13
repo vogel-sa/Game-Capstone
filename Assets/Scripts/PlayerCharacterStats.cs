@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
 {
@@ -134,8 +135,8 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
     #endregion
 
     #region
-    //[SerializeField]
-    //Add UnityEvents
+    [SerializeField]
+    UnityEvent[] ability;
     [SerializeField]
     Sprite[] abilitySprites;
     [SerializeField]

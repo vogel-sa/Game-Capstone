@@ -51,6 +51,37 @@ public class AbilityData{
         }
     }
 
+    [SerializeField]
+    int _maxcooldown;
+    public int Maxcooldown
+    {
+        get
+        {
+            return _maxcooldown;
+        }
+
+        set
+        {
+            _maxcooldown = value;
+        }
+    }
+
+    [SerializeField]
+    int _currcooldown;
+    public int Currcooldown
+    {
+        get
+        {
+            return _currcooldown;
+        }
+
+        set
+        {
+            _currcooldown = value;
+        }
+    }
+
+
 
 
 

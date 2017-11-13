@@ -20,7 +20,7 @@ public class PortraitChanger : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (selectedCharacter != PlayerMovementManager.Instance.SelectedCharacterStats)
+		if (selectedCharacter.Name != PlayerMovementManager.Instance.selectedCharacterStats.Name)
         {
             selectedCharacter = PlayerMovementManager.Instance.SelectedCharacterStats;
             changeSelected();

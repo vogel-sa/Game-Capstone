@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
 {
-	#region
+    #region
     [SerializeField]
     string _name;
     public string Name
@@ -132,6 +132,7 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
             _portrait = value;
         }
     }
+<<<<<<< HEAD
 	#endregion
     [SerializeField]
     UnityEvent[] _abilities;
@@ -142,6 +143,14 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
             return _abilities;
         }
     }
+=======
+    #endregion
+
+    #region
+    [SerializeField]
+    AbilityData[] abilityData;
+    #endregion
+>>>>>>> 6a248127c80f79dd071ce6ff707a7040a3ce6efa
 
     public bool IsDead()
     {

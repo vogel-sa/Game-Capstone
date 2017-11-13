@@ -132,25 +132,19 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
             _portrait = value;
         }
     }
-<<<<<<< HEAD
-	#endregion
-    [SerializeField]
-    UnityEvent[] _abilities;
-    public UnityEvent[] Abilities
-    {
-        get
-        {
-            return _abilities;
-        }
-    }
-=======
     #endregion
 
     #region
     [SerializeField]
-    AbilityData[] abilityData;
+    AbilityData[] _abilityData;
+    public AbilityData[] AbilityData
+    {
+        get
+        {
+            return _abilityData;
+        }
+    }
     #endregion
->>>>>>> 6a248127c80f79dd071ce6ff707a7040a3ce6efa
 
     public bool IsDead()
     {

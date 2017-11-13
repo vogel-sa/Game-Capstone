@@ -10,7 +10,7 @@ public class ButtonAbilitySelector : MonoBehaviour {
     private Button[] _buttons;
     private Sprite[] _sprites;
     [SerializeField]
-    private UnityEvent[] abilities;
+    private AbilityData[] abilities;
 
     void Start()
     {
@@ -37,16 +37,16 @@ public class ButtonAbilitySelector : MonoBehaviour {
     void ChangeAbilityButtons()
     {
         Debug.Log("Buttons changed");
-        abilities = new UnityEvent[PlayerMovementManager.Instance.SelectedCharacterStats.Abilities.Length];
+        abilities = new AbilityData[PlayerMovementManager.Instance.SelectedCharacterStats.AbilityData.Length];
         for (int i = 0; i < _buttons.Length; i++)
         {
-            abilities[i] = PlayerMovementManager.Instance.SelectedCharacterStats.Abilities[i];
+            abilities[i] = PlayerMovementManager.Instance.SelectedCharacterStats.AbilityData[i];
 
             _buttons[i].onClick.RemoveAllListeners();
             var e = abilities[i];
             _buttons[i].onClick.AddListener(delegate
             {
-                e.Invoke();
+                e.Ability.Invoke();
             });
             // TODO: Change button sprite, change ability data.
         }

@@ -136,10 +136,6 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
 
     #region
     [SerializeField]
-    UnityEvent[] ability;
-    [SerializeField]
-    Sprite[] abilitySprites;
-    [SerializeField]
     AbilityData[] abilityData;
     #endregion
 

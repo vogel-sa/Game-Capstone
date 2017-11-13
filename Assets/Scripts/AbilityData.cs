@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 [Serializable]
 public class AbilityData{
@@ -96,4 +96,8 @@ public class AbilityData{
             _currcooldown = value;
         }
     }
+    [SerializeField]
+    UnityEvent ability;
+    [SerializeField]
+    Sprite abilitySprite;
 }

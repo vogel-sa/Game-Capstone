@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
 {
+    #region
     [SerializeField]
     string _name;
     public string Name
@@ -130,7 +132,12 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
             _portrait = value;
         }
     }
+    #endregion
 
+    #region
+    [SerializeField]
+    AbilityData[] abilityData;
+    #endregion
 
     public bool IsDead()
     {

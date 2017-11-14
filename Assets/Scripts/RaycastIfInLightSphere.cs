@@ -62,7 +62,7 @@ public class RaycastIfInLightSphere : MonoBehaviour
         for (int i = 0; i < segments; i++)
         {
             Vector3 direction = (Quaternion.AngleAxis(i * 360 / segments, Vector3.up) * transform.forward).normalized;
-            Physics.Raycast(transform.position, direction, out hit, range, ~raycastIgnore);
+            Physics.Raycast(transform.position, direction, out hit, range, ~(raycastIgnore | (1 << 2)));
             if (hit.collider && hit.collider.Equals(col)) return true;
         }
         return false;

@@ -171,6 +171,7 @@ public class PlayerMovementManager : MonoBehaviour
         }
         var modifier = new GameObject().AddComponent<RaycastModifier>();
             modifier.raycastOffset = Vector3.up;
+        modifier.mask = LayerMask.GetMask("Obstacle", "Enemy");
         modifier.Apply(path);
         var finished = false;
         var positionEnumeration = (from node in path.vectorPath

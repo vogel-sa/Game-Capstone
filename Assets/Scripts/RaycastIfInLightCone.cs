@@ -51,14 +51,14 @@ public class RaycastIfInLightCone : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider col)
-    {
-        if (col.transform.tag.Equals("Enemy"))
-        {
-            col.GetComponent<MeshRenderer>().enabled = false;
-            col.GetComponent<cakeslice.Outline>().enabled = false;
-        }
-    }
+    //void OnTriggerExit(Collider col)
+    //{
+    //    if (col.transform.tag.Equals("Enemy"))
+    //    {
+    //        col.GetComponent<MeshRenderer>().enabled = false;
+    //        col.GetComponent<cakeslice.Outline>().enabled = false;
+    //    }
+    //}
 
     private bool RaySweep(Collider col)
     {
@@ -66,8 +66,8 @@ public class RaycastIfInLightCone : MonoBehaviour
 
         for (int i = 0; i < segments; i++)
         {
-            Vector3 direction = (Quaternion.AngleAxis(i - angle / 2, Vector3.up) * transform.forward).normalized;
-            Physics.Raycast(transform.position, direction, out hit, range, ~raycastIgnore);
+            Vector3 direction = (Quaternion.AngleAxis((i * angle / segments) - angle / 2, Vector3.up) * transform.forward).normalized;
+            Physics.Raycast(transform.position, direction, out hit, range, ~(raycastIgnore | (1 << 2)));
             if (hit.collider && hit.collider.Equals(col)) return true;
         }
         return false;

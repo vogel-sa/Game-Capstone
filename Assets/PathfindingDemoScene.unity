@@ -400,67 +400,7 @@ MonoBehaviour:
   hasMoved: 0
   _actionsleft: 2
   _portrait: {fileID: 0}
-  _abilities:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1220671593}
-        m_MethodName: BasicShootAbility
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 156955662}
-          m_ObjectArgumentAssemblyTypeName: PlayerCharacterStats, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1220671593}
-        m_MethodName: BasicShootAbility
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 156955662}
-          m_ObjectArgumentAssemblyTypeName: PlayerCharacterStats, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1220671593}
-        m_MethodName: BasicShootAbility
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 156955662}
-          m_ObjectArgumentAssemblyTypeName: PlayerCharacterStats, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1220671593}
-        m_MethodName: BasicShootAbility
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 156955662}
-          m_ObjectArgumentAssemblyTypeName: PlayerCharacterStats, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+  _abilityData: []
 --- !u!114 &156955663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1136,7 +1076,7 @@ MonoBehaviour:
   lightIntensity: 2
   raycastIgnore:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
 --- !u!135 &421141403
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1651,7 +1591,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 1200090379}
+  m_TargetTexture: {fileID: 1583487046}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -2274,7 +2214,7 @@ MonoBehaviour:
   lightIntensity: 8
   raycastIgnore:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
 --- !u!114 &1038104934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2535,7 +2475,7 @@ MonoBehaviour:
   lightIntensity: 2
   raycastIgnore:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
 --- !u!135 &1194565778
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2610,30 +2550,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &1200090379
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 550
-  m_Height: 344
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    m_FilterMode: 1
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapMode: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1220671584
 GameObject:
   m_ObjectHideFlags: 0
@@ -2755,8 +2671,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 1220671588}
   outlineCamera: {fileID: 921524927}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 1200090379}
-  extraRenderTexture: {fileID: 1233322107}
+  renderTexture: {fileID: 1583487046}
+  extraRenderTexture: {fileID: 1656218541}
 --- !u!114 &1220671591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2795,30 +2711,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78471dffea5bce44c98da5efa89ee57b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!84 &1233322107
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 550
-  m_Height: 344
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapMode: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1279919875
 GameObject:
   m_ObjectHideFlags: 0
@@ -3041,7 +2933,51 @@ MonoBehaviour:
   hasMoved: 0
   _actionsleft: 2
   _portrait: {fileID: 0}
-  _abilities: []
+  _abilityData:
+  - _name: 
+    _description: 
+    _damageAmount: 
+    _maxcooldown: 0
+    _currcooldown: 0
+    _ability:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    _abilitySprite: {fileID: 0}
+  - _name: 
+    _description: 
+    _damageAmount: 
+    _maxcooldown: 0
+    _currcooldown: 0
+    _ability:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    _abilitySprite: {fileID: 0}
+  - _name: 
+    _description: 
+    _damageAmount: 
+    _maxcooldown: 0
+    _currcooldown: 0
+    _ability:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    _abilitySprite: {fileID: 0}
+  - _name: 
+    _description: 
+    _damageAmount: 
+    _maxcooldown: 0
+    _currcooldown: 0
+    _ability:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    _abilitySprite: {fileID: 0}
 --- !u!114 &1313259221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3090,7 +3026,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1313259219}
   m_LocalRotation: {x: -0, y: 0.99932724, z: -0, w: 0.03667603}
-  m_LocalPosition: {x: -3.431, y: 0, z: -5.44}
+  m_LocalPosition: {x: -2.49, y: 0, z: -1.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2041561665}
@@ -3853,6 +3789,30 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1565473413}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!84 &1583487046
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 550
+  m_Height: 344
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapMode: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1635062956
 GameObject:
   m_ObjectHideFlags: 0
@@ -3939,7 +3899,7 @@ MonoBehaviour:
   lightIntensity: 8
   raycastIgnore:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
 --- !u!114 &1635062960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4315,6 +4275,30 @@ MonoBehaviour:
   eraseRenderer: 1
   originalLayer: 0
   originalMaterials: []
+--- !u!84 &1656218541
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 550
+  m_Height: 344
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapMode: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1726887441
 GameObject:
   m_ObjectHideFlags: 0

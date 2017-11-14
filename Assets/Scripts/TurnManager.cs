@@ -30,12 +30,14 @@ public class TurnManager : MonoBehaviour {
 	List<GameObject> enemyList;
 
 	void Awake(){
+        playerList = new List<PlayerCharacterStats>();
+        enemyList = new List<GameObject>();
 		theInstance = this;
-
+        PlayerCharacterStats player;
         foreach (var x in GameObject.FindGameObjectsWithTag("Player")) {
-            if (x.GetComponent<PlayerCharacterStats>() != null)
+            if (player = x.GetComponent<PlayerCharacterStats>())
             {
-                playerList.Add(x.GetComponent<PlayerCharacterStats>());
+                playerList.Add(player);
             }
         }
 	}

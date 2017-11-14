@@ -26,28 +26,50 @@ public class Abilities : MonoBehaviour {
     public void BasicShootAbility(PlayerCharacterStats stats) { StartCoroutine(_basicShootAbility(stats)); }
     private IEnumerator _basicShootAbility(PlayerCharacterStats stats)
     {
-        PlayerMovementManager.Instance.SetQuadsEnabled(false);
-        var range = 5f;
-
-        GameObject aimLine = Instantiate(Resources.Load<GameObject>("AimLine"));
-        aimLine.transform.position = stats.transform.position + Vector3.up / 2;
-        // TODO: Control Ability (exit using escape)
-        do
+        LineRenderer lineRenderer = null;
+        try
         {
+            PlayerMovementManager.Instance.SetQuadsEnabled(false);
+            PlayerMovementManager.Instance.enabled = false;
+            var range = 10f;
+            var width = .05f;
+            Vector3 direction = Vector3.zero;
             RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+            lineRenderer = new GameObject().AddComponent<LineRenderer>();
+            lineRenderer.material = Resources.Load<Material>("UI");
+            lineRenderer.endWidth = lineRenderer.startWidth = width;
+            do
             {
-                var v = hit.point;
-                aimLine.transform.LookAt(new Vector3(hit.point.x, aimLine.transform.position.y, hit.point.z));
-            }
-            yield return null;
-        } while (!Input.GetMouseButtonDown(0));
+                if (Input.GetKeyDown(KeyCode.Escape)) yield break;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+                {
+                    var mousePos = new Vector3(hit.point.x, stats.transform.position.y + 1/*aimLine.transform.position.y*/, hit.point.z);
+                    var origin = stats.transform.position + Vector3.up;
+                    direction = origin - mousePos;
+                    lineRenderer.SetPositions(new Vector3[] { origin, origin - direction.normalized*range });
+                    stats.transform.LookAt(new Vector3(direction.x, stats.transform.position.y, direction.z));
+                }
+                yield return null;
+            } while (!Input.GetMouseButtonDown(0));
+            lineRenderer.gameObject.SetActive(false);
+            // TODO: Animation of ability
 
-        Destroy(aimLine.gameObject);
-        // TODO: Animation of ability
-        Debug.Log("Bang");
-        yield return new WaitForSeconds(.5f);// Change to wait until animation over, possibly wait for enemy reaction (i.e. reaction shot, death anim, etc.);
-        PlayerMovementManager.Instance.SetQuadsEnabled(true);
+            if (Physics.Raycast(stats.transform.position, direction, out hit, range, ~LayerMask.GetMask("Enemy")))
+            {
+                var hitStats = hit.transform.GetComponent<ICharacterStats>();
+                //hitStats.IsDead = true;
+            }
+            Debug.Log("Bang");
+
+
+            yield return new WaitForSeconds(.5f);// Change to wait until animation over, possibly wait for enemy reaction (i.e. reaction shot, death anim, etc.);
+        }
+        finally
+        {
+            PlayerMovementManager.Instance.SetQuadsEnabled(true);
+            PlayerMovementManager.Instance.enabled = true;
+            if (lineRenderer) Destroy(lineRenderer.gameObject);
+        }
     }
 }

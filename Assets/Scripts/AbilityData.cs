@@ -115,4 +115,33 @@ public class AbilityData{
             return _abilitySprite;
         }
     }
+    
+    /// <summary>
+    /// READ BEFORE SETTING THIS DICTIONARY
+    /// Use "Range" for range of ability
+    /// Use "Area of Effect" for radius
+    /// </summary>
+    [SerializeField]
+    StringFloatDictionary _othervalues;
+    public StringFloatDictionary OtherValues
+    {
+        get
+        {
+            return _othervalues;
+        }
+
+        set
+        {
+            _othervalues = value;
+        }
+    }
+}
+
+[Serializable]
+public class StringFloatDictionary : SerializableDictionary<string, float> {
+
+    public StringFloatDictionary(IDictionary<string, float> dict) :base(dict)
+    {
+
+    }
 }

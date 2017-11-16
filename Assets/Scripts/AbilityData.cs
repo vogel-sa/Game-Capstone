@@ -97,7 +97,22 @@ public class AbilityData{
         }
     }
     [SerializeField]
-    UnityEvent ability;
+    UnityEvent _ability;
+    public UnityEvent Ability
+    {
+        get
+        {
+            return _ability;
+        }
+    }
+
     [SerializeField]
-    Sprite abilitySprite;
+    Sprite _abilitySprite;
+    public Sprite AbilitySprite
+    {
+        get
+        {
+            return _abilitySprite;
+        }
+    }
 }

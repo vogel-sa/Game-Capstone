@@ -13,16 +13,16 @@ public class PortraitChanger : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        selectedCharacter = PlayerMovementManager.Instance.selectedCharacterStats;
+        selectedCharacter = PlayerMovementManager.Instance.SelectedCharacterStats;
         raw = GetComponent <RawImage>();
         Name = GetComponentInChildren<Text>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (selectedCharacter.Name != PlayerMovementManager.Instance.selectedCharacterStats.Name)
+		if (selectedCharacter.Name != PlayerMovementManager.Instance.SelectedCharacterStats.Name)
         {
-            selectedCharacter = PlayerMovementManager.Instance.selectedCharacterStats;
+            selectedCharacter = PlayerMovementManager.Instance.SelectedCharacterStats;
             changeSelected();
         }
 	}

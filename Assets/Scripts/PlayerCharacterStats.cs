@@ -136,7 +136,14 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
 
     #region
     [SerializeField]
-    AbilityData[] abilityData;
+    AbilityData[] _abilityData;
+    public AbilityData[] AbilityData
+    {
+        get
+        {
+            return _abilityData;
+        }
+    }
     #endregion
 
     public bool IsDead()
@@ -162,4 +169,5 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
         Actionsleft = 1;
 
     }
+    
 }

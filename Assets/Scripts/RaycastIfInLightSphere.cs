@@ -17,6 +17,7 @@ public class RaycastIfInLightSphere : MonoBehaviour
     {
         var col = GetComponent<SphereCollider>();
         col.radius = range;
+        col.isTrigger = true;
         var light = GetComponent<Light>();
         light.type = LightType.Point;
         light.range = range;

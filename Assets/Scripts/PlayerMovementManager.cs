@@ -96,11 +96,13 @@ public class PlayerMovementManager : MonoBehaviour
     {
         if (selected)
         {
-            
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (lastUpdateOutline) lastUpdateOutline.color = notHighlightedColor;
-                if (Physics.Raycast(ray, out hit, Camera.main.farClipPlane, 1 << LayerMask.NameToLayer("Outline")))
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (lastUpdateOutline) lastUpdateOutline.color = notHighlightedColor;
+            if (Physics.Raycast(ray, out hit, Camera.main.farClipPlane, LayerMask.GetMask("Outline")))
+            {
+                //if (hit.transform.gameObject.layer == LayerMask.GetMask("Outline"))
                 {
                     Outline outline = hit.transform.GetComponent<Outline>();
                     if (lastUpdateOutline) lastUpdateOutline.color = notHighlightedColor;
@@ -110,7 +112,7 @@ public class PlayerMovementManager : MonoBehaviour
                     if (controlsEnabled && Input.GetMouseButtonDown(0) && !SelectedCharacterStats.hasMoved)
                     {
                         Vector3 hitPos = AstarData.active.GetNearest(hit.point).position;
-                        if (!Physics.Raycast(new Ray(hitPos, Vector3.up), 1, 1 << LayerMask.NameToLayer("Player"))) // Check if occupied.
+                        if (!Physics.Raycast(new Ray(hitPos, Vector3.up), 1, LayerMask.GetMask("Player"))) // Check if occupied.
                         {
                             var path = PathManager.Instance.getPath(selected.transform.position, hitPos, PathManager.CharacterFaction.ALLY);
                             this.path = path;
@@ -121,8 +123,8 @@ public class PlayerMovementManager : MonoBehaviour
                             Debug.Log("Space occupied.");
                         }
                     }
-
                 }
+            }
         }
         if (Input.GetMouseButtonDown(0))
         {
@@ -217,7 +219,10 @@ public class PlayerMovementManager : MonoBehaviour
         Debug.Log("select");
         // Get list of traversable nodes within range.
         var blocked = from blocker in PathManager.Instance.enemies
-                      select AstarData.active.GetNearest(blocker.transform.position).node;
+                      select blocker.lastBlocked;
+        //blocked.Concat(from player in PathManager.Instance.allies
+        //               //where player != t.GetComponent<SingleNodeBlocker>()
+        //               select player.lastBlocked);
         nodes = PathUtilities.BFS(AstarData.active.GetNearest(t.position).node,
             stats.MovementRange,
             walkableDefinition: (n) => !blocked.Contains(n));

@@ -20,6 +20,7 @@ public class RaycastIfInLightCone : MonoBehaviour
         ConeCollider col = GetComponent<ConeCollider>();
         col.Angle = angle / 2;
         col.Distance = range;
+        col.IsTrigger = true;
         var light = GetComponent<Light>();
         light.type = LightType.Spot;
         light.range = range;

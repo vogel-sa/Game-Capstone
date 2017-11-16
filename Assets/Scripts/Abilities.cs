@@ -47,18 +47,21 @@ public class Abilities : MonoBehaviour {
                     var mousePos = new Vector3(hit.point.x, stats.transform.position.y + 1/*aimLine.transform.position.y*/, hit.point.z);
                     var origin = stats.transform.position + Vector3.up;
                     direction = origin - mousePos;
-                    lineRenderer.SetPositions(new Vector3[] { origin, origin - direction.normalized*range });
+                    lineRenderer.SetPositions(new Vector3[] { origin - direction.normalized*.5f, origin - direction.normalized*range });
 					stats.transform.LookAt(new Vector3((origin - direction.normalized*range).x, stats.transform.position.y, (origin - direction.normalized*range).z));
                 }
                 yield return null;
             } while (!Input.GetMouseButtonDown(0));
             lineRenderer.gameObject.SetActive(false);
             // TODO: Animation of ability
-
-            if (Physics.Raycast(stats.transform.position, direction, out hit, range, ~LayerMask.GetMask("Enemy")))
+            EnemyStats hitStats;
+            if (Physics.Raycast(stats.transform.position + Vector3.up, -(direction.normalized), out hit, range, ~LayerMask.GetMask("Player", "Ground", "Ignore Raycast")))//, LayerMask.NameToLayer("Enemy")))
             {
-                var hitStats = hit.transform.GetComponent<ICharacterStats>();
-                //hitStats.IsDead = true;
+                if (hit.transform.CompareTag("Enemy"))
+                {
+                    hitStats = hit.transform.parent.GetComponent<EnemyStats>();
+                    hitStats.TakeDamage(10 /* TODO: Change to use player stats */);
+                }
             }
             Debug.Log("Bang");
 
@@ -69,7 +72,34 @@ public class Abilities : MonoBehaviour {
         {
             PlayerMovementManager.Instance.SetQuadsEnabled(true);
             PlayerMovementManager.Instance.enabled = true;
+            PlayerMovementManager.Instance.Select(stats.transform, stats);
             if (lineRenderer) Destroy(lineRenderer.gameObject);
+        }
+    }
+
+    public void RoadFlareAbility(PlayerCharacterStats stats) { StartCoroutine(_roadFlareAbility(stats)); }
+    private IEnumerator _roadFlareAbility(PlayerCharacterStats stats)
+    {
+        try
+        {
+            PlayerMovementManager.Instance.SetQuadsEnabled(false);
+            PlayerMovementManager.Instance.enabled = false;
+            Vector3 to = Vector3.zero;
+            do
+            {
+                if (Input.GetKeyDown(KeyCode.Escape)) yield break;
+                yield return null;
+            } while (!Input.GetMouseButtonDown(0));
+            Debug.Log("flare dropped");
+            GameObject flare = Instantiate(Resources.Load<GameObject>("Prefabs/Flare"));
+            flare.transform.position = stats.transform.position + Vector3.up + stats.transform.forward * .7f;
+
+            yield return null;
+        }
+        finally
+        {
+            PlayerMovementManager.Instance.SetQuadsEnabled(true);
+            PlayerMovementManager.Instance.enabled = true;
         }
     }
 }

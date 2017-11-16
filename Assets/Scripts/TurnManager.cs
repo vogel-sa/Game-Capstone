@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour {
 
-	private static TurnManager theInstance;
+	private static TurnManager _instance;
 
 	public static TurnManager instance{
 		get{
-			if (!theInstance) {
+			if (!_instance) {
 				var inst = FindObjectOfType<TurnManager> ();
-				theInstance = inst ? inst : new GameObject ().AddComponent<TurnManager> ();
+				_instance = inst ? inst : new GameObject ().AddComponent<TurnManager> ();
 			}
-			return theInstance;
+			return _instance;
 		}
 	}
 
@@ -32,7 +32,7 @@ public class TurnManager : MonoBehaviour {
 	void Awake(){
         playerList = new List<PlayerCharacterStats>();
         enemyList = new List<GameObject>();
-		theInstance = this;
+		_instance = this;
         PlayerCharacterStats player;
         foreach (var x in GameObject.FindGameObjectsWithTag("Player")) {
             if (player = x.GetComponent<PlayerCharacterStats>())

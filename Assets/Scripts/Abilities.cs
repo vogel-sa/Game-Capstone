@@ -55,7 +55,7 @@ public class Abilities : MonoBehaviour {
             lineRenderer.gameObject.SetActive(false);
             // TODO: Animation of ability
             EnemyStats hitStats;
-            if (Physics.Raycast(stats.transform.position + Vector3.up, -(direction.normalized), out hit, range, ~LayerMask.GetMask("Player", "Ground", "Ignore Raycast")))//, LayerMask.NameToLayer("Enemy")))
+            if (Physics.Raycast(stats.transform.position + Vector3.up, -(direction.normalized), out hit, range, ~LayerMask.GetMask("Player", "Ground", "Ignore Raycast", "Flare")))//, LayerMask.NameToLayer("Enemy")))
             {
                 if (hit.transform.CompareTag("Enemy"))
                 {

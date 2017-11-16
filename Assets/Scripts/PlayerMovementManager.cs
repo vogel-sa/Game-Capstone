@@ -173,7 +173,7 @@ public class PlayerMovementManager : MonoBehaviour
             quads[i].SetActive(false);
         }
         var modifier = new GameObject().AddComponent<RaycastModifier>();
-            modifier.raycastOffset = Vector3.up;
+            modifier.raycastOffset = Vector3.up * .2f;
         modifier.mask = LayerMask.GetMask("Obstacle", "Enemy");
         modifier.Apply(path);
         var finished = false;

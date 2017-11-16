@@ -10,11 +10,16 @@ public class Flare : MonoBehaviour {
 	// Use this for initialization
 	void Awake()
     {
-        PlayerMovementManager.Instance.OnSelect += Countdown;
+        TurnManager.instance.OnTurnChange += Countdown;
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    void OnDestroy()
+    {
+        TurnManager.instance.OnTurnChange -= Countdown;
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
@@ -30,10 +35,9 @@ public class Flare : MonoBehaviour {
 
     void Countdown()
     {
-        if ((turns -= 1) == 0)
+        if ((--turns) == 0)
         {
             Destroy(gameObject);
         }
-        
     }
 }

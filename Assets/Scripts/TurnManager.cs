@@ -23,6 +23,9 @@ public class TurnManager : MonoBehaviour {
         ENEMYTURN
     }
 
+    public delegate void TurnChangeAction();
+    public event TurnChangeAction OnTurnChange;
+
     public GAMESTATE currentTurn { get; private set;}
 
     [SerializeField]

@@ -49,6 +49,19 @@ public class ButtonAbilitySelector : MonoBehaviour {
                 e.Ability.Invoke();
             });
             // TODO: Change button sprite, change ability data.
+
+			//store abilitydata on buttons
+			_buttons[i].gameObject.GetComponent<AbilityButton>().ability = new AbilityData();
+			_buttons[i].gameObject.GetComponent<AbilityButton>().ability = abilities[i];
         }
+		UpdateAbilityIcon (abilities);
+	}
+
+	void UpdateAbilityIcon(AbilityData[] ad){
+		
+		for (int i = 0; i < _buttons.Length; i++) {
+			
+			this.transform.GetChild(i).GetComponent<Image>().sprite = ad [i].AbilitySprite;
+		}
 	}
 }

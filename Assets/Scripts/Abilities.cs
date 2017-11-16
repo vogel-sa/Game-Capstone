@@ -48,7 +48,7 @@ public class Abilities : MonoBehaviour {
                     var origin = stats.transform.position + Vector3.up;
                     direction = origin - mousePos;
                     lineRenderer.SetPositions(new Vector3[] { origin, origin - direction.normalized*range });
-                    stats.transform.LookAt(new Vector3(direction.x, stats.transform.position.y, direction.z));
+					stats.transform.LookAt(new Vector3((origin - direction.normalized*range).x, stats.transform.position.y, (origin - direction.normalized*range).z));
                 }
                 yield return null;
             } while (!Input.GetMouseButtonDown(0));

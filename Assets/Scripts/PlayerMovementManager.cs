@@ -8,7 +8,7 @@ using DentedPixel;
 
 public class PlayerMovementManager : MonoBehaviour
 {
-
+	#region SINGLETON
     private static object _lock = new object();
     private static bool applicationIsQuitting = false;
     private static PlayerMovementManager _instance;
@@ -31,6 +31,7 @@ public class PlayerMovementManager : MonoBehaviour
             return _instance;
         }
     }
+	#endregion
 
     private struct BoolWrapper
     {

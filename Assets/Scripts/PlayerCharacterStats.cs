@@ -146,6 +146,11 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
     }
     #endregion
 
+    void Awake()
+    {
+        CurrHP = MaxHP;
+    }
+
     public bool IsDead()
     {
         return CurrHP <= 0;

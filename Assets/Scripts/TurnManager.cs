@@ -28,27 +28,33 @@ public class TurnManager : MonoBehaviour {
 
     public GAMESTATE currentTurn { get; private set;}
 
+    //List of all player stats in the game.  remove when player character is defeated
     [SerializeField]
 	List<PlayerCharacterStats> playerList;
-	List<GameObject> enemyList;
+    //List of all Enemy stats currently in game, remove when enemy is defeated
+    [SerializeField]
+	List<EnemyStats> enemyList;
 
 	void Awake(){
         playerList = new List<PlayerCharacterStats>();
-        enemyList = new List<GameObject>();
+        enemyList = new List<EnemyStats>();
 		_instance = this;
         PlayerCharacterStats player;
+        EnemyStats enemy;
         foreach (var x in GameObject.FindGameObjectsWithTag("Player")) {
             if (player = x.GetComponent<PlayerCharacterStats>())
             {
                 playerList.Add(player);
             }
         }
+        foreach (var x in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            if (enemy = x.GetComponent<EnemyStats>())
+            {
+                enemyList.Add(enemy);
+            }
+        }
 	}
-
-	void Start () {
-		//UpdateAllCombatMembers ();
-	}
-	
 
 	void Update () {
 
@@ -128,4 +134,15 @@ public class TurnManager : MonoBehaviour {
         return true;
 	}
 
+    /// <summary>
+    /// checks for victory condition
+    /// </summary>
+    /// <returns></returns>
+    public void isVictory()
+    {
+       if (enemyList.Count == 0)
+        {
+            //TODO: End state
+        }
+    }
 }

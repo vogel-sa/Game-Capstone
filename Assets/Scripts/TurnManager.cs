@@ -145,4 +145,12 @@ public class TurnManager : MonoBehaviour {
             //TODO: End state
         }
     }
+
+    public void isDefeat()
+    {
+        if (playerList.Count == 0)
+        {
+            //TODO:  Game Over
+        }
+    }
 }

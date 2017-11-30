@@ -145,7 +145,7 @@ public class PlayerMovementManager : MonoBehaviour
             }
         }
         #if DEBUG
-        if (path != null)
+        if (this.path != null)
         {
             for (int i = 0; i < path.vectorPath.Count - 1; i++)
             {

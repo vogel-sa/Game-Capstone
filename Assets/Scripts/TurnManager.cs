@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TurnManager : MonoBehaviour {
+public class TurnManager : MonoBehaviour
+{
 
 	private static TurnManager _instance;
-
-	public static TurnManager instance{
-		get{
-			if (!_instance) {
-				var inst = FindObjectOfType<TurnManager> ();
-				_instance = inst ? inst : new GameObject ().AddComponent<TurnManager> ();
+	private static object _lock = new object();
+	public static TurnManager instance
+	{
+		get
+		{
+			lock(_lock)
+			{
+				if (!_instance)
+				{
+					var inst = FindObjectOfType<TurnManager> ();
+					_instance = inst ? inst : new GameObject ().AddComponent<TurnManager> ();
+				}
 			}
 			return _instance;
 		}
@@ -23,37 +30,35 @@ public class TurnManager : MonoBehaviour {
         ENEMYTURN
     }
 
-    public delegate void TurnChangeAction();
+	public delegate void TurnChangeAction(IList<PlayerCharacterStats> players, IList<EnemyStats> enemies, GAMESTATE turn);
     public event TurnChangeAction OnTurnChange;
 
     public GAMESTATE currentTurn { get; private set;}
 
     //List of all player stats in the game.  remove when player character is defeated
-    [SerializeField]
-	List<PlayerCharacterStats> playerList;
-    //List of all Enemy stats currently in game, remove when enemy is defeated
-    [SerializeField]
-	List<EnemyStats> enemyList;
+  [SerializeField]
+	IList<PlayerCharacterStats> playerList;
+	IList<EnemyStats> enemyList;
 
 	void Awake(){
         playerList = new List<PlayerCharacterStats>();
-        enemyList = new List<EnemyStats>();
+		enemyList = new List<EnemyStats>();
 		_instance = this;
         PlayerCharacterStats player;
-        EnemyStats enemy;
+		currentTurn = GAMESTATE.PLAYERTURN;
+		EnemyStats enemy;
         foreach (var x in GameObject.FindGameObjectsWithTag("Player")) {
             if (player = x.GetComponent<PlayerCharacterStats>())
             {
                 playerList.Add(player);
             }
         }
-        foreach (var x in GameObject.FindGameObjectsWithTag("Enemy"))
-        {
-            if (enemy = x.GetComponent<EnemyStats>())
-            {
-                enemyList.Add(enemy);
-            }
-        }
+		foreach (var x in GameObject.FindGameObjectsWithTag("Enemy")) {
+			if (enemy = x.GetComponent<EnemyStats>())
+			{
+				enemyList.Add(enemy);
+			}
+		}
 	}
 
 	void Update () {
@@ -101,6 +106,7 @@ public class TurnManager : MonoBehaviour {
                 }
                 
 		}
+		OnTurnChange (playerList, enemyList, currentTurn);
 	}
 
     public void EndPlayerTurn()

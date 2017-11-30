@@ -156,9 +156,4 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
         GetComponent<SingleNodeBlocker>().Unblock();
         PathManager.Instance.enemies.Remove(GetComponent<SingleNodeBlocker>());
     }
-
-    int ICharacterStats.TakeDamage(int damage)
-    {
-        throw new NotImplementedException();
-    }
 }

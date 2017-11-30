@@ -156,16 +156,14 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
         return CurrHP <= 0;
     }
 
-    public int TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
-        if (MitigationValue >= damage)
+        if (MitigationValue <= damage)
         {
-            return 0;
-        }
-        var dmgtaken = damage - MitigationValue;
+            var dmgtaken = damage - MitigationValue;
 
-        CurrHP = Math.Max(CurrHP - dmgtaken, 0);
-        return dmgtaken;
+            CurrHP = Math.Max(CurrHP - dmgtaken, 0);
+        }
     }
 
     public void OnTurnStart()

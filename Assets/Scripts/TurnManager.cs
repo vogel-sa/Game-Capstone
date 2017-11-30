@@ -138,7 +138,7 @@ public class TurnManager : MonoBehaviour {
     /// checks for victory condition
     /// </summary>
     /// <returns></returns>
-    public void isVictory()
+    private void isVictory()
     {
        if (enemyList.Count == 0)
         {
@@ -146,7 +146,7 @@ public class TurnManager : MonoBehaviour {
         }
     }
 
-    public void isDefeat()
+    private void isDefeat()
     {
         if (playerList.Count == 0)
         {

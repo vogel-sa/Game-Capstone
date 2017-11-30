@@ -12,11 +12,6 @@ public class AbilityButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 	void Start () {
 		page = GameObject.Find ("AbilityDescription").GetComponent<AbilityDescriptionPage> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	public void OnPointerEnter(PointerEventData data){
 		

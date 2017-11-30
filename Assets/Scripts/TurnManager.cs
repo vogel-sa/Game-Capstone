@@ -61,14 +61,6 @@ public class TurnManager : MonoBehaviour
 		}
 	}
 
-	void Update () {
-
-        if (Input.GetKeyDown(KeyCode.Space) && currentTurn == GAMESTATE.ENEMYTURN)
-        {
-            SwitchTurn();
-        }
-    }
-
 	private void OnPlayerTurnStart(){
 
         PlayerMovementManager.Instance.enabled = true;
@@ -106,16 +98,8 @@ public class TurnManager : MonoBehaviour
                 }
                 
 		}
-		OnTurnChange (playerList, enemyList, currentTurn);
+        OnTurnChange(playerList, enemyList, currentTurn);
 	}
-
-    public void EndPlayerTurn()
-    {
-        if (currentTurn == GAMESTATE.PLAYERTURN)
-        {
-            SwitchTurn();
-        }
-    }
 
     /// <summary>
     /// Checks if all players have moved, then auto ends the players turn if ALL player characters have moved

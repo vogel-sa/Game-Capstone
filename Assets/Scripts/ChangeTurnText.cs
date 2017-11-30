@@ -31,15 +31,16 @@ public class ChangeTurnText : MonoBehaviour {
 
 	}
 	
-	// Update is called once per frame
-	void Update () {
-        if (manager.currentTurn != state)
-        {
-            switchText();
-        }
+	void OnEnable () {
+        TurnManager.instance.OnTurnChange += switchText;
 	}
 
-    public void switchText()
+    void OnDisable()
+    {
+        TurnManager.instance.OnTurnChange -= switchText;
+    }
+
+    public void switchText(IList<PlayerCharacterStats> players, IList<EnemyStats> enemies, TurnManager.GAMESTATE turn)
     {
         if (text.text == yourturn)
         {

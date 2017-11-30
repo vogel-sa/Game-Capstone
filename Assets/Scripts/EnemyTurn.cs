@@ -26,13 +26,18 @@ public class EnemyTurn : MonoBehaviour
 		}
 	}
 
-	void OnEnable()
-	{
-		TurnManager.instance.OnTurnChange += RunTurn;
-	}
+    void OnEnable()
+    {
+        TurnManager.instance.OnTurnChange += RunTurn;
+    }
+
+    private void OnDisable()
+    {
+        TurnManager.instance.OnTurnChange -= RunTurn;
+    }
 
 
-	private void RunTurn(IList<PlayerCharacterStats> players, IList<EnemyStats> enemies, TurnManager.GAMESTATE turn)
+    private void RunTurn(IList<PlayerCharacterStats> players, IList<EnemyStats> enemies, TurnManager.GAMESTATE turn)
 	{
 		if (turn == TurnManager.GAMESTATE.ENEMYTURN)
 		{
@@ -73,17 +78,20 @@ public class EnemyTurn : MonoBehaviour
 				arr [arr.Length - 1] = arr [arr.Length - 2];
 				var spline = new LTSpline (arr);
 				Destroy (modifier.gameObject);
-
-				LeanTween.moveSpline (enemy.gameObject, spline, spline.distance / moveSpeed).
-					setOnComplete (() => finished = true).// May want to fiddle with animation states here.
-					setEase (LeanTweenType.linear).
-					setOrientToPath (true);
-				yield return new WaitUntil (() => finished);
+                if (arr.Length >= 4)
+                {
+                    LeanTween.moveSpline(enemy.gameObject, spline, spline.distance / moveSpeed).
+                        setOnComplete(() => finished = true).// May want to fiddle with animation states here.
+                        setEase(LeanTweenType.linear).
+                        setOrientToPath(true);
+                    yield return new WaitUntil(() => finished);
+                }
 				yield return new WaitForSeconds (.2f);
 			}
 		}
 		yield return null;
-		TurnManager.instance.SwitchTurn ();
+        //TurnManager.instance.SwitchTurn ();
+        Debug.Log("This happens");
 	}
 	
 	private float ManhattanDist(Vector3 a, Vector3 b)

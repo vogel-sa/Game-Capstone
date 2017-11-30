@@ -33,7 +33,7 @@ public class Flare : MonoBehaviour {
         }
     }
 
-    void Countdown()
+	void Countdown(IList<PlayerCharacterStats> stats, IList<EnemyStats> enemies, TurnManager.GAMESTATE turn)
     {
         if ((--turns) == 0)
         {

@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TurnManager : MonoBehaviour {
+public class TurnManager : MonoBehaviour
+{
 
 	private static TurnManager _instance;
-
-	public static TurnManager instance{
-		get{
-			if (!_instance) {
-				var inst = FindObjectOfType<TurnManager> ();
-				_instance = inst ? inst : new GameObject ().AddComponent<TurnManager> ();
+	private static object _lock = new object();
+	public static TurnManager instance
+	{
+		get
+		{
+			lock(_lock)
+			{
+				if (!_instance)
+				{
+					var inst = FindObjectOfType<TurnManager> ();
+					_instance = inst ? inst : new GameObject ().AddComponent<TurnManager> ();
+				}
 			}
 			return _instance;
 		}
@@ -23,26 +30,34 @@ public class TurnManager : MonoBehaviour {
         ENEMYTURN
     }
 
-    public delegate void TurnChangeAction();
+	public delegate void TurnChangeAction(IList<PlayerCharacterStats> players, IList<EnemyStats> enemies, GAMESTATE turn);
     public event TurnChangeAction OnTurnChange;
 
     public GAMESTATE currentTurn { get; private set;}
 
     [SerializeField]
-	List<PlayerCharacterStats> playerList;
-	List<GameObject> enemyList;
+	IList<PlayerCharacterStats> playerList;
+	IList<EnemyStats> enemyList;
 
 	void Awake(){
         playerList = new List<PlayerCharacterStats>();
-        enemyList = new List<GameObject>();
+		enemyList = new List<EnemyStats>();
 		_instance = this;
         PlayerCharacterStats player;
+		currentTurn = GAMESTATE.PLAYERTURN;
+		EnemyStats enemy;
         foreach (var x in GameObject.FindGameObjectsWithTag("Player")) {
             if (player = x.GetComponent<PlayerCharacterStats>())
             {
                 playerList.Add(player);
             }
         }
+		foreach (var x in GameObject.FindGameObjectsWithTag("Enemy")) {
+			if (enemy = x.GetComponent<EnemyStats>())
+			{
+				enemyList.Add(enemy);
+			}
+		}
 	}
 
 	void Start () {
@@ -95,6 +110,7 @@ public class TurnManager : MonoBehaviour {
                 }
                 
 		}
+		OnTurnChange (playerList, enemyList, currentTurn);
 	}
 
     public void EndPlayerTurn()

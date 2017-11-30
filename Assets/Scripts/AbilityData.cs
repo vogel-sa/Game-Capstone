@@ -7,6 +7,7 @@ using UnityEngine.Events;
 [Serializable]
 public class AbilityData{
 
+    #region
     /// <summary>
     /// Name of the Ability
     /// </summary>
@@ -47,8 +48,8 @@ public class AbilityData{
     /// The amount of damage for said ability
     /// </summary>
     [SerializeField]
-    string _damageAmount;
-    public string DamageAmount
+    int _damageAmount;
+    public int DamageAmount
     {
         get
         {
@@ -96,6 +97,8 @@ public class AbilityData{
             _currcooldown = value;
         }
     }
+    #endregion
+
     [SerializeField]
     UnityEvent _ability;
     public UnityEvent Ability
@@ -115,4 +118,114 @@ public class AbilityData{
             return _abilitySprite;
         }
     }
+    
+    /// <summary>
+    /// READ BEFORE SETTING THIS DICTIONARY
+    /// Use "Range" for range of ability
+    /// Use "Area of Effect" for radius
+    /// </summary>
+    [SerializeField]
+    OtherAbilityValues _othervalues;
+    public OtherAbilityValues OtherValues
+    {
+        get
+        {
+            return _othervalues;
+        }
+
+        set
+        {
+            _othervalues = value;
+        }
+    }
+}
+
+[Serializable]
+public class OtherAbilityValues
+{
+    /// <summary>
+    /// The Range of the ability.  How far the attack extends out from the player
+    /// </summary>
+    [SerializeField]
+    private float _range;
+    public float Range
+    {
+        get
+        {
+            return _range;
+        }
+
+        set
+        {
+            _range = value;
+        }
+    }
+
+    /// <summary>
+    /// The width for a lined attack
+    /// </summary>
+    [SerializeField]
+    private float _width;
+    public float Width
+    {
+        get
+        {
+            return _width;
+        }
+
+        set
+        {
+            _width = value;
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [SerializeField]
+    private int _duration;
+    public int Duration
+    {
+        get
+        {
+            return _duration;
+        }
+
+        set
+        {
+            _duration = value;
+        }
+    }
+
+    [SerializeField]
+    private float _areaofeffect;
+    public float AreaOfEffect
+    {
+        get
+        {
+            return _areaofeffect;
+        }
+
+        set
+        {
+            _areaofeffect = value;
+        }
+    }
+
+    [SerializeField]
+    private float _angle;
+    public float Angle
+    {
+        get
+        {
+            return _angle;
+        }
+
+        set
+        {
+            _angle = value;
+        }
+    }
+
+
 }

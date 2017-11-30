@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 8
+  serializedVersion: 7
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -25,7 +25,6 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 0
   m_AmbientMode: 3
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -67,6 +66,7 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
+    m_DirectLightInLightProbes: 1
     m_FinalGather: 0
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
@@ -106,8 +106,6 @@ NavMeshSettings:
     minRegionArea: 2
     manualCellSize: 0
     cellSize: 0.16666667
-    manualTileSize: 0
-    tileSize: 256
     accuratePlacement: 0
     debug:
       m_Flags: 0
@@ -304,7 +302,6 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!65 &122394804
 BoxCollider:
@@ -405,9 +402,9 @@ MonoBehaviour:
   _actionsleft: 2
   _portrait: {fileID: 0}
   _abilityData:
-  - _name: Shoot
+  - _name: RifleShot
     _description: Fire a single shot in a straight line.
-    _damageAmount: 2
+    _damageAmount: 10
     _maxcooldown: 2
     _currcooldown: 0
     _ability:
@@ -427,9 +424,15 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     _abilitySprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    _othervalues:
+      _range: 7
+      _width: 0.1
+      _duration: 0
+      _areaofeffect: 0
+      _angle: 0
   - _name: Flare
     _description: Drop a flare at your feet.
-    _damageAmount: 
+    _damageAmount: 0
     _maxcooldown: 3
     _currcooldown: 0
     _ability:
@@ -449,9 +452,15 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     _abilitySprite: {fileID: 21300000, guid: 317638b018e5a1a4287cfeddeac9e023, type: 3}
+    _othervalues:
+      _range: 0
+      _width: 0
+      _duration: 0
+      _areaofeffect: 0
+      _angle: 0
   - _name: 
     _description: 
-    _damageAmount: 
+    _damageAmount: 0
     _maxcooldown: 0
     _currcooldown: 0
     _ability:
@@ -460,9 +469,15 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     _abilitySprite: {fileID: 0}
+    _othervalues:
+      _range: 0
+      _width: 0
+      _duration: 0
+      _areaofeffect: 0
+      _angle: 0
   - _name: 
     _description: 
-    _damageAmount: 
+    _damageAmount: 0
     _maxcooldown: 0
     _currcooldown: 0
     _ability:
@@ -471,6 +486,12 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     _abilitySprite: {fileID: 0}
+    _othervalues:
+      _range: 0
+      _width: 0
+      _duration: 0
+      _areaofeffect: 0
+      _angle: 0
 --- !u!114 &156955663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -562,7 +583,6 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!65 &157798541
 BoxCollider:
@@ -1158,7 +1178,7 @@ MonoBehaviour:
   ability:
     _name: 
     _description: 
-    _damageAmount: 
+    _damageAmount: 0
     _maxcooldown: 0
     _currcooldown: 0
     _ability:
@@ -1167,6 +1187,12 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     _abilitySprite: {fileID: 0}
+    _othervalues:
+      _range: 0
+      _width: 0
+      _duration: 0
+      _areaofeffect: 0
+      _angle: 0
 --- !u!1 &409343565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,7 +1274,6 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!114 &409343569
 MonoBehaviour:
@@ -1363,7 +1388,7 @@ Light:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 421141400}
   m_Enabled: 1
-  serializedVersion: 8
+  serializedVersion: 7
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2
@@ -1388,8 +1413,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1.5, y: 1.5}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!1 &441265122
@@ -1428,7 +1451,7 @@ Light:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 441265122}
   m_Enabled: 1
-  serializedVersion: 8
+  serializedVersion: 7
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 0.25
@@ -1453,10 +1476,30 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!84 &456424269
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 441
+  m_Height: 276
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapMode: 1
 --- !u!1 &456987617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1910,7 +1953,7 @@ Light:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 885922572}
   m_Enabled: 1
-  serializedVersion: 8
+  serializedVersion: 7
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 0.25
@@ -1935,8 +1978,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &885922574
@@ -1998,8 +2039,6 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
-  m_AllowMSAA: 1
-  m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -2142,7 +2181,7 @@ MonoBehaviour:
   ability:
     _name: 
     _description: 
-    _damageAmount: 
+    _damageAmount: 0
     _maxcooldown: 0
     _currcooldown: 0
     _ability:
@@ -2151,6 +2190,12 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     _abilitySprite: {fileID: 0}
+    _othervalues:
+      _range: 0
+      _width: 0
+      _duration: 0
+      _areaofeffect: 0
+      _angle: 0
 --- !u!1 &981692937
 GameObject:
   m_ObjectHideFlags: 0
@@ -2213,7 +2258,7 @@ Canvas:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 981692937}
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 2
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
@@ -2222,7 +2267,6 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -2450,7 +2494,7 @@ MonoBehaviour:
   ability:
     _name: 
     _description: 
-    _damageAmount: 
+    _damageAmount: 0
     _maxcooldown: 0
     _currcooldown: 0
     _ability:
@@ -2459,6 +2503,12 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     _abilitySprite: {fileID: 0}
+    _othervalues:
+      _range: 0
+      _width: 0
+      _duration: 0
+      _areaofeffect: 0
+      _angle: 0
 --- !u!1 &1021663630
 GameObject:
   m_ObjectHideFlags: 0
@@ -2523,7 +2573,6 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!136 &1021663633
 CapsuleCollider:
@@ -2625,7 +2674,6 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!114 &1038104932
 MonoBehaviour:
@@ -2692,7 +2740,7 @@ Light:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1038104929}
   m_Enabled: 1
-  serializedVersion: 8
+  serializedVersion: 7
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 8
@@ -2717,8 +2765,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!1 &1107905911
@@ -2762,6 +2808,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &1117872294
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 441
+  m_Height: 276
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapMode: 1
 --- !u!1 &1156601979
 GameObject:
   m_ObjectHideFlags: 0
@@ -2885,7 +2953,7 @@ Light:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1194565774}
   m_Enabled: 1
-  serializedVersion: 8
+  serializedVersion: 7
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2
@@ -2910,8 +2978,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1.5, y: 1.5}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!114 &1194565777
@@ -3081,8 +3147,6 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
-  m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -3416,7 +3480,7 @@ MonoBehaviour:
   ability:
     _name: 
     _description: 
-    _damageAmount: 
+    _damageAmount: 0
     _maxcooldown: 0
     _currcooldown: 0
     _ability:
@@ -3425,6 +3489,12 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     _abilitySprite: {fileID: 0}
+    _othervalues:
+      _range: 0
+      _width: 0
+      _duration: 0
+      _areaofeffect: 0
+      _angle: 0
 --- !u!1 &1313259219
 GameObject:
   m_ObjectHideFlags: 0
@@ -3465,7 +3535,7 @@ MonoBehaviour:
   _abilityData:
   - _name: 
     _description: 
-    _damageAmount: 
+    _damageAmount: 0
     _maxcooldown: 0
     _currcooldown: 0
     _ability:
@@ -3474,9 +3544,15 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     _abilitySprite: {fileID: 0}
+    _othervalues:
+      _range: 0
+      _width: 0
+      _duration: 0
+      _areaofeffect: 0
+      _angle: 0
   - _name: 
     _description: 
-    _damageAmount: 
+    _damageAmount: 0
     _maxcooldown: 0
     _currcooldown: 0
     _ability:
@@ -3485,9 +3561,15 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     _abilitySprite: {fileID: 0}
+    _othervalues:
+      _range: 0
+      _width: 0
+      _duration: 0
+      _areaofeffect: 0
+      _angle: 0
   - _name: 
     _description: 
-    _damageAmount: 
+    _damageAmount: 0
     _maxcooldown: 0
     _currcooldown: 0
     _ability:
@@ -3496,9 +3578,15 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     _abilitySprite: {fileID: 0}
+    _othervalues:
+      _range: 0
+      _width: 0
+      _duration: 0
+      _areaofeffect: 0
+      _angle: 0
   - _name: 
     _description: 
-    _damageAmount: 
+    _damageAmount: 0
     _maxcooldown: 0
     _currcooldown: 0
     _ability:
@@ -3507,6 +3595,12 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     _abilitySprite: {fileID: 0}
+    _othervalues:
+      _range: 0
+      _width: 0
+      _duration: 0
+      _areaofeffect: 0
+      _angle: 0
 --- !u!114 &1313259221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4076,7 +4170,6 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!65 &1476697846
 BoxCollider:
@@ -4167,7 +4260,7 @@ Light:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1513697913}
   m_Enabled: 1
-  serializedVersion: 8
+  serializedVersion: 7
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 0.25
@@ -4192,8 +4285,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!1 &1523638983
@@ -4314,7 +4405,6 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!136 &1565473416
 CapsuleCollider:
@@ -4376,7 +4466,7 @@ Light:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1635062956}
   m_Enabled: 1
-  serializedVersion: 8
+  serializedVersion: 7
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 8
@@ -4401,8 +4491,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!114 &1635062959
@@ -4495,7 +4583,6 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!1 &1645600764
 GameObject:
@@ -4655,7 +4742,7 @@ Light:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1652670997}
   m_Enabled: 1
-  serializedVersion: 8
+  serializedVersion: 7
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 0.25
@@ -4680,8 +4767,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!1 &1654065992
@@ -4750,7 +4835,6 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!136 &1654065995
 CapsuleCollider:
@@ -5338,7 +5422,6 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!136 &2041561668
 CapsuleCollider:

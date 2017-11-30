@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Abilities : MonoBehaviour {
@@ -29,10 +30,12 @@ public class Abilities : MonoBehaviour {
         LineRenderer lineRenderer = null;
         try
         {
+            var abilData = (from abil in stats.AbilityData where abil.Name == "RifleShot" select abil).FirstOrDefault();
+            Debug.Log(abilData.Description);
             PlayerMovementManager.Instance.SetQuadsEnabled(false);
             PlayerMovementManager.Instance.enabled = false;
-            var range = 10f;
-            var width = .05f;
+            var range = abilData.OtherValues.Range;
+            var width = abilData.OtherValues.Width;
             Vector3 direction = Vector3.zero;
             RaycastHit hit;
             lineRenderer = new GameObject().AddComponent<LineRenderer>();
@@ -60,7 +63,7 @@ public class Abilities : MonoBehaviour {
                 if (hit.transform.CompareTag("Enemy"))
                 {
                     hitStats = hit.transform.parent.GetComponent<EnemyStats>();
-                    hitStats.TakeDamage(10 /* TODO: Change to use player stats */);
+                    hitStats.TakeDamage(abilData.DamageAmount);
                 }
             }
             Debug.Log("Bang");

@@ -21,7 +21,7 @@ public interface ICharacterStats
     /// </summary>
     /// <param name="damage"></param>
     /// <returns>dmg taken after self-mitigation calculated</returns>
-    int TakeDamage(int damage);
+    void TakeDamage(int damage);
 
     /// <summary>
     /// Permanently changes the damage mitigation value

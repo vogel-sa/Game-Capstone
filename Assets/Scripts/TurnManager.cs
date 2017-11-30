@@ -35,7 +35,8 @@ public class TurnManager : MonoBehaviour
 
     public GAMESTATE currentTurn { get; private set;}
 
-    [SerializeField]
+    //List of all player stats in the game.  remove when player character is defeated
+  [SerializeField]
 	IList<PlayerCharacterStats> playerList;
 	IList<EnemyStats> enemyList;
 
@@ -59,11 +60,6 @@ public class TurnManager : MonoBehaviour
 			}
 		}
 	}
-
-	void Start () {
-		//UpdateAllCombatMembers ();
-	}
-	
 
 	void Update () {
 
@@ -144,4 +140,23 @@ public class TurnManager : MonoBehaviour
         return true;
 	}
 
+    /// <summary>
+    /// checks for victory condition
+    /// </summary>
+    /// <returns></returns>
+    private void isVictory()
+    {
+       if (enemyList.Count == 0)
+        {
+            //TODO: End state
+        }
+    }
+
+    private void isDefeat()
+    {
+        if (playerList.Count == 0)
+        {
+            //TODO:  Game Over
+        }
+    }
 }

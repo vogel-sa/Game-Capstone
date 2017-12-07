@@ -37,7 +37,7 @@ public class ConeCollider : MonoBehaviour {
         set { m_isFixScale = value; }
     }
 
-    void Awake()
+    public void Init()
     {
         //リソースロード
         GameObject cone = Resources.Load("Prefab/ConeCollider") as GameObject;
@@ -105,14 +105,6 @@ public class ConeCollider : MonoBehaviour {
             scale.z = 1.0f / scale.z;
             this.transform.localScale = scale;
         }
-    }
-
-    private void Start() {
-
-    }
-
-    private void Update() {
-
     }
 
     GameObject DebugObject(Vector3 pos, float scale = 1.0f, string name = "Sphere")

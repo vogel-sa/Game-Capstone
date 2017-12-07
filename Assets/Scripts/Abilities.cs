@@ -30,7 +30,7 @@ public class Abilities : MonoBehaviour {
         LineRenderer lineRenderer = null;
         try
         {
-            var abilData = (from abil in stats.AbilityData where abil.Name == "RifleShot" select abil).FirstOrDefault();
+            var abilData = (from abil in stats.AbilityData where abil.Name == "Shoot" select abil).FirstOrDefault();
             Debug.Log(abilData.Description);
             PlayerMovementManager.Instance.SetQuadsEnabled(false);
             PlayerMovementManager.Instance.enabled = false;
@@ -50,7 +50,7 @@ public class Abilities : MonoBehaviour {
                     var mousePos = new Vector3(hit.point.x, stats.transform.position.y + 1/*aimLine.transform.position.y*/, hit.point.z);
                     var origin = stats.transform.position + Vector3.up;
                     direction = origin - mousePos;
-                    lineRenderer.SetPositions(new Vector3[] { origin - direction.normalized*.5f, origin - direction.normalized*range });
+                    lineRenderer.SetPositions(new Vector3[] { origin - direction.normalized * .5f, origin - direction.normalized*range });
 					stats.transform.LookAt(new Vector3((origin - direction.normalized*range).x, stats.transform.position.y, (origin - direction.normalized*range).z));
                 }
                 yield return null;
@@ -103,6 +103,65 @@ public class Abilities : MonoBehaviour {
         {
             PlayerMovementManager.Instance.SetQuadsEnabled(true);
             PlayerMovementManager.Instance.enabled = true;
+        }
+    }
+
+    public void FlashlightAbility(PlayerCharacterStats stats) { StartCoroutine(_flashlightAbility(stats)); }
+    private IEnumerator _flashlightAbility(PlayerCharacterStats stats)
+    {
+        LineOfSight los = null;
+        try
+        {
+            var abilData = (from abil in stats.AbilityData where abil.Name == "Flashlight" select abil).FirstOrDefault();
+            Debug.Log(abilData.Description);
+            PlayerMovementManager.Instance.SetQuadsEnabled(false);
+            PlayerMovementManager.Instance.enabled = false;
+            var range = abilData.OtherValues.Range;
+            var width = abilData.OtherValues.Width;
+            Vector3 direction = Vector3.zero;
+            RaycastHit hit;
+            los = new GameObject().AddComponent<LineOfSight>();
+            los._idle = Resources.Load<Material>("UI");
+            los.transform.position = stats.transform.position + Vector3.up;
+            los._cullingMask = LayerMask.GetMask("Obstacle");
+            los._maxAngle = (int)abilData.OtherValues.Angle;
+            los._maxDistance = abilData.OtherValues.Range;
+            RaycastIfInLightCone flashlight = new GameObject().AddComponent<RaycastIfInLightCone>();//stats.transform.Find("Spotlight");
+            yield return null; // Wait for flashlight to initialize.
+            flashlight.Range = abilData.OtherValues.Range;
+            flashlight.Angle = (int)abilData.OtherValues.Angle;
+            flashlight.transform.position = stats.transform.position + Vector3.up;
+            flashlight.transform.parent = stats.transform;
+            flashlight.gameObject.SetActive(false);
+            flashlight.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+            do
+            {
+                if (Input.GetKeyDown(KeyCode.Escape)) yield break;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+                {
+                    var mousePos = new Vector3(hit.point.x, stats.transform.position.y + 1/*aimLine.transform.position.y*/, hit.point.z);
+                    var origin = stats.transform.position + Vector3.up;
+                    direction = origin - mousePos;
+                    var lookAt = new Vector3((origin - direction.normalized * range).x, stats.transform.position.y + 1, (origin - direction.normalized * range).z);
+                    los.transform.LookAt(lookAt);
+                    stats.transform.LookAt(lookAt);
+                    flashlight.transform.LookAt(lookAt);
+                }
+                yield return null;
+            } while (!Input.GetMouseButtonDown(0));
+            los.gameObject.SetActive(false);
+            flashlight.gameObject.SetActive(true);
+            // TODO: Animation of ability
+
+            yield return new WaitForSeconds(.5f);// Change to wait until animation over, possibly wait for enemy reaction (i.e. reaction shot, death anim, etc.);
+        }
+        finally
+        {
+            PlayerMovementManager.Instance.SetQuadsEnabled(true);
+            PlayerMovementManager.Instance.enabled = true;
+            PlayerMovementManager.Instance.Select(stats.transform, stats);
+            if (los) Destroy(los.gameObject);
         }
     }
 }

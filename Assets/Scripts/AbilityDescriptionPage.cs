@@ -7,10 +7,11 @@ public class AbilityDescriptionPage : MonoBehaviour {
 	// Use this for initialization
 	Text name;
 	Text des;
+    Image background;
 	void Start () {
 		name = transform.Find ("Name").GetComponent<Text> ();
 		des = transform.Find ("Description").GetComponent<Text> ();
-
+        background = transform.Find("Background").GetComponent<Image>();
 		Hide ();
 	}
 	
@@ -20,14 +21,18 @@ public class AbilityDescriptionPage : MonoBehaviour {
 	}
 
 	public void Show(AbilityData ad){
-		transform.position = new Vector3 (Input.mousePosition.x, Input.mousePosition.y + 100, 0);
-		Debug.Log ("show page");
-		name.text = ad.Name;
+        name.enabled = true;
+        des.enabled = true;
+        background.enabled = true;
+
+        name.text = ad.Name;
 		des.text = ad.Description;
 	}
 
 	public void Hide(){
-		
-		transform.position = new Vector3 (2000, 2000, 0);
+
+        name.enabled = false;
+        des.enabled = false;
+        background.enabled = false;
 	}
 }

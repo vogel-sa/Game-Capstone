@@ -18,7 +18,6 @@ public class ButtonAbilitySelector : MonoBehaviour {
         for (int i = 0; i < _buttons.Length; i++)
         {
             _sprites[i] = _buttons[i].GetComponent<Sprite>();
-            // TODO: Change image, change script to call.
         }
     }
 
@@ -38,7 +37,7 @@ public class ButtonAbilitySelector : MonoBehaviour {
     {
         Debug.Log("Buttons changed");
         abilities = new AbilityData[PlayerMovementManager.Instance.SelectedCharacterStats.AbilityData.Length];
-        for (int i = 0; i < _buttons.Length; i++)
+        for (int i = 0; i < abilities.Length; i++)
         {
             abilities[i] = PlayerMovementManager.Instance.SelectedCharacterStats.AbilityData[i];
 
@@ -59,9 +58,9 @@ public class ButtonAbilitySelector : MonoBehaviour {
 
 	void UpdateAbilityIcon(AbilityData[] ad){
 		
-		for (int i = 0; i < _buttons.Length; i++) {
+		for (int i = 0; i < abilities.Length; i++) {
 			
-			this.transform.GetChild(i).GetComponent<Image>().sprite = ad [i].AbilitySprite;
+			transform.GetChild(i).GetComponent<Image>().sprite = ad [i].AbilitySprite;
 		}
 	}
 }

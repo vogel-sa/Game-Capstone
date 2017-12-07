@@ -240,6 +240,7 @@ public class PlayerMovementManager : MonoBehaviour
         }
         selected = t;
         OnSelect();
+		SetQuadsEnabled (true);
     }
 
     public void SetQuadsEnabled(bool enabled)

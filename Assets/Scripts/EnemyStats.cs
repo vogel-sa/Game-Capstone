@@ -150,20 +150,6 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
         }
     }
 
-	[SerializeField]
-	private int _moveDist = 10;
-	public int MoveDist
-	{
-		get
-		{
-			return _moveDist;
-		}
-		private set
-		{
-			_moveDist = value;
-		}
-	}
-
     private void Die()
     {
         gameObject.SetActive(false);

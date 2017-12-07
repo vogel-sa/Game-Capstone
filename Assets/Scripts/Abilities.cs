@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using cakeslice;
 
 public class Abilities : MonoBehaviour {
 
@@ -73,9 +74,10 @@ public class Abilities : MonoBehaviour {
         }
         finally
         {
-            PlayerMovementManager.Instance.SetQuadsEnabled(true);
+            //PlayerMovementManager.Instance.SetQuadsEnabled(true);
             PlayerMovementManager.Instance.enabled = true;
-            PlayerMovementManager.Instance.Select(stats.transform, stats);
+            //PlayerMovementManager.Instance.Select(stats.transform, stats);
+			stats.hasMoved = true;
             if (lineRenderer) Destroy(lineRenderer.gameObject);
         }
     }
@@ -121,7 +123,8 @@ public class Abilities : MonoBehaviour {
             Vector3 direction = Vector3.zero;
             RaycastHit hit;
             los = new GameObject().AddComponent<LineOfSight>();
-            los._idle = Resources.Load<Material>("UI");
+			los.gameObject.AddComponent<Outline>();
+            los._idle = Resources.Load<Material>("Clear");
             los.transform.position = stats.transform.position + Vector3.up;
             los._cullingMask = LayerMask.GetMask("Obstacle");
             los._maxAngle = (int)abilData.OtherValues.Angle;
@@ -143,10 +146,10 @@ public class Abilities : MonoBehaviour {
                     var mousePos = new Vector3(hit.point.x, stats.transform.position.y + 1/*aimLine.transform.position.y*/, hit.point.z);
                     var origin = stats.transform.position + Vector3.up;
                     direction = origin - mousePos;
-                    var lookAt = new Vector3((origin - direction.normalized * range).x, stats.transform.position.y + 1, (origin - direction.normalized * range).z);
+                    var lookAt = new Vector3((origin - direction.normalized * range).x, stats.transform.position.y/* + 1*/, (origin - direction.normalized * range).z);
                     los.transform.LookAt(lookAt);
                     stats.transform.LookAt(lookAt);
-                    flashlight.transform.LookAt(lookAt);
+                    //flashlight.transform.LookAt(lookAt);
                 }
                 yield return null;
             } while (!Input.GetMouseButtonDown(0));
@@ -158,10 +161,10 @@ public class Abilities : MonoBehaviour {
         }
         finally
         {
-            PlayerMovementManager.Instance.SetQuadsEnabled(true);
+            //PlayerMovementManager.Instance.SetQuadsEnabled(true);
             PlayerMovementManager.Instance.enabled = true;
-            PlayerMovementManager.Instance.Select(stats.transform, stats);
             if (los) Destroy(los.gameObject);
+			stats.hasMoved = true;
         }
     }
 }

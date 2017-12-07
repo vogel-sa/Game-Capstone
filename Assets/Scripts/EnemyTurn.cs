@@ -65,24 +65,22 @@ public class EnemyTurn : MonoBehaviour
 			}
 			if (path != null)
 			{
-				// TODO: truncate path to correct movedist for enemy before modifier.
-				var modifier = new GameObject ().AddComponent<RaycastModifier> ();
-				modifier.raycastOffset = Vector3.up * .2f;
-				modifier.mask = LayerMask.GetMask ("Obstacle", "Player");
-				modifier.Apply (path);
 				bool finished = false;
+				var arr = new Vector3[enemy.MovementRange + 2];
+                for (int i = 1; i < arr.Length - 1; i++)
+                {
+                    arr[i] = path.vectorPath[i-1];
+                }
 
-				var arr = new Vector3[path.vectorPath.Count + 2];
-				path.vectorPath.CopyTo (arr, 1);
 				arr [0] = arr [1];
 				arr [arr.Length - 1] = arr [arr.Length - 2];
 				var spline = new LTSpline (arr);
-				Destroy (modifier.gameObject);
+				//Destroy (modifier.gameObject);
                 if (arr.Length >= 4)
                 {
                     LeanTween.moveSpline(enemy.gameObject, spline, spline.distance / moveSpeed).
                         setOnComplete(() => finished = true).// May want to fiddle with animation states here.
-                        setEase(LeanTweenType.linear).
+                        //setEase(LeanTweenType.linear).
                         setOrientToPath(true);
                     yield return new WaitUntil(() => finished);
                 }
@@ -90,7 +88,7 @@ public class EnemyTurn : MonoBehaviour
 			}
 		}
 		yield return null;
-        //TurnManager.instance.SwitchTurn ();
+        TurnManager.instance.SwitchTurn ();
         Debug.Log("This happens");
 	}
 	

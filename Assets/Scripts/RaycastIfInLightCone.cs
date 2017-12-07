@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(ConeCollider), typeof(Light))]
 public class RaycastIfInLightCone : MonoBehaviour
 {
-    private ConeCollider col;
+    private ConeCollider cone;
     private Light lt;
     [SerializeField, Range(.01f, 179f)]
     private int angle = 30;
@@ -16,7 +16,7 @@ public class RaycastIfInLightCone : MonoBehaviour
         }
         set
         {
-            col.Angle = angle = value / 2;
+            cone.Angle = angle = value / 2;
             lt.spotAngle = value;
         }
     }
@@ -30,7 +30,7 @@ public class RaycastIfInLightCone : MonoBehaviour
         }
         set
         {
-            col.Distance = lt.range = range = value;
+            cone.Distance = lt.range = range = value;
 
         }
     }
@@ -50,19 +50,19 @@ public class RaycastIfInLightCone : MonoBehaviour
     [SerializeField]
     LayerMask raycastIgnore;// = LayerMask.GetMask("Player");
     [SerializeField]
-    public int turns = 3;
+    public int turns = 2;
 
     void Start()
     {
         raycastIgnore = LayerMask.GetMask("Player", "Raycast Ignore");
-        col = GetComponent<ConeCollider>();
-        if (!col) col = gameObject.AddComponent<ConeCollider>();
+        cone = GetComponent<ConeCollider>();
+        if (!cone) cone = gameObject.AddComponent<ConeCollider>();
         lt = GetComponent<Light>();
         if (!lt) lt = gameObject.AddComponent<Light>();
-        col.Angle = angle / 2;
-        col.Distance = range;
-        col.IsTrigger = true;
-        col.Init();
+        cone.Angle = angle / 2;
+        cone.Distance = range;
+        cone.IsTrigger = true;
+        cone.Init();
         lt.type = LightType.Spot;
         lt.range = range;
         lt.spotAngle = angle;
@@ -93,7 +93,7 @@ public class RaycastIfInLightCone : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        if (col.transform.tag.Equals("Enemy") && !col.GetComponent<MeshRenderer>().enabled)
+        if (col.transform.tag =="Enemy" && !col.GetComponent<MeshRenderer>().enabled)
         {
             if (RaySweep(col))
             {

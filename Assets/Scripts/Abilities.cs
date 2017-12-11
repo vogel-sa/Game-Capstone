@@ -30,7 +30,7 @@ public class Abilities : MonoBehaviour {
         LineRenderer lineRenderer = null;
         try
         {
-            var abilData = (from abil in stats.AbilityData where abil.Name == "RifleShot" select abil).FirstOrDefault();
+            var abilData = (from abil in stats.AbilityData where abil.Name == "RifleShot" select abil).FirstOrDefault(); //Find better way to do this
             Debug.Log(abilData.Description);
             PlayerMovementManager.Instance.SetQuadsEnabled(false);
             PlayerMovementManager.Instance.enabled = false;
@@ -66,9 +66,9 @@ public class Abilities : MonoBehaviour {
                     hitStats.TakeDamage(abilData.DamageAmount);
                 }
             }
+            stats.Actionsleft = 0;
             Debug.Log("Bang");
-
-
+            TurnManager.instance.AutoEndTurnCheck();
             yield return new WaitForSeconds(.5f);// Change to wait until animation over, possibly wait for enemy reaction (i.e. reaction shot, death anim, etc.);
         }
         finally

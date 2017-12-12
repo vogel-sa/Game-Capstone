@@ -80,7 +80,7 @@ public class EnemyTurn : MonoBehaviour
                 {
                     LeanTween.moveSpline(enemy.gameObject, spline, spline.distance / moveSpeed).
                         setOnComplete(() => finished = true).// May want to fiddle with animation states here.
-                        //setEase(LeanTweenType.linear).
+						//setEase(LeanTweenType.easeInQuad).
                         setOrientToPath(true);
                     yield return new WaitUntil(() => finished);
                 }
@@ -89,7 +89,6 @@ public class EnemyTurn : MonoBehaviour
 		}
 		yield return null;
         TurnManager.instance.SwitchTurn ();
-        Debug.Log("This happens");
 	}
 	
 	private float ManhattanDist(Vector3 a, Vector3 b)

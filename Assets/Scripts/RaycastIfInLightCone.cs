@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(ConeCollider), typeof(Light))]
+[RequireComponent(typeof(ConeCollider), typeof(Light), typeof(VolumetricLight))]
 public class RaycastIfInLightCone : MonoBehaviour
 {
     private ConeCollider cone;
     private Light lt;
+	private VolumetricLight vl;
     [SerializeField, Range(.01f, 179f)]
     private int angle = 30;
     public int Angle
@@ -59,6 +60,8 @@ public class RaycastIfInLightCone : MonoBehaviour
         if (!cone) cone = gameObject.AddComponent<ConeCollider>();
         lt = GetComponent<Light>();
         if (!lt) lt = gameObject.AddComponent<Light>();
+		vl = GetComponent<VolumetricLight> ();
+		if (!vl) vl = gameObject.AddComponent<VolumetricLight> ();
         cone.Angle = angle / 2;
         cone.Distance = range;
         cone.IsTrigger = true;
@@ -93,7 +96,7 @@ public class RaycastIfInLightCone : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        if (col.transform.tag =="Enemy" && !col.GetComponent<MeshRenderer>().enabled)
+		if (LayerMask.LayerToName(col.gameObject.layer) =="Enemy" && !col.GetComponent<MeshRenderer>().enabled)
         {
             if (RaySweep(col))
             {

@@ -147,7 +147,7 @@ public class Abilities : MonoBehaviour {
                     var origin = stats.transform.position + Vector3.up;
                     direction = origin - mousePos;
                     var lookAt = new Vector3((origin - direction.normalized * range).x, stats.transform.position.y/* + 1*/, (origin - direction.normalized * range).z);
-                    los.transform.LookAt(lookAt);
+					los.transform.LookAt(new Vector3(lookAt.x, los.transform.position.y, lookAt.z));
                     stats.transform.LookAt(lookAt);
                     //flashlight.transform.LookAt(lookAt);
                 }

@@ -108,17 +108,17 @@ public class TurnManager : MonoBehaviour
     /// </summary>
     public void AutoEndTurnCheck()
     {
-        if (HaveAllPlayersMoved())
+        if (HaveAllPlayersTakenAction())
         {
             SwitchTurn();
         }
     }
 
-	private bool HaveAllPlayersMoved(){
+	private bool HaveAllPlayersTakenAction(){
 
         foreach (var playerchars in playerList)
         {
-            if (!playerchars.hasMoved)
+            if (!playerchars.hasMoved  || playerchars.Actionsleft > 0)
             {
                 return false;
             }

@@ -67,9 +67,9 @@ public class Abilities : MonoBehaviour {
                     hitStats.TakeDamage(abilData.DamageAmount);
                 }
             }
+            stats.Actionsleft = 0;
             Debug.Log("Bang");
-
-
+            TurnManager.instance.AutoEndTurnCheck();
             yield return new WaitForSeconds(.5f);// Change to wait until animation over, possibly wait for enemy reaction (i.e. reaction shot, death anim, etc.);
         }
         finally

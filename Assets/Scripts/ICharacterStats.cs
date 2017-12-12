@@ -46,4 +46,7 @@ public interface ICharacterStats
     /// <returns></returns>
     string Name { get; }
 
+    int MaxHP { get; }
+    int CurrHP { get; }
+
 }

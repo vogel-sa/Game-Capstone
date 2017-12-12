@@ -7,7 +7,12 @@ public class PortraitChanger : MonoBehaviour {
 
     private ICharacterStats selectedCharacter;
     RawImage raw;
+    Slider HPbar;
     Text Name { get; set; }
+    [SerializeField]
+    GameObject HPTextOBJ;
+    Text HPText;
+
    
 
 
@@ -16,6 +21,9 @@ public class PortraitChanger : MonoBehaviour {
         PlayerMovementManager.Instance.OnSelect += Select;
         raw = GetComponent <RawImage>();
         Name = GetComponentInChildren<Text>();
+        HPbar = GetComponentInChildren<Slider>();
+        HPText = HPTextOBJ.GetComponent<Text>();
+
 	}
 
     private void OnDisable()
@@ -33,5 +41,8 @@ public class PortraitChanger : MonoBehaviour {
     {
         raw.texture = selectedCharacter.Portrait;
         Name.text = selectedCharacter.Name;
+        HPbar.maxValue = selectedCharacter.MaxHP;
+        HPbar.value = selectedCharacter.CurrHP;
+        HPText.text = "HP: " + selectedCharacter.CurrHP;
     }
 }

@@ -39,7 +39,8 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
     }
 
     [SerializeField]
-    private int _currHP; public int CurrHP
+    private int _currHP;
+    public int CurrHP
     {
         get
         {
@@ -148,7 +149,7 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
 
     void Awake()
     {
-        CurrHP = MaxHP;
+        //CurrHP = MaxHP;
     }
 
     public bool IsDead()

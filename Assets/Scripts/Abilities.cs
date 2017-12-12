@@ -61,7 +61,7 @@ public class Abilities : MonoBehaviour {
             EnemyStats hitStats;
             if (Physics.Raycast(stats.transform.position + Vector3.up, -(direction.normalized), out hit, range, ~LayerMask.GetMask("Player", "Ground", "Ignore Raycast", "Flare")))//, LayerMask.NameToLayer("Enemy")))
             {
-                if (hit.transform.CompareTag("Enemy"))
+				if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Enemy")
                 {
                     hitStats = hit.transform.parent.GetComponent<EnemyStats>();
                     hitStats.TakeDamage(abilData.DamageAmount);

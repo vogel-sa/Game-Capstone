@@ -37,7 +37,7 @@ public class RaycastIfInLightSphere : MonoBehaviour
 #endif
     void OnTriggerStay(Collider col)
     {
-        if (col.transform.tag.Equals("Enemy") && !col.GetComponent<MeshRenderer>().enabled)
+		if (LayerMask.LayerToName(col.gameObject.layer) == "Enemy" && !col.GetComponent<MeshRenderer>().enabled)
         {
             if (RaySweep(col))
             {
@@ -49,7 +49,7 @@ public class RaycastIfInLightSphere : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        if (col.transform.tag.Equals("Enemy"))
+		if (LayerMask.LayerToName(col.gameObject.layer) == "Enemy")
         {
             col.GetComponent<MeshRenderer>().enabled = false;
             col.GetComponent<cakeslice.Outline>().enabled = false;

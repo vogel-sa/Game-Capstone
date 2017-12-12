@@ -8,10 +8,12 @@ public class TurnManager : MonoBehaviour
 
 	private static TurnManager _instance;
 	private static object _lock = new object();
-	public static TurnManager instance
+    private static bool applicationIsQuitting = false;
+    public static TurnManager instance
 	{
 		get
 		{
+            if (applicationIsQuitting) return null;
 			lock(_lock)
 			{
 				if (!_instance)

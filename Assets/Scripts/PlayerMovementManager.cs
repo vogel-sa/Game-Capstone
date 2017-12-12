@@ -46,6 +46,9 @@ public class PlayerMovementManager : MonoBehaviour
     public delegate void SelectAction();
     public event SelectAction OnSelect;
 
+    public delegate void DeselectAction();
+    public event DeselectAction OnDeselect;
+
     private Transform selected;
 
     public PlayerCharacterStats SelectedCharacterStats { get; private set; }
@@ -96,7 +99,7 @@ public class PlayerMovementManager : MonoBehaviour
     {
         if (selected)
         {
-
+            if (Input.GetKeyDown(KeyCode.Escape)) Deselect();
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (lastUpdateOutline) lastUpdateOutline.color = notHighlightedColor;
@@ -208,39 +211,44 @@ public class PlayerMovementManager : MonoBehaviour
 
     public void Select(Transform t, PlayerCharacterStats stats)
     {
+        if (stats.Actionsleft <= 0) return;
         SelectedCharacterStats = stats;
-        if (stats.hasMoved) return;
-        Debug.Log("Character name is now:" + stats.Name);
+        if (!stats.hasMoved)
+        {
+            for (int i = 0; i < quads.Length; i++)
+            {
+                quads[i].SetActive(false);
+            }
+            // Get list of traversable nodes within range.
+            var blocked = from blocker in PathManager.Instance.enemies
+                          select blocker.lastBlocked;
 
-        for (int i = 0; i < quads.Length; i++)
-        {
-            quads[i].SetActive(false);
-        }
-        Debug.Log("select");
-        // Get list of traversable nodes within range.
-        var blocked = from blocker in PathManager.Instance.enemies
-                      select blocker.lastBlocked;
-        //blocked.Concat(from player in PathManager.Instance.allies
-        //               //where player != t.GetComponent<SingleNodeBlocker>()
-        //               select player.lastBlocked);
-        nodes = PathUtilities.BFS(AstarData.active.GetNearest(t.position).node,
-            stats.MovementRange,
-            walkableDefinition: (n) => !blocked.Contains(n));
-        // Shouldn't ever need too many quads.
-        int count = 0;
-        if (nodes.Count > quads.Length)
-        {
-            throw new System.Exception("Too many quads are required for the current range");
-        }
-        foreach (var node in nodes)
-        {
-            quads[count].SetActive(true);
-            quads[count].transform.position = (Vector3)node.position + new Vector3(0, .01f, 0);
-            count++;
+            nodes = PathUtilities.BFS(AstarData.active.GetNearest(t.position).node,
+                stats.MovementRange,
+                walkableDefinition: (n) => !blocked.Contains(n));
+            // Shouldn't ever need too many quads.
+            int count = 0;
+            if (nodes.Count > quads.Length)
+            {
+                throw new System.Exception("Too many quads are required for the current range");
+            }
+            foreach (var node in nodes)
+            {
+                quads[count].SetActive(true);
+                quads[count].transform.position = (Vector3)node.position + new Vector3(0, .01f, 0);
+                count++;
+            }
+            SetQuadsEnabled(true);
         }
         selected = t;
         OnSelect();
-		SetQuadsEnabled (true);
+    }
+
+    public void Deselect()
+    {
+        SelectedCharacterStats = null;
+        SetQuadsEnabled(false);
+        OnDeselect();
     }
 
     public void SetQuadsEnabled(bool enabled)

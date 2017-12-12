@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine.UI;
 using UnityEngine;
+using System.Collections.Generic;
 
 public interface ICharacterStats
 {
@@ -28,11 +29,6 @@ public interface ICharacterStats
     /// </summary>
     /// <param name="value"> value to change the damage mitigation to to</param>
     int MitigationValue { get; set; }
-   
-    /// <summary>
-    /// Handles all onTurn start effects, such as resetting movement flags and action count
-    /// </summary>
-    void OnTurnStart();
 
     /// <summary>
     /// Returns this character's designated base portrait

@@ -25,7 +25,7 @@ public class Abilities : MonoBehaviour {
         }
     }
 
-    public void BasicShootAbility(PlayerCharacterStats stats) { StartCoroutine(_basicShootAbility(stats)); }
+    public void BasicShootAbility(PlayerCharacterStats stats) { if (stats.Actionsleft > 0) StartCoroutine(_basicShootAbility(stats)); }
     private IEnumerator _basicShootAbility(PlayerCharacterStats stats)
     {
         LineRenderer lineRenderer = null;
@@ -67,8 +67,11 @@ public class Abilities : MonoBehaviour {
                     hitStats.TakeDamage(abilData.DamageAmount);
                 }
             }
-            stats.Actionsleft = 0;
             Debug.Log("Bang");
+            TurnManager.instance.AutoEndTurnCheck();
+            abilData.Currcooldown = abilData.Maxcooldown;
+            stats.hasMoved = true;
+            stats.Actionsleft--;
             TurnManager.instance.AutoEndTurnCheck();
             yield return new WaitForSeconds(.5f);// Change to wait until animation over, possibly wait for enemy reaction (i.e. reaction shot, death anim, etc.);
         }
@@ -77,12 +80,12 @@ public class Abilities : MonoBehaviour {
             //PlayerMovementManager.Instance.SetQuadsEnabled(true);
             PlayerMovementManager.Instance.enabled = true;
             //PlayerMovementManager.Instance.Select(stats.transform, stats);
-			stats.hasMoved = true;
             if (lineRenderer) Destroy(lineRenderer.gameObject);
+            if (stats.Actionsleft == 0) PlayerMovementManager.Instance.Deselect();
         }
     }
 
-    public void RoadFlareAbility(PlayerCharacterStats stats) { StartCoroutine(_roadFlareAbility(stats)); }
+    public void RoadFlareAbility(PlayerCharacterStats stats) { if (stats.Actionsleft > 0) StartCoroutine(_roadFlareAbility(stats)); }
     private IEnumerator _roadFlareAbility(PlayerCharacterStats stats)
     {
         try
@@ -98,17 +101,25 @@ public class Abilities : MonoBehaviour {
             Debug.Log("flare dropped");
             GameObject flare = Instantiate(Resources.Load<GameObject>("Prefabs/Flare"));
             flare.transform.position = stats.transform.position + Vector3.up + stats.transform.forward * .7f;
+            stats.hasMoved = true;
+            stats.Actionsleft--;
 
+            var ability = (from a in stats.AbilityData
+                           where a.Name == "Flare"
+                           select a).FirstOrDefault();
+             ability.Currcooldown = ability.Maxcooldown;
+            TurnManager.instance.AutoEndTurnCheck();
             yield return null;
         }
         finally
         {
             PlayerMovementManager.Instance.SetQuadsEnabled(true);
             PlayerMovementManager.Instance.enabled = true;
+            if (stats.Actionsleft == 0) PlayerMovementManager.Instance.Deselect();
         }
     }
 
-    public void FlashlightAbility(PlayerCharacterStats stats) { StartCoroutine(_flashlightAbility(stats)); }
+    public void FlashlightAbility(PlayerCharacterStats stats) { if (stats.Actionsleft > 0) StartCoroutine(_flashlightAbility(stats)); }
     private IEnumerator _flashlightAbility(PlayerCharacterStats stats)
     {
         LineOfSight los = null;
@@ -157,6 +168,10 @@ public class Abilities : MonoBehaviour {
             flashlight.gameObject.SetActive(true);
             // TODO: Animation of ability
 
+            abilData.Currcooldown = abilData.Maxcooldown;
+            stats.hasMoved = true;
+            stats.Actionsleft--;
+            TurnManager.instance.AutoEndTurnCheck();
             yield return new WaitForSeconds(.5f);// Change to wait until animation over, possibly wait for enemy reaction (i.e. reaction shot, death anim, etc.);
         }
         finally
@@ -164,7 +179,7 @@ public class Abilities : MonoBehaviour {
             //PlayerMovementManager.Instance.SetQuadsEnabled(true);
             PlayerMovementManager.Instance.enabled = true;
             if (los) Destroy(los.gameObject);
-			stats.hasMoved = true;
+            if (stats.Actionsleft == 0) PlayerMovementManager.Instance.Deselect();
         }
     }
 }

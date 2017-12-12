@@ -136,11 +136,6 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
         return CurrHP <= 0;
     }
 
-    public void OnTurnStart()
-    {
-        throw new NotImplementedException();
-    }
-
     public void TakeDamage(int dmg)
     {
         CurrHP -= dmg;

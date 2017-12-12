@@ -100,6 +100,9 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
     }
 
     public bool hasMoved;
+
+    [SerializeField]
+    private int _maxActions = 1;
     /// <summary>
     /// Number of Actions a character has in a turn. Default at turn start is 1,
     /// Every attack on the bar costs 1. Free Actions cost 0.
@@ -152,6 +155,11 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
         //CurrHP = MaxHP;
     }
 
+    void OnEnable()
+    {
+        TurnManager.instance.OnTurnChange += OnTurnStart;
+    }
+
     public bool IsDead()
     {
         return CurrHP <= 0;
@@ -167,11 +175,16 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
         }
     }
 
-    public void OnTurnStart()
+    private void OnTurnStart(IList<PlayerCharacterStats> players, IList<EnemyStats> enemies, TurnManager.GAMESTATE turn)
     {
-        hasMoved = false;
-        Actionsleft = 1;
-
+        if (turn == TurnManager.GAMESTATE.PLAYERTURN)
+        {
+            foreach (var ability in AbilityData)
+            {
+                ability.Currcooldown = Mathf.Max(ability.Currcooldown - 1, 0);
+            }
+            hasMoved = false;
+            Actionsleft = _maxActions;
+        }
     }
-    
 }

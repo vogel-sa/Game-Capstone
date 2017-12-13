@@ -8,11 +8,14 @@ using cakeslice;
 public class Abilities : MonoBehaviour {
 
     private static object _lock = new object();
+	private static bool applicationIsQuitting = false; 
     private static Abilities _instance;
     public static Abilities Instance
     {
         get
         {
+			if (applicationIsQuitting)
+				return null;
             lock (_lock)
             {
                 if (!_instance)
@@ -24,6 +27,11 @@ public class Abilities : MonoBehaviour {
             return _instance;
         }
     }
+
+	void OnDestroy()
+	{
+		applicationIsQuitting = true;
+	}
 
     public void BasicShootAbility(PlayerCharacterStats stats) { if (stats.Actionsleft > 0) StartCoroutine(_basicShootAbility(stats)); }
     private IEnumerator _basicShootAbility(PlayerCharacterStats stats)

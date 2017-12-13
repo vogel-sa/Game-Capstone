@@ -81,25 +81,30 @@ public class TurnManager : MonoBehaviour
     /// Switches the Current turn to the Other turn
     /// </summary>
 	public void SwitchTurn(){
+		StartCoroutine (_switchTurn ());
+	}
 
-        switch (currentTurn) {
+	private IEnumerator _switchTurn()
+	{
+		switch (currentTurn) {
 
 		case GAMESTATE.ENEMYTURN:
-                {
-                    currentTurn = GAMESTATE.PLAYERTURN;
-                    OnPlayerTurnStart();
-                    break;
-                }
+			{
+				currentTurn = GAMESTATE.PLAYERTURN;
+				OnPlayerTurnStart();
+				break;
+			}
 
 		case GAMESTATE.PLAYERTURN:
-                {
-                    currentTurn = GAMESTATE.ENEMYTURN;
-                    OnEnemyTurnStart();
-                    break;
-                }
-                
+			{
+				currentTurn = GAMESTATE.ENEMYTURN;
+				OnEnemyTurnStart();
+				break;
+			}
+
 		}
-        OnTurnChange(playerList, enemyList, currentTurn);
+		yield return new WaitForSeconds (.5f);
+		OnTurnChange(playerList, enemyList, currentTurn);
 	}
 
     /// <summary>
@@ -144,4 +149,9 @@ public class TurnManager : MonoBehaviour
             //TODO:  Game Over
         }
     }
+
+	void OnDestroy()
+	{
+		applicationIsQuitting = true;
+	}
 }

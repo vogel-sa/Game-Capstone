@@ -123,6 +123,7 @@ public class Abilities : MonoBehaviour {
     private IEnumerator _flashlightAbility(PlayerCharacterStats stats)
     {
         LineOfSight los = null;
+        RaycastIfInLightCone flashlight = null;
         try
         {
             var abilData = (from abil in stats.AbilityData where abil.Name == "Flashlight" select abil).FirstOrDefault();
@@ -140,7 +141,7 @@ public class Abilities : MonoBehaviour {
             los._cullingMask = LayerMask.GetMask("Obstacle");
             los._maxAngle = (int)abilData.OtherValues.Angle;
             los._maxDistance = abilData.OtherValues.Range;
-            RaycastIfInLightCone flashlight = new GameObject().AddComponent<RaycastIfInLightCone>();//stats.transform.Find("Spotlight");
+            flashlight = new GameObject().AddComponent<RaycastIfInLightCone>();//stats.transform.Find("Spotlight");
             yield return null; // Wait for flashlight to initialize.
             flashlight.Range = abilData.OtherValues.Range;
             flashlight.Angle = (int)abilData.OtherValues.Angle;
@@ -158,8 +159,10 @@ public class Abilities : MonoBehaviour {
                     var origin = stats.transform.position + Vector3.up;
                     direction = origin - mousePos;
                     var lookAt = new Vector3((origin - direction.normalized * range).x, stats.transform.position.y/* + 1*/, (origin - direction.normalized * range).z);
-					los.transform.LookAt(new Vector3(lookAt.x, los.transform.position.y, lookAt.z));
+                    lookAt = new Vector3(lookAt.x, los.transform.position.y, lookAt.z);
+                    los.transform.LookAt(lookAt);
                     stats.transform.LookAt(lookAt);
+                    flashlight.transform.LookAt(lookAt);
                     //flashlight.transform.LookAt(lookAt);
                 }
                 yield return null;
@@ -179,6 +182,7 @@ public class Abilities : MonoBehaviour {
             //PlayerMovementManager.Instance.SetQuadsEnabled(true);
             PlayerMovementManager.Instance.enabled = true;
             if (los) Destroy(los.gameObject);
+            if (flashlight && !flashlight.gameObject.activeSelf) Destroy(flashlight.gameObject);
             if (stats.Actionsleft == 0) PlayerMovementManager.Instance.Deselect();
         }
     }

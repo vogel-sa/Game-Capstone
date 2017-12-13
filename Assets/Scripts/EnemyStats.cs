@@ -126,6 +126,10 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
         }
     }
 
+    [SerializeField]
+    private float _detectionRadius;
+    public float DetectionRadius { get { return _detectionRadius; } }
+
     void Awake()
     {
         CurrHP = MaxHP;
@@ -151,4 +155,6 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
         GetComponent<SingleNodeBlocker>().Unblock();
         PathManager.Instance.enemies.Remove(GetComponent<SingleNodeBlocker>());
     }
+
+
 }

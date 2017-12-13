@@ -51,8 +51,9 @@ public class EnemyTurn : MonoBehaviour
 		foreach (var enemy in enemies)
 		{
 			ABPath path = null;
-			foreach (var player in players)
+			foreach (PlayerCharacterStats player in players)
 			{
+                if (Vector3.Distance(player.transform.position, enemy.transform.position) > enemy.DetectionRadius) break;
 				List<GraphNode> neighbors = new List<GraphNode> ();
 				// TODO: Find a better way to do this, one that takes enemy and ally blocked nodes into account.
 				GraphNode neighbor = AstarData.active.GetNearest(player.transform.position + Vector3.left).node;

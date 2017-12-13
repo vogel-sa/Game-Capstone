@@ -38,9 +38,8 @@ public class TurnManager : MonoBehaviour
     public GAMESTATE currentTurn { get; private set;}
 
     //List of all player stats in the game.  remove when player character is defeated
-  [SerializeField]
-	IList<PlayerCharacterStats> playerList;
-	IList<EnemyStats> enemyList;
+	public IList<PlayerCharacterStats> playerList { get; private set; }
+	public IList<EnemyStats> enemyList { get; private set; }
 
 	void Awake(){
         playerList = new List<PlayerCharacterStats>();

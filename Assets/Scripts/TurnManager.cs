@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,8 +39,11 @@ public class TurnManager : MonoBehaviour
     public GAMESTATE currentTurn { get; private set;}
 
     //List of all player stats in the game.  remove when player character is defeated
+
 	public IList<PlayerCharacterStats> playerList { get; private set; }
 	public IList<EnemyStats> enemyList { get; private set; }
+  [SerializeField]
+  GameObject VictoryScreen;
 
 	void Awake(){
         playerList = new List<PlayerCharacterStats>();
@@ -60,9 +64,11 @@ public class TurnManager : MonoBehaviour
 				enemyList.Add(enemy);
 			}
 		}
+
+        VictoryScreen.SetActive(false);
 	}
 
-	private void OnPlayerTurnStart(){
+    private void OnPlayerTurnStart(){
 
         PlayerMovementManager.Instance.enabled = true;
 
@@ -108,6 +114,36 @@ public class TurnManager : MonoBehaviour
 	}
 
     /// <summary>
+    /// Checks if a gameOver state has been reached
+    /// </summary>
+    public void CheckGameOver()
+    {
+        //if all players have been 
+        if (playerList.Count == 0)
+        {
+            PlayerWins();
+        }
+        if (enemyList.Count == 0)
+        {
+            GameOver(2);
+        }
+    }
+
+    private IEnumerator GameOver(int waitval)
+    {
+        VictoryScreen.SetActive(true);
+        yield return new WaitForSeconds(waitval);
+
+        //GOTO MAIN MENU
+        
+    }
+
+    private void PlayerWins()
+    {
+
+    }
+
+    /// <summary>
     /// Checks if all players have moved, then auto ends the players turn if ALL player characters have moved
     /// </summary>
     public void AutoEndTurnCheck()
@@ -130,25 +166,6 @@ public class TurnManager : MonoBehaviour
         return true;
 	}
 
-    /// <summary>
-    /// checks for victory condition
-    /// </summary>
-    /// <returns></returns>
-    private void isVictory()
-    {
-       if (enemyList.Count == 0)
-        {
-            //TODO: End state
-        }
-    }
-
-    private void isDefeat()
-    {
-        if (playerList.Count == 0)
-        {
-            //TODO:  Game Over
-        }
-    }
 
 	void OnDestroy()
 	{

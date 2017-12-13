@@ -121,13 +121,17 @@ public class TurnManager : MonoBehaviour
         }
         if (enemyList.Count == 0)
         {
-            GameOver();
+            GameOver(2);
         }
     }
 
-    private void GameOver()
+    private IEnumerator GameOver(int waitval)
     {
         VictoryScreen.SetActive(true);
+        yield return new WaitForSeconds(waitval);
+
+        //GOTO MAIN MENU
+        
     }
 
     private void PlayerWins()

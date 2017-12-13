@@ -39,12 +39,11 @@ public class TurnManager : MonoBehaviour
     public GAMESTATE currentTurn { get; private set;}
 
     //List of all player stats in the game.  remove when player character is defeated
-    [SerializeField]
-	IList<PlayerCharacterStats> playerList;
-	IList<EnemyStats> enemyList;
-    [SerializeField]
-    GameObject VictoryScreen;
 
+	public IList<PlayerCharacterStats> playerList { get; private set; }
+	public IList<EnemyStats> enemyList { get; private set; }
+  [SerializeField]
+  GameObject VictoryScreen;
 
 	void Awake(){
         playerList = new List<PlayerCharacterStats>();
@@ -88,25 +87,30 @@ public class TurnManager : MonoBehaviour
     /// Switches the Current turn to the Other turn
     /// </summary>
 	public void SwitchTurn(){
+		StartCoroutine (_switchTurn ());
+	}
 
-        switch (currentTurn) {
+	private IEnumerator _switchTurn()
+	{
+		switch (currentTurn) {
 
 		case GAMESTATE.ENEMYTURN:
-                {
-                    currentTurn = GAMESTATE.PLAYERTURN;
-                    OnPlayerTurnStart();
-                    break;
-                }
+			{
+				currentTurn = GAMESTATE.PLAYERTURN;
+				OnPlayerTurnStart();
+				break;
+			}
 
 		case GAMESTATE.PLAYERTURN:
-                {
-                    currentTurn = GAMESTATE.ENEMYTURN;
-                    OnEnemyTurnStart();
-                    break;
-                }
-                
+			{
+				currentTurn = GAMESTATE.ENEMYTURN;
+				OnEnemyTurnStart();
+				break;
+			}
+
 		}
-        OnTurnChange(playerList, enemyList, currentTurn);
+		yield return new WaitForSeconds (.5f);
+		OnTurnChange(playerList, enemyList, currentTurn);
 	}
 
     /// <summary>
@@ -160,5 +164,11 @@ public class TurnManager : MonoBehaviour
             }
         }
         return true;
+	}
+
+
+	void OnDestroy()
+	{
+		applicationIsQuitting = true;
 	}
 }

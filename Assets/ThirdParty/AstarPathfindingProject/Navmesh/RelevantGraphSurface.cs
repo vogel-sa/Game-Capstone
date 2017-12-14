@@ -13,7 +13,7 @@ namespace Pathfinding {
 	public class RelevantGraphSurface : VersionedMonoBehaviour {
 		private static RelevantGraphSurface root;
 
-		public float maxRange = 1;
+		public float maVRange = 1;
 
 		private RelevantGraphSurface prev;
 		private RelevantGraphSurface next;
@@ -82,12 +82,12 @@ namespace Pathfinding {
 
 		public void OnDrawGizmos () {
 			Gizmos.color = new Color(57/255f, 211/255f, 46/255f, 0.4f);
-			Gizmos.DrawLine(transform.position - Vector3.up*maxRange, transform.position + Vector3.up*maxRange);
+			Gizmos.DrawLine(transform.position - Vector3.up*maVRange, transform.position + Vector3.up*maVRange);
 		}
 
 		public void OnDrawGizmosSelected () {
 			Gizmos.color = new Color(57/255f, 211/255f, 46/255f);
-			Gizmos.DrawLine(transform.position - Vector3.up*maxRange, transform.position + Vector3.up*maxRange);
+			Gizmos.DrawLine(transform.position - Vector3.up*maVRange, transform.position + Vector3.up*maVRange);
 		}
 	}
 }

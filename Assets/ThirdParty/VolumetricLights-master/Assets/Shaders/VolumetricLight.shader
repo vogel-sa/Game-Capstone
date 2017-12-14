@@ -82,7 +82,7 @@ Shader "Sandbox/VolumetricLight"
 		float4 _HeightFog;
 		//float4 _LightDir;
 
-		float _MaxRayLength;
+		float _MaVRayLength;
 
 		int _SampleCount;
 
@@ -632,7 +632,7 @@ Shader "Sandbox/VolumetricLight"
 				float rayLength = length(rayDir);
 				rayDir /= rayLength;
 
-				rayLength = min(rayLength, _MaxRayLength);
+				rayLength = min(rayLength, _MaVRayLength);
 
 				float4 color = RayMarch(i.pos.xy, rayStart, rayDir, rayLength);
 

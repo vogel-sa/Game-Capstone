@@ -22,7 +22,7 @@ namespace UnityEngine.PostProcessing
             internal static readonly int _PixelsPerMeterAtOneMeter   = Shader.PropertyToID("_PixelsPerMeterAtOneMeter");
             internal static readonly int _ScreenEdgeFading           = Shader.PropertyToID("_ScreenEdgeFading");
             internal static readonly int _ReflectionBlur             = Shader.PropertyToID("_ReflectionBlur");
-            internal static readonly int _MaxRayTraceDistance        = Shader.PropertyToID("_MaxRayTraceDistance");
+            internal static readonly int _MaVRayTraceDistance        = Shader.PropertyToID("_MaVRayTraceDistance");
             internal static readonly int _FadeDistance               = Shader.PropertyToID("_FadeDistance");
             internal static readonly int _LayerThickness             = Shader.PropertyToID("_LayerThickness");
             internal static readonly int _SSRMultiplier              = Shader.PropertyToID("_SSRMultiplier");
@@ -138,7 +138,7 @@ namespace UnityEngine.PostProcessing
             material.SetFloat(Uniforms._PixelsPerMeterAtOneMeter, pixelsPerMeterAtOneMeter);
             material.SetFloat(Uniforms._ScreenEdgeFading, settings.screenEdgeMask.intensity);
             material.SetFloat(Uniforms._ReflectionBlur, settings.reflection.reflectionBlur);
-            material.SetFloat(Uniforms._MaxRayTraceDistance, settings.reflection.maxDistance);
+            material.SetFloat(Uniforms._MaVRayTraceDistance, settings.reflection.maxDistance);
             material.SetFloat(Uniforms._FadeDistance, settings.intensity.fadeDistance);
             material.SetFloat(Uniforms._LayerThickness, settings.reflection.widthModifier);
             material.SetFloat(Uniforms._SSRMultiplier, settings.intensity.reflectionMultiplier);

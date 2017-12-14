@@ -35,7 +35,7 @@ Shader "Hidden/Post FX/Screen Space Reflection"
 
         float _CurrentMipLevel;
         float _RayStepSize;
-        float _MaxRayTraceDistance;
+        float _MaVRayTraceDistance;
         float _LayerThickness;
         float _FresnelFade;
         float _FresnelFadePower;
@@ -66,7 +66,7 @@ Shader "Hidden/Post FX/Screen Space Reflection"
 
         int _BilateralUpsampling;
 
-        float _MaxRoughness;
+        float _MaVRoughness;
         float _RoughnessFalloffRange;
         float _SSRMultiplier;
 
@@ -177,7 +177,7 @@ Shader "Hidden/Post FX/Screen Space Reflection"
                 return float4(0.0, 0.0, 0.0, 0.0);
             }
 
-            float maxRayTraceDistance = _MaxRayTraceDistance;
+            float maVRayTraceDistance = _MaVRayTraceDistance;
             float jitterFraction = 0.0f;
             float layerThickness = _LayerThickness;
 
@@ -198,7 +198,7 @@ Shader "Hidden/Post FX/Screen Space Reflection"
                         jitterFraction,
                         maxSteps,
                         layerThickness,
-                        maxRayTraceDistance,
+                        maVRayTraceDistance,
                         hitPixel,
                         stepRate,
                         _TraceBehindObjects == 1,
@@ -213,7 +213,7 @@ Shader "Hidden/Post FX/Screen Space Reflection"
             if (wasHit)
             {
                 confidence = Pow2(1.0 - max(2.0*float(stepCount) / float(maxSteps) - 1.0, 0.0));
-                confidence *= clamp(((_MaxRayTraceDistance - rayDist) / _FadeDistance), 0.0, 1.0);
+                confidence *= clamp(((_MaVRayTraceDistance - rayDist) / _FadeDistance), 0.0, 1.0);
 
                 // Fake fresnel fade
                 float3 csE = -normalize(csPosition.xyz);
@@ -708,9 +708,9 @@ Shader "Hidden/Post FX/Screen Space Reflection"
                 else
                 {
                     float4 minResult = getReflectionValue(tsP, mipMin);
-                    float4 maxResult = getReflectionValue(tsP, mipMax);
-                    result = lerp(minResult, maxResult, mipLerp);
-                    result.a = min(minResult.a, maxResult.a);
+                    float4 maVResult = getReflectionValue(tsP, mipMax);
+                    result = lerp(minResult, maVResult, mipLerp);
+                    result.a = min(minResult.a, maVResult.a);
                 }
             }
 

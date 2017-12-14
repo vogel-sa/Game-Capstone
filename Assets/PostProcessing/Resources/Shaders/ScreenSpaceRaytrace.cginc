@@ -83,7 +83,7 @@ bool castDenseScreenSpaceRay
     float           jitterFraction,
     int             maxSteps,
     float           layerThickness,
-    float           maxRayTraceDistance,
+    float           maVRayTraceDistance,
     out float2      hitPixel,
     int             stepRate,
     bool            traceBehindObjects,
@@ -97,9 +97,9 @@ bool castDenseScreenSpaceRay
 
     float nearPlaneZ = -0.01;
     // Clip ray to a near plane in 3D (doesn't have to be *the* near plane, although that would be a good idea)
-    float rayLength = ((csOrigin.z + csDirection.z * maxRayTraceDistance) > nearPlaneZ) ?
+    float rayLength = ((csOrigin.z + csDirection.z * maVRayTraceDistance) > nearPlaneZ) ?
                         ((nearPlaneZ - csOrigin.z) / csDirection.z) :
-                        maxRayTraceDistance;
+                        maVRayTraceDistance;
 
     float3 csEndPoint = csDirection * rayLength + csOrigin;
 

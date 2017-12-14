@@ -79,7 +79,7 @@ namespace Pathfinding {
 		private int fpsDropCounterSize = 200;
 		private float[] fpsDrops;
 
-		private Rect boxRect;
+		private Rect boVRect;
 
 		private GUIStyle style;
 
@@ -215,14 +215,14 @@ namespace Pathfinding {
 			if (Time.realtimeSinceStartup - lastUpdate > 0.5f || cachedText == null || !Application.isPlaying) {
 				lastUpdate = Time.realtimeSinceStartup;
 
-				boxRect = new Rect(5, yOffset, 310, 40);
+				boVRect = new Rect(5, yOffset, 310, 40);
 
 				text.Length = 0;
 				text.AppendLine("A* Pathfinding Project Debugger");
 				text.Append("A* Version: ").Append(AstarPath.Version.ToString());
 
 				if (showMemProfile) {
-					boxRect.height += 200;
+					boVRect.height += 200;
 
 					text.AppendLine();
 					text.AppendLine();
@@ -294,10 +294,10 @@ namespace Pathfinding {
 				style.fontSize = fontSize;
 			}
 
-			boxRect.height = style.CalcHeight(new GUIContent(cachedText), boxRect.width);
+			boVRect.height = style.CalcHeight(new GUIContent(cachedText), boVRect.width);
 
-			GUI.Box(boxRect, "");
-			GUI.Label(boxRect, cachedText, style);
+			GUI.Box(boVRect, "");
+			GUI.Label(boVRect, cachedText, style);
 
 			if (showGraph) {
 				float minMem = float.PositiveInfinity, maxMem = 0, minFPS = float.PositiveInfinity, maxFPS = 0;

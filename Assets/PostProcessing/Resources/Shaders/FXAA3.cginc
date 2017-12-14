@@ -953,7 +953,7 @@ FxaaFloat4 FxaaPixelShader(
     /*--------------------------------------------------------------------------*/
     FxaaFloat lumaNS = lumaN + lumaS;
     FxaaFloat lumaWE = lumaW + lumaE;
-    FxaaFloat subpixRcpRange = 1.0 / range;
+    FxaaFloat subpiVRcpRange = 1.0 / range;
     FxaaFloat subpixNSWE = lumaNS + lumaWE;
     FxaaFloat edgeHorz1 = (-2.0 * lumaM) + lumaNS;
     FxaaFloat edgeVert1 = (-2.0 * lumaM) + lumaWE;
@@ -989,7 +989,7 @@ FxaaFloat4 FxaaPixelShader(
     FxaaBool pairN = abs(gradientN) >= abs(gradientS);
     FxaaFloat gradient = max(abs(gradientN), abs(gradientS));
     if (pairN) lengthSign = -lengthSign;
-    FxaaFloat subpixC = FxaaSat(abs(subpixB) * subpixRcpRange);
+    FxaaFloat subpixC = FxaaSat(abs(subpixB) * subpiVRcpRange);
     /*--------------------------------------------------------------------------*/
     FxaaFloat2 posB;
     posB.x = posM.x;

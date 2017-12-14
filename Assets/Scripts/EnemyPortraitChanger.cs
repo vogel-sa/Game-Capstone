@@ -30,7 +30,7 @@ public class EnemyPortraitChanger : MonoBehaviour {
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Enemy")) && hit.transform.GetComponent<Renderer>().enabled == true)
         {
             var obj = hit.transform;
-            while (obj.parent && LayerMask.LayerToName(hit.transform.gameObject.layer) == "Enemy")
+            while (obj.parent && LayerMask.LayerToName(obj.parent.gameObject.layer) == "Enemy")
             {
                 obj = obj.parent;
             }

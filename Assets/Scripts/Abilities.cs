@@ -37,16 +37,39 @@ public class Abilities : MonoBehaviour {
 		applicationIsQuitting = true;
 	}
 
+    void OnEnable()
+    {
+        PlayerMovementManager.Instance.OnSelect += EnableButtons;
+    }
+
+    void OnDisable()
+    {
+        PlayerMovementManager.Instance.OnSelect -= EnableButtons;
+    }
+
+    private void EnableButtons()
+    {
+        foreach (var button in buttons)
+        {
+            button.gameObject.SetActive(true);
+        }
+    }
+
+    private void DisableButtons()
+    {
+        foreach (var button in buttons)
+        {
+            button.gameObject.SetActive(false);
+        }
+    }
+
     public void BasicShootAbility(PlayerCharacterStats stats) { if (stats.Actionsleft > 0) StartCoroutine(_basicShootAbility(stats)); }
     private IEnumerator _basicShootAbility(PlayerCharacterStats stats)
     {
         LineRenderer lineRenderer = null;
         try
         {
-			foreach(var button in buttons)
-			{
-				button.gameObject.SetActive(false);
-			}
+            DisableButtons();
             var abilData = (from abil in stats.AbilityData where abil.Name == "Shoot" select abil).FirstOrDefault();
             Debug.Log(abilData.Description);
             PlayerMovementManager.Instance.SetQuadsEnabled(false);
@@ -101,9 +124,7 @@ public class Abilities : MonoBehaviour {
 				PlayerMovementManager.Instance.Deselect ();
 			else
 				PlayerMovementManager.Instance.Select (stats);
-			foreach (var button in buttons) {
-				button.gameObject.SetActive(true);
-			}
+            EnableButtons();
         }
     }
 
@@ -112,10 +133,7 @@ public class Abilities : MonoBehaviour {
     {
         try
         {
-			foreach(var button in buttons)
-			{
-				button.gameObject.SetActive(false);
-			}
+            DisableButtons();
             PlayerMovementManager.Instance.SetQuadsEnabled(false);
             PlayerMovementManager.Instance.enabled = false;
             Vector3 to = Vector3.zero;
@@ -145,9 +163,7 @@ public class Abilities : MonoBehaviour {
 				PlayerMovementManager.Instance.Deselect ();
 			else
 				PlayerMovementManager.Instance.Select (stats);
-			foreach (var button in buttons) {
-				button.gameObject.SetActive(true);
-			}
+            EnableButtons();
         }
     }
 
@@ -158,10 +174,7 @@ public class Abilities : MonoBehaviour {
         RaycastIfInLightCone flashlight = null;
         try
         {
-			foreach(var button in buttons)
-			{
-				button.gameObject.SetActive(false);
-			}
+            DisableButtons();
             var abilData = (from abil in stats.AbilityData where abil.Name == "Flashlight" select abil).FirstOrDefault();
             Debug.Log(abilData.Description);
             PlayerMovementManager.Instance.SetQuadsEnabled(false);
@@ -223,9 +236,7 @@ public class Abilities : MonoBehaviour {
 				PlayerMovementManager.Instance.Deselect ();
 			else
 				PlayerMovementManager.Instance.Select (stats);
-			foreach (var button in buttons) {
-				button.gameObject.SetActive(true);
-			}
+            EnableButtons();
         }
     }
 }

@@ -63,7 +63,7 @@ public class VolumetricLight : MonoBehaviour
     public Vector2 NoiseVelocity = new Vector2(3.0f, 3.0f);
 
     [Tooltip("")]    
-    public float MaxRayLength = 400.0f;    
+    public float MaVRayLength = 400.0f;    
 
     public Light Light { get { return _light; } }
     public Material VolumetricMaterial { get { return _material; } }
@@ -395,7 +395,7 @@ public class VolumetricLight : MonoBehaviour
 
         _material.SetVector("_LightDir", new Vector4(_light.transform.forward.x, _light.transform.forward.y, _light.transform.forward.z, 1.0f / (_light.range * _light.range)));
         _material.SetVector("_LightColor", _light.color * _light.intensity);
-        _material.SetFloat("_MaxRayLength", MaxRayLength);
+        _material.SetFloat("_MaVRayLength", MaVRayLength);
 
         if (_light.cookie == null)
         {

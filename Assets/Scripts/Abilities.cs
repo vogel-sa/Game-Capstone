@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using cakeslice;
 
 public class Abilities : MonoBehaviour {
@@ -28,6 +29,9 @@ public class Abilities : MonoBehaviour {
         }
     }
 
+	[SerializeField]
+	private Button[] buttons;
+
 	void OnDestroy()
 	{
 		applicationIsQuitting = true;
@@ -39,6 +43,10 @@ public class Abilities : MonoBehaviour {
         LineRenderer lineRenderer = null;
         try
         {
+			foreach(var button in buttons)
+			{
+				button.gameObject.SetActive(false);
+			}
             var abilData = (from abil in stats.AbilityData where abil.Name == "Shoot" select abil).FirstOrDefault();
             Debug.Log(abilData.Description);
             PlayerMovementManager.Instance.SetQuadsEnabled(false);
@@ -93,6 +101,9 @@ public class Abilities : MonoBehaviour {
 				PlayerMovementManager.Instance.Deselect ();
 			else
 				PlayerMovementManager.Instance.Select (stats);
+			foreach (var button in buttons) {
+				button.gameObject.SetActive(true);
+			}
         }
     }
 
@@ -101,6 +112,10 @@ public class Abilities : MonoBehaviour {
     {
         try
         {
+			foreach(var button in buttons)
+			{
+				button.gameObject.SetActive(false);
+			}
             PlayerMovementManager.Instance.SetQuadsEnabled(false);
             PlayerMovementManager.Instance.enabled = false;
             Vector3 to = Vector3.zero;
@@ -130,6 +145,9 @@ public class Abilities : MonoBehaviour {
 				PlayerMovementManager.Instance.Deselect ();
 			else
 				PlayerMovementManager.Instance.Select (stats);
+			foreach (var button in buttons) {
+				button.gameObject.SetActive(true);
+			}
         }
     }
 
@@ -140,6 +158,10 @@ public class Abilities : MonoBehaviour {
         RaycastIfInLightCone flashlight = null;
         try
         {
+			foreach(var button in buttons)
+			{
+				button.gameObject.SetActive(false);
+			}
             var abilData = (from abil in stats.AbilityData where abil.Name == "Flashlight" select abil).FirstOrDefault();
             Debug.Log(abilData.Description);
             PlayerMovementManager.Instance.SetQuadsEnabled(false);
@@ -149,7 +171,7 @@ public class Abilities : MonoBehaviour {
             Vector3 direction = Vector3.zero;
             RaycastHit hit;
             los = new GameObject().AddComponent<LineOfSight>();
-			los.gameObject.AddComponent<Outline>();
+			los.gameObject.AddComponent<cakeslice.Outline>();
             los._idle = Resources.Load<Material>("Clear");
             los.transform.position = stats.transform.position + Vector3.up;
             los._cullingMask = LayerMask.GetMask("Obstacle");
@@ -175,7 +197,7 @@ public class Abilities : MonoBehaviour {
                     var lookAt = new Vector3((origin - direction.normalized * range).x, stats.transform.position.y/* + 1*/, (origin - direction.normalized * range).z);
                     lookAt = new Vector3(lookAt.x, los.transform.position.y, lookAt.z);
                     los.transform.LookAt(lookAt);
-                    stats.transform.LookAt(lookAt);
+					stats.transform.LookAt(lookAt + Vector3.down);
                     flashlight.transform.LookAt(lookAt);
                     //flashlight.transform.LookAt(lookAt);
                 }
@@ -201,6 +223,9 @@ public class Abilities : MonoBehaviour {
 				PlayerMovementManager.Instance.Deselect ();
 			else
 				PlayerMovementManager.Instance.Select (stats);
+			foreach (var button in buttons) {
+				button.gameObject.SetActive(true);
+			}
         }
     }
 }

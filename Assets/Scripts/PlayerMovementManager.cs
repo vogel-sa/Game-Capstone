@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using DentedPixel;
 
 public class PlayerMovementManager : MonoBehaviour
@@ -43,6 +44,7 @@ public class PlayerMovementManager : MonoBehaviour
     private static readonly GameObject[] quads = new GameObject[300];
     private static int quadsInUse = 0;
 
+
     public delegate void SelectAction();
     public event SelectAction OnSelect;
 
@@ -72,6 +74,7 @@ public class PlayerMovementManager : MonoBehaviour
     void Awake()
     {
         quadParent = new GameObject();
+		//quadParent.transform.parent = gameObject.transform;
         Vector3 quadRotation = new Vector3(90, 0, 0);
 		for (int i = 0; i < quads.Length; i++)
         {
@@ -103,31 +106,29 @@ public class PlayerMovementManager : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (lastUpdateOutline) lastUpdateOutline.color = notHighlightedColor;
-            if (Physics.Raycast(ray, out hit, Camera.main.farClipPlane, LayerMask.GetMask("Outline")))
-            {
-                //if (hit.transform.gameObject.layer == LayerMask.GetMask("Outline"))
-                {
-                    Outline outline = hit.transform.GetComponent<Outline>();
-                    if (lastUpdateOutline) lastUpdateOutline.color = notHighlightedColor;
-                    outline.color = highlightedColor;
-                    lastUpdateOutline = outline;
+			if (!EventSystem.current.IsPointerOverGameObject()) {
+				if (Physics.Raycast (ray, out hit, Camera.main.farClipPlane, LayerMask.GetMask ("Outline", "UI"))) {
+					//if (hit.transform.gameObject.layer == LayerMask.GetMask("Outline"))
+					{
+						Outline outline = hit.transform.GetComponent<Outline> ();
+						if (lastUpdateOutline)
+							lastUpdateOutline.color = notHighlightedColor;
+						outline.color = highlightedColor;
+						lastUpdateOutline = outline;
 
-                    if (controlsEnabled && Input.GetMouseButtonDown(0) && !SelectedCharacterStats.hasMoved)
-                    {
-                        Vector3 hitPos = AstarData.active.GetNearest(hit.point).position;
-                        if (!Physics.Raycast(new Ray(hitPos, Vector3.up), 1, LayerMask.GetMask("Player"))) // Check if occupied.
-                        {
-                            var path = PathManager.Instance.getPath(selected.transform.position, hitPos, PathManager.CharacterFaction.ALLY);
-                            this.path = path;
-                            StartCoroutine(MoveCharacter(path));
-                        }
-                        else
-                        {
-                            Debug.Log("Space occupied.");
-                        }
-                    }
-                }
-            }
+						if (controlsEnabled && Input.GetMouseButtonDown (0) && !SelectedCharacterStats.hasMoved) {
+							Vector3 hitPos = AstarData.active.GetNearest (hit.point).position;
+							if (!Physics.Raycast (new Ray (hitPos, Vector3.up), 1, LayerMask.GetMask ("Player", "UI"))) { // Check if occupied.
+								var path = PathManager.Instance.getPath (selected.transform.position, hitPos, PathManager.CharacterFaction.ALLY);
+								this.path = path;
+								StartCoroutine (MoveCharacter (path));
+							} else {
+								Debug.Log ("Space occupied.");
+							}
+						}
+					}
+				}
+			}
         }
         if (Input.GetMouseButtonDown(0))
         {

@@ -89,7 +89,10 @@ public class Abilities : MonoBehaviour {
             PlayerMovementManager.Instance.enabled = true;
             //PlayerMovementManager.Instance.Select(stats.transform, stats);
             if (lineRenderer) Destroy(lineRenderer.gameObject);
-            if (stats.Actionsleft == 0) PlayerMovementManager.Instance.Deselect();
+			if (stats.Actionsleft == 0)
+				PlayerMovementManager.Instance.Deselect ();
+			else
+				PlayerMovementManager.Instance.Select (stats);
         }
     }
 
@@ -123,7 +126,10 @@ public class Abilities : MonoBehaviour {
         {
             PlayerMovementManager.Instance.SetQuadsEnabled(true);
             PlayerMovementManager.Instance.enabled = true;
-            if (stats.Actionsleft == 0) PlayerMovementManager.Instance.Deselect();
+			if (stats.Actionsleft == 0)
+				PlayerMovementManager.Instance.Deselect ();
+			else
+				PlayerMovementManager.Instance.Select (stats);
         }
     }
 
@@ -191,7 +197,10 @@ public class Abilities : MonoBehaviour {
             PlayerMovementManager.Instance.enabled = true;
             if (los) Destroy(los.gameObject);
             if (flashlight && !flashlight.gameObject.activeSelf) Destroy(flashlight.gameObject);
-            if (stats.Actionsleft == 0) PlayerMovementManager.Instance.Deselect();
+			if (stats.Actionsleft == 0)
+				PlayerMovementManager.Instance.Deselect ();
+			else
+				PlayerMovementManager.Instance.Select (stats);
         }
     }
 }

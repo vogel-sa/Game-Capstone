@@ -143,7 +143,7 @@ public class PlayerMovementManager : MonoBehaviour
                             obj = obj.parent;
                         }
                     var stats = obj.GetComponentInParent<PlayerCharacterStats>();
-                    Select(obj, stats);
+                    Select(stats);
                 }
             }
         }
@@ -209,38 +209,36 @@ public class PlayerMovementManager : MonoBehaviour
         applicationIsQuitting = true;
     }
 
-    public void Select(Transform t, PlayerCharacterStats stats)
+    public void Select(PlayerCharacterStats stats)
     {
         if (stats.Actionsleft <= 0) return;
         SelectedCharacterStats = stats;
-        if (!stats.hasMoved)
-        {
-            for (int i = 0; i < quads.Length; i++)
-            {
-                quads[i].SetActive(false);
-            }
-            // Get list of traversable nodes within range.
-            var blocked = from blocker in PathManager.Instance.enemies
-                          select blocker.lastBlocked;
+		if (!stats.hasMoved) {
+			for (int i = 0; i < quads.Length; i++) {
+				quads [i].SetActive (false);
+			}
+			// Get list of traversable nodes within range.
+			var blocked = from blocker in PathManager.Instance.enemies
+			                       select blocker.lastBlocked;
 
-            nodes = PathUtilities.BFS(AstarData.active.GetNearest(t.position).node,
-                stats.MovementRange,
-                walkableDefinition: (n) => !blocked.Contains(n));
-            // Shouldn't ever need too many quads.
-            int count = 0;
-            if (nodes.Count > quads.Length)
-            {
-                throw new System.Exception("Too many quads are required for the current range");
-            }
-            foreach (var node in nodes)
-            {
-                quads[count].SetActive(true);
-                quads[count].transform.position = (Vector3)node.position + new Vector3(0, .01f, 0);
-                count++;
-            }
-            SetQuadsEnabled(true);
-        }
-        selected = t;
+			nodes = PathUtilities.BFS (AstarData.active.GetNearest (stats.transform.position).node,
+				stats.MovementRange,
+				walkableDefinition: (n) => !blocked.Contains (n));
+			// Shouldn't ever need too many quads.
+			int count = 0;
+			if (nodes.Count > quads.Length) {
+				throw new System.Exception ("Too many quads are required for the current range");
+			}
+			foreach (var node in nodes) {
+				quads [count].SetActive (true);
+				quads [count].transform.position = (Vector3)node.position + new Vector3 (0, .01f, 0);
+				count++;
+			}
+			SetQuadsEnabled (true);
+		} else {
+			SetQuadsEnabled (false);
+		}
+		selected = stats.transform;
         OnSelect();
     }
 

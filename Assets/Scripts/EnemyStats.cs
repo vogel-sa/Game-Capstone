@@ -155,6 +155,7 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
         GetComponent<SingleNodeBlocker>().Unblock();
         PathManager.Instance.enemies.Remove(GetComponent<SingleNodeBlocker>());
 		TurnManager.instance.enemyList.Remove (this);
+		TurnManager.instance.CheckGameOver ();
     }
 
 

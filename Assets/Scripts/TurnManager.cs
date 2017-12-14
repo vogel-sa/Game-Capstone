@@ -125,7 +125,7 @@ public class TurnManager : MonoBehaviour
         }
         if (enemyList.Count == 0)
         {
-            GameOver(2);
+			StartCoroutine(GameOver(2));
         }
     }
 

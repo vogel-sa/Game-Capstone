@@ -7,13 +7,12 @@ public class Flare : MonoBehaviour {
     [SerializeField]
     public int turns = 3;
 
-	// Use this for initialization
-	void Awake()
+    void OnEnable()
     {
         TurnManager.instance.OnTurnChange += Countdown;
-	}
+    }
 
-    void OnDestroy()
+    void OnDisable()
     {
         TurnManager.instance.OnTurnChange -= Countdown;
     }

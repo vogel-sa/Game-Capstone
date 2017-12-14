@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour
@@ -42,8 +43,8 @@ public class TurnManager : MonoBehaviour
 
 	public IList<PlayerCharacterStats> playerList { get; private set; }
 	public IList<EnemyStats> enemyList { get; private set; }
-  [SerializeField]
-  GameObject VictoryScreen;
+  	[SerializeField]
+  	GameObject VictoryScreen;
 
 	void Awake(){
         playerList = new List<PlayerCharacterStats>();
@@ -121,7 +122,7 @@ public class TurnManager : MonoBehaviour
         //if all players have been 
         if (playerList.Count == 0)
         {
-            PlayerWins();
+            PlayerLoses();
         }
         if (enemyList.Count == 0)
         {
@@ -132,13 +133,16 @@ public class TurnManager : MonoBehaviour
     private IEnumerator GameOver(int waitval)
     {
         VictoryScreen.SetActive(true);
+		PlayerMovementManager.Instance.enabled = false;
+		TurnManager.instance.enabled = false;
         yield return new WaitForSeconds(waitval);
 
         //GOTO MAIN MENU
-        
+
+		SceneManager.LoadScene("Main Menu");
     }
 
-    private void PlayerWins()
+    private void PlayerLoses()
     {
 
     }

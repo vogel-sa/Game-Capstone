@@ -70,6 +70,8 @@ public class RaycastIfInLightCone : MonoBehaviour
         lt.range = range;
         lt.spotAngle = angle;
         lt.intensity = lightIntensity;
+        lt.cullingMask = ~raycastIgnore;
+        lt.shadows = LightShadows.Hard;
     }
 
     void Awake()

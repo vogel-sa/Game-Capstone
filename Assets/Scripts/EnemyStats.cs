@@ -36,7 +36,6 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
         }
     }
 
-    [SerializeField]
     private int _currHP; public int CurrHP
     {
         get
@@ -59,6 +58,19 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
         }
     }
 
+	[SerializeField]
+	private int _atk;
+	public int Atk
+	{
+		get
+		{
+			return _atk;
+		}
+		set
+		{
+			_atk = value;
+		}
+	}
     /* Represents a scalar damage reduction value   
     A value of 1 would reduce all incoming damage by 1
     Value of 2 reduces all incoming damage by 2, etc.*/

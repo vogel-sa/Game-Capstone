@@ -34,15 +34,16 @@ public class PortraitChanger : MonoBehaviour {
     // Update is called once per frame
     void Select () {
         selectedCharacter = PlayerMovementManager.Instance.SelectedCharacterStats;
-        changeSelected();
 	}
 
-    private void changeSelected()
+    private void Update()
     {
-        raw.texture = selectedCharacter.Portrait;
-        Name.text = selectedCharacter.Name;
-        HPbar.maxValue = selectedCharacter.MaxHP;
-        HPbar.value = selectedCharacter.CurrHP;
-        HPText.text = "HP: " + selectedCharacter.CurrHP;
+		if (selectedCharacter != null) {
+			raw.texture = selectedCharacter.Portrait;
+			Name.text = selectedCharacter.Name;
+			HPbar.maxValue = selectedCharacter.MaxHP;
+			HPbar.value = selectedCharacter.CurrHP;
+			HPText.text = "HP: " + selectedCharacter.CurrHP;
+		}
     }
 }

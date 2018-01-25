@@ -247,7 +247,7 @@ public class PlayerMovementManager : MonoBehaviour
     {
         SelectedCharacterStats = null;
         SetQuadsEnabled(false);
-        OnDeselect();
+		if (OnDeselect != null) OnDeselect();
     }
 
     public void SetQuadsEnabled(bool enabled)

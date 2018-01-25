@@ -88,6 +88,7 @@ public class TurnManager : MonoBehaviour
     /// Switches the Current turn to the Other turn
     /// </summary>
 	public void SwitchTurn(){
+		PlayerMovementManager.Instance.Deselect ();
 		StartCoroutine (_switchTurn ());
 	}
 

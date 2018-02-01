@@ -157,7 +157,7 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
 
     void OnEnable()
     {
-        TurnManager.instance.OnTurnChange += OnTurnStart;
+		FindObjectOfType<TurnManager>().OnTurnChange += OnTurnStart;
     }
 
     public bool IsDead()

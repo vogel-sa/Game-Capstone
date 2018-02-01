@@ -4,19 +4,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LoadLevel : MonoBehaviour {
-	[SerializeField]
-	private string ScenePath;
-	private GameObject scene;
+
+	public delegate void ManagerUnloader();
+	public static event ManagerUnloader UnloadLevelEvent;
+
 	void Awake()
 	{
 		SceneManager.sceneUnloaded += Unload;
-		scene = Instantiate (Resources.Load<GameObject> (ScenePath));
 	}
 
 	void Unload(Scene thisScene)
 	{
 		SceneManager.sceneUnloaded -= Unload;
-		Destroy (scene);
-		print ("destroyed");
+		UnloadLevelEvent ();
 	}
 }

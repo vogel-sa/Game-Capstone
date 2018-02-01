@@ -165,10 +165,10 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
     {
         gameObject.SetActive(false);
         GetComponent<SingleNodeBlocker>().Unblock();
-        PathManager.Instance.enemies.Remove(GetComponent<SingleNodeBlocker>());
-		TurnManager.instance.enemyList.Remove (this);
-		TurnManager.instance.CheckGameOver ();
+		FindObjectOfType<PathManager>().enemies.Remove(GetComponent<SingleNodeBlocker>());
+		//eventually change to mark for removal
+		FindObjectOfType<TurnManager>().enemyList.Remove (this);
+		FindObjectOfType<TurnManager>().CheckGameOver ();
     }
-
-
+		
 }

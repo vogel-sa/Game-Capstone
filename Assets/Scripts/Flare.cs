@@ -9,12 +9,12 @@ public class Flare : MonoBehaviour {
 
     void OnEnable()
     {
-        TurnManager.instance.OnTurnChange += Countdown;
+        GetComponent<TurnManager>().OnTurnChange += Countdown;
     }
 
     void OnDisable()
     {
-        TurnManager.instance.OnTurnChange -= Countdown;
+        GetComponent<TurnManager>().OnTurnChange -= Countdown;
     }
 
     // Update is called once per frame

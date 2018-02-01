@@ -26,18 +26,18 @@ public class ChangeTurnText : MonoBehaviour {
         text.text = yourturn;
         text.color = yourturnColor;
 
-        manager = TurnManager.instance;
+		manager = FindObjectOfType<TurnManager>();
         state = manager.currentTurn;
 
 	}
 	
 	void OnEnable () {
-        TurnManager.instance.OnTurnChange += switchText;
+		FindObjectOfType<TurnManager>().OnTurnChange += switchText;
 	}
 
     void OnDisable()
     {
-        TurnManager.instance.OnTurnChange -= switchText;
+		FindObjectOfType<TurnManager>().OnTurnChange -= switchText;
     }
 
     public void switchText(IList<PlayerCharacterStats> players, IList<EnemyStats> enemies, TurnManager.GAMESTATE turn)

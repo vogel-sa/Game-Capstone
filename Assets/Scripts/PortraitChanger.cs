@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PortraitChanger : MonoBehaviour {
 
-    private ICharacterStats selectedCharacter;
+	private PlayerCharacterStats selectedCharacter;
     RawImage raw;
     Slider HPbar;
     Text Name { get; set; }
@@ -18,7 +18,7 @@ public class PortraitChanger : MonoBehaviour {
 
 	// Use this for initialization
 	void OnEnable () {
-        PlayerMovementManager.Instance.OnSelect += Select;
+		FindObjectOfType<PlayerMovementManager>().OnSelect += Select;
         raw = GetComponent <RawImage>();
         Name = GetComponentInChildren<Text>();
         HPbar = GetComponentInChildren<Slider>();
@@ -28,12 +28,12 @@ public class PortraitChanger : MonoBehaviour {
 
     private void OnDisable()
     {
-        PlayerMovementManager.Instance.OnSelect -= Select;
+		FindObjectOfType<PlayerMovementManager>().OnSelect -= Select;
     }
 
     // Update is called once per frame
     void Select () {
-        selectedCharacter = PlayerMovementManager.Instance.SelectedCharacterStats;
+		selectedCharacter = FindObjectOfType<PlayerMovementManager>().SelectedCharacterStats;
 	}
 
     private void Update()

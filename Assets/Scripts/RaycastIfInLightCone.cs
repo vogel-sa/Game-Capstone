@@ -76,12 +76,12 @@ public class RaycastIfInLightCone : MonoBehaviour
 
     void Awake()
     {
-        TurnManager.instance.OnTurnChange += Countdown;
+		FindObjectOfType<TurnManager>().OnTurnChange += Countdown;
     }
 
     void OnDestroy()
     {
-        TurnManager.instance.OnTurnChange -= Countdown;
+		FindObjectOfType<TurnManager>().OnTurnChange -= Countdown;
     }
 
 #if DEBUG

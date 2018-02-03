@@ -142,6 +142,193 @@ public class Abilities : MonoBehaviour {
         }
     }
 
+	public void shotgunBlast(PlayerCharacterStats stats) { if (stats.Actionsleft > 0) StartCoroutine(_shotgunBlast(stats)); }
+	private IEnumerator _shotgunBlast(PlayerCharacterStats stats)
+	{
+
+		LineOfSight cone = null;
+		try
+		{
+			var abilData = (from abil in stats.AbilityData where abil.Name == "ShotGunBlast" select abil).FirstOrDefault();
+			Debug.Log(abilData.Description);
+			PlayerMovementManager.Instance.SetQuadsEnabled(false);
+			PlayerMovementManager.Instance.enabled = false;
+			var range = abilData.OtherValues.Range;
+			var width = abilData.OtherValues.Width;
+			Vector3 direction = Vector3.zero;
+			RaycastHit hit;
+			cone = new GameObject().AddComponent<LineOfSight>();
+			cone.gameObject.AddComponent<Outline>();
+			cone._idle = Resources.Load<Material>("UI");
+			cone.transform.position = stats.transform.position + Vector3.up;
+			cone._cullingMask = LayerMask.GetMask("Obstacle");
+			cone._maxAngle = (int)abilData.OtherValues.Angle;
+			cone._maxDistance = abilData.OtherValues.Range;
+
+			do
+			{
+				if (Input.GetKeyDown(KeyCode.Escape)) yield break;
+				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+				{
+					var mousePos = new Vector3(hit.point.x, stats.transform.position.y + 1/*aimLine.transform.position.y*/, hit.point.z);
+					var origin = stats.transform.position + Vector3.up;
+					direction = origin - mousePos;
+					var directedAt = new Vector3((origin - direction.normalized * range).x, stats.transform.position.y/* + 1*/, (origin - direction.normalized * range).z);
+					directedAt = new Vector3(directedAt.x, cone.transform.position.y, directedAt.z);
+					stats.transform.LookAt(directedAt);
+					cone.transform.LookAt(directedAt);
+
+				}
+				yield return null;
+			} while (!Input.GetMouseButtonDown(0));
+			cone.gameObject.SetActive(false);
+			EnemyStats hitStats;
+
+
+			Quaternion startingAngle = Quaternion.AngleAxis(-(cone._maxAngle/2), Vector3.up);
+			int increment = 8;
+			Quaternion stepAngle = Quaternion.AngleAxis(increment, Vector3.up);
+			var angle = cone.transform.rotation * startingAngle;
+			var direction2 = angle * Vector3.forward;
+			var pos = cone.transform.position;
+			List<EnemyStats> enemies = new List<EnemyStats>();
+			for (var i = 0; i < (cone._maxAngle/increment); i++) {
+				if (Physics.Raycast(stats.transform.position + Vector3.up, direction2, out hit, range, ~LayerMask.GetMask("Player", "Ground", "Ignore Raycast", "Flare")))//, LayerMask.NameToLayer("Enemy")))
+				{
+					if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Enemy")
+					{
+						hitStats = hit.transform.parent.GetComponent<EnemyStats>();
+						if (!enemies.Contains(hitStats)) {
+							enemies.Add(hitStats);
+						}
+						if (!hitStats.hitByAbility()) {
+							if (hit.distance <= 2) {
+								hitStats.TakeDamage(abilData.DamageAmount);
+							}
+							else {
+								hitStats.TakeDamage(abilData.DamageAmount - 2);
+							}
+							hitStats.swapFlag();
+						}
+					}
+				}
+				direction2 = stepAngle * direction2;
+			}
+			Debug.Log("ShoutGunBlast");
+			foreach (EnemyStats stat in enemies) {
+				stat.swapFlag();
+			}
+			abilData.Currcooldown = abilData.Maxcooldown;
+			stats.hasMoved = true;
+			stats.Actionsleft--;
+			TurnManager.instance.AutoEndTurnCheck();
+			yield return new WaitForSeconds(.5f);// Change to wait until animation over, possibly wait for enemy reaction (i.e. reaction shot, death anim, etc.);
+		}
+		finally
+		{
+			//PlayerMovementManager.Instance.SetQuadsEnabled(true);
+			PlayerMovementManager.Instance.enabled = true;
+			//PlayerMovementManager.Instance.Select(stats.transform, stats);
+			if (cone) Destroy(cone.gameObject);
+			if (stats.Actionsleft == 0)
+				PlayerMovementManager.Instance.Deselect ();
+			else
+				PlayerMovementManager.Instance.Select (stats);
+		}
+	}
+
+	public void RapidFire(PlayerCharacterStats stats) { if (stats.Actionsleft > 0) StartCoroutine(_RapidFire(stats)); }
+	private IEnumerator _RapidFire(PlayerCharacterStats stats)
+	{
+		
+		LineOfSight cone = null;
+		try
+		{
+			var abilData = (from abil in stats.AbilityData where abil.Name == "RapidFire" select abil).FirstOrDefault();
+			Debug.Log(abilData.Description);
+			PlayerMovementManager.Instance.SetQuadsEnabled(false);
+			PlayerMovementManager.Instance.enabled = false;
+			var range = abilData.OtherValues.Range;
+			var width = abilData.OtherValues.Width;
+			Vector3 direction = Vector3.zero;
+			RaycastHit hit;
+			cone = new GameObject().AddComponent<LineOfSight>();
+			cone.gameObject.AddComponent<Outline>();
+			cone._idle = Resources.Load<Material>("UI");
+			cone.transform.position = stats.transform.position + Vector3.up;
+			cone._cullingMask = LayerMask.GetMask("Obstacle");
+			cone._maxAngle = (int)abilData.OtherValues.Angle;
+			cone._maxDistance = abilData.OtherValues.Range;
+
+			do
+			{
+				if (Input.GetKeyDown(KeyCode.Escape)) yield break;
+				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+				{
+					var mousePos = new Vector3(hit.point.x, stats.transform.position.y + 1/*aimLine.transform.position.y*/, hit.point.z);
+					var origin = stats.transform.position + Vector3.up;
+					direction = origin - mousePos;
+					var directedAt = new Vector3((origin - direction.normalized * range).x, stats.transform.position.y/* + 1*/, (origin - direction.normalized * range).z);
+					directedAt = new Vector3(directedAt.x, cone.transform.position.y, directedAt.z);
+					stats.transform.LookAt(directedAt);
+					cone.transform.LookAt(directedAt);
+
+				}
+				yield return null;
+			} while (!Input.GetMouseButtonDown(0));
+			cone.gameObject.SetActive(false);
+			EnemyStats hitStats;
+
+
+			Quaternion startingAngle = Quaternion.AngleAxis(-(cone._maxAngle/2), Vector3.up);
+			int increment = 2;
+			Quaternion stepAngle = Quaternion.AngleAxis(increment, Vector3.up);
+			var angle = cone.transform.rotation * startingAngle;
+			var direction2 = angle * Vector3.forward;
+			var pos = cone.transform.position;
+			List<EnemyStats> enemies = new List<EnemyStats>();
+			for (var i = 0; i < (cone._maxAngle/increment); i++) {
+				if (Physics.Raycast(stats.transform.position + Vector3.up, direction2, out hit, range, ~LayerMask.GetMask("Player", "Ground", "Ignore Raycast", "Flare")))//, LayerMask.NameToLayer("Enemy")))
+				{
+					if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Enemy")
+					{
+						hitStats = hit.transform.parent.GetComponent<EnemyStats>();
+						if (!enemies.Contains(hitStats)) {
+							enemies.Add(hitStats);
+						}
+						if (!hitStats.hitByAbility()) {
+							hitStats.TakeDamage(abilData.DamageAmount);
+							hitStats.swapFlag();
+						}
+					}
+				}
+				direction2 = stepAngle * direction2;
+			}
+			Debug.Log("RapidFire");
+			foreach (EnemyStats stat in enemies) {
+				stat.swapFlag();
+			}
+			abilData.Currcooldown = abilData.Maxcooldown;
+			stats.hasMoved = true;
+			stats.Actionsleft--;
+			TurnManager.instance.AutoEndTurnCheck();
+			yield return new WaitForSeconds(.5f);// Change to wait until animation over, possibly wait for enemy reaction (i.e. reaction shot, death anim, etc.);
+		}
+		finally
+		{
+			//PlayerMovementManager.Instance.SetQuadsEnabled(true);
+			PlayerMovementManager.Instance.enabled = true;
+			//PlayerMovementManager.Instance.Select(stats.transform, stats);
+			if (cone) Destroy(cone.gameObject);
+			if (stats.Actionsleft == 0)
+				PlayerMovementManager.Instance.Deselect ();
+			else
+				PlayerMovementManager.Instance.Select (stats);
+		}
+	}
+
     public void FlashlightAbility(PlayerCharacterStats stats) { if (stats.Actionsleft > 0) StartCoroutine(_flashlightAbility(stats)); }
     private IEnumerator _flashlightAbility(PlayerCharacterStats stats)
     {
@@ -214,4 +401,6 @@ public class Abilities : MonoBehaviour {
             EnableButtons();
         }
     }
+		
+
 }

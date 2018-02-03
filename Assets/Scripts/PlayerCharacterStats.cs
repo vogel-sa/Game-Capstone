@@ -150,9 +150,32 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
     }
     #endregion
 
+	#region
+	[SerializeField]
+	bool _isCoveringFire;
+	public bool isCoveringFire
+	{
+		get
+		{
+			return _isCoveringFire;
+		}
+
+		set
+		{
+			_isCoveringFire = value;
+		}
+	}
+	#endregion
+
+
+	public void startCoverFire() {
+		isCoveringFire = true;
+	}
+
     void Awake()
     {
         //CurrHP = MaxHP;
+		isCoveringFire = false;
     }
 
     void OnEnable()
@@ -185,6 +208,8 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
             }
             hasMoved = false;
             Actionsleft = _maxActions;
+			isCoveringFire = false;
+			MitigationValue = 0;
         }
     }
 }

@@ -11,7 +11,10 @@ public class PortraitChanger : MonoBehaviour {
     Text Name { get; set; }
     [SerializeField]
     GameObject HPTextOBJ;
+	[SerializeField]
+	GameObject ActionTextOBJ;
     Text HPText;
+	Text ActionText;
 
    
 
@@ -23,6 +26,7 @@ public class PortraitChanger : MonoBehaviour {
         Name = GetComponentInChildren<Text>();
         HPbar = GetComponentInChildren<Slider>();
         HPText = HPTextOBJ.GetComponent<Text>();
+		ActionText = ActionTextOBJ.GetComponent<Text>();
 
 	}
 
@@ -44,6 +48,7 @@ public class PortraitChanger : MonoBehaviour {
 			HPbar.maxValue = selectedCharacter.MaxHP;
 			HPbar.value = selectedCharacter.CurrHP;
 			HPText.text = "HP: " + selectedCharacter.CurrHP;
+			ActionText.text = "Actions Left:" + selectedCharacter.Actionsleft;
 		}
     }
 }

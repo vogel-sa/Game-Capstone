@@ -70,7 +70,7 @@ public class EnemyTurn : MonoBehaviour
                 }
 				yield return new WaitForSeconds (.2f);
 				if (Vector3.Distance (AstarData.active.GetNearest (target.transform.position).position,
-					    AstarData.active.GetNearest (enemy.transform.position).position) <= 2f) {
+					    AstarData.active.GetNearest (enemy.transform.position).position) <= 1f) {
 					target.TakeDamage (enemy.Atk);
 				}
 			}

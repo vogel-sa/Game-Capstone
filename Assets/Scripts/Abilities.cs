@@ -8,43 +8,17 @@ using cakeslice;
 
 public class Abilities : MonoBehaviour {
 
-    private static object _lock = new object();
-	private static bool applicationIsQuitting = false; 
-    private static Abilities _instance;
-    public static Abilities Instance
-    {
-        get
-        {
-			if (applicationIsQuitting)
-				return null;
-            lock (_lock)
-            {
-                if (!_instance)
-                {
-                    var inst = FindObjectOfType(typeof(Abilities)) as Abilities;
-                    _instance = inst ? inst : new GameObject().AddComponent<Abilities>();
-                }
-            }
-            return _instance;
-        }
-    }
-
 	[SerializeField]
 	private Button[] buttons;
 
-	void OnDestroy()
-	{
-		applicationIsQuitting = true;
-	}
-
     void OnEnable()
     {
-        PlayerMovementManager.Instance.OnSelect += EnableButtons;
+		GetComponent<PlayerMovementManager>().OnSelect += EnableButtons;
     }
 
     void OnDisable()
     {
-        PlayerMovementManager.Instance.OnSelect -= EnableButtons;
+		GetComponent<PlayerMovementManager>().OnSelect -= EnableButtons;
     }
 
     private void EnableButtons()
@@ -72,8 +46,9 @@ public class Abilities : MonoBehaviour {
             DisableButtons();
             var abilData = (from abil in stats.AbilityData where abil.Name == "Shoot" select abil).FirstOrDefault();
             Debug.Log(abilData.Description);
-            PlayerMovementManager.Instance.SetQuadsEnabled(false);
-            PlayerMovementManager.Instance.enabled = false;
+			var pmm = GetComponent<PlayerMovementManager>();
+			pmm.SetQuadsEnabled(false);
+			pmm.enabled = false;
             var range = abilData.OtherValues.Range;
             var width = abilData.OtherValues.Width;
             Vector3 direction = Vector3.zero;
@@ -107,23 +82,23 @@ public class Abilities : MonoBehaviour {
                 }
             }
             Debug.Log("Bang");
-            TurnManager.instance.AutoEndTurnCheck();
+			GetComponent<TurnManager>().AutoEndTurnCheck();
             abilData.Currcooldown = abilData.Maxcooldown;
             stats.hasMoved = true;
             stats.Actionsleft--;
-            TurnManager.instance.AutoEndTurnCheck();
+			GetComponent<TurnManager>().AutoEndTurnCheck();
             yield return new WaitForSeconds(.5f);// Change to wait until animation over, possibly wait for enemy reaction (i.e. reaction shot, death anim, etc.);
         }
         finally
         {
-            //PlayerMovementManager.Instance.SetQuadsEnabled(true);
-            PlayerMovementManager.Instance.enabled = true;
-            //PlayerMovementManager.Instance.Select(stats.transform, stats);
+            //GetComponent<PlayerMovementManager>().SetQuadsEnabled(true);
+			GetComponent<PlayerMovementManager>().enabled = true;
+            //GetComponent<PlayerMovementManager>().Select(stats.transform, stats);
             if (lineRenderer) Destroy(lineRenderer.gameObject);
 			if (stats.Actionsleft == 0)
-				PlayerMovementManager.Instance.Deselect ();
+				GetComponent<PlayerMovementManager>().Deselect ();
 			else
-				PlayerMovementManager.Instance.Select (stats);
+				GetComponent<PlayerMovementManager>().Select (stats);
             EnableButtons();
         }
     }
@@ -134,8 +109,8 @@ public class Abilities : MonoBehaviour {
         try
         {
             DisableButtons();
-            PlayerMovementManager.Instance.SetQuadsEnabled(false);
-            PlayerMovementManager.Instance.enabled = false;
+			GetComponent<PlayerMovementManager>().SetQuadsEnabled(false);
+			GetComponent<PlayerMovementManager>().enabled = false;
             Vector3 to = Vector3.zero;
             do
             {
@@ -152,17 +127,17 @@ public class Abilities : MonoBehaviour {
                            where a.Name == "Flare"
                            select a).FirstOrDefault();
              ability.Currcooldown = ability.Maxcooldown;
-            TurnManager.instance.AutoEndTurnCheck();
+			GetComponent<TurnManager>().AutoEndTurnCheck();
             yield return null;
         }
         finally
         {
-            PlayerMovementManager.Instance.SetQuadsEnabled(true);
-            PlayerMovementManager.Instance.enabled = true;
+			GetComponent<PlayerMovementManager>().SetQuadsEnabled(true);
+			GetComponent<PlayerMovementManager>().enabled = true;
 			if (stats.Actionsleft == 0)
-				PlayerMovementManager.Instance.Deselect ();
+				GetComponent<PlayerMovementManager>().Deselect ();
 			else
-				PlayerMovementManager.Instance.Select (stats);
+				GetComponent<PlayerMovementManager>().Select (stats);
             EnableButtons();
         }
     }
@@ -177,8 +152,8 @@ public class Abilities : MonoBehaviour {
             DisableButtons();
             var abilData = (from abil in stats.AbilityData where abil.Name == "Flashlight" select abil).FirstOrDefault();
             Debug.Log(abilData.Description);
-            PlayerMovementManager.Instance.SetQuadsEnabled(false);
-            PlayerMovementManager.Instance.enabled = false;
+			GetComponent<PlayerMovementManager>().SetQuadsEnabled(false);
+			GetComponent<PlayerMovementManager>().enabled = false;
             var range = abilData.OtherValues.Range;
             var width = abilData.OtherValues.Width;
             Vector3 direction = Vector3.zero;
@@ -223,19 +198,19 @@ public class Abilities : MonoBehaviour {
             abilData.Currcooldown = abilData.Maxcooldown;
             stats.hasMoved = true;
             stats.Actionsleft--;
-            TurnManager.instance.AutoEndTurnCheck();
+			GetComponent<TurnManager>().AutoEndTurnCheck();
             yield return new WaitForSeconds(.5f);// Change to wait until animation over, possibly wait for enemy reaction (i.e. reaction shot, death anim, etc.);
         }
         finally
         {
-            //PlayerMovementManager.Instance.SetQuadsEnabled(true);
-            PlayerMovementManager.Instance.enabled = true;
+            //GetComponent<PlayerMovementManager>().SetQuadsEnabled(true);
+			GetComponent<PlayerMovementManager>().enabled = true;
             if (los) Destroy(los.gameObject);
             if (flashlight && !flashlight.gameObject.activeSelf) Destroy(flashlight.gameObject);
 			if (stats.Actionsleft == 0)
-				PlayerMovementManager.Instance.Deselect ();
+				GetComponent<PlayerMovementManager>().Deselect ();
 			else
-				PlayerMovementManager.Instance.Select (stats);
+				GetComponent<PlayerMovementManager>().Select (stats);
             EnableButtons();
         }
     }

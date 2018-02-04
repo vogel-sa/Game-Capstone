@@ -7,33 +7,14 @@ using System.Linq;
 
 public class EnemyTurn : MonoBehaviour
 {
-
-	private static EnemyTurn _instance;
-	private static object _lock = new object();
-	public static EnemyTurn instance
-	{
-		get
-		{
-			lock(_lock)
-			{
-				if (!_instance)
-				{
-					var inst = FindObjectOfType<EnemyTurn> ();
-					_instance = inst ? inst : new GameObject ().AddComponent<EnemyTurn> ();
-				}
-			}
-			return _instance;
-		}
-	}
-
     void OnEnable()
     {
-        TurnManager.instance.OnTurnChange += RunTurn;
+        GetComponent<TurnManager>().OnTurnChange += RunTurn;
     }
 
     private void OnDisable()
     {
-        TurnManager.instance.OnTurnChange -= RunTurn;
+        GetComponent<TurnManager>().OnTurnChange -= RunTurn;
     }
 
 
@@ -51,6 +32,7 @@ public class EnemyTurn : MonoBehaviour
 		foreach (var enemy in enemies)
 		{
 			ABPath path = null;
+			PlayerCharacterStats target = null;
 			foreach (PlayerCharacterStats player in players)
 			{
                 if (Vector3.Distance(player.transform.position, enemy.transform.position) > enemy.DetectionRadius) break;
@@ -61,10 +43,11 @@ public class EnemyTurn : MonoBehaviour
 				if (neighbor == null || !neighbor.Walkable) neighbor = AstarData.active.GetNearest(player.transform.position + Vector3.forward).node;
 				if (neighbor == null || !neighbor.Walkable) neighbor = AstarData.active.GetNearest(player.transform.position + Vector3.back).node;
 
-				var newPath = PathManager.Instance.getPath (enemy.transform.position, (Vector3)neighbor.position, PathManager.CharacterFaction.ENEMY);
+				var newPath = GetComponent<PathManager>().getPath (enemy.transform.position, (Vector3)neighbor.position, PathManager.CharacterFaction.ENEMY);
 				if (newPath != null && (path == null || path.vectorPath.Count > newPath.vectorPath.Count)) path = newPath;
+				target = player;
 			}
-			if (path != null)
+			if (path != null && !path.error)
 			{
 				bool finished = false;
 				var arr = new Vector3[enemy.MovementRange + 2];
@@ -86,10 +69,14 @@ public class EnemyTurn : MonoBehaviour
                     yield return new WaitUntil(() => finished);
                 }
 				yield return new WaitForSeconds (.2f);
+				if (Vector3.Distance (AstarData.active.GetNearest (target.transform.position).position,
+					    AstarData.active.GetNearest (enemy.transform.position).position) <= 1f) {
+					target.TakeDamage (enemy.Atk);
+				}
 			}
 		}
 		yield return null;
-        TurnManager.instance.SwitchTurn ();
+        GetComponent<TurnManager>().SwitchTurn ();
 	}
 	
 	private float ManhattanDist(Vector3 a, Vector3 b)

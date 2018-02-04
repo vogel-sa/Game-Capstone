@@ -70,16 +70,18 @@ public class RaycastIfInLightCone : MonoBehaviour
         lt.range = range;
         lt.spotAngle = angle;
         lt.intensity = lightIntensity;
+        lt.cullingMask = ~raycastIgnore;
+        lt.shadows = LightShadows.Hard;
     }
 
     void Awake()
     {
-        TurnManager.instance.OnTurnChange += Countdown;
+		FindObjectOfType<TurnManager>().OnTurnChange += Countdown;
     }
 
     void OnDestroy()
     {
-        TurnManager.instance.OnTurnChange -= Countdown;
+		FindObjectOfType<TurnManager>().OnTurnChange -= Countdown;
     }
 
 #if DEBUG

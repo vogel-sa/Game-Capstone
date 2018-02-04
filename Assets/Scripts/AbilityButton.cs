@@ -20,14 +20,16 @@ public class AbilityButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     void OnEnable()
     {
-        PlayerMovementManager.Instance.OnSelect += ShowMe;
-        PlayerMovementManager.Instance.OnDeselect += HideMe;
+		var pmm = FindObjectOfType<PlayerMovementManager> ();
+		pmm.OnSelect += ShowMe;
+		pmm.OnDeselect += HideMe;
     }
 
     void OnDisable()
     {
-        PlayerMovementManager.Instance.OnSelect -= ShowMe;
-        PlayerMovementManager.Instance.OnDeselect -= HideMe;
+		var pmm = FindObjectOfType<PlayerMovementManager> ();
+		pmm.OnSelect -= ShowMe;
+		pmm.OnDeselect -= HideMe;
     }
 
     void Update()

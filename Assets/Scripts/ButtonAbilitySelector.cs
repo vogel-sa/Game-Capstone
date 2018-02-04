@@ -23,23 +23,23 @@ public class ButtonAbilitySelector : MonoBehaviour {
 
 	// Use this for initialization
 	void OnEnable () {
-        PlayerMovementManager.Instance.OnSelect += ChangeAbilityButtons;
+		FindObjectOfType<PlayerMovementManager>().OnSelect += ChangeAbilityButtons;
     }
 
     void OnDisable()
     {
-        if (PlayerMovementManager.Instance)
-            PlayerMovementManager.Instance.OnSelect -= ChangeAbilityButtons;
+		if (GetComponent<PlayerMovementManager>())
+			GetComponent<PlayerMovementManager>().OnSelect -= ChangeAbilityButtons;
     }
 
     // Update is called once per frame
     void ChangeAbilityButtons()
     {
         Debug.Log("Buttons changed");
-        abilities = new AbilityData[PlayerMovementManager.Instance.SelectedCharacterStats.AbilityData.Length];
+		abilities = new AbilityData[FindObjectOfType<PlayerMovementManager>().SelectedCharacterStats.AbilityData.Length];
         for (int i = 0; i < abilities.Length; i++)
         {
-            abilities[i] = PlayerMovementManager.Instance.SelectedCharacterStats.AbilityData[i];
+			abilities[i] = FindObjectOfType<PlayerMovementManager>().SelectedCharacterStats.AbilityData[i];
 
             _buttons[i].onClick.RemoveAllListeners();
             var e = abilities[i];

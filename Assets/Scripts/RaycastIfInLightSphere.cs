@@ -12,6 +12,7 @@ public class RaycastIfInLightSphere : MonoBehaviour
     private float lightIntensity = 2;
     [SerializeField]
     LayerMask raycastIgnore;
+    [SerializeField]
 
     void Start()
     {
@@ -22,6 +23,8 @@ public class RaycastIfInLightSphere : MonoBehaviour
         light.type = LightType.Point;
         light.range = range;
         light.intensity = lightIntensity;
+        light.cullingMask = ~raycastIgnore;
+        light.shadows = LightShadows.Hard;
     }
 
 #if DEBUG

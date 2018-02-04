@@ -9,40 +9,15 @@ using DentedPixel;
 
 public class PlayerMovementManager : MonoBehaviour
 {
-	#region SINGLETON
-    private static object _lock = new object();
-    private static bool applicationIsQuitting = false;
-    private static PlayerMovementManager _instance;
-    public static PlayerMovementManager Instance
-    {
-        get
-        {
-            if (applicationIsQuitting)
-            {
-                return null;
-            }
-            lock (_lock)
-            {
-                if (!_instance)
-                {
-                    var inst = FindObjectOfType(typeof(PlayerMovementManager)) as PlayerMovementManager;
-                    _instance = inst ? inst : new GameObject().AddComponent<PlayerMovementManager>();
-                }
-            }
-            return _instance;
-        }
-    }
-	#endregion
-
     private struct BoolWrapper
     {
         public bool val { get; set; }
     }
 
     // Static pool of quads from which to pull for outline purposes.
-    private static GameObject quadParent;
-    private static readonly GameObject[] quads = new GameObject[300];
-    private static int quadsInUse = 0;
+    private GameObject quadParent;
+    private readonly GameObject[] quads = new GameObject[300];
+    private int quadsInUse = 0;
 
 
     public delegate void SelectAction();
@@ -71,8 +46,7 @@ public class PlayerMovementManager : MonoBehaviour
     private ABPath path;
     private float moveSpeed = 5f;
 
-    void Awake()
-    {
+	void Awake() {
         quadParent = new GameObject();
 		//quadParent.transform.parent = gameObject.transform;
         Vector3 quadRotation = new Vector3(90, 0, 0);
@@ -119,7 +93,7 @@ public class PlayerMovementManager : MonoBehaviour
 						if (controlsEnabled && Input.GetMouseButtonDown (0) && !SelectedCharacterStats.hasMoved) {
 							Vector3 hitPos = AstarData.active.GetNearest (hit.point).position;
 							if (!Physics.Raycast (new Ray (hitPos, Vector3.up), 1, LayerMask.GetMask ("Player", "UI"))) { // Check if occupied.
-								var path = PathManager.Instance.getPath (selected.transform.position, hitPos, PathManager.CharacterFaction.ALLY);
+								var path = GetComponent<PathManager>().getPath (selected.transform.position, hitPos, PathManager.CharacterFaction.ALLY);
 								this.path = path;
 								StartCoroutine (MoveCharacter (path));
 							} else {
@@ -201,13 +175,8 @@ public class PlayerMovementManager : MonoBehaviour
         controlsEnabled = true;
         // TODO: Fix the heirarchy for stats.
         SelectedCharacterStats.hasMoved = true;
-        TurnManager.instance.AutoEndTurnCheck();
+        GetComponent<TurnManager>().AutoEndTurnCheck();
         selected.GetComponent<SingleNodeBlocker>().BlockAtCurrentPosition();
-    }
-
-    void OnDestroy()
-    {
-        applicationIsQuitting = true;
     }
 
     public void Select(PlayerCharacterStats stats)
@@ -219,7 +188,7 @@ public class PlayerMovementManager : MonoBehaviour
 				quads [i].SetActive (false);
 			}
 			// Get list of traversable nodes within range.
-			var blocked = from blocker in PathManager.Instance.enemies
+			var blocked = from blocker in GetComponent<PathManager>().enemies
 			                       select blocker.lastBlocked;
 
 			nodes = PathUtilities.BFS (AstarData.active.GetNearest (stats.transform.position).node,
@@ -247,7 +216,7 @@ public class PlayerMovementManager : MonoBehaviour
     {
         SelectedCharacterStats = null;
         SetQuadsEnabled(false);
-        OnDeselect();
+		if (OnDeselect != null) OnDeselect();
     }
 
     public void SetQuadsEnabled(bool enabled)

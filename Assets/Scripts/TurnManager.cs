@@ -7,27 +7,6 @@ using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour
 {
-
-	private static TurnManager _instance;
-	private static object _lock = new object();
-    private static bool applicationIsQuitting = false;
-    public static TurnManager instance
-	{
-		get
-		{
-            if (applicationIsQuitting) return null;
-			lock(_lock)
-			{
-				if (!_instance)
-				{
-					var inst = FindObjectOfType<TurnManager> ();
-					_instance = inst ? inst : new GameObject ().AddComponent<TurnManager> ();
-				}
-			}
-			return _instance;
-		}
-	}
-
     public enum GAMESTATE
     {
         PLAYERTURN,
@@ -41,15 +20,17 @@ public class TurnManager : MonoBehaviour
 
     //List of all player stats in the game.  remove when player character is defeated
 
-	public IList<PlayerCharacterStats> playerList { get; private set; }
-	public IList<EnemyStats> enemyList { get; private set; }
+
+	public List<PlayerCharacterStats> playerList;
+
+	public List<EnemyStats> enemyList;
   	[SerializeField]
   	GameObject VictoryScreen;
 
-	void Awake(){
+	void Awake()
+	{
         playerList = new List<PlayerCharacterStats>();
 		enemyList = new List<EnemyStats>();
-		_instance = this;
         PlayerCharacterStats player;
 		currentTurn = GAMESTATE.PLAYERTURN;
 		EnemyStats enemy;
@@ -67,11 +48,12 @@ public class TurnManager : MonoBehaviour
 		}
 
         VictoryScreen.SetActive(false);
+		print ("Reloaded " + this.GetType().ToString());
 	}
 
     private void OnPlayerTurnStart(){
 
-        PlayerMovementManager.Instance.enabled = true;
+		GetComponent<PlayerMovementManager>().enabled = true;
 
         foreach (var players in playerList)
         {
@@ -81,13 +63,14 @@ public class TurnManager : MonoBehaviour
 
     private void OnEnemyTurnStart()
     {
-        PlayerMovementManager.Instance.enabled = false;
+		GetComponent<PlayerMovementManager>().enabled = false;
     }
 
     /// <summary>
     /// Switches the Current turn to the Other turn
     /// </summary>
 	public void SwitchTurn(){
+		GetComponent<PlayerMovementManager>().Deselect ();
 		StartCoroutine (_switchTurn ());
 	}
 
@@ -133,8 +116,8 @@ public class TurnManager : MonoBehaviour
     private IEnumerator GameOver(int waitval)
     {
         VictoryScreen.SetActive(true);
-		PlayerMovementManager.Instance.enabled = false;
-		TurnManager.instance.enabled = false;
+		GetComponent<PlayerMovementManager>().enabled = false;
+		GetComponent<TurnManager>().enabled = false;
         yield return new WaitForSeconds(waitval);
 
         //GOTO MAIN MENU
@@ -147,9 +130,6 @@ public class TurnManager : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// Checks if all players have moved, then auto ends the players turn if ALL player characters have moved
-    /// </summary>
     public void AutoEndTurnCheck()
     {
         if (HaveAllPlayersTakenAction())
@@ -170,9 +150,4 @@ public class TurnManager : MonoBehaviour
         return true;
 	}
 
-
-	void OnDestroy()
-	{
-		applicationIsQuitting = true;
-	}
 }

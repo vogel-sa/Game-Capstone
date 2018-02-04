@@ -10,30 +10,6 @@ public class PathManager : MonoBehaviour {
         ENEMY
     };
 
-    private static object _lock = new object();
-    private static bool applicationIsQuitting = false;
-    private static PathManager _instance;
-    public static PathManager Instance
-    {
-        get
-        {
-            if (applicationIsQuitting)
-            {
-                return null;
-            }
-            lock (_lock)
-            {
-                if (!_instance)
-                {
-                    var inst = FindObjectOfType(typeof(PathManager)) as PathManager;
-                    _instance = inst ? inst : new GameObject().AddComponent<PathManager>();
-                    _instance.Init();
-                }
-            }
-            return _instance;
-        }
-    }
-
     public BlockManager blockManager;
     public List<SingleNodeBlocker> enemies { get; private set; }
     public List<SingleNodeBlocker> allies { get; private set; }
@@ -42,7 +18,7 @@ public class PathManager : MonoBehaviour {
     public BlockManager.TraversalProvider enemyTraversalProvider { get; private set; }
 
     // Use this for initialization
-    void Init () {
+    void Awake () {
         var bm = GetComponent<BlockManager>();
         blockManager = bm ? bm : gameObject.AddComponent<BlockManager>();
         enemies = new List<SingleNodeBlocker>();
@@ -62,11 +38,6 @@ public class PathManager : MonoBehaviour {
 
         allyTraversalProvider = new BlockManager.TraversalProvider(blockManager, BlockManager.BlockMode.OnlySelector, enemies);
         enemyTraversalProvider = new BlockManager.TraversalProvider(blockManager, BlockManager.BlockMode.OnlySelector, allies);
-    }
-
-    void OnDestroy()
-    {
-        applicationIsQuitting = true;
     }
 
     public ABPath getPath(Vector3 start, Vector3 end, CharacterFaction team)

@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 33321255}
   - component: {fileID: 33321254}
   - component: {fileID: 33321253}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: TopRightBuilding2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c19aaf9768a5ad843b71a16369d5c6f2, type: 2}
+  - {fileID: 2100000, guid: dc1d272dcdb77f54b84f7a4859fba5ac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 170739819}
   - component: {fileID: 170739818}
   - component: {fileID: 170739817}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: RightBotBuilding1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c19aaf9768a5ad843b71a16369d5c6f2, type: 2}
+  - {fileID: 2100000, guid: 87099bc88bb4580458d31bd5724b6ecf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -492,7 +492,7 @@ GameObject:
   - component: {fileID: 343467162}
   - component: {fileID: 343467161}
   - component: {fileID: 343467160}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: TopLeftBuilding2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -526,7 +526,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c19aaf9768a5ad843b71a16369d5c6f2, type: 2}
+  - {fileID: 2100000, guid: 67f39deee3329df4291084ab28c8543f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -665,7 +665,7 @@ GameObject:
   - component: {fileID: 430841589}
   - component: {fileID: 430841588}
   - component: {fileID: 430841587}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: TopLeftBuilding2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -699,7 +699,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c19aaf9768a5ad843b71a16369d5c6f2, type: 2}
+  - {fileID: 2100000, guid: 7d6cb93e5ec351d49978d76b74b06f0c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -922,8 +922,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 485221470}
   outlineCamera: {fileID: 673679436}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 498603338}
-  extraRenderTexture: {fileID: 863727733}
+  renderTexture: {fileID: 896865792}
+  extraRenderTexture: {fileID: 957962625}
 --- !u!81 &485221467
 AudioListener:
   m_ObjectHideFlags: 0
@@ -985,37 +985,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!84 &498603338
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 872
-  m_Height: 545
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &527093412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,7 +996,7 @@ GameObject:
   - component: {fileID: 527093416}
   - component: {fileID: 527093415}
   - component: {fileID: 527093414}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: TopLeftBuilding3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1061,7 +1030,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c19aaf9768a5ad843b71a16369d5c6f2, type: 2}
+  - {fileID: 2100000, guid: 67f39deee3329df4291084ab28c8543f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1242,7 +1211,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 498603338}
+  m_TargetTexture: {fileID: 896865792}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -1260,7 +1229,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 754677582}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: TopRightBuilding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1283,37 +1252,6 @@ Transform:
   m_Father: {fileID: 1264269130}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &863727733
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 872
-  m_Height: 545
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1001 &881620262
 Prefab:
   m_ObjectHideFlags: 0
@@ -1387,6 +1325,37 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db2658fcf25cca342b93d9ad22e8a0f6, type: 2}
   m_IsPrefabParent: 0
+--- !u!84 &896865792
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 872
+  m_Height: 545
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &930066759
 GameObject:
   m_ObjectHideFlags: 0
@@ -1419,6 +1388,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &957962625
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 872
+  m_Height: 545
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &969372708
 GameObject:
   m_ObjectHideFlags: 0
@@ -1427,7 +1427,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 969372709}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: BotRightBuildings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1461,7 +1461,7 @@ GameObject:
   - component: {fileID: 970477088}
   - component: {fileID: 970477087}
   - component: {fileID: 970477086}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: RightBotBuilding3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1495,7 +1495,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c19aaf9768a5ad843b71a16369d5c6f2, type: 2}
+  - {fileID: 2100000, guid: 87099bc88bb4580458d31bd5724b6ecf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1545,7 +1545,7 @@ GameObject:
   - component: {fileID: 994295019}
   - component: {fileID: 994295018}
   - component: {fileID: 994295017}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: TopLeftBuilding2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1579,7 +1579,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c19aaf9768a5ad843b71a16369d5c6f2, type: 2}
+  - {fileID: 2100000, guid: 67f39deee3329df4291084ab28c8543f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1723,7 +1723,7 @@ Prefab:
     - target: {fileID: 2300008, guid: ca6a542169d8e474aa2c2cb47423839a, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 2191478c1f641c245b4fe9449817a0b7, type: 2}
+      objectReference: {fileID: 2100000, guid: 757247ac43b91e8448b02ceed32c6c99, type: 2}
     - target: {fileID: 400008, guid: ca6a542169d8e474aa2c2cb47423839a, type: 2}
       propertyPath: m_LocalScale.x
       value: 0.62446
@@ -1789,7 +1789,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1088210877}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: TopLeftBuilding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1825,7 +1825,7 @@ GameObject:
   - component: {fileID: 1168482283}
   - component: {fileID: 1168482282}
   - component: {fileID: 1168482281}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: LeftBotBuilding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1859,7 +1859,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 91ba25c5e9aad2e4d8693d1840f12d00, type: 2}
+  - {fileID: 2100000, guid: dc1d272dcdb77f54b84f7a4859fba5ac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1952,7 +1952,7 @@ Prefab:
     - target: {fileID: 2300008, guid: ca6a542169d8e474aa2c2cb47423839a, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 2191478c1f641c245b4fe9449817a0b7, type: 2}
+      objectReference: {fileID: 2100000, guid: 0e1fad36eb87b754184ce63d228d0f66, type: 2}
     - target: {fileID: 400008, guid: ca6a542169d8e474aa2c2cb47423839a, type: 2}
       propertyPath: m_LocalScale.x
       value: 0.6244601
@@ -2109,7 +2109,7 @@ GameObject:
   - component: {fileID: 1219137626}
   - component: {fileID: 1219137625}
   - component: {fileID: 1219137624}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: TopRightBuilding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2143,7 +2143,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c19aaf9768a5ad843b71a16369d5c6f2, type: 2}
+  - {fileID: 2100000, guid: 01a6560168e996a4dad7919558f5d845, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2190,7 +2190,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1248226315}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: BotLeftBuildings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2651,7 +2651,7 @@ GameObject:
   - component: {fileID: 1749857105}
   - component: {fileID: 1749857104}
   - component: {fileID: 1749857103}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: TopLeftBuilding1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2685,7 +2685,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c19aaf9768a5ad843b71a16369d5c6f2, type: 2}
+  - {fileID: 2100000, guid: 01a6560168e996a4dad7919558f5d845, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2870,6 +2870,21 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SwitchTurn
       objectReference: {fileID: 0}
+    - target: {fileID: 224492552696770718, guid: 009703c746a6b4b478d92f684554995b,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -14.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224454569360920942, guid: 009703c746a6b4b478d92f684554995b,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 224454569360920942, guid: 009703c746a6b4b478d92f684554995b,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -4.6
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 65191742779582478, guid: 009703c746a6b4b478d92f684554995b, type: 2}
     - {fileID: 65309230657168096, guid: 009703c746a6b4b478d92f684554995b, type: 2}
@@ -2893,7 +2908,7 @@ GameObject:
   - component: {fileID: 1769625207}
   - component: {fileID: 1769625206}
   - component: {fileID: 1769625205}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: LeftBot Small Building
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3117,7 +3132,7 @@ GameObject:
   - component: {fileID: 1944171808}
   - component: {fileID: 1944171807}
   - component: {fileID: 1944171806}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: RightBotBuilding2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3151,7 +3166,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c19aaf9768a5ad843b71a16369d5c6f2, type: 2}
+  - {fileID: 2100000, guid: 87099bc88bb4580458d31bd5724b6ecf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3285,7 +3300,7 @@ GameObject:
   - component: {fileID: 2070670550}
   - component: {fileID: 2070670549}
   - component: {fileID: 2070670548}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: TopRightBuilding2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3319,7 +3334,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c19aaf9768a5ad843b71a16369d5c6f2, type: 2}
+  - {fileID: 2100000, guid: 7750ca1db8b6b7940afe0a7d502dff47, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

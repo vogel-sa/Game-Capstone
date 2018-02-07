@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 33321255}
   - component: {fileID: 33321254}
   - component: {fileID: 33321253}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: TopRightBuilding2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 0, g: 0.004217125, b: 0.004217125, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -335,7 +335,7 @@ Prefab:
     - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
         type: 2}
       propertyPath: _abilityData.Array.data[0]._othervalues._width
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86b4b7408bc749447ba88778a8d3290e, type: 2}
@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 170739819}
   - component: {fileID: 170739818}
   - component: {fileID: 170739817}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: RightBotBuilding1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,6 +424,68 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 170739815}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!84 &238951397
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 872
+  m_Height: 545
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+--- !u!84 &293629246
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 872
+  m_Height: 545
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!114 &300377475 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114034486553360236, guid: 009703c746a6b4b478d92f684554995b,
@@ -492,7 +554,7 @@ GameObject:
   - component: {fileID: 343467162}
   - component: {fileID: 343467161}
   - component: {fileID: 343467160}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: TopLeftBuilding2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,37 +632,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4009812802009128, guid: 4aebf087b6caf38459977b7f288ab4bc,
     type: 2}
   m_PrefabInternal: {fileID: 1365458136}
---- !u!84 &405107040
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 872
-  m_Height: 545
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &411026007
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,7 +643,7 @@ GameObject:
   - component: {fileID: 411026011}
   - component: {fileID: 411026010}
   - component: {fileID: 411026009}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: RightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -696,7 +727,7 @@ GameObject:
   - component: {fileID: 430841589}
   - component: {fileID: 430841588}
   - component: {fileID: 430841587}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: TopLeftBuilding2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -953,8 +984,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 485221470}
   outlineCamera: {fileID: 673679436}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 2068241720}
-  extraRenderTexture: {fileID: 405107040}
+  renderTexture: {fileID: 293629246}
+  extraRenderTexture: {fileID: 238951397}
 --- !u!81 &485221467
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1027,7 +1058,7 @@ GameObject:
   - component: {fileID: 527093416}
   - component: {fileID: 527093415}
   - component: {fileID: 527093414}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: TopLeftBuilding3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1111,7 +1142,7 @@ GameObject:
   - component: {fileID: 671510802}
   - component: {fileID: 671510801}
   - component: {fileID: 671510800}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: TopWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1242,7 +1273,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 2068241720}
+  m_TargetTexture: {fileID: 293629246}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -1260,7 +1291,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 754677582}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TopRightBuilding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1333,6 +1364,26 @@ Prefab:
       propertyPath: manager
       value: 
       objectReference: {fileID: 485221465}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[1]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 485221459}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[1]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FlashlightAbility
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[0]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 485221459}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[0]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BasicShootAbility
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db2658fcf25cca342b93d9ad22e8a0f6, type: 2}
   m_IsPrefabParent: 0
@@ -1376,7 +1427,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 969372709}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BotRightBuildings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1410,7 +1461,7 @@ GameObject:
   - component: {fileID: 970477088}
   - component: {fileID: 970477087}
   - component: {fileID: 970477086}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: RightBotBuilding3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1494,7 +1545,7 @@ GameObject:
   - component: {fileID: 994295019}
   - component: {fileID: 994295018}
   - component: {fileID: 994295017}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: TopLeftBuilding2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1580,7 +1631,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4009812802009128, guid: 4aebf087b6caf38459977b7f288ab4bc, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.11
+      value: 2.58
       objectReference: {fileID: 0}
     - target: {fileID: 4009812802009128, guid: 4aebf087b6caf38459977b7f288ab4bc, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1687,7 +1738,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100008, guid: ca6a542169d8e474aa2c2cb47423839a, type: 2}
       propertyPath: m_Layer
-      value: 8
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: ca6a542169d8e474aa2c2cb47423839a, type: 2}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: ca6a542169d8e474aa2c2cb47423839a, type: 2}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ca6a542169d8e474aa2c2cb47423839a, type: 2}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: ca6a542169d8e474aa2c2cb47423839a, type: 2}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ca6a542169d8e474aa2c2cb47423839a, type: 2}
@@ -1722,7 +1789,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1088210877}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TopLeftBuilding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1758,7 +1825,7 @@ GameObject:
   - component: {fileID: 1168482283}
   - component: {fileID: 1168482282}
   - component: {fileID: 1168482281}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: LeftBotBuilding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1900,11 +1967,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100008, guid: ca6a542169d8e474aa2c2cb47423839a, type: 2}
       propertyPath: m_Layer
-      value: 8
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 100008, guid: ca6a542169d8e474aa2c2cb47423839a, type: 2}
       propertyPath: m_Name
       value: 'Vehicles_HotdogTruck Left '
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: ca6a542169d8e474aa2c2cb47423839a, type: 2}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: ca6a542169d8e474aa2c2cb47423839a, type: 2}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ca6a542169d8e474aa2c2cb47423839a, type: 2}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: ca6a542169d8e474aa2c2cb47423839a, type: 2}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ca6a542169d8e474aa2c2cb47423839a, type: 2}
@@ -1942,7 +2025,7 @@ GameObject:
   - component: {fileID: 1218825458}
   - component: {fileID: 1218825457}
   - component: {fileID: 1218825456}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2026,7 +2109,7 @@ GameObject:
   - component: {fileID: 1219137626}
   - component: {fileID: 1219137625}
   - component: {fileID: 1219137624}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: TopRightBuilding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2107,7 +2190,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1248226315}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BotLeftBuildings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2137,7 +2220,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1264269130}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2354,7 +2437,7 @@ GameObject:
   - component: {fileID: 1551129245}
   - component: {fileID: 1551129244}
   - component: {fileID: 1551129243}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: LeftWall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2437,7 +2520,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1558734625}
   - component: {fileID: 1558734624}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: A*
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2568,7 +2651,7 @@ GameObject:
   - component: {fileID: 1749857105}
   - component: {fileID: 1749857104}
   - component: {fileID: 1749857103}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: TopLeftBuilding1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2787,7 +2870,11 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SwitchTurn
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65191742779582478, guid: 009703c746a6b4b478d92f684554995b, type: 2}
+    - {fileID: 65309230657168096, guid: 009703c746a6b4b478d92f684554995b, type: 2}
+    - {fileID: 65441795490858802, guid: 009703c746a6b4b478d92f684554995b, type: 2}
+    - {fileID: 65095055535427588, guid: 009703c746a6b4b478d92f684554995b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 009703c746a6b4b478d92f684554995b, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1767269961 stripped
@@ -2806,7 +2893,7 @@ GameObject:
   - component: {fileID: 1769625207}
   - component: {fileID: 1769625206}
   - component: {fileID: 1769625205}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: LeftBot Small Building
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2946,7 +3033,7 @@ GameObject:
   - component: {fileID: 1848158500}
   - component: {fileID: 1848158499}
   - component: {fileID: 1848158498}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Gas Station Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3030,7 +3117,7 @@ GameObject:
   - component: {fileID: 1944171808}
   - component: {fileID: 1944171807}
   - component: {fileID: 1944171806}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: RightBotBuilding2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3114,7 +3201,7 @@ GameObject:
   - component: {fileID: 1967316110}
   - component: {fileID: 1967316109}
   - component: {fileID: 1967316108}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: LeftWall (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3187,37 +3274,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1967316106}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!84 &2068241720
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 872
-  m_Height: 545
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &2070670546
 GameObject:
   m_ObjectHideFlags: 0
@@ -3229,7 +3285,7 @@ GameObject:
   - component: {fileID: 2070670550}
   - component: {fileID: 2070670549}
   - component: {fileID: 2070670548}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: TopRightBuilding2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3313,7 +3369,7 @@ GameObject:
   - component: {fileID: 2075847522}
   - component: {fileID: 2075847521}
   - component: {fileID: 2075847520}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: LeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

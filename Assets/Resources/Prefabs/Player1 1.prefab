@@ -283,8 +283,8 @@ MonoBehaviour:
   _mitigationValue: 1
   _movementRange: 10
   hasMoved: 0
-  _maxActions: 2
-  _actionsleft: 2
+  _maxActions: 1
+  _actionsleft: 1
   _portrait: {fileID: 2800000, guid: 632ccb68b00d9034c944617507687eda, type: 3}
   _abilityData:
   - _name: Shoot

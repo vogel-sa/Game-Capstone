@@ -255,7 +255,6 @@ public class Abilities : MonoBehaviour {
 		try {
 			DisableButtons();
 			var abilData = (from abil in stats.AbilityData where abil.Name == "Fortify" select abil).FirstOrDefault();
-			//Debug.Log(abilData.Description);
 			GetComponent<PlayerMovementManager>().SetQuadsEnabled(false);
 			GetComponent<PlayerMovementManager>().enabled = false;
 			do
@@ -264,7 +263,7 @@ public class Abilities : MonoBehaviour {
 				yield return null;
 			} while (!Input.GetMouseButtonDown(0));
 
-			stats.MitigationValue = 2;
+			stats.MitigationValue = abilData.DamageAmount;
 			abilData.Currcooldown = abilData.Maxcooldown;
 			//stats.hasMoved = true;
 			stats.Actionsleft--;
@@ -389,7 +388,7 @@ public class Abilities : MonoBehaviour {
 		LineOfSight cone = null;
 		try
 		{
-			var abilData = (from abil in stats.AbilityData where abil.Name == "ShotGunBlast" select abil).FirstOrDefault();
+			var abilData = (from abil in stats.AbilityData where abil.Name == "Shotgun Blast" select abil).FirstOrDefault();
 			Debug.Log(abilData.Description);
 			GetComponent<PlayerMovementManager>().SetQuadsEnabled(false);
 			GetComponent<PlayerMovementManager>().enabled = false;

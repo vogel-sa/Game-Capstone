@@ -32,12 +32,14 @@ public class ChangeTurnText : MonoBehaviour {
 	}
 	
 	void OnEnable () {
-		FindObjectOfType<TurnManager>().OnTurnChange += switchText;
+		var tm = FindObjectOfType<TurnManager> ();
+		if (tm) tm.OnTurnChange += switchText;
 	}
 
     void OnDisable()
     {
-		FindObjectOfType<TurnManager>().OnTurnChange -= switchText;
+		var tm = FindObjectOfType<TurnManager> ();
+		if (tm) tm.OnTurnChange -= switchText;
     }
 
     public void switchText(IList<PlayerCharacterStats> players, IList<EnemyStats> enemies, TurnManager.GAMESTATE turn)

@@ -9,12 +9,14 @@ public class EndTurnButton : MonoBehaviour {
 
     private void OnEnable()
     {
-        FindObjectOfType<TurnManager>().OnTurnChange += DisableButton;
+		var tm = FindObjectOfType<TurnManager> ();
+		if (tm) tm.OnTurnChange += DisableButton;
     }
 
     private void OnDisable()
     {
-        FindObjectOfType<TurnManager>().OnTurnChange -= DisableButton;
+		var tm = FindObjectOfType<TurnManager> ();
+		if (tm) tm.OnTurnChange -= DisableButton;
     }
 
     private void Start()

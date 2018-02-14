@@ -18,7 +18,8 @@ public class PortraitChanger : MonoBehaviour {
 
 	// Use this for initialization
 	void OnEnable () {
-		FindObjectOfType<PlayerMovementManager>().OnSelect += Select;
+		var pmm = FindObjectOfType<PlayerMovementManager> ();
+		if (pmm) pmm.OnSelect += Select;
         raw = GetComponent <RawImage>();
         Name = GetComponentInChildren<Text>();
         HPbar = GetComponentInChildren<Slider>();
@@ -28,7 +29,8 @@ public class PortraitChanger : MonoBehaviour {
 
     private void OnDisable()
     {
-		FindObjectOfType<PlayerMovementManager>().OnSelect -= Select;
+		var pmm = FindObjectOfType<PlayerMovementManager> ();
+		if (pmm) pmm.OnSelect -= Select;
     }
 
     // Update is called once per frame

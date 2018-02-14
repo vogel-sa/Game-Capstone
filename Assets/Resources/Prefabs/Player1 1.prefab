@@ -283,12 +283,13 @@ MonoBehaviour:
   _mitigationValue: 1
   _movementRange: 10
   hasMoved: 0
-  _maxActions: 2
-  _actionsleft: 2
+  _maxActions: 1
+  _actionsleft: 1
   _portrait: {fileID: 2800000, guid: 632ccb68b00d9034c944617507687eda, type: 3}
   _abilityData:
   - _name: Shoot
-    _description: Fire a single shot
+    _description: Fire a single rifle shot in a targeted direction, and deal 5 damage
+      to the first target hit
     _damageAmount: 5
     _maxcooldown: 0
     _currcooldown: 0
@@ -316,7 +317,8 @@ MonoBehaviour:
       _areaofeffect: 0
       _angle: 0
   - _name: Flare
-    _description: Drop a road flare.
+    _description: Throw a flare at the targeted location.   The flare illuminates
+      the area for 3 turns, showing all enemies that pass through it
     _damageAmount: 0
     _maxcooldown: 3
     _currcooldown: 0

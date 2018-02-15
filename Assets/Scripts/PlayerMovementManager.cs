@@ -56,7 +56,7 @@ public class PlayerMovementManager : MonoBehaviour
             var quad = PrimitiveHelper.CreatePrimitive(PrimitiveType.Quad, false);
             quad.transform.parent = quadParent.transform;
             var col = quad.AddComponent<BoxCollider>();
-            col.size = new Vector3(1, .01f, 1);
+            col.size = new Vector3(1, .4f, 1);
             col.isTrigger = true;
             quad.layer = LayerMask.NameToLayer("Outline");
             var renderer = quad.GetComponent<Renderer>();
@@ -82,7 +82,6 @@ public class PlayerMovementManager : MonoBehaviour
             if (lastUpdateOutline) lastUpdateOutline.color = notHighlightedColor;
 			if (!EventSystem.current.IsPointerOverGameObject()) {
 				if (Physics.Raycast (ray, out hit, Camera.main.farClipPlane, LayerMask.GetMask ("Outline", "UI"))) {
-					//if (hit.transform.gameObject.layer == LayerMask.GetMask("Outline"))
 					{
 						Outline outline = hit.transform.GetComponent<Outline> ();
 						if (lastUpdateOutline)
@@ -135,6 +134,7 @@ public class PlayerMovementManager : MonoBehaviour
 
     private IEnumerator MoveCharacter(ABPath path)
     {
+        this.enabled = false;
         #if DEBUG
         for (int i = 0; i < path.vectorPath.Count - 1; i++)
         {
@@ -177,6 +177,7 @@ public class PlayerMovementManager : MonoBehaviour
         SelectedCharacterStats.hasMoved = true;
         GetComponent<TurnManager>().AutoEndTurnCheck();
         selected.GetComponent<SingleNodeBlocker>().BlockAtCurrentPosition();
+        this.enabled = true;
     }
 
     public void Select(PlayerCharacterStats stats)

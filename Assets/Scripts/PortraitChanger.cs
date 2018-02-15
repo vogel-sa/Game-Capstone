@@ -50,6 +50,8 @@ public class PortraitChanger : MonoBehaviour {
 			HPbar.maxValue = selectedCharacter.MaxHP;
 			HPbar.value = selectedCharacter.CurrHP;
 			HPText.text = "HP: " + selectedCharacter.CurrHP;
+			ActionText.text = "Actions Left: " + selectedCharacter.Actionsleft;
+
 		}
     }
 }

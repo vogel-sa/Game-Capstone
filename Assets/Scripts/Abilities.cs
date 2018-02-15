@@ -219,17 +219,26 @@ public class Abilities : MonoBehaviour {
 	public void CoveringFire(PlayerCharacterStats stats) { if (stats.Actionsleft > 0) StartCoroutine(_CoveringFire(stats)); }
 	private IEnumerator _CoveringFire(PlayerCharacterStats stats)
 	{
+		LineOfSight los = null;
 		try {
 			DisableButtons();
 			var abilData = (from abil in stats.AbilityData where abil.Name == "CoveringFire" select abil).FirstOrDefault();
 			//Debug.Log(abilData.Description);
 			GetComponent<PlayerMovementManager>().SetQuadsEnabled(false);
 			GetComponent<PlayerMovementManager>().enabled = false;
+			los = new GameObject().AddComponent<LineOfSight>();
+			los.gameObject.AddComponent<cakeslice.Outline>();
+			los._idle = Resources.Load<Material>("Clear");
+			los.transform.position = stats.transform.position + Vector3.up;
+			los._cullingMask = LayerMask.GetMask("Obstacle");
+			los._maxAngle = (int)abilData.OtherValues.Angle;
+			los._maxDistance = abilData.OtherValues.Range;
 			do
 			{
 				if (Input.GetKeyDown(KeyCode.Escape)) yield break;
 				yield return null;
 			} while (!Input.GetMouseButtonDown(0));
+			los.gameObject.SetActive(false);
 			stats.isCoveringFire = true;
 			abilData.Currcooldown = abilData.Maxcooldown;
 			//stats.hasMoved = true;
@@ -239,6 +248,7 @@ public class Abilities : MonoBehaviour {
 		}
 		finally {
 			GetComponent<PlayerMovementManager>().enabled = true;
+			if (los) Destroy(los.gameObject);
 			if (stats.Actionsleft == 0)
 				GetComponent<PlayerMovementManager>().Deselect ();
 			else

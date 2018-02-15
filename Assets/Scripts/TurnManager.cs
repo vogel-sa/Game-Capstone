@@ -71,6 +71,10 @@ public class TurnManager : MonoBehaviour
     /// </summary>
 	public void SwitchTurn(){
 		GetComponent<PlayerMovementManager>().Deselect ();
+		foreach (PlayerCharacterStats stats in playerList)
+		{
+			stats.GetComponentInChildren<MeshRenderer>().material.color = Color.gray;
+		}
 		StartCoroutine (_switchTurn ());
 	}
 

@@ -37,6 +37,10 @@ public class Abilities : MonoBehaviour {
         }
     }
 
+
+
+
+
     public void BasicShootAbility(PlayerCharacterStats stats) { if (stats.Actionsleft > 0) StartCoroutine(_basicShootAbility(stats)); }
     private IEnumerator _basicShootAbility(PlayerCharacterStats stats)
     {
@@ -91,6 +95,7 @@ public class Abilities : MonoBehaviour {
         }
         finally
         {
+			stats.CheckCharacterCannotMove();
             //GetComponent<PlayerMovementManager>().SetQuadsEnabled(true);
 			GetComponent<PlayerMovementManager>().enabled = true;
             //GetComponent<PlayerMovementManager>().Select(stats.transform, stats);
@@ -132,6 +137,7 @@ public class Abilities : MonoBehaviour {
         }
         finally
         {
+			stats.CheckCharacterCannotMove();
 			GetComponent<PlayerMovementManager>().SetQuadsEnabled(true);
 			GetComponent<PlayerMovementManager>().enabled = true;
 			if (stats.Actionsleft == 0)
@@ -203,6 +209,7 @@ public class Abilities : MonoBehaviour {
         }
         finally
         {
+			stats.CheckCharacterCannotMove();
             //GetComponent<PlayerMovementManager>().SetQuadsEnabled(true);
 			GetComponent<PlayerMovementManager>().enabled = true;
             if (los) Destroy(los.gameObject);

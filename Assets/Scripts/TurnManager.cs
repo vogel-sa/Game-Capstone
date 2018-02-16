@@ -109,7 +109,7 @@ public class TurnManager : MonoBehaviour
         //if all players have been 
         if (playerList.Count == 0)
         {
-            PlayerLoses();
+            StartCoroutine(PlayerLoses(2));
         }
         if (enemyList.Count == 0)
         {
@@ -129,9 +129,18 @@ public class TurnManager : MonoBehaviour
 		SceneManager.LoadScene("Main Menu");
     }
 
-    private void PlayerLoses()
+    private IEnumerator PlayerLoses(int waitval)
     {
+        var text = VictoryScreen.GetComponentInChildren<Text>();
+        text.text = "You lost! \n:(";
+        VictoryScreen.SetActive(true);
+        GetComponent<PlayerMovementManager>().enabled = false;
+        GetComponent<TurnManager>().enabled = false;
+        yield return new WaitForSeconds(waitval);
 
+        //GOTO MAIN MENU
+
+        SceneManager.LoadScene("Main Menu");
     }
 
     public void AutoEndTurnCheck()

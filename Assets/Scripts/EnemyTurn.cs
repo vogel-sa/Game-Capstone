@@ -29,7 +29,9 @@ public class EnemyTurn : MonoBehaviour
 	private IEnumerator _runTurn(IList<PlayerCharacterStats> players, IList<EnemyStats> enemies, TurnManager.GAMESTATE turn)
 	{
 		var moveSpeed = 5f;
-		foreach (var enemy in enemies)
+        var manager = FindObjectOfType<TurnManager>();
+
+        foreach (var enemy in enemies)
 		{
 			ABPath path = null;
 			PlayerCharacterStats target = null;
@@ -73,6 +75,7 @@ public class EnemyTurn : MonoBehaviour
 					    AstarData.active.GetNearest (enemy.transform.position).position) <= 1f) {
 					target.TakeDamage (enemy.Atk);
 				}
+                manager.CheckGameOver();
 			}
 		}
 		yield return null;

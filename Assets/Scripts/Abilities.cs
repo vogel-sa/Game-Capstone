@@ -137,12 +137,10 @@ public class Abilities : MonoBehaviour {
                 {
                     if (LayerMask.LayerToName(hit.collider.gameObject.layer) != "ObstacleLayer")
                     {
-
                         mousePos = new Vector3(hit.point.x, stats.transform.position.y + 1/*aimLine.transform.position.y*/, hit.point.z);
                         var origin = stats.transform.position + Vector3.up;
                         origin.y = 0;
                         distance = Vector3.Distance(origin, mousePos);
-                        Debug.Log(distance);
                     }
 
                 }

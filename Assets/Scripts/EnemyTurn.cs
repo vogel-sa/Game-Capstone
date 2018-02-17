@@ -35,12 +35,9 @@ public class EnemyTurn : MonoBehaviour
 		{
 			ABPath path = null;
 			PlayerCharacterStats target = null;
-			var blocked = from blocker in GetComponent<PathManager>().enemies 
-				select blocker.lastBlocked;
-
-			nodes = PathUtilities.BFS (AstarData.active.GetNearest (enemy.transform.position).node,
-				enemy.MovementRange,
-				walkableDefinition: (n) => !blocked.Contains (n));
+			var blocked = (from blocker in GetComponent<PathManager> ().enemies
+			               select blocker.lastBlocked).Concat (from blocker in GetComponent<PathManager> ().allies
+			                                                   select blocker.lastBlocked).ToList ();
 			
 			foreach (PlayerCharacterStats player in players)
 			{
@@ -66,7 +63,9 @@ public class EnemyTurn : MonoBehaviour
                 {
                     arr[i] = path.vectorPath[i-1];
                 }
-
+				if (blocked.Contains(AstarData.active.GetNearest( arr[arr.Length - 1]).node)) {
+					continue;
+				}
 				arr [0] = arr [1];
 				arr [arr.Length - 1] = arr [arr.Length - 2];
 				var spline = new LTSpline (arr);

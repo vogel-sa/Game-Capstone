@@ -111,20 +111,45 @@ public class Abilities : MonoBehaviour {
     public void RoadFlareAbility(PlayerCharacterStats stats) { if (stats.Actionsleft > 0) StartCoroutine(_roadFlareAbility(stats)); }
     private IEnumerator _roadFlareAbility(PlayerCharacterStats stats)
     {
+        LineOfSight los = null;
         try
         {
+            
+            var abilData = (from abil in stats.AbilityData where abil.Name == "Flare" select abil).FirstOrDefault();
             DisableButtons();
 			GetComponent<PlayerMovementManager>().SetQuadsEnabled(false);
 			GetComponent<PlayerMovementManager>().enabled = false;
-            Vector3 to = Vector3.zero;
+            Vector3 direction = Vector3.zero;
+            RaycastHit hit;
+            Vector3 mousePos = new Vector3(0,0,0);
+            los = new GameObject().AddComponent<LineOfSight>();
+            los._maxAngle = (int)abilData.OtherValues.Angle;
+            los._maxDistance = abilData.OtherValues.Range;
+            los.gameObject.AddComponent<cakeslice.Outline>();
+            los._idle = Resources.Load<Material>("Clear");
+            los.transform.position = stats.transform.position + Vector3.up;
+            los._cullingMask = LayerMask.GetMask("Obstacle");
+            float distance = 0;
             do
             {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+                {
+                    mousePos = new Vector3(hit.point.x, stats.transform.position.y + 1/*aimLine.transform.position.y*/, hit.point.z);
+                    var origin = stats.transform.position + Vector3.up;
+                    origin.y = 0;
+                    distance = Vector3.Distance(origin, mousePos);
+                    Debug.Log(distance);
+
+                }
                 if (Input.GetKeyDown(KeyCode.Escape)) yield break;
                 yield return null;
             } while (!Input.GetMouseButtonDown(0));
             Debug.Log("flare dropped");
+            //find location of mouse
             GameObject flare = Instantiate(Resources.Load<GameObject>("Prefabs/Flare"));
-            flare.transform.position = stats.transform.position + Vector3.up + stats.transform.forward * .7f;
+            mousePos.y = 1.1f;
+            flare.transform.position = mousePos;
             stats.hasMoved = true;
             stats.Actionsleft--;
 
@@ -140,7 +165,8 @@ public class Abilities : MonoBehaviour {
 			stats.CheckCharacterCannotMove();
 			GetComponent<PlayerMovementManager>().SetQuadsEnabled(true);
 			GetComponent<PlayerMovementManager>().enabled = true;
-			if (stats.Actionsleft == 0)
+            if (los) Destroy(los.gameObject);
+            if (stats.Actionsleft == 0)
 				GetComponent<PlayerMovementManager>().Deselect ();
 			else
 				GetComponent<PlayerMovementManager>().Select (stats);
@@ -199,7 +225,6 @@ public class Abilities : MonoBehaviour {
             } while (!Input.GetMouseButtonDown(0));
             los.gameObject.SetActive(false);
             flashlight.gameObject.SetActive(true);
-            // TODO: Animation of ability
 
             abilData.Currcooldown = abilData.Maxcooldown;
             stats.hasMoved = true;

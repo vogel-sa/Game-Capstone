@@ -135,11 +135,15 @@ public class Abilities : MonoBehaviour {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
                 {
-                    mousePos = new Vector3(hit.point.x, stats.transform.position.y + 1/*aimLine.transform.position.y*/, hit.point.z);
-                    var origin = stats.transform.position + Vector3.up;
-                    origin.y = 0;
-                    distance = Vector3.Distance(origin, mousePos);
-                    Debug.Log(distance);
+                    if (LayerMask.LayerToName(hit.collider.gameObject.layer) != "ObstacleLayer")
+                    {
+
+                        mousePos = new Vector3(hit.point.x, stats.transform.position.y + 1/*aimLine.transform.position.y*/, hit.point.z);
+                        var origin = stats.transform.position + Vector3.up;
+                        origin.y = 0;
+                        distance = Vector3.Distance(origin, mousePos);
+                        Debug.Log(distance);
+                    }
 
                 }
                 if (Input.GetKeyDown(KeyCode.Escape)) yield break;

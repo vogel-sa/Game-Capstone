@@ -100,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1109138234862372}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.1693304, y: 0.3519721, z: -7.3094115}
+  m_LocalPosition: {x: -7.3916235, y: 0.5, z: -14.381819}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4223041851568218}
@@ -312,7 +312,7 @@ MonoBehaviour:
     _abilitySprite: {fileID: 21300000, guid: 281954cd1af076349a14f26155eeec70, type: 3}
     _othervalues:
       _range: 10
-      _width: 0.05
+      _width: 0.1
       _duration: 0
       _areaofeffect: 0
       _angle: 0
@@ -340,11 +340,11 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
     _abilitySprite: {fileID: 21300000, guid: cd1d32c9aba1a8545bf016f7ef6d9d04, type: 3}
     _othervalues:
-      _range: 0
+      _range: 7
       _width: 0
-      _duration: 0
-      _areaofeffect: 0
-      _angle: 0
+      _duration: 3
+      _areaofeffect: 3
+      _angle: 360
   - _name: 
     _description: 
     _damageAmount: 0

@@ -30,6 +30,7 @@ public class EnemyTurn : MonoBehaviour
 	{
 		var moveSpeed = 5f;
 		List<GraphNode> nodes = null;
+        var manager = FindObjectOfType<TurnManager>();
 		foreach (var enemy in enemies)
 		{
 			ABPath path = null;
@@ -83,6 +84,7 @@ public class EnemyTurn : MonoBehaviour
 					    AstarData.active.GetNearest (enemy.transform.position).position) <= 1f) {
 					target.TakeDamage (enemy.Atk);
 				}
+                manager.CheckGameOver();
 			}
 		}
 		yield return null;

@@ -50,7 +50,7 @@ public class EnemyTurn : MonoBehaviour
 			if (path != null && !path.error)
 			{
 				bool finished = false;
-				var arr = new Vector3[path.vectorPath.Count + 2];//new Vector3[Mathf.Min(enemy.MovementRange + 2)];
+				var arr = new Vector3[Mathf.Min(path.vectorPath.Count + 2, enemy.MovementRange + 2)];//new Vector3[Mathf.Min(enemy.MovementRange + 2)];
                 for (int i = 1; i < arr.Length - 1; i++)
                 {
                     arr[i] = path.vectorPath[i-1];

@@ -176,7 +176,7 @@ public class PlayerMovementManager : MonoBehaviour
         // TODO: Fix the heirarchy for stats.
 
         SelectedCharacterStats.hasMoved = true;
-		SelectedCharacterStats.CheckCharacterCannotMove ();
+		SelectedCharacterStats.CheckCharacterCannotMove();
 		GetComponent<TurnManager>().AutoEndTurnCheck();
         selected.GetComponent<SingleNodeBlocker>().BlockAtCurrentPosition();
         this.enabled = true;

@@ -55,7 +55,7 @@ public class TurnManager : MonoBehaviour
 
 		GetComponent<PlayerMovementManager>().enabled = true;
 
-        foreach (var players in playerList)
+        foreach (var player in playerList)
         {
             players.hasMoved = false;
             players.gameObject.GetComponentInChildren<MeshRenderer>().material.color = Color.white;

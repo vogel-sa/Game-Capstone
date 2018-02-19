@@ -87,7 +87,7 @@ public class EnemyTurn : MonoBehaviour
                 manager.CheckGameOver();
 			}
 		}
-		yield return null;
+		yield return new WaitForSeconds(1f);
         GetComponent<TurnManager>().SwitchTurn ();
 	}
 	

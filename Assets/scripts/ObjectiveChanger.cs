@@ -15,12 +15,11 @@ public class ObjectiveChanger : MonoBehaviour {
 	void OnEnable () {
 		ObjectiveText = ObjectiveTextOBJ.GetComponent<Text> ();
 		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
-		//ObjectiveText.text = "- The Objective of this level is to defeat all enemies on the map \n - Remaining Enemies:" + enemies.Length;
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		ObjectiveText.text = "- The Objective of this level is to defeat all enemies on the map \n - Remaining Enemies:" + enemies.Length;
+		ObjectiveText.text = "- The Objective of this level is to defeat all enemies on the map.\n \n - Enemies Remaining:  " + enemies.Length;
 	}
 }

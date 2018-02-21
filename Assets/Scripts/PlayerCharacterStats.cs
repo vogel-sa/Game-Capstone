@@ -136,21 +136,8 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
             _portrait = value;
         }
     }
-    #endregion
 
-    #region
-    [SerializeField]
-    AbilityData[] _abilityData;
-    public AbilityData[] AbilityData
-    {
-        get
-        {
-            return _abilityData;
-        }
-    }
-    #endregion
 
-	#region
 	[SerializeField]
 	bool _isCoveringFire;
 	public bool isCoveringFire
@@ -165,7 +152,39 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
 			_isCoveringFire = value;
 		}
 	}
-	#endregion
+
+
+	[SerializeField]
+	bool _isFortifying;
+	public bool isFortifying
+	{
+		get
+		{
+			return _isFortifying;
+		}
+
+		set
+		{
+			_isFortifying = value;
+		}
+	}
+
+
+    #endregion
+
+    #region
+    [SerializeField]
+    AbilityData[] _abilityData;
+    public AbilityData[] AbilityData
+    {
+        get
+        {
+            return _abilityData;
+        }
+    }
+    #endregion
+
+
 
 
 	public void startCoverFire() {
@@ -205,11 +224,16 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
             foreach (var ability in AbilityData)
             {
                 ability.Currcooldown = Mathf.Max(ability.Currcooldown - 1, 0);
-            }
+				if (ability.Name == "Fortify" && isFortifying) {
+					MitigationValue -= ability.DamageAmount;
+				}
+
+			}
             hasMoved = false;
             Actionsleft = _maxActions;
 			isCoveringFire = false;
-			MitigationValue = 0;
+			isFortifying = false;
+			//MitigationValue = 1;
         }
     }
 }

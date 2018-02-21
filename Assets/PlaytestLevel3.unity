@@ -667,6 +667,8 @@ MonoBehaviour:
   _maxActions: 1
   _actionsleft: 1
   _portrait: {fileID: 2800000, guid: 713271f43d2ac5040af931b5ebc09ddd, type: 3}
+  _isCoveringFire: 0
+  _isFortifying: 0
   _abilityData:
   - _name: Shoot
     _description: Shoot a single shot in a straight line.
@@ -754,7 +756,7 @@ MonoBehaviour:
       _angle: 360
   - _name: Fortify
     _description: 
-    _damageAmount: 0
+    _damageAmount: 2
     _maxcooldown: 2
     _currcooldown: 0
     _ability:
@@ -777,10 +779,9 @@ MonoBehaviour:
     _othervalues:
       _range: 0
       _width: 0
-      _duration: 0
+      _duration: 2
       _areaofeffect: 0
       _angle: 0
-  _isCoveringFire: 0
 --- !u!114 &186012301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3735,60 +3736,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0}
---- !u!84 &968965249
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 1068
-  m_Height: 527
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
---- !u!84 &970462739
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 1068
-  m_Height: 527
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!4 &1000289284 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4970498438732416, guid: 48a1f18551c6a144da89672cfc9ac4d7,
@@ -6546,7 +6493,7 @@ Prefab:
         type: 2}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 968965249}
+      objectReference: {fileID: 1965171904}
     - target: {fileID: 114413685643047740, guid: 189015d4d38a2924ca143f2dba47306c,
         type: 2}
       propertyPath: VictoryScreen
@@ -6590,6 +6537,33 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 189015d4d38a2924ca143f2dba47306c, type: 2}
   m_IsPrefabParent: 0
+--- !u!84 &1546740282
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 1068
+  m_Height: 527
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1558755096
 GameObject:
   m_ObjectHideFlags: 0
@@ -8342,6 +8316,33 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!84 &1965171904
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 1068
+  m_Height: 527
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1975450725
 GameObject:
   m_ObjectHideFlags: 0
@@ -9163,6 +9164,8 @@ MonoBehaviour:
   _maxActions: 2
   _actionsleft: 2
   _portrait: {fileID: 2800000, guid: 632ccb68b00d9034c944617507687eda, type: 3}
+  _isCoveringFire: 0
+  _isFortifying: 0
   _abilityData:
   - _name: Shoot
     _description: Fire a single shot
@@ -9278,7 +9281,6 @@ MonoBehaviour:
       _duration: 0
       _areaofeffect: 0
       _angle: 360
-  _isCoveringFire: 0
 --- !u!114 &2093872209
 MonoBehaviour:
   m_ObjectHideFlags: 0

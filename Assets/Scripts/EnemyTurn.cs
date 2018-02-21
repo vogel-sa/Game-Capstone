@@ -72,6 +72,7 @@ public class EnemyTurn : MonoBehaviour
 				if (Vector3.Distance (AstarData.active.GetNearest (target.transform.position).position,
 					    AstarData.active.GetNearest (enemy.transform.position).position) <= 1f) {
 					target.TakeDamage (enemy.Atk);
+					Debug.Log (target.name);
 				}
 			}
 			RaycastHit hit;

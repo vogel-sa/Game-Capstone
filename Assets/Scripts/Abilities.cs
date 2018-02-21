@@ -245,6 +245,7 @@ public class Abilities : MonoBehaviour {
 			stats.Actionsleft--;
 			GetComponent<TurnManager>().AutoEndTurnCheck();
 			yield return new WaitForSeconds(.5f);
+			//abiltiy effects in enemyturn
 		}
 		finally {
 			GetComponent<PlayerMovementManager>().enabled = true;
@@ -272,13 +273,14 @@ public class Abilities : MonoBehaviour {
 				if (Input.GetKeyDown(KeyCode.Escape)) yield break;
 				yield return null;
 			} while (!Input.GetMouseButtonDown(0));
-
-			stats.MitigationValue = abilData.DamageAmount;
+			stats.isFortifying = true;
+			stats.MitigationValue += abilData.DamageAmount;
 			abilData.Currcooldown = abilData.Maxcooldown;
 			//stats.hasMoved = true;
 			stats.Actionsleft--;
 			GetComponent<TurnManager>().AutoEndTurnCheck();
 			yield return new WaitForSeconds(.5f);
+			//Wear off happens in player on turn start
 		}
 		finally {
 			GetComponent<PlayerMovementManager>().enabled = true;

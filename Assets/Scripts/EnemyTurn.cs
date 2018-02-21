@@ -92,7 +92,7 @@ public class EnemyTurn : MonoBehaviour
 				//Debug.Log (player.name);
 				if (player.isCoveringFire) {
 					var abilData = (from abil in player.AbilityData where abil.Name == "CoveringFire" select abil).FirstOrDefault();
-					if (Vector3.Distance (enemy.transform.position, player.transform.position) <= abilData.OtherValues.Range) {
+					if (Vector3.Distance (enemy.transform.position, player.transform.position) <= abilData.OtherValues.Range && enemy.GetComponentInChildren<MeshRenderer>().enabled) {
 						if (Physics.Raycast(enemy.transform.position, (player.transform.position - enemy.transform.position), out hit, abilData.OtherValues.Range) && hit.transform.parent.tag == "Player") {
 							//Debug.Log (player.name);
 							//Debug.Log (hit.transform.parent.name);

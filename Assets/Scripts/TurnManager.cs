@@ -55,9 +55,10 @@ public class TurnManager : MonoBehaviour
 
 		GetComponent<PlayerMovementManager>().enabled = true;
 
-        foreach (var players in playerList)
+        foreach (var player in playerList)
         {
-            players.hasMoved = false;
+            player.hasMoved = false;
+            player.gameObject.GetComponentInChildren<MeshRenderer>().material.color = Color.white;
         }
 	}
 
@@ -71,6 +72,10 @@ public class TurnManager : MonoBehaviour
     /// </summary>
 	public void SwitchTurn(){
 		GetComponent<PlayerMovementManager>().Deselect ();
+		foreach (PlayerCharacterStats stats in playerList)
+		{
+			stats.GetComponentInChildren<MeshRenderer>().material.color = Color.gray;
+		}
 		StartCoroutine (_switchTurn ());
 	}
 
@@ -93,7 +98,7 @@ public class TurnManager : MonoBehaviour
 			}
 
 		}
-		yield return new WaitForSeconds (.5f);
+		yield return new WaitForSeconds (.2f);
 		OnTurnChange(playerList, enemyList, currentTurn);
 	}
 
@@ -105,7 +110,7 @@ public class TurnManager : MonoBehaviour
         //if all players have been 
         if (playerList.Count == 0)
         {
-            PlayerLoses();
+            StartCoroutine(PlayerLoses(2));
         }
         if (enemyList.Count == 0)
         {
@@ -125,9 +130,18 @@ public class TurnManager : MonoBehaviour
 		SceneManager.LoadScene("Main Menu");
     }
 
-    private void PlayerLoses()
+    private IEnumerator PlayerLoses(int waitval)
     {
+        var text = VictoryScreen.GetComponentInChildren<Text>();
+        text.text = "You lost! \n:(";
+        VictoryScreen.SetActive(true);
+        GetComponent<PlayerMovementManager>().enabled = false;
+        GetComponent<TurnManager>().enabled = false;
+        yield return new WaitForSeconds(waitval);
 
+        //GOTO MAIN MENU
+
+        SceneManager.LoadScene("Main Menu");
     }
 
     public void AutoEndTurnCheck()

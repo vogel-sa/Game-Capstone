@@ -18,7 +18,7 @@ public class PathManager : MonoBehaviour {
     public BlockManager.TraversalProvider enemyTraversalProvider { get; private set; }
 
     // Use this for initialization
-    void Awake () {
+    void Start () {
         var bm = GetComponent<BlockManager>();
         blockManager = bm ? bm : gameObject.AddComponent<BlockManager>();
         enemies = new List<SingleNodeBlocker>();

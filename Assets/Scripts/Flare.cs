@@ -34,9 +34,13 @@ public class Flare : MonoBehaviour {
 
 	void Countdown(IList<PlayerCharacterStats> stats, IList<EnemyStats> enemies, TurnManager.GAMESTATE turn)
     {
-        if ((--turns) == 0)
+        if (turn == TurnManager.GAMESTATE.PLAYERTURN)
         {
-            Destroy(gameObject);
+            Debug.Log("Reduced");
+            if ((--turns) == 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

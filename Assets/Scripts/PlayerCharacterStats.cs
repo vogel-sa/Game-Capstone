@@ -195,8 +195,30 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
             var dmgtaken = damage - MitigationValue;
 
             CurrHP = Math.Max(CurrHP - dmgtaken, 0);
+
+            if (IsDead())
+            {
+                DeadCleanup();
+            }
         }
     }
+
+
+    public void DeadCleanup() {
+        var manager = FindObjectOfType<TurnManager>();
+        manager.playerList.Remove(this);
+
+        Destroy(this.gameObject);
+    }
+
+	public void CheckCharacterCannotMove()
+	{
+		if (Actionsleft == 0 && hasMoved)
+		{
+			// Turn character greyscale. Undo this at the start of the player turn.
+			GetComponentInChildren<MeshRenderer>().material.color = Color.gray;
+		}
+	}
 
     private void OnTurnStart(IList<PlayerCharacterStats> players, IList<EnemyStats> enemies, TurnManager.GAMESTATE turn)
     {

@@ -29,10 +29,16 @@ public class EnemyTurn : MonoBehaviour
 	private IEnumerator _runTurn(IList<PlayerCharacterStats> players, IList<EnemyStats> enemies, TurnManager.GAMESTATE turn)
 	{
 		var moveSpeed = 5f;
+		List<GraphNode> nodes = null;
+        var manager = FindObjectOfType<TurnManager>();
 		foreach (var enemy in enemies)
 		{
 			ABPath path = null;
 			PlayerCharacterStats target = null;
+			var blocked = (from blocker in GetComponent<PathManager> ().enemies
+			               select blocker.lastBlocked).Concat (from blocker in GetComponent<PathManager> ().allies
+			                                                   select blocker.lastBlocked).ToList ();
+			
 			foreach (PlayerCharacterStats player in players)
 			{
                 if (Vector3.Distance(player.transform.position, enemy.transform.position) > enemy.DetectionRadius) break;
@@ -43,6 +49,8 @@ public class EnemyTurn : MonoBehaviour
 				if (neighbor == null || !neighbor.Walkable) neighbor = AstarData.active.GetNearest(player.transform.position + Vector3.forward).node;
 				if (neighbor == null || !neighbor.Walkable) neighbor = AstarData.active.GetNearest(player.transform.position + Vector3.back).node;
 
+
+
 				var newPath = GetComponent<PathManager>().getPath (enemy.transform.position, (Vector3)neighbor.position, PathManager.CharacterFaction.ENEMY);
 				if (newPath != null && (path == null || path.vectorPath.Count > newPath.vectorPath.Count)) path = newPath;
 				target = player;
@@ -50,12 +58,14 @@ public class EnemyTurn : MonoBehaviour
 			if (path != null && !path.error)
 			{
 				bool finished = false;
-				var arr = new Vector3[path.vectorPath.Count + 2];//new Vector3[Mathf.Min(enemy.MovementRange + 2)];
+				var arr = new Vector3[Mathf.Min(path.vectorPath.Count + 2, enemy.MovementRange + 2)];
                 for (int i = 1; i < arr.Length - 1; i++)
                 {
                     arr[i] = path.vectorPath[i-1];
                 }
-
+				if (blocked.Contains(AstarData.active.GetNearest( arr[arr.Length - 1]).node)) {
+					continue;
+				}
 				arr [0] = arr [1];
 				arr [arr.Length - 1] = arr [arr.Length - 2];
 				var spline = new LTSpline (arr);
@@ -68,11 +78,13 @@ public class EnemyTurn : MonoBehaviour
                         setOrientToPath(true);
                     yield return new WaitUntil(() => finished);
                 }
+				enemy.GetComponent<SingleNodeBlocker> ().BlockAtCurrentPosition ();
 				yield return new WaitForSeconds (.2f);
 				if (Vector3.Distance (AstarData.active.GetNearest (target.transform.position).position,
 					    AstarData.active.GetNearest (enemy.transform.position).position) <= 1f) {
 					target.TakeDamage (enemy.Atk);
 				}
+                manager.CheckGameOver();
 			}
 			RaycastHit hit;
 			foreach (PlayerCharacterStats player in players) {
@@ -92,7 +104,7 @@ public class EnemyTurn : MonoBehaviour
 				}
 			}
 		}
-		yield return null;
+		yield return new WaitForSeconds(1f);
         GetComponent<TurnManager>().SwitchTurn ();
 	}
 	

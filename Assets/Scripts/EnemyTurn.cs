@@ -87,23 +87,7 @@ public class EnemyTurn : MonoBehaviour
 				}
                 manager.CheckGameOver();
 			}
-			RaycastHit hit;
-			foreach (PlayerCharacterStats player in players) {
-				//Debug.Log (player.name);
-				if (player.isCoveringFire) {
-					var abilData = (from abil in player.AbilityData where abil.Name == "CoveringFire" select abil).FirstOrDefault();
-					if (Vector3.Distance (enemy.transform.position, player.transform.position) <= abilData.OtherValues.Range && enemy.GetComponentInChildren<MeshRenderer>().enabled) {
-						if (Physics.Raycast(enemy.transform.position, (player.transform.position - enemy.transform.position), out hit, abilData.OtherValues.Range) && hit.transform.parent.tag == "Player") {
-							//Debug.Log (player.name);
-							//Debug.Log (hit.transform.parent.name);
-							enemy.TakeDamage(abilData.DamageAmount);
-							player.isCoveringFire = false;
-						}
-
-					}
-					
-				}
-			}
+			checkCoveringFire(enemy, players);
 		}
 		yield return new WaitForSeconds(1f);
         GetComponent<TurnManager>().SwitchTurn ();
@@ -115,4 +99,25 @@ public class EnemyTurn : MonoBehaviour
 		Debug.Log (ret);
 		return ret;
 	}
+
+	private void checkCoveringFire(EnemyStats enemy, IList<PlayerCharacterStats> players) {
+		RaycastHit hit;
+		foreach (PlayerCharacterStats player in players) {
+			//Debug.Log (player.name);
+			if (player.isCoveringFire) {
+				var abilData = (from abil in player.AbilityData where abil.Name == "CoveringFire" select abil).FirstOrDefault();
+				if (Vector3.Distance (enemy.transform.position, player.transform.position) <= abilData.OtherValues.Range && enemy.GetComponentInChildren<MeshRenderer>().enabled) {
+					if (Physics.Raycast(enemy.transform.position, (player.transform.position - enemy.transform.position), out hit, abilData.OtherValues.Range) && hit.transform.parent.tag == "Player") {
+						//Debug.Log (player.name);
+						//Debug.Log (hit.transform.parent.name);
+						enemy.TakeDamage(abilData.DamageAmount);
+						player.isCoveringFire = false;
+					}
+
+				}
+
+			}
+		}
+	}
+
 }

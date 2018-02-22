@@ -227,5 +227,35 @@ public class OtherAbilityValues
         }
     }
 
+	[SerializeField]
+	private int _initialRange;
+	public int InitialRange
+	{
+		get
+		{
+			return _initialRange;
+		}
+
+		set
+		{
+			_initialRange = value;
+		}
+	}
+
+	[SerializeField]
+	private int _fallOffDamage;
+	public int FallOffDamage
+	{
+		get
+		{
+			return _fallOffDamage;
+		}
+
+		set
+		{
+			_fallOffDamage = value;
+		}
+	}
+
 
 }

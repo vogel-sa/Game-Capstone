@@ -432,6 +432,7 @@ public class Abilities : MonoBehaviour {
 	private IEnumerator _shotgunBlast(PlayerCharacterStats stats)
 	{
 		LineOfSight cone = null;
+		LineOfSight coneInner = null;
 		try
 		{
 			var abilData = (from abil in stats.AbilityData where abil.Name == "Shotgun Blast" select abil).FirstOrDefault();
@@ -449,6 +450,14 @@ public class Abilities : MonoBehaviour {
 			cone._cullingMask = LayerMask.GetMask("Obstacle");
 			cone._maxAngle = (int)abilData.OtherValues.Angle;
 			cone._maxDistance = abilData.OtherValues.Range;
+			coneInner = new GameObject().AddComponent<LineOfSight>();
+			coneInner.gameObject.AddComponent<cakeslice.Outline>();
+			coneInner._idle = Resources.Load<Material>("Clear");
+			coneInner.transform.position = stats.transform.position + Vector3.up;
+			coneInner._cullingMask = LayerMask.GetMask("Obstacle");
+			coneInner._maxAngle = (int)abilData.OtherValues.Angle;
+			coneInner._maxDistance = abilData.OtherValues.InitialRange;
+
 			do
 			{
 				if (Input.GetKeyDown(KeyCode.Escape)) yield break;
@@ -459,13 +468,16 @@ public class Abilities : MonoBehaviour {
 					var origin = stats.transform.position + Vector3.up;
 					direction = origin - mousePos;
 					var directedAt = new Vector3((origin - direction.normalized * range).x, stats.transform.position.y/* + 1*/, (origin - direction.normalized * range).z);
-					directedAt = new Vector3(directedAt.x, cone.transform.position.y, directedAt.z);
+					directedAt = new Vector3(directedAt.x, coneInner.transform.position.y, directedAt.z);
 					stats.transform.LookAt(directedAt);
+					coneInner.transform.LookAt(directedAt);
 					cone.transform.LookAt(directedAt);
+
 				}
 				yield return null;
 			} while (!Input.GetMouseButtonDown(0));
 			cone.gameObject.SetActive(false);
+			coneInner.gameObject.SetActive(false);
 			EnemyStats hitStats;
 			Quaternion startingAngle = Quaternion.AngleAxis(-(cone._maxAngle/2), Vector3.up);
 			int increment = 8;
@@ -484,11 +496,11 @@ public class Abilities : MonoBehaviour {
 							enemies.Add(hitStats);
 						}
 						if (!hitStats.hitByAbility()) {
-							if (hit.distance <= 2) {
+							if (hit.distance <= abilData.OtherValues.InitialRange) {
 								hitStats.TakeDamage(abilData.DamageAmount);
 							}
 							else {
-								hitStats.TakeDamage(abilData.DamageAmount - 2);
+								hitStats.TakeDamage(abilData.DamageAmount - abilData.OtherValues.FallOffDamage);
 							}
 							hitStats.swapFlag();
 						}
@@ -512,6 +524,7 @@ public class Abilities : MonoBehaviour {
 			GetComponent<PlayerMovementManager>().enabled = true;
 			//PlayerMovementManager.Instance.Select(stats.transform, stats);
 			if (cone) Destroy(cone.gameObject);
+			if (coneInner) Destroy (coneInner.gameObject);
 			if (stats.Actionsleft == 0)
 				GetComponent<PlayerMovementManager>().Deselect ();
 			else

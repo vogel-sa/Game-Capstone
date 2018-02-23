@@ -136,6 +136,40 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
             _portrait = value;
         }
     }
+
+
+	[SerializeField]
+	bool _isCoveringFire;
+	public bool isCoveringFire
+	{
+		get
+		{
+			return _isCoveringFire;
+		}
+
+		set
+		{
+			_isCoveringFire = value;
+		}
+	}
+
+
+	[SerializeField]
+	bool _isFortifying;
+	public bool isFortifying
+	{
+		get
+		{
+			return _isFortifying;
+		}
+
+		set
+		{
+			_isFortifying = value;
+		}
+	}
+
+
     #endregion
 
     #region
@@ -150,9 +184,17 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
     }
     #endregion
 
+
+
+
+	public void startCoverFire() {
+		isCoveringFire = true;
+	}
+
     void Awake()
     {
         //CurrHP = MaxHP;
+		isCoveringFire = false;
     }
 
     void OnEnable()
@@ -204,9 +246,16 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
             foreach (var ability in AbilityData)
             {
                 ability.Currcooldown = Mathf.Max(ability.Currcooldown - 1, 0);
-            }
+				if (ability.Name == "Fortify" && isFortifying) {
+					MitigationValue -= ability.DamageAmount;
+				}
+
+			}
             hasMoved = false;
             Actionsleft = _maxActions;
+			isCoveringFire = false;
+			isFortifying = false;
+			//MitigationValue = 1;
         }
     }
 }

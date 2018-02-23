@@ -1022,9 +1022,9 @@ GameObject:
   - component: {fileID: 485221463}
   - component: {fileID: 485221462}
   - component: {fileID: 485221461}
-  - component: {fileID: 485221460}
   - component: {fileID: 485221459}
   - component: {fileID: 485221458}
+  - component: {fileID: 485221460}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1081,8 +1081,7 @@ MonoBehaviour:
 --- !u!114 &485221460
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114302410827168268, guid: dec6c4e7d76f6af498b0efea8e6e4000,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 485221456}
   m_Enabled: 1
@@ -1541,7 +1540,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 1621320494}
+  m_TargetTexture: {fileID: 1621320494
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -1716,6 +1715,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4231778708646304, guid: db2658fcf25cca342b93d9ad22e8a0f6, type: 2}
       propertyPath: m_LocalPosition.x
       value: -3.026694
@@ -1777,13 +1781,80 @@ Prefab:
     - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
         type: 2}
       propertyPath: _abilityData.Array.data[0]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BasicShootAbility
+      value: shotgunBlast
       objectReference: {fileID: 0}
     - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
         type: 2}
       propertyPath: _abilityData.Array.data[0]._name
-      value: Shoot
+      value: Shotgun Blast
       objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[0]._othervalues._width
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[0]._othervalues._angle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._name
+      value: Fortify
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._description
+      value: Hunker down, reducing the amount of damage this character takes this
+        turn by 2.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._damageAmount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 485221459}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Fortify
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: PlayerCharacterStats, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._maxcooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 934668519}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._abilitySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bbf25ac6e1fc53c4e9a13b9333c28727,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db2658fcf25cca342b93d9ad22e8a0f6, type: 2}
   m_IsPrefabParent: 0
@@ -2458,6 +2529,37 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1168482279}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!84 &1194713616
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 1087
+  m_Height: 617
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1001 &1203740066
 Prefab:
   m_ObjectHideFlags: 0

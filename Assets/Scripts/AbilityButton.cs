@@ -8,12 +8,14 @@ public class AbilityButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
 	public AbilityData ability;
     private Button button;
+	private Text cooldown;
 	// Use this for initialization
 	AbilityDescriptionPage page;
 	bool stop = false;
 	void Start () {
 		page = GameObject.Find ("AbilityDescription").GetComponent<AbilityDescriptionPage> ();
         button = GetComponent<Button>();
+		cooldown = GetComponentInChildren<Text>();
         if (!button) button = gameObject.AddComponent<Button>();
         HideMe();
 	}
@@ -38,13 +40,16 @@ public class AbilityButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     void Update()
     {
+		
         if (ability.Currcooldown == 0)
         {
             button.interactable = true;
+			cooldown.text = "";
         }
         else
         {
             button.interactable = false;
+			cooldown.text = ability.Currcooldown.ToString();
         }
     }
 
@@ -63,10 +68,14 @@ public class AbilityButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private void HideMe()
     {
         GetComponent<Image>().enabled = false;
+		GetComponentInChildren<Text>().enabled = false;
+
     }
 
     private void ShowMe()
     {
         GetComponent<Image>().enabled = true;
+		GetComponentInChildren<Text>().enabled = true;
+	
     }
 }

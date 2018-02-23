@@ -275,6 +275,84 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1767269960}
   m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!1 &126756851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1032433528416114, guid: 009703c746a6b4b478d92f684554995b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 126756852}
+  - component: {fileID: 126756854}
+  - component: {fileID: 126756853}
+  m_Layer: 5
+  m_Name: ActionText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &126756852
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 224022774876205372, guid: 009703c746a6b4b478d92f684554995b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 126756851}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.9999999}
+  m_Children: []
+  m_Father: {fileID: 1767269962}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -0.000022888184, y: -33.1}
+  m_SizeDelta: {x: 100, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &126756853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114087117309392360, guid: 009703c746a6b4b478d92f684554995b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 126756851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Actions Left:'
+--- !u!222 &126756854
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 222602853082360942, guid: 009703c746a6b4b478d92f684554995b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 126756851}
 --- !u!1001 &127154210
 Prefab:
   m_ObjectHideFlags: 0
@@ -282,6 +360,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4571046729023890, guid: 86b4b7408bc749447ba88778a8d3290e, type: 2}
       propertyPath: m_LocalPosition.x
       value: -7.3916235
@@ -329,9 +417,148 @@ Prefab:
       propertyPath: manager
       value: 
       objectReference: {fileID: 485221460}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._name
+      value: CoveringFire
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._damageAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._maxcooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._othervalues._range
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._othervalues._angle
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._description
+      value: Set up a reaction shot.  Take a shot dealing X damage to the first enemy
+        within range and sight on the enemy turn
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._name
+      value: RapidFire
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._description
+      value: Let loose a barage of bullets, hitting all enemies in a cone for X damage
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._damageAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._maxcooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._othervalues._range
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._othervalues._angle
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 485221459}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RapidFire
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: PlayerCharacterStats, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 127154211}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 485221459}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CoveringFire
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: PlayerCharacterStats, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 127154211}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._abilitySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3b0f966d3f188e84f8378e0ff4d967f7,
+        type: 3}
+    - target: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._abilitySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5a588b96710622f40b453035d6c6242a,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86b4b7408bc749447ba88778a8d3290e, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &127154211 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114899361186994330, guid: 86b4b7408bc749447ba88778a8d3290e,
+    type: 2}
+  m_PrefabInternal: {fileID: 127154210}
+  m_Script: {fileID: 11500000, guid: 1f1181aceedd279439c37654b88ffa44, type: 3}
 --- !u!1 &170739815
 GameObject:
   m_ObjectHideFlags: 0
@@ -976,8 +1203,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 485221470}
   outlineCamera: {fileID: 673679436}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 1598673458}
-  extraRenderTexture: {fileID: 1378060259}
+  renderTexture: {fileID: 1558498285}
+  extraRenderTexture: {fileID: 2071749958}
 --- !u!81 &485221467
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1261,7 +1488,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 1598673458}
+  m_TargetTexture: {fileID: 1558498285}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -1381,6 +1608,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4231778708646304, guid: db2658fcf25cca342b93d9ad22e8a0f6, type: 2}
       propertyPath: m_LocalPosition.x
       value: -3.026694
@@ -1442,16 +1679,175 @@ Prefab:
     - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
         type: 2}
       propertyPath: _abilityData.Array.data[0]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BasicShootAbility
+      value: shotgunBlast
       objectReference: {fileID: 0}
     - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
         type: 2}
       propertyPath: _abilityData.Array.data[0]._name
-      value: Shoot
+      value: Shotgun Blast
       objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._name
+      value: CoveringFire
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._damageAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._maxcooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._othervalues._range
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._othervalues._angle
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._description
+      value: Set up a reaction shot.  Take a shot dealing X damage to the first enemy
+        within range and sight on the enemy turn
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 485221459}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CoveringFire
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: PlayerCharacterStats, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 881620263}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._name
+      value: Fortify
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._damageAmount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._maxcooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._othervalues._duration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 485221459}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Fortify
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: PlayerCharacterStats, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 881620263}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._description
+      value: Hunker down, reducing the amount of damage this character takes this
+        turn by X.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[0]._othervalues._angle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[0]._othervalues._width
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[0]._othervalues._areaofeffect
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[0]._othervalues._initalRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[0]._othervalues._fallOffDamage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[0]._othervalues._initialRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._abilitySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5a588b96710622f40b453035d6c6242a,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db2658fcf25cca342b93d9ad22e8a0f6, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &881620263 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
+    type: 2}
+  m_PrefabInternal: {fileID: 881620262}
+  m_Script: {fileID: 11500000, guid: 1f1181aceedd279439c37654b88ffa44, type: 3}
 --- !u!1 &930066759
 GameObject:
   m_ObjectHideFlags: 0
@@ -2806,33 +3202,6 @@ Prefab:
     - {fileID: 114593994967402976, guid: 4aebf087b6caf38459977b7f288ab4bc, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4aebf087b6caf38459977b7f288ab4bc, type: 2}
   m_IsPrefabParent: 0
---- !u!84 &1378060259
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 1068
-  m_Height: 527
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1431976065
 GameObject:
   m_ObjectHideFlags: 0
@@ -3034,6 +3403,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1551129241}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!84 &1558498285
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 1020
+  m_Height: 527
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1558734623
 GameObject:
   m_ObjectHideFlags: 0
@@ -3153,33 +3549,6 @@ Transform:
   m_Father: {fileID: 1264269130}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &1598673458
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 1068
-  m_Height: 527
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!4 &1631904910 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4009812802009128, guid: 4aebf087b6caf38459977b7f288ab4bc,
@@ -3453,12 +3822,22 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114402432564385356, guid: 009703c746a6b4b478d92f684554995b,
+        type: 2}
+      propertyPath: ActionTextOBJ
+      value: 
+      objectReference: {fileID: 126756851}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 009703c746a6b4b478d92f684554995b, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1767269961 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1211089335537522, guid: 009703c746a6b4b478d92f684554995b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1767269960}
+--- !u!224 &1767269962 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 224050566315784670, guid: 009703c746a6b4b478d92f684554995b,
     type: 2}
   m_PrefabInternal: {fileID: 1767269960}
 --- !u!1 &1769625203
@@ -4089,6 +4468,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2070670546}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!84 &2071749958
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 1020
+  m_Height: 527
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &2075847518
 GameObject:
   m_ObjectHideFlags: 0

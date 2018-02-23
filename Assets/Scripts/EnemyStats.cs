@@ -161,6 +161,24 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
         }
     }
 
+	private bool flag = false;
+
+	public void swapFlag() {
+
+		if (flag) {
+			flag = false;
+		}
+		else {
+			flag = true;
+		}
+	}
+
+	public bool hitByAbility() {
+		return flag;
+	}
+
+
+
     private void Die()
     {
         gameObject.SetActive(false);

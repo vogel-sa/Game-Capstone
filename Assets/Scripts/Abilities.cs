@@ -432,7 +432,6 @@ public class Abilities : MonoBehaviour {
 	private IEnumerator _shotgunBlast(PlayerCharacterStats stats)
 	{
 		LineOfSight cone = null;
-		LineOfSight coneInner = null;
 		try
 		{
 			var abilData = (from abil in stats.AbilityData where abil.Name == "Shotgun Blast" select abil).FirstOrDefault();
@@ -514,7 +513,6 @@ public class Abilities : MonoBehaviour {
 		{
 			GetComponent<PlayerMovementManager>().enabled = true;
 			if (cone) Destroy(cone.gameObject);
-			if (coneInner) Destroy (coneInner.gameObject);
 			if (stats.Actionsleft == 0)
 				GetComponent<PlayerMovementManager>().Deselect ();
 			else

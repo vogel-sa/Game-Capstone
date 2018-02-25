@@ -432,7 +432,6 @@ public class Abilities : MonoBehaviour {
 	private IEnumerator _shotgunBlast(PlayerCharacterStats stats)
 	{
 		LineOfSight cone = null;
-		LineOfSight coneInner = null;
 		try
 		{
 			var abilData = (from abil in stats.AbilityData where abil.Name == "Shotgun Blast" select abil).FirstOrDefault();
@@ -470,7 +469,6 @@ public class Abilities : MonoBehaviour {
 				yield return null;
 			} while (!Input.GetMouseButtonDown(0));
 			cone.gameObject.SetActive(false);
-			coneInner.gameObject.SetActive(false);
 			EnemyStats hitStats;
 			Quaternion startingAngle = Quaternion.AngleAxis(-(cone._maxAngle/2), Vector3.up);
 			int increment = 8;
@@ -517,7 +515,6 @@ public class Abilities : MonoBehaviour {
 			GetComponent<PlayerMovementManager>().enabled = true;
 			//PlayerMovementManager.Instance.Select(stats.transform, stats);
 			if (cone) Destroy(cone.gameObject);
-			if (coneInner) Destroy (coneInner.gameObject);
 			if (stats.Actionsleft == 0)
 				GetComponent<PlayerMovementManager>().Deselect ();
 			else

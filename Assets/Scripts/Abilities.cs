@@ -346,7 +346,7 @@ public class Abilities : MonoBehaviour {
 			RaycastHit hit;
 			cone = new GameObject().AddComponent<LineOfSight>();
 			cone.gameObject.AddComponent<cakeslice.Outline>();
-			cone._idle = Resources.Load<Material>("UI");
+			cone._idle = Resources.Load<Material>("Clear");
 			cone.transform.position = stats.transform.position + Vector3.up;
 			cone._cullingMask = LayerMask.GetMask("Obstacle");
 			cone._maxAngle = (int)abilData.OtherValues.Angle;
@@ -362,7 +362,7 @@ public class Abilities : MonoBehaviour {
 					direction = origin - mousePos;
 					var directedAt = new Vector3((origin - direction.normalized * range).x, stats.transform.position.y/* + 1*/, (origin - direction.normalized * range).z);
 					directedAt = new Vector3(directedAt.x, cone.transform.position.y, directedAt.z);
-					stats.transform.LookAt(directedAt);
+					stats.transform.LookAt(directedAt + Vector3.down);
 					cone.transform.LookAt(directedAt);
 				}
 				yield return null;
@@ -445,18 +445,12 @@ public class Abilities : MonoBehaviour {
 			RaycastHit hit;
 			cone = new GameObject().AddComponent<LineOfSight>();
 			cone.gameObject.AddComponent<cakeslice.Outline>();
-			cone._idle = Resources.Load<Material>("UI");
+			cone._idle = Resources.Load<Material>("Clear");
 			cone.transform.position = stats.transform.position + Vector3.up;
 			cone._cullingMask = LayerMask.GetMask("Obstacle");
 			cone._maxAngle = (int)abilData.OtherValues.Angle;
 			cone._maxDistance = abilData.OtherValues.Range;
-			coneInner = new GameObject().AddComponent<LineOfSight>();
-			coneInner.gameObject.AddComponent<cakeslice.Outline>();
-			coneInner._idle = Resources.Load<Material>("Clear");
-			coneInner.transform.position = stats.transform.position + Vector3.up;
-			coneInner._cullingMask = LayerMask.GetMask("Obstacle");
-			coneInner._maxAngle = (int)abilData.OtherValues.Angle;
-			coneInner._maxDistance = abilData.OtherValues.InitialRange;
+
 
 			do
 			{
@@ -467,10 +461,9 @@ public class Abilities : MonoBehaviour {
 					var mousePos = new Vector3(hit.point.x, stats.transform.position.y + 1/*aimLine.transform.position.y*/, hit.point.z);
 					var origin = stats.transform.position + Vector3.up;
 					direction = origin - mousePos;
-					var directedAt = new Vector3((origin - direction.normalized * range).x, stats.transform.position.y/* + 1*/, (origin - direction.normalized * range).z);
-					directedAt = new Vector3(directedAt.x, coneInner.transform.position.y, directedAt.z);
-					stats.transform.LookAt(directedAt);
-					coneInner.transform.LookAt(directedAt);
+					var directedAt = new Vector3((origin - direction.normalized * range).x, stats.transform.position.y + 1, (origin - direction.normalized * range).z);
+					directedAt = new Vector3(directedAt.x, cone.transform.position.y, directedAt.z);
+					stats.transform.LookAt(directedAt + Vector3.down);
 					cone.transform.LookAt(directedAt);
 
 				}

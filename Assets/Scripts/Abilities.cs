@@ -315,6 +315,7 @@ public class Abilities : MonoBehaviour {
 			GetComponent<TurnManager>().AutoEndTurnCheck();
 			yield return new WaitForSeconds(.5f);
 			//Wear off happens in player on turn start
+			print("Fortifying");
 		}
 		finally {
 			GetComponent<PlayerMovementManager>().enabled = true;

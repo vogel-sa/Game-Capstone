@@ -37,10 +37,6 @@ public class Abilities : MonoBehaviour {
         }
     }
 
-
-
-
-
     public void BasicShootAbility(PlayerCharacterStats stats) { if (stats.Actionsleft > 0) StartCoroutine(_basicShootAbility(stats)); }
     private IEnumerator _basicShootAbility(PlayerCharacterStats stats)
     {
@@ -86,25 +82,14 @@ public class Abilities : MonoBehaviour {
                 }
             }
             Debug.Log("Bang");
-			GetComponent<TurnManager>().AutoEndTurnCheck();
-            abilData.Currcooldown = abilData.Maxcooldown;
+            genericStatChange(abilData, stats);
             stats.hasMoved = true;
-            stats.Actionsleft--;
-			GetComponent<TurnManager>().AutoEndTurnCheck();
             yield return new WaitForSeconds(.5f);// Change to wait until animation over, possibly wait for enemy reaction (i.e. reaction shot, death anim, etc.);
         }
         finally
         {
-			stats.CheckCharacterCannotMove();
-            //GetComponent<PlayerMovementManager>().SetQuadsEnabled(true);
-			GetComponent<PlayerMovementManager>().enabled = true;
-            //GetComponent<PlayerMovementManager>().Select(stats.transform, stats);
+            genericCleanup(stats);
             if (lineRenderer) Destroy(lineRenderer.gameObject);
-			if (stats.Actionsleft == 0)
-				GetComponent<PlayerMovementManager>().Deselect ();
-			else
-				GetComponent<PlayerMovementManager>().Select (stats);
-            EnableButtons();
         }
     }
 
@@ -152,27 +137,16 @@ public class Abilities : MonoBehaviour {
             GameObject flare = Instantiate(Resources.Load<GameObject>("Prefabs/Flare"));
             mousePos.y = 1.1f;
             flare.transform.position = mousePos;
-            stats.hasMoved = true;
-            stats.Actionsleft--;
 
-            var ability = (from a in stats.AbilityData
-                           where a.Name == "Flare"
-                           select a).FirstOrDefault();
-             ability.Currcooldown = ability.Maxcooldown;
-			GetComponent<TurnManager>().AutoEndTurnCheck();
+            genericStatChange(abilData, stats);
             yield return null;
         }
         finally
         {
-			stats.CheckCharacterCannotMove();
+            genericCleanup(stats);
 			GetComponent<PlayerMovementManager>().SetQuadsEnabled(true);
 			GetComponent<PlayerMovementManager>().enabled = true;
             if (los) Destroy(los.gameObject);
-            if (stats.Actionsleft == 0)
-				GetComponent<PlayerMovementManager>().Deselect ();
-			else
-				GetComponent<PlayerMovementManager>().Select (stats);
-            EnableButtons();
         }
     }
 
@@ -236,16 +210,9 @@ public class Abilities : MonoBehaviour {
         }
         finally
         {
-			stats.CheckCharacterCannotMove();
-            //GetComponent<PlayerMovementManager>().SetQuadsEnabled(true);
-			GetComponent<PlayerMovementManager>().enabled = true;
+            genericCleanup(stats);
             if (los) Destroy(los.gameObject);
             if (flashlight && !flashlight.gameObject.activeSelf) Destroy(flashlight.gameObject);
-			if (stats.Actionsleft == 0)
-				GetComponent<PlayerMovementManager>().Deselect ();
-			else
-				GetComponent<PlayerMovementManager>().Select (stats);
-            EnableButtons();
         }
     }
 
@@ -274,22 +241,14 @@ public class Abilities : MonoBehaviour {
 			} while (!Input.GetMouseButtonDown(0));
 			los.gameObject.SetActive(false);
 			stats.isCoveringFire = true;
-			abilData.Currcooldown = abilData.Maxcooldown;
-			//stats.hasMoved = true;
-			stats.Actionsleft--;
-			GetComponent<TurnManager>().AutoEndTurnCheck();
+			stats.hasMoved = true;
+            genericStatChange(abilData, stats);
 			yield return new WaitForSeconds(.5f);
 			//abiltiy effects in enemyturn
 		}
 		finally {
-			GetComponent<PlayerMovementManager>().enabled = true;
+            genericCleanup(stats);
 			if (los) Destroy(los.gameObject);
-			if (stats.Actionsleft == 0)
-				GetComponent<PlayerMovementManager>().Deselect ();
-			else
-				GetComponent<PlayerMovementManager>().Select (stats);
-			EnableButtons();
-
 		}
 			
 	}
@@ -308,22 +267,14 @@ public class Abilities : MonoBehaviour {
 				yield return null;
 			} while (!Input.GetMouseButtonDown(0));
 			stats.isFortifying = true;
+            genericStatChange(abilData, stats);
 			stats.MitigationValue += abilData.DamageAmount;
-			abilData.Currcooldown = abilData.Maxcooldown;
 			//stats.hasMoved = true;
-			stats.Actionsleft--;
-			GetComponent<TurnManager>().AutoEndTurnCheck();
 			yield return new WaitForSeconds(.5f);
 			//Wear off happens in player on turn start
 		}
 		finally {
-			GetComponent<PlayerMovementManager>().enabled = true;
-			if (stats.Actionsleft == 0)
-				GetComponent<PlayerMovementManager>().Deselect ();
-			else
-				GetComponent<PlayerMovementManager>().Select (stats);
-			EnableButtons();
-
+            genericCleanup(stats);
 		}
 
 	}
@@ -393,9 +344,7 @@ public class Abilities : MonoBehaviour {
 						}
 					}
 				}
-
 				direction2 = stepAngle * direction2;
-
 			}
 
 			Debug.Log("RapidFire");
@@ -403,29 +352,14 @@ public class Abilities : MonoBehaviour {
 				stat.swapFlag();
 
 			}
-			abilData.Currcooldown = abilData.Maxcooldown;
-			stats.hasMoved = true;
-			stats.Actionsleft--;
-			GetComponent<TurnManager>().AutoEndTurnCheck();
+            genericStatChange(abilData, stats);
 			yield return new WaitForSeconds(.5f);// Change to wait until animation over, possibly wait for enemy reaction (i.e. reaction shot, death anim, etc.);
-
 		}
-
 		finally
-
 		{
-			//PlayerMovementManager.Instance.SetQuadsEnabled(true);
-			GetComponent<PlayerMovementManager>().enabled = true;
-			//PlayerMovementManager.Instance.Select(stats.transform, stats);
+            genericCleanup(stats);
 			if (cone) Destroy(cone.gameObject);
-			if (stats.Actionsleft == 0)
-				GetComponent<PlayerMovementManager>().Deselect();
-
-			else
-				GetComponent<PlayerMovementManager>().Select (stats);
-
 		}
-
 	}
 
 	public void shotgunBlast(PlayerCharacterStats stats) { if (stats.Actionsleft > 0) StartCoroutine(_shotgunBlast(stats)); }
@@ -499,24 +433,41 @@ public class Abilities : MonoBehaviour {
 				}
 				direction2 = stepAngle * direction2;
 			}
-			Debug.Log("ShoutGunBlast");
+
 			foreach (EnemyStats stat in enemies) {
 				stat.swapFlag();
 			}
-			abilData.Currcooldown = abilData.Maxcooldown;
-			stats.hasMoved = true;
-			stats.Actionsleft--;
-			GetComponent<TurnManager>().AutoEndTurnCheck();
+            genericStatChange(abilData, stats);
 			yield return new WaitForSeconds(.5f);// Change to wait until animation over, possibly wait for enemy reaction (i.e. reaction shot, death anim, etc.);
 		}
 		finally
 		{
-			GetComponent<PlayerMovementManager>().enabled = true;
+            genericCleanup(stats);
 			if (cone) Destroy(cone.gameObject);
-			if (stats.Actionsleft == 0)
-				GetComponent<PlayerMovementManager>().Deselect ();
-			else
-				GetComponent<PlayerMovementManager>().Select (stats);
 		}
 	}
+
+    private void genericStatChange(AbilityData abilData, PlayerCharacterStats stats)
+    {
+        GetComponent<TurnManager>().AutoEndTurnCheck();
+        abilData.Currcooldown = abilData.Maxcooldown;
+        stats.Actionsleft--;
+        GetComponent<TurnManager>().AutoEndTurnCheck();
+    }
+
+    private void genericCleanup(PlayerCharacterStats stats)
+    {
+        stats.CheckCharacterCannotMove();
+        GetComponent<PlayerMovementManager>().enabled = true;
+        if (stats.Actionsleft == 0 && stats.hasMoved)
+        {
+            GetComponent<PlayerMovementManager>().Deselect();
+        }
+        else if (stats.Actionsleft == 0 && !stats.hasMoved)
+        {
+            DisableButtons();
+        }
+        else
+            GetComponent<PlayerMovementManager>().Select(stats);
+    }
 }

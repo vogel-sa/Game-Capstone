@@ -74,7 +74,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1615585556852688}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.07, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4231778708646304}
@@ -87,7 +87,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1031844861047060}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.2593307, y: 0.3519721, z: -7.239412}
+  m_LocalPosition: {x: -3.026694, y: 0, z: -14.681345}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4445643447524814}
@@ -205,9 +205,11 @@ MonoBehaviour:
   _maxActions: 1
   _actionsleft: 1
   _portrait: {fileID: 2800000, guid: 713271f43d2ac5040af931b5ebc09ddd, type: 3}
+  _isCoveringFire: 0
+  _isFortifying: 0
   _abilityData:
-  - _name: Shotgun
-    _description: Fire your shotgun in a spread in front of you, dealing 8 damage
+  - _name: Shotgun Blast
+    _description: Fire your shotgun in a spread in front of you, dealing X damage
       to all enemies caught in the blast
     _damageAmount: 8
     _maxcooldown: 0
@@ -216,7 +218,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 0}
-          m_MethodName: BasicShootAbility
+          m_MethodName: shotgunBlast
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 114180736114845260}
@@ -231,10 +233,12 @@ MonoBehaviour:
     _abilitySprite: {fileID: 21300000, guid: affa483705b0ced4688e1de561cf7d6e, type: 3}
     _othervalues:
       _range: 5
-      _width: 0.1
+      _width: 0.2
       _duration: 0
       _areaofeffect: 0
-      _angle: 0
+      _angle: 60
+      _initialRange: 0
+      _fallOffDamage: 0
   - _name: Flashlight
     _description: Shine your flashlight in a targeted direction for a turn, illuminating
       the area.  This skill is free and can be used with other skills
@@ -264,6 +268,39 @@ MonoBehaviour:
       _duration: 1
       _areaofeffect: 0
       _angle: 30
+      _initialRange: 0
+      _fallOffDamage: 0
+  - _name: Fortify
+    _description: Hunker down, reducing the amount of damage this character takes
+      this turn by 2.
+    _damageAmount: 2
+    _maxcooldown: 2
+    _currcooldown: 0
+    _ability:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_MethodName: Fortify
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: PlayerCharacterStats, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    _abilitySprite: {fileID: 21300000, guid: bbf25ac6e1fc53c4e9a13b9333c28727, type: 3}
+    _othervalues:
+      _range: 0
+      _width: 0
+      _duration: 0
+      _areaofeffect: 0
+      _angle: 0
+      _initialRange: 0
+      _fallOffDamage: 0
   - _name: 
     _description: 
     _damageAmount: 0
@@ -281,23 +318,8 @@ MonoBehaviour:
       _duration: 0
       _areaofeffect: 0
       _angle: 0
-  - _name: 
-    _description: 
-    _damageAmount: 0
-    _maxcooldown: 0
-    _currcooldown: 0
-    _ability:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    _abilitySprite: {fileID: 0}
-    _othervalues:
-      _range: 0
-      _width: 0
-      _duration: 0
-      _areaofeffect: 0
-      _angle: 0
+      _initialRange: 0
+      _fallOffDamage: 0
 --- !u!114 &114467017914458182
 MonoBehaviour:
   m_ObjectHideFlags: 1

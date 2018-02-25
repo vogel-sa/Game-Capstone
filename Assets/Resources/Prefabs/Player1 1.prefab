@@ -87,7 +87,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1822846807679530}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.07, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4571046729023890}
@@ -100,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1109138234862372}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.3916235, y: 0.5, z: -14.381819}
+  m_LocalPosition: {x: -7.3916235, y: 0, z: -14.381819}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4223041851568218}
@@ -286,11 +286,13 @@ MonoBehaviour:
   _maxActions: 1
   _actionsleft: 1
   _portrait: {fileID: 2800000, guid: 632ccb68b00d9034c944617507687eda, type: 3}
+  _isCoveringFire: 0
+  _isFortifying: 0
   _abilityData:
   - _name: Shoot
     _description: Fire a single rifle shot in a targeted direction, and deal 5 damage
       to the first target hit
-    _damageAmount: 5
+    _damageAmount: 4
     _maxcooldown: 0
     _currcooldown: 0
     _ability:
@@ -316,6 +318,8 @@ MonoBehaviour:
       _duration: 0
       _areaofeffect: 0
       _angle: 0
+      _initialRange: 0
+      _fallOffDamage: 0
   - _name: Flare
     _description: Throw a flare at the targeted location.   The flare illuminates
       the area for 3 turns, showing all enemies that pass through it
@@ -345,6 +349,38 @@ MonoBehaviour:
       _duration: 3
       _areaofeffect: 3
       _angle: 360
+      _initialRange: 0
+      _fallOffDamage: 0
+  - _name: RapidFire
+    _description: Pretty much the same as shotgun.
+    _damageAmount: 6
+    _maxcooldown: 3
+    _currcooldown: 0
+    _ability:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_MethodName: RapidFire
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 114899361186994330}
+            m_ObjectArgumentAssemblyTypeName: PlayerCharacterStats, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    _abilitySprite: {fileID: 21300000, guid: b84ed3e1cd146e64d8a6af4040001d09, type: 3}
+    _othervalues:
+      _range: 7
+      _width: 0
+      _duration: 0
+      _areaofeffect: 0
+      _angle: 45
+      _initialRange: 0
+      _fallOffDamage: 0
   - _name: 
     _description: 
     _damageAmount: 0
@@ -362,23 +398,8 @@ MonoBehaviour:
       _duration: 0
       _areaofeffect: 0
       _angle: 0
-  - _name: 
-    _description: 
-    _damageAmount: 0
-    _maxcooldown: 0
-    _currcooldown: 0
-    _ability:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    _abilitySprite: {fileID: 0}
-    _othervalues:
-      _range: 0
-      _width: 0
-      _duration: 0
-      _areaofeffect: 0
-      _angle: 0
+      _initialRange: 0
+      _fallOffDamage: 0
 --- !u!114 &114908889340701136
 MonoBehaviour:
   m_ObjectHideFlags: 1

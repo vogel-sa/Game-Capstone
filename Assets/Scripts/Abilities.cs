@@ -135,20 +135,20 @@ public class Abilities : MonoBehaviour {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
                 {
-                    if (LayerMask.LayerToName(hit.collider.gameObject.layer) != "ObstacleLayer")
+                    if (LayerMask.LayerToName(hit.collider.gameObject.layer) != "Obstacle")
                     {
-                        mousePos = new Vector3(hit.point.x, stats.transform.position.y + 1/*aimLine.transform.position.y*/, hit.point.z);
+                        mousePos = new Vector3(hit.point.x, stats.transform.position.y + 1, hit.point.z);
                         var origin = stats.transform.position + Vector3.up;
                         origin.y = 0;
                         distance = Vector3.Distance(origin, mousePos);
                     }
 
                 }
+
                 if (Input.GetKeyDown(KeyCode.Escape)) yield break;
                 yield return null;
-            } while (!Input.GetMouseButtonDown(0));
+            } while (!(Input.GetMouseButtonDown(0) && distance < los._maxDistance));
             Debug.Log("flare dropped");
-            //find location of mouse
             GameObject flare = Instantiate(Resources.Load<GameObject>("Prefabs/Flare"));
             mousePos.y = 1.1f;
             flare.transform.position = mousePos;
@@ -520,9 +520,7 @@ public class Abilities : MonoBehaviour {
 		}
 		finally
 		{
-			//PlayerMovementManager.Instance.SetQuadsEnabled(true);
 			GetComponent<PlayerMovementManager>().enabled = true;
-			//PlayerMovementManager.Instance.Select(stats.transform, stats);
 			if (cone) Destroy(cone.gameObject);
 			if (coneInner) Destroy (coneInner.gameObject);
 			if (stats.Actionsleft == 0)

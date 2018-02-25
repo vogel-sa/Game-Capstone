@@ -470,7 +470,6 @@ public class Abilities : MonoBehaviour {
 				yield return null;
 			} while (!Input.GetMouseButtonDown(0));
 			cone.gameObject.SetActive(false);
-			coneInner.gameObject.SetActive(false);
 			EnemyStats hitStats;
 			Quaternion startingAngle = Quaternion.AngleAxis(-(cone._maxAngle/2), Vector3.up);
 			int increment = 8;

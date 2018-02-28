@@ -21,7 +21,7 @@ public class Abilities : MonoBehaviour {
 		GetComponent<PlayerMovementManager>().OnSelect -= EnableButtons;
     }
 
-    private void EnableButtons()
+    private void EnableButtons(PlayerCharacterStats stats)
     {
         foreach (var button in buttons)
         {
@@ -29,7 +29,7 @@ public class Abilities : MonoBehaviour {
         }
     }
 
-    private void DisableButtons()
+    private void DisableButtons(PlayerCharacterStats stats)
     {
         foreach (var button in buttons)
         {
@@ -43,7 +43,7 @@ public class Abilities : MonoBehaviour {
         LineRenderer lineRenderer = null;
         try
         {
-            DisableButtons();
+            DisableButtons(stats);
             var abilData = (from abil in stats.AbilityData where abil.Name == "Shoot" select abil).FirstOrDefault();
             Debug.Log(abilData.Description);
 			var pmm = GetComponent<PlayerMovementManager>();
@@ -83,7 +83,6 @@ public class Abilities : MonoBehaviour {
             }
             Debug.Log("Bang");
             genericStatChange(abilData, stats);
-            stats.hasMoved = true;
             yield return new WaitForSeconds(.5f);// Change to wait until animation over, possibly wait for enemy reaction (i.e. reaction shot, death anim, etc.);
         }
         finally
@@ -101,7 +100,7 @@ public class Abilities : MonoBehaviour {
         {
             
             var abilData = (from abil in stats.AbilityData where abil.Name == "Flare" select abil).FirstOrDefault();
-            DisableButtons();
+            DisableButtons(stats);
 			GetComponent<PlayerMovementManager>().SetQuadsEnabled(false);
 			GetComponent<PlayerMovementManager>().enabled = false;
             Vector3 direction = Vector3.zero;
@@ -157,7 +156,7 @@ public class Abilities : MonoBehaviour {
         RaycastIfInLightCone flashlight = null;
         try
         {
-            DisableButtons();
+            DisableButtons(stats);
             var abilData = (from abil in stats.AbilityData where abil.Name == "Flashlight" select abil).FirstOrDefault();
             Debug.Log(abilData.Description);
 			GetComponent<PlayerMovementManager>().SetQuadsEnabled(false);
@@ -201,11 +200,8 @@ public class Abilities : MonoBehaviour {
             } while (!Input.GetMouseButtonDown(0));
             los.gameObject.SetActive(false);
             flashlight.gameObject.SetActive(true);
-
-            abilData.Currcooldown = abilData.Maxcooldown;
+            genericStatChange(abilData,stats);
             stats.hasMoved = true;
-            stats.Actionsleft--;
-			GetComponent<TurnManager>().AutoEndTurnCheck();
             yield return new WaitForSeconds(.5f);// Change to wait until animation over, possibly wait for enemy reaction (i.e. reaction shot, death anim, etc.);
         }
         finally
@@ -222,7 +218,7 @@ public class Abilities : MonoBehaviour {
 	{
 		LineOfSight los = null;
 		try {
-			DisableButtons();
+			DisableButtons(stats);
 			var abilData = (from abil in stats.AbilityData where abil.Name == "CoveringFire" select abil).FirstOrDefault();
 			//Debug.Log(abilData.Description);
 			GetComponent<PlayerMovementManager>().SetQuadsEnabled(false);
@@ -257,7 +253,7 @@ public class Abilities : MonoBehaviour {
 	private IEnumerator _Fortify(PlayerCharacterStats stats)
 	{
 		try {
-			DisableButtons();
+			DisableButtons(stats);
 			var abilData = (from abil in stats.AbilityData where abil.Name == "Fortify" select abil).FirstOrDefault();
 			GetComponent<PlayerMovementManager>().SetQuadsEnabled(false);
 			GetComponent<PlayerMovementManager>().enabled = false;
@@ -269,7 +265,6 @@ public class Abilities : MonoBehaviour {
 			stats.isFortifying = true;
             genericStatChange(abilData, stats);
 			stats.MitigationValue += abilData.DamageAmount;
-			//stats.hasMoved = true;
 			yield return new WaitForSeconds(.5f);
 			//Wear off happens in player on turn start
 			print("Fortifying");
@@ -466,7 +461,8 @@ public class Abilities : MonoBehaviour {
         }
         else if (stats.Actionsleft == 0 && !stats.hasMoved)
         {
-            DisableButtons();
+            GetComponent<PlayerMovementManager>().Select(stats);
+            DisableButtons(stats);
         }
         else
             GetComponent<PlayerMovementManager>().Select(stats);

@@ -38,8 +38,8 @@ public class PortraitChanger : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Select () {
-		selectedCharacter = FindObjectOfType<PlayerMovementManager>().SelectedCharacterStats;
+    void Select (PlayerCharacterStats stats) {
+        selectedCharacter = stats;
 	}
 
     private void Update()

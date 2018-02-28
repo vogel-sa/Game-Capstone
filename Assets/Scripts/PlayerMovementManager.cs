@@ -20,7 +20,7 @@ public class PlayerMovementManager : MonoBehaviour
     private int quadsInUse = 0;
 
 
-    public delegate void SelectAction();
+    public delegate void SelectAction(PlayerCharacterStats stats);
     public event SelectAction OnSelect;
 
     public delegate void DeselectAction();
@@ -184,7 +184,6 @@ public class PlayerMovementManager : MonoBehaviour
 
     public void Select(PlayerCharacterStats stats)
     {
-        if (stats.Actionsleft <= 0) return;
         SelectedCharacterStats = stats;
 		if (!stats.hasMoved) {
 			for (int i = 0; i < quads.Length; i++) {
@@ -212,7 +211,7 @@ public class PlayerMovementManager : MonoBehaviour
 			SetQuadsEnabled (false);
 		}
 		selected = stats.transform;
-        OnSelect();
+        OnSelect(stats);
     }
 
     public void Deselect()

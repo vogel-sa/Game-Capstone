@@ -272,6 +272,7 @@ public class Abilities : MonoBehaviour {
 			//stats.hasMoved = true;
 			yield return new WaitForSeconds(.5f);
 			//Wear off happens in player on turn start
+			print("Fortifying");
 		}
 		finally {
             genericCleanup(stats);

@@ -72,7 +72,7 @@ public class AbilityButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     }
 
-    private void ShowMe()
+    private void ShowMe(PlayerCharacterStats stats)
     {
         GetComponent<Image>().enabled = true;
 		GetComponentInChildren<Text>().enabled = true;

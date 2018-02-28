@@ -14,7 +14,7 @@ public class PortraitChanger : MonoBehaviour {
 	[SerializeField]
 	GameObject ActionTextOBJ;
     Text HPText;
-	Text ActionText;
+	//Text ActionText;
 
    
 
@@ -27,7 +27,7 @@ public class PortraitChanger : MonoBehaviour {
         Name = GetComponentInChildren<Text>();
         HPbar = GetComponentInChildren<Slider>();
         HPText = HPTextOBJ.GetComponent<Text>();
-		ActionText = ActionTextOBJ.GetComponent<Text>();
+		//ActionText = ActionTextOBJ.GetComponent<Text>();
 
 	}
 
@@ -38,8 +38,8 @@ public class PortraitChanger : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Select () {
-		selectedCharacter = FindObjectOfType<PlayerMovementManager>().SelectedCharacterStats;
+    void Select (PlayerCharacterStats stats) {
+        selectedCharacter = stats;
 	}
 
     private void Update()
@@ -50,7 +50,7 @@ public class PortraitChanger : MonoBehaviour {
 			HPbar.maxValue = selectedCharacter.MaxHP;
 			HPbar.value = selectedCharacter.CurrHP;
 			HPText.text = "HP: " + selectedCharacter.CurrHP;
-			ActionText.text = "Actions Left: " + selectedCharacter.Actionsleft;
+			//ActionText.text = "Actions Left: " + selectedCharacter.Actionsleft;
 
 		}
     }

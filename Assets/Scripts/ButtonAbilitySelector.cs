@@ -33,9 +33,10 @@ public class ButtonAbilitySelector : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void ChangeAbilityButtons()
+    void ChangeAbilityButtons(PlayerCharacterStats stats)
     {
         Debug.Log("Buttons changed");
+        if (stats.Actionsleft <= 0) return;
 		abilities = new AbilityData[FindObjectOfType<PlayerMovementManager>().SelectedCharacterStats.AbilityData.Length];
         for (int i = 0; i < abilities.Length; i++)
         {

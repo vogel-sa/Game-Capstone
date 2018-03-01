@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 114180736114845260}
   - component: {fileID: 114467017914458182}
   m_Layer: 10
-  m_Name: Player2 1
+  m_Name: Player2
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +117,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -133,7 +132,6 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -205,8 +203,6 @@ MonoBehaviour:
   _maxActions: 1
   _actionsleft: 1
   _portrait: {fileID: 2800000, guid: 713271f43d2ac5040af931b5ebc09ddd, type: 3}
-  _isCoveringFire: 0
-  _isFortifying: 0
   _abilityData:
   - _name: Shotgun Blast
     _description: Fire your shotgun in a spread in front of you, dealing X damage
@@ -228,8 +224,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
     _abilitySprite: {fileID: 21300000, guid: affa483705b0ced4688e1de561cf7d6e, type: 3}
     _othervalues:
       _range: 5
@@ -237,8 +233,6 @@ MonoBehaviour:
       _duration: 0
       _areaofeffect: 0
       _angle: 60
-      _initialRange: 0
-      _fallOffDamage: 0
   - _name: Flashlight
     _description: Shine your flashlight in a targeted direction for a turn, illuminating
       the area.  This skill is free and can be used with other skills
@@ -259,8 +253,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
     _abilitySprite: {fileID: 21300000, guid: 802580fae2e71cd4d8087a7d0f3a438d, type: 3}
     _othervalues:
       _range: 10
@@ -268,8 +262,6 @@ MonoBehaviour:
       _duration: 1
       _areaofeffect: 0
       _angle: 30
-      _initialRange: 0
-      _fallOffDamage: 0
   - _name: Fortify
     _description: Hunker down, reducing the amount of damage this character takes
       this turn by 2.
@@ -290,8 +282,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
     _abilitySprite: {fileID: 21300000, guid: bbf25ac6e1fc53c4e9a13b9333c28727, type: 3}
     _othervalues:
       _range: 0
@@ -299,8 +291,6 @@ MonoBehaviour:
       _duration: 0
       _areaofeffect: 0
       _angle: 0
-      _initialRange: 0
-      _fallOffDamage: 0
   - _name: 
     _description: 
     _damageAmount: 0
@@ -309,8 +299,8 @@ MonoBehaviour:
     _ability:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
     _abilitySprite: {fileID: 0}
     _othervalues:
       _range: 0
@@ -318,8 +308,6 @@ MonoBehaviour:
       _duration: 0
       _areaofeffect: 0
       _angle: 0
-      _initialRange: 0
-      _fallOffDamage: 0
 --- !u!114 &114467017914458182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -397,10 +385,8 @@ MonoBehaviour:
       m_Bits: 4294967295
     useGraphRaycasting: 0
   traversableTags: -1
-  traversableTagsCompatibility:
-    tagsChange: -1
-    tagsSet: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask: -1
 --- !u!114 &114828972200036412
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114899361186994330}
   - component: {fileID: 114722433453753508}
   m_Layer: 10
-  m_Name: Player1 1
+  m_Name: Player 1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +117,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -133,7 +132,6 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -234,10 +232,8 @@ MonoBehaviour:
       m_Bits: 4294967295
     useGraphRaycasting: 0
   traversableTags: -1
-  traversableTagsCompatibility:
-    tagsChange: -1
-    tagsSet: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask: -1
 --- !u!114 &114507652485076626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -286,8 +282,6 @@ MonoBehaviour:
   _maxActions: 1
   _actionsleft: 1
   _portrait: {fileID: 2800000, guid: 632ccb68b00d9034c944617507687eda, type: 3}
-  _isCoveringFire: 0
-  _isFortifying: 0
   _abilityData:
   - _name: Shoot
     _description: Fire a single rifle shot in a targeted direction, and deal 5 damage
@@ -309,8 +303,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
     _abilitySprite: {fileID: 21300000, guid: 281954cd1af076349a14f26155eeec70, type: 3}
     _othervalues:
       _range: 10
@@ -318,8 +312,6 @@ MonoBehaviour:
       _duration: 0
       _areaofeffect: 0
       _angle: 0
-      _initialRange: 0
-      _fallOffDamage: 0
   - _name: Flare
     _description: Throw a flare at the targeted location.   The flare illuminates
       the area for 3 turns, showing all enemies that pass through it
@@ -340,8 +332,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
     _abilitySprite: {fileID: 21300000, guid: cd1d32c9aba1a8545bf016f7ef6d9d04, type: 3}
     _othervalues:
       _range: 7
@@ -349,8 +341,6 @@ MonoBehaviour:
       _duration: 3
       _areaofeffect: 3
       _angle: 360
-      _initialRange: 0
-      _fallOffDamage: 0
   - _name: RapidFire
     _description: Pretty much the same as shotgun.
     _damageAmount: 6
@@ -370,8 +360,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
     _abilitySprite: {fileID: 21300000, guid: b84ed3e1cd146e64d8a6af4040001d09, type: 3}
     _othervalues:
       _range: 7
@@ -379,8 +369,6 @@ MonoBehaviour:
       _duration: 0
       _areaofeffect: 0
       _angle: 45
-      _initialRange: 0
-      _fallOffDamage: 0
   - _name: 
     _description: 
     _damageAmount: 0
@@ -389,8 +377,8 @@ MonoBehaviour:
     _ability:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
     _abilitySprite: {fileID: 0}
     _othervalues:
       _range: 0
@@ -398,8 +386,6 @@ MonoBehaviour:
       _duration: 0
       _areaofeffect: 0
       _angle: 0
-      _initialRange: 0
-      _fallOffDamage: 0
 --- !u!114 &114908889340701136
 MonoBehaviour:
   m_ObjectHideFlags: 1

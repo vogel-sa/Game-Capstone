@@ -112,7 +112,7 @@ Shader "Hidden/OutlineEffect"
 			ZTest Always
 			ZWrite Off
 			Cull Off
-
+			
 			CGPROGRAM
 
 			#pragma vertex vert

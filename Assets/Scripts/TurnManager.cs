@@ -26,6 +26,8 @@ public class TurnManager : MonoBehaviour
 	public List<EnemyStats> enemyList;
   	[SerializeField]
   	GameObject VictoryScreen;
+	[SerializeField]
+	GameObject TurnChangeScreen;
 
 	void Awake()
 	{
@@ -48,6 +50,7 @@ public class TurnManager : MonoBehaviour
 		}
 
         VictoryScreen.SetActive(false);
+		TurnChangeScreen.SetActive(false);
 		print ("Reloaded " + this.GetType().ToString());
 	}
 
@@ -81,10 +84,15 @@ public class TurnManager : MonoBehaviour
 
 	private IEnumerator _switchTurn()
 	{
+		var text = TurnChangeScreen.GetComponentInChildren<Text>();
 		switch (currentTurn) {
 
 		case GAMESTATE.ENEMYTURN:
 			{
+				TurnChangeScreen.SetActive(true);
+				text.text = "Player turn start";
+				yield return new WaitForSeconds (2f);
+				TurnChangeScreen.SetActive(false);
 				currentTurn = GAMESTATE.PLAYERTURN;
 				OnPlayerTurnStart();
 				break;
@@ -92,6 +100,10 @@ public class TurnManager : MonoBehaviour
 
 		case GAMESTATE.PLAYERTURN:
 			{
+				TurnChangeScreen.SetActive(true);
+				text.text = "Enemy turn start";
+				yield return new WaitForSeconds (2f);
+				TurnChangeScreen.SetActive(false);
 				currentTurn = GAMESTATE.ENEMYTURN;
 				OnEnemyTurnStart();
 				break;

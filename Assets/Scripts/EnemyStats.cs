@@ -198,6 +198,7 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
         var pm = FindObjectOfType<PathManager>();
         pm.allies.Remove(GetComponent<SingleNodeBlocker>());
         Destroy(lastKnownLocation);
+        
     }
 		
 }

@@ -230,6 +230,7 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
         var pm = FindObjectOfType<PathManager>();
         pm.allies.Remove(GetComponent<SingleNodeBlocker>());
         Destroy(this.gameObject);
+        manager.CheckGameOver();
     }
 
 	public void CheckCharacterCannotMove()

@@ -17,8 +17,11 @@ public class PathManager : MonoBehaviour {
     public BlockManager.TraversalProvider allyTraversalProvider { get; private set; }
     public BlockManager.TraversalProvider enemyTraversalProvider { get; private set; }
 
+    private GridGraph gg;
+
     // Use this for initialization
     void Start () {
+        gg = AstarPath.active.data.gridGraph;
         var bm = GetComponent<BlockManager>();
         blockManager = bm ? bm : gameObject.AddComponent<BlockManager>();
         enemies = new List<SingleNodeBlocker>();
@@ -40,10 +43,22 @@ public class PathManager : MonoBehaviour {
         enemyTraversalProvider = new BlockManager.TraversalProvider(blockManager, BlockManager.BlockMode.OnlySelector, allies);
     }
 
+    public EnemyStats enemyOnNode(GraphNode node)
+    {
+        foreach (SingleNodeBlocker enemy in enemies)
+        {
+            if (gg.GetNearest(enemy.transform.position).node == node)
+            {
+                return enemy.GetComponent<EnemyStats>();
+            }
+        }
+        return null;
+    }
+
     public ABPath getPath(Vector3 start, Vector3 end, CharacterFaction team)
     {
         var path = ABPath.Construct(start, end, null);
-        path.traversalProvider = team == CharacterFaction.ALLY ? allyTraversalProvider : enemyTraversalProvider;
+        //path.traversalProvider = team == CharacterFaction.ALLY ? allyTraversalProvider : enemyTraversalProvider;
         AstarPath.StartPath(path);
         path.BlockUntilCalculated();
 

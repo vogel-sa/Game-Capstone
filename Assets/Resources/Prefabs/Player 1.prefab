@@ -246,10 +246,8 @@ MonoBehaviour:
       m_Bits: 4294967295
     useGraphRaycasting: 0
   traversableTags: -1
-  traversableTagsCompatibility:
-    tagsChange: -1
-    tagsSet: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask: -1
 --- !u!114 &114507652485076626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -298,8 +296,6 @@ MonoBehaviour:
   _maxActions: 1
   _actionsleft: 1
   _portrait: {fileID: 2800000, guid: 632ccb68b00d9034c944617507687eda, type: 3}
-  _isCoveringFire: 0
-  _isFortifying: 0
   _abilityData:
   - _name: Shoot
     _description: Fire a single rifle shot in a targeted direction, and deal 5 damage
@@ -330,8 +326,6 @@ MonoBehaviour:
       _duration: 0
       _areaofeffect: 0
       _angle: 0
-      _initialRange: 0
-      _fallOffDamage: 0
   - _name: Flare
     _description: Throw a flare at the targeted location.   The flare illuminates
       the area for 3 turns, showing all enemies that pass through it
@@ -361,8 +355,6 @@ MonoBehaviour:
       _duration: 3
       _areaofeffect: 3
       _angle: 360
-      _initialRange: 0
-      _fallOffDamage: 0
   - _name: RapidFire
     _description: Pretty much the same as shotgun.
     _damageAmount: 6
@@ -391,8 +383,6 @@ MonoBehaviour:
       _duration: 0
       _areaofeffect: 0
       _angle: 45
-      _initialRange: 0
-      _fallOffDamage: 0
   - _name: 
     _description: 
     _damageAmount: 0
@@ -410,8 +400,6 @@ MonoBehaviour:
       _duration: 0
       _areaofeffect: 0
       _angle: 0
-      _initialRange: 0
-      _fallOffDamage: 0
 --- !u!114 &114908889340701136
 MonoBehaviour:
   m_ObjectHideFlags: 1

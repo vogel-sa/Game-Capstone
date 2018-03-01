@@ -193,9 +193,8 @@ public class PlayerMovementManager : MonoBehaviour
 			var blocked = from blocker in GetComponent<PathManager>().enemies
 			                       select blocker.lastBlocked;
 
-			nodes = PathUtilities.BFS (AstarData.active.GetNearest (stats.transform.position).node,
-				stats.MovementRange,
-				walkableDefinition: (n) => !blocked.Contains (n));
+            nodes = PathUtilities.BFS(AstarData.active.GetNearest(stats.transform.position).node,
+                stats.MovementRange);
 			// Shouldn't ever need too many quads.
 			int count = 0;
 			if (nodes.Count > quads.Length) {

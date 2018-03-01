@@ -217,8 +217,6 @@ MonoBehaviour:
   _maxActions: 1
   _actionsleft: 1
   _portrait: {fileID: 2800000, guid: 713271f43d2ac5040af931b5ebc09ddd, type: 3}
-  _isCoveringFire: 0
-  _isFortifying: 0
   _abilityData:
   - _name: Shotgun Blast
     _description: Fire your shotgun in a spread in front of you, dealing X damage
@@ -249,8 +247,6 @@ MonoBehaviour:
       _duration: 0
       _areaofeffect: 0
       _angle: 60
-      _initialRange: 0
-      _fallOffDamage: 0
   - _name: Flashlight
     _description: Shine your flashlight in a targeted direction for a turn, illuminating
       the area.  This skill is free and can be used with other skills
@@ -280,8 +276,6 @@ MonoBehaviour:
       _duration: 1
       _areaofeffect: 0
       _angle: 30
-      _initialRange: 0
-      _fallOffDamage: 0
   - _name: Fortify
     _description: Hunker down, reducing the amount of damage this character takes
       this turn by 2.
@@ -311,8 +305,6 @@ MonoBehaviour:
       _duration: 0
       _areaofeffect: 0
       _angle: 0
-      _initialRange: 0
-      _fallOffDamage: 0
   - _name: 
     _description: 
     _damageAmount: 0
@@ -330,8 +322,6 @@ MonoBehaviour:
       _duration: 0
       _areaofeffect: 0
       _angle: 0
-      _initialRange: 0
-      _fallOffDamage: 0
 --- !u!114 &114467017914458182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -409,10 +399,8 @@ MonoBehaviour:
       m_Bits: 4294967295
     useGraphRaycasting: 0
   traversableTags: -1
-  traversableTagsCompatibility:
-    tagsChange: -1
-    tagsSet: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask: -1
 --- !u!114 &114828972200036412
 MonoBehaviour:
   m_ObjectHideFlags: 1

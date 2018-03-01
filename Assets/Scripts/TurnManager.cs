@@ -89,8 +89,8 @@ public class TurnManager : MonoBehaviour
 
 		case GAMESTATE.ENEMYTURN:
 			{
+				text.text = "Player Turn Start";
 				TurnChangeScreen.SetActive(true);
-				text.text = "Player turn start";
 				yield return new WaitForSeconds (2f);
 				TurnChangeScreen.SetActive(false);
 				currentTurn = GAMESTATE.PLAYERTURN;
@@ -100,12 +100,12 @@ public class TurnManager : MonoBehaviour
 
 		case GAMESTATE.PLAYERTURN:
 			{
+				OnEnemyTurnStart();
+				text.text = "Enemy Turn Start";
 				TurnChangeScreen.SetActive(true);
-				text.text = "Enemy turn start";
 				yield return new WaitForSeconds (2f);
 				TurnChangeScreen.SetActive(false);
 				currentTurn = GAMESTATE.ENEMYTURN;
-				OnEnemyTurnStart();
 				break;
 			}
 

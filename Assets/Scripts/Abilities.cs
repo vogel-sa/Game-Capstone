@@ -134,6 +134,7 @@ public class Abilities : MonoBehaviour {
                             var origin = stats.transform.position + Vector3.up;
                             origin.y = 0;
                             distance = Vector3.Distance(origin, hitPointAtEyeLevel);
+                            break;
                         }
 
 

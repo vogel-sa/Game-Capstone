@@ -178,7 +178,14 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
 		return flag;
 	}
 
+    private GameObject lastKnownLocation = null;
 
+    void Start()
+    {
+        lastKnownLocation = Instantiate(Resources.Load<GameObject>("Prefabs/LastKnownLocation"));
+        LastKnownLocation lkl = lastKnownLocation.GetComponent<LastKnownLocation>();
+        lkl.stats = this;
+    }
 
     private void Die()
     {
@@ -188,6 +195,7 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
 		//eventually change to mark for removal
 		FindObjectOfType<TurnManager>().enemyList.Remove (this);
 		FindObjectOfType<TurnManager>().CheckGameOver ();
+        Destroy(lastKnownLocation);
     }
 		
 }

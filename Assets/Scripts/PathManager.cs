@@ -55,6 +55,18 @@ public class PathManager : MonoBehaviour {
         return null;
     }
 
+    public EnemyStats allyOnNode(GraphNode node)
+    {
+        foreach (SingleNodeBlocker ally in allies)
+        {
+            if (gg.GetNearest(ally.transform.position).node == node)
+            {
+                return ally.GetComponent<EnemyStats>();
+            }
+        }
+        return null;
+    }
+
     public ABPath getPath(Vector3 start, Vector3 end, CharacterFaction team)
     {
         var path = ABPath.Construct(start, end, null);

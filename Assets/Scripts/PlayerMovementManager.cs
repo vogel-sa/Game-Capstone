@@ -83,39 +83,35 @@ public class PlayerMovementManager : MonoBehaviour
     {
         if (selected)
         {
-            if (Input.GetKeyDown(KeyCode.Escape)) Deselect();
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1)) Deselect();
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (lastUpdateOutline) lastUpdateOutline.color = notHighlightedColor;
-			if (!EventSystem.current.IsPointerOverGameObject()) {
-				if (Physics.Raycast (ray, out hit, Camera.main.farClipPlane, LayerMask.GetMask ("Outline", "UI"))) {
-					{
-						Outline outline = hit.transform.GetComponent<Outline> ();
-						if (lastUpdateOutline)
-							lastUpdateOutline.color = notHighlightedColor;
-						outline.color = highlightedColor;
-						lastUpdateOutline = outline;
+			if (!EventSystem.current.IsPointerOverGameObject() && Physics.Raycast (ray, out hit, Camera.main.farClipPlane, LayerMask.GetMask ("Outline", "UI"))) {
+				Outline outline = hit.transform.GetComponent<Outline> ();
+				if (lastUpdateOutline)
+					lastUpdateOutline.color = notHighlightedColor;
+				outline.color = highlightedColor;
+				lastUpdateOutline = outline;
 
-						if (controlsEnabled && Input.GetMouseButtonDown (0) && !SelectedCharacterStats.hasMoved) {
-							Vector3 hitPos = AstarData.active.GetNearest (hit.point).position;
-							if (!Physics.Raycast (new Ray (hitPos, Vector3.up), 1, LayerMask.GetMask ("Player", "UI"))) { // Check if occupied.
+				if (controlsEnabled && Input.GetMouseButtonDown (0) && !SelectedCharacterStats.hasMoved) {
+					Vector3 hitPos = AstarData.active.GetNearest (hit.point).position;
+					if (!Physics.Raycast (new Ray (hitPos, Vector3.up), 1, LayerMask.GetMask ("Player", "UI"))) { // Check if occupied.
 
-                                var node = gg.GetNearest(hitPos).node as GridNode;
-                                var pm = GetComponent<PathManager>();
+                        var node = gg.GetNearest(hitPos).node as GridNode;
+                        var pm = GetComponent<PathManager>();
 
-								var path = pm.getPath (selected.transform.position, hitPos, PathManager.CharacterFaction.ALLY);
+						var path = pm.getPath (selected.transform.position, hitPos, PathManager.CharacterFaction.ALLY);
 
-                                this.path = path;
-								StartCoroutine (MoveCharacter (path));
-							} else {
-								Debug.Log ("Space occupied.");
-							}
-						}
+                        this.path = path;
+						StartCoroutine (MoveCharacter (path));
+					} else {
+						Debug.Log ("Space occupied.");
 					}
 				}
 			}
         }
-        if (Input.GetMouseButtonDown(0))
+        if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0))
         {
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

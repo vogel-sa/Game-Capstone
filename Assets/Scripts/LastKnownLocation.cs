@@ -28,7 +28,7 @@ public class LastKnownLocation : MonoBehaviour {
 	void Update () {
 		if (stats && rend.enabled)
         {
-            transform.position = stats.transform.position;
+            transform.position = AstarPath.active.data.gridGraph.GetNearest(stats.transform.position).clampedPosition;
             myRend.enabled = true;
         }
 	}

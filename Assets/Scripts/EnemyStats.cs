@@ -195,6 +195,8 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
 		//eventually change to mark for removal
 		FindObjectOfType<TurnManager>().enemyList.Remove (this);
 		FindObjectOfType<TurnManager>().CheckGameOver ();
+        var pm = FindObjectOfType<PathManager>();
+        pm.allies.Remove(GetComponent<SingleNodeBlocker>());
         Destroy(lastKnownLocation);
     }
 		

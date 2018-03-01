@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using Pathfinding;
 
 public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
 {
@@ -226,7 +227,8 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
     public void DeadCleanup() {
         var manager = FindObjectOfType<TurnManager>();
         manager.playerList.Remove(this);
-
+        var pm = FindObjectOfType<PathManager>();
+        pm.allies.Remove(GetComponent<SingleNodeBlocker>());
         Destroy(this.gameObject);
     }
 

@@ -14,6 +14,8 @@ public class PathManager : MonoBehaviour {
     public List<SingleNodeBlocker> enemies { get; private set; }
     public List<SingleNodeBlocker> allies { get; private set; }
 
+    
+
     public BlockManager.TraversalProvider allyTraversalProvider { get; private set; }
     public BlockManager.TraversalProvider enemyTraversalProvider { get; private set; }
 
@@ -55,13 +57,13 @@ public class PathManager : MonoBehaviour {
         return null;
     }
 
-    public EnemyStats allyOnNode(GraphNode node)
+    public PlayerCharacterStats allyOnNode(GraphNode node)
     {
         foreach (SingleNodeBlocker ally in allies)
         {
             if (gg.GetNearest(ally.transform.position).node == node)
             {
-                return ally.GetComponent<EnemyStats>();
+                return ally.GetComponent<PlayerCharacterStats>();
             }
         }
         return null;
@@ -71,6 +73,7 @@ public class PathManager : MonoBehaviour {
     {
         var path = ABPath.Construct(start, end, null);
         //path.traversalProvider = team == CharacterFaction.ALLY ? allyTraversalProvider : enemyTraversalProvider;
+        if (team == CharacterFaction.ENEMY) path.traversalProvider = enemyTraversalProvider;
         AstarPath.StartPath(path);
         path.BlockUntilCalculated();
 

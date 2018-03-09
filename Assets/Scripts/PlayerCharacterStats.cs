@@ -213,7 +213,7 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
         if (MitigationValue <= damage)
         {
             var dmgtaken = damage - MitigationValue;
-
+            GetComponent<DamageText>().displayText(dmgtaken, 1.1f);
             CurrHP = Math.Max(CurrHP - dmgtaken, 0);
 
             if (IsDead())

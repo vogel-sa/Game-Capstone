@@ -16,7 +16,10 @@ public class DamageText : MonoBehaviour {
 
     public void displayText(int damage, float time)
     {
-        StartCoroutine(displayCoRoutine(damage, time));
+        if (gameObject.tag =="Player" || GetComponentInChildren<MeshRenderer>().enabled)
+        {
+            StartCoroutine(displayCoRoutine(damage, time));
+        }
     }
 
      IEnumerator displayCoRoutine(int damage, float timetoDisplay)
@@ -26,7 +29,7 @@ public class DamageText : MonoBehaviour {
             Camera.main.transform.rotation * Vector3.up);
         damageText.enabled = true;
 
-        yield return new WaitForSeconds(timetoDisplay);
+        yield return new WaitForSeconds(timetoDisplay   );
         damageText.enabled = false;
     }
 }

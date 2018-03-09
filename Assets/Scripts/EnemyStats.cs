@@ -156,6 +156,7 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
     public void TakeDamage(int dmg)
     {
         CurrHP -= dmg;
+
         GetComponent<DamageText>().displayText(dmg, 1.1f);
 
         if (CurrHP <= 0)

@@ -34,9 +34,13 @@ public class EnemyTurn : MonoBehaviour
 		{
 			ABPath path = null;
 			PlayerCharacterStats target = null;
-			var blocked = (from blocker in GetComponent<PathManager> ().enemies
-			               select blocker.lastBlocked).Concat (from blocker in GetComponent<PathManager> ().allies
-			                                                   select blocker.lastBlocked).ToList ();
+			var enemypositions = new List<GraphNode> ();
+			foreach (var e in enemies)
+			{
+				if (e != enemy)
+					enemypositions.Add (AstarData.active.GetNearest(enemy.transform.position).node);
+			}
+
             var pm = GetComponent<PathManager>();
             GridGraph gg = AstarPath.active.data.gridGraph;
             GridNode node = gg.GetNearest(enemy.transform.position).node as GridNode;
@@ -97,22 +101,16 @@ public class EnemyTurn : MonoBehaviour
                     path = pm.getPath(enemy.transform.position, (Vector3)dest.position, PathManager.CharacterFaction.ENEMY);
                     break;
                 }
-
-
-                //var newPath = GetComponent<PathManager>().getPath (enemy.transform.position, (Vector3)neighbor.position, PathManager.CharacterFaction.ENEMY);
-				//if (newPath != null && (path == null || path.vectorPath.Count > newPath.vectorPath.Count)) path = newPath;
-				//target = player;
 			}
 			if (path != null && !path.error)
 			{
-                print("Enemy found valid path");
 				bool finished = false;
 				var arr = new Vector3[Mathf.Min(path.vectorPath.Count + 2, enemy.MovementRange + 2)];
                 for (int i = 1; i < arr.Length - 1; i++)
                 {
                     arr[i] = path.vectorPath[i-1];
                 }
-				if (blocked.Contains(AstarData.active.GetNearest( arr[arr.Length - 1]).node)) {
+				if (enemypositions.Contains(AstarData.active.GetNearest(path.vectorPath[path.vectorPath.Count - 1]).node)) {
 					continue;
 				}
 				arr [0] = arr [1];

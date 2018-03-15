@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using Pathfinding;
 
 public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
 {
@@ -212,7 +213,7 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
         if (MitigationValue <= damage)
         {
             var dmgtaken = damage - MitigationValue;
-
+            GetComponent<DamageText>().displayText(dmgtaken, 1.1f);
             CurrHP = Math.Max(CurrHP - dmgtaken, 0);
 
             if (IsDead())
@@ -226,8 +227,10 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
     public void DeadCleanup() {
         var manager = FindObjectOfType<TurnManager>();
         manager.playerList.Remove(this);
-
+        var pm = FindObjectOfType<PathManager>();
+        pm.allies.Remove(GetComponent<SingleNodeBlocker>());
         Destroy(this.gameObject);
+        manager.CheckGameOver();
     }
 
 	public void CheckCharacterCannotMove()

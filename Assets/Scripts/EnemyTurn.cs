@@ -29,31 +29,78 @@ public class EnemyTurn : MonoBehaviour
 	private IEnumerator _runTurn(IList<PlayerCharacterStats> players, IList<EnemyStats> enemies, TurnManager.GAMESTATE turn)
 	{
 		var moveSpeed = 5f;
-		List<GraphNode> nodes = null;
         var manager = FindObjectOfType<TurnManager>();
 		foreach (var enemy in enemies)
 		{
 			ABPath path = null;
 			PlayerCharacterStats target = null;
-			var blocked = (from blocker in GetComponent<PathManager> ().enemies
-			               select blocker.lastBlocked).Concat (from blocker in GetComponent<PathManager> ().allies
-			                                                   select blocker.lastBlocked).ToList ();
-			
-			foreach (PlayerCharacterStats player in players)
+			var enemypositions = new List<GraphNode> ();
+			foreach (var e in enemies)
 			{
-                if (Vector3.Distance(player.transform.position, enemy.transform.position) > enemy.DetectionRadius) break;
-				List<GraphNode> neighbors = new List<GraphNode> ();
-				// TODO: Find a better way to do this, one that takes enemy and ally blocked nodes into account.
-				GraphNode neighbor = AstarData.active.GetNearest(player.transform.position + Vector3.left).node;
-				if (neighbor == null || !neighbor.Walkable) neighbor = AstarData.active.GetNearest(player.transform.position + Vector3.right).node;
-				if (neighbor == null || !neighbor.Walkable) neighbor = AstarData.active.GetNearest(player.transform.position + Vector3.forward).node;
-				if (neighbor == null || !neighbor.Walkable) neighbor = AstarData.active.GetNearest(player.transform.position + Vector3.back).node;
+				if (e != enemy)
+					enemypositions.Add (AstarData.active.GetNearest(enemy.transform.position).node);
+			}
 
+            var pm = GetComponent<PathManager>();
+            GridGraph gg = AstarPath.active.data.gridGraph;
+            GridNode node = gg.GetNearest(enemy.transform.position).node as GridNode;
+            int x = node.NodeInGridIndex % gg.width;
+            int y = node.NodeInGridIndex / gg.width;
+            GraphNode dest = null;
+            GraphNode[] neighbors = new GraphNode[4];
+            neighbors[0] = gg.GetNode(x - 1, y);
+            neighbors[1] = gg.GetNode(x + 1, y);
+            neighbors[2] = gg.GetNode(x, y - 1);
+            neighbors[3] = gg.GetNode(x, y + 1);
 
+            foreach (var n in neighbors)
+            {
+                var ally = pm.allyOnNode(n);
+                if (n != null && ally != null && (!target || ally.CurrHP < target.CurrHP))
+                {
+                    target = ally;
+                }
+            }
+            if (target)
+            {
+                target.TakeDamage(enemy.Atk);
+                continue;
+            }
+            // Find closest player
+            foreach (PlayerCharacterStats player in players)
+			{
+                if (Vector3.Distance(player.transform.position, enemy.transform.position) > enemy.DetectionRadius) continue;
+                neighbors[0] = null;
+                neighbors[1] = null;
+                neighbors[2] = null;
+                neighbors[3] = null;
+                GridNode playerNode = gg.GetNearest(player.transform.position).node as GridNode;
+                x = playerNode.NodeInGridIndex % gg.width;
+                y = playerNode.NodeInGridIndex / gg.width;
+                neighbors[0] = gg.GetNode(x - 1, y);
+                neighbors[1] = gg.GetNode(x + 1, y);
+                neighbors[2] = gg.GetNode(x, y - 1);
+                neighbors[3] = gg.GetNode(x, y + 1);
+                target = null;
+                //var nodesInRange = new HashSet<GraphNode>(PathUtilities.BFS(node, enemy.MovementRange));
+                
+                foreach (GraphNode n in neighbors)
+                {
+                    
+                    if (n != null && !pm.enemyOnNode(n) && !pm.allyOnNode(n) &&
+                                  (dest == null || Vector3.Distance((Vector3)node.position,(Vector3)n.position) <
+                                                   Vector3.Distance((Vector3)node.position, (Vector3)dest.position)))
+                    {
+                        dest = n;
+                        target = pm.allyOnNode(playerNode);
+                    }
+                }
 
-				var newPath = GetComponent<PathManager>().getPath (enemy.transform.position, (Vector3)neighbor.position, PathManager.CharacterFaction.ENEMY);
-				if (newPath != null && (path == null || path.vectorPath.Count > newPath.vectorPath.Count)) path = newPath;
-				target = player;
+                if (target && dest != null)
+                {
+                    path = pm.getPath(enemy.transform.position, (Vector3)dest.position, PathManager.CharacterFaction.ENEMY);
+                    break;
+                }
 			}
 			if (path != null && !path.error)
 			{
@@ -63,7 +110,7 @@ public class EnemyTurn : MonoBehaviour
                 {
                     arr[i] = path.vectorPath[i-1];
                 }
-				if (blocked.Contains(AstarData.active.GetNearest( arr[arr.Length - 1]).node)) {
+				if (enemypositions.Contains(AstarData.active.GetNearest(path.vectorPath[path.vectorPath.Count - 1]).node)) {
 					continue;
 				}
 				arr [0] = arr [1];

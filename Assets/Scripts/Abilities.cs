@@ -58,7 +58,7 @@ public class Abilities : MonoBehaviour {
             lineRenderer.endWidth = lineRenderer.startWidth = width;
             do
             {
-                if (Input.GetKeyDown(KeyCode.Escape)) yield break;
+                if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1)) yield break;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
                 {
@@ -105,37 +105,48 @@ public class Abilities : MonoBehaviour {
 			GetComponent<PlayerMovementManager>().enabled = false;
             Vector3 direction = Vector3.zero;
             RaycastHit hit;
+            Vector3 hitpoint = Vector3.zero;
             Vector3 mousePos = new Vector3(0,0,0);
             los = new GameObject().AddComponent<LineOfSight>();
             los._maxAngle = (int)abilData.OtherValues.Angle;
             los._maxDistance = abilData.OtherValues.Range;
             los.gameObject.AddComponent<cakeslice.Outline>();
             los._idle = Resources.Load<Material>("Clear");
-            los.transform.position = stats.transform.position + Vector3.up;
+            los.transform.position = stats.transform.position + Vector3.up * .2f;
             los._cullingMask = LayerMask.GetMask("Obstacle");
+            bool goodHit = false;
             float distance = 0;
             do
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+                if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
                 {
-                    if (LayerMask.LayerToName(hit.collider.gameObject.layer) != "Obstacle")
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
                     {
-                        mousePos = new Vector3(hit.point.x, stats.transform.position.y + 1, hit.point.z);
-                        var origin = stats.transform.position + Vector3.up;
-                        origin.y = 0;
-                        distance = Vector3.Distance(origin, mousePos);
+                        hitpoint = hit.point;
+                        Vector3 hitPointAtEyeLevel = new Vector3(hit.point.x, stats.transform.position.y + 1, hit.point.z);
+                        Ray losRay = new Ray(stats.transform.position, hitPointAtEyeLevel - stats.transform.position);
+                        RaycastHit newhit;
+                        if (!Physics.Raycast(losRay, out newhit, Vector3.Distance(stats.transform.position + Vector3.up, hitPointAtEyeLevel), LayerMask.GetMask("Obstacle")))
+                        {
+                            print("raycsat didn't hit");
+                            goodHit = true;
+                            var origin = stats.transform.position + Vector3.up;
+                            origin.y = 0;
+                            distance = Vector3.Distance(origin, hitPointAtEyeLevel);
+                            break;
+                        }
+
+
                     }
-
                 }
-
-                if (Input.GetKeyDown(KeyCode.Escape)) yield break;
+                if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1)) yield break;
                 yield return null;
-            } while (!(Input.GetMouseButtonDown(0) && distance < los._maxDistance));
+            } while (!(Input.GetMouseButtonDown(0) && distance < los._maxDistance && goodHit));
             Debug.Log("flare dropped");
             GameObject flare = Instantiate(Resources.Load<GameObject>("Prefabs/Flare"));
             mousePos.y = 1.1f;
-            flare.transform.position = mousePos;
+            flare.transform.position = hitpoint;//mousePos;
 
             genericStatChange(abilData, stats);
             yield return null;
@@ -182,7 +193,7 @@ public class Abilities : MonoBehaviour {
             flashlight.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
             do
             {
-                if (Input.GetKeyDown(KeyCode.Escape)) yield break;
+                if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1)) yield break;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
                 {
@@ -212,7 +223,6 @@ public class Abilities : MonoBehaviour {
         }
     }
 
-
 	public void CoveringFire(PlayerCharacterStats stats) { if (stats.Actionsleft > 0) StartCoroutine(_CoveringFire(stats)); }
 	private IEnumerator _CoveringFire(PlayerCharacterStats stats)
 	{
@@ -232,7 +242,7 @@ public class Abilities : MonoBehaviour {
 			los._maxDistance = abilData.OtherValues.Range;
 			do
 			{
-				if (Input.GetKeyDown(KeyCode.Escape)) yield break;
+				if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1)) yield break;
 				yield return null;
 			} while (!Input.GetMouseButtonDown(0));
 			los.gameObject.SetActive(false);
@@ -259,7 +269,7 @@ public class Abilities : MonoBehaviour {
 			GetComponent<PlayerMovementManager>().enabled = false;
 			do
 			{
-				if (Input.GetKeyDown(KeyCode.Escape)) yield break;
+				if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1)) yield break;
 				yield return null;
 			} while (!Input.GetMouseButtonDown(0));
 			stats.isFortifying = true;
@@ -274,8 +284,6 @@ public class Abilities : MonoBehaviour {
 		}
 
 	}
-
-
 
 	public void RapidFire(PlayerCharacterStats stats) { if (stats.Actionsleft > 0) StartCoroutine(_RapidFire(stats)); }
 	private IEnumerator _RapidFire(PlayerCharacterStats stats)
@@ -300,7 +308,7 @@ public class Abilities : MonoBehaviour {
 			cone._maxDistance = abilData.OtherValues.Range;
 			do
 			{
-				if (Input.GetKeyDown(KeyCode.Escape)) yield break;
+				if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1)) yield break;
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
 				{
@@ -383,7 +391,7 @@ public class Abilities : MonoBehaviour {
 
 			do
 			{
-				if (Input.GetKeyDown(KeyCode.Escape)) yield break;
+				if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1)) yield break;
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
 				{

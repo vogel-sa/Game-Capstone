@@ -46,13 +46,15 @@ public class PlayerMovementManager : MonoBehaviour
     private ABPath path;
     private float moveSpeed = 5f;
 
+    private GridGraph gg;
+
 	void Awake() {
         quadParent = new GameObject();
 		//quadParent.transform.parent = gameObject.transform;
         Vector3 quadRotation = new Vector3(90, 0, 0);
 		for (int i = 0; i < quads.Length; i++)
         {
-
+            
             var quad = PrimitiveHelper.CreatePrimitive(PrimitiveType.Quad, false);
             quad.transform.parent = quadParent.transform;
             var col = quad.AddComponent<BoxCollider>();
@@ -71,39 +73,45 @@ public class PlayerMovementManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        gg = AstarData.active.data.gridGraph;
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (selected)
         {
-            if (Input.GetKeyDown(KeyCode.Escape)) Deselect();
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1)) Deselect();
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (lastUpdateOutline) lastUpdateOutline.color = notHighlightedColor;
-			if (!EventSystem.current.IsPointerOverGameObject()) {
-				if (Physics.Raycast (ray, out hit, Camera.main.farClipPlane, LayerMask.GetMask ("Outline", "UI"))) {
-					{
-						Outline outline = hit.transform.GetComponent<Outline> ();
-						if (lastUpdateOutline)
-							lastUpdateOutline.color = notHighlightedColor;
-						outline.color = highlightedColor;
-						lastUpdateOutline = outline;
+			if (!EventSystem.current.IsPointerOverGameObject() && Physics.Raycast (ray, out hit, Camera.main.farClipPlane, LayerMask.GetMask ("Outline", "UI"))) {
+				Outline outline = hit.transform.GetComponent<Outline> ();
+				if (lastUpdateOutline)
+					lastUpdateOutline.color = notHighlightedColor;
+				outline.color = highlightedColor;
+				lastUpdateOutline = outline;
 
-						if (controlsEnabled && Input.GetMouseButtonDown (0) && !SelectedCharacterStats.hasMoved) {
-							Vector3 hitPos = AstarData.active.GetNearest (hit.point).position;
-							if (!Physics.Raycast (new Ray (hitPos, Vector3.up), 1, LayerMask.GetMask ("Player", "UI"))) { // Check if occupied.
-								var path = GetComponent<PathManager>().getPath (selected.transform.position, hitPos, PathManager.CharacterFaction.ALLY);
-								this.path = path;
-								StartCoroutine (MoveCharacter (path));
-							} else {
-								Debug.Log ("Space occupied.");
-							}
-						}
+				if (controlsEnabled && Input.GetMouseButtonDown (0) && !SelectedCharacterStats.hasMoved) {
+					Vector3 hitPos = AstarData.active.GetNearest (hit.point).position;
+					if (!Physics.Raycast (new Ray (hitPos, Vector3.up), 1, LayerMask.GetMask ("Player", "UI"))) { // Check if occupied.
+
+                        var node = gg.GetNearest(hitPos).node as GridNode;
+                        var pm = GetComponent<PathManager>();
+
+						var path = pm.getPath (selected.transform.position, hitPos, PathManager.CharacterFaction.ALLY);
+
+                        this.path = path;
+						StartCoroutine (MoveCharacter (path));
+					} else {
+						Debug.Log ("Space occupied.");
 					}
 				}
 			}
         }
-        if (Input.GetMouseButtonDown(0))
+        if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0))
         {
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -150,31 +158,43 @@ public class PlayerMovementManager : MonoBehaviour
         {
             quads[i].SetActive(false);
         }
-        var modifier = new GameObject().AddComponent<RaycastModifier>();
-            modifier.raycastOffset = Vector3.up * .2f;
-        modifier.mask = LayerMask.GetMask("Obstacle", "Enemy");
-        modifier.Apply(path);
+        //var modifier = new GameObject().AddComponent<RaycastModifier>();
+        //    modifier.raycastOffset = Vector3.up * .2f;
+        //modifier.mask = LayerMask.GetMask("Obstacle", "Enemy");
+        //modifier.Apply(path);
         var finished = false;
         var positionEnumeration = (from node in path.vectorPath
                                    orderby path.vectorPath.IndexOf(node)
-                                   select (Vector3)node).ToArray();
+                                   select (Vector3)node).ToList();
+        for (int i = positionEnumeration.Count - 1; i >= 0; i--)
+        {
+            var node = gg.GetNearest(positionEnumeration[i]).node;
+            if (GetComponent<PathManager>().enemyOnNode(node))
+            {
+                positionEnumeration.RemoveAt(i);
+            }
+            else
+            {
+                break;
+            }
+        }
         var arr = new Vector3[positionEnumeration.Count() + 2];
         positionEnumeration.CopyTo(arr, 1);
         arr[0] = arr[1];
         arr[arr.Length - 1] = arr[arr.Length - 2];
         var spline = new LTSpline(arr);
-		Destroy (modifier.gameObject);
+		//Destroy (modifier.gameObject);
 
         LeanTween.moveSpline(selected.gameObject, spline, spline.distance / moveSpeed).
             setOnComplete(() => finished = true). // May want to fiddle with animation states here.
-            setEase(LeanTweenType.linear).
+            setEase(LeanTweenType.easeInOutQuad).
             setOrientToPath(true);
         //.setOnStart()
 
         yield return new WaitUntil(() => finished);
         controlsEnabled = true;
         // TODO: Fix the heirarchy for stats.
-
+        
         SelectedCharacterStats.hasMoved = true;
 		SelectedCharacterStats.CheckCharacterCannotMove();
 		GetComponent<TurnManager>().AutoEndTurnCheck();

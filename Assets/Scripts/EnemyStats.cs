@@ -139,6 +139,39 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
         }
     }
 
+	[SerializeField]
+	private AudioClip _movementSound;
+	public AudioClip MovementSound
+	{
+		get
+		{
+			return _movementSound;
+		}
+
+	}
+
+	[SerializeField]
+	private AudioClip _attackSound;
+	public AudioClip AttackSound
+	{
+		get
+		{
+			return _attackSound;
+		}
+
+	}
+
+	[SerializeField]
+	private AudioClip _deathSound;
+	public AudioClip DeathSound
+	{
+		get
+		{
+			return _deathSound;
+		}
+
+	}
+
     [SerializeField]
     private float _detectionRadius;
     public float DetectionRadius { get { return _detectionRadius; } }
@@ -196,6 +229,8 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
         GetComponent<SingleNodeBlocker>().Unblock();
 		FindObjectOfType<PathManager>().enemies.Remove(GetComponent<SingleNodeBlocker>());
 		//eventually change to mark for removal
+		var audio = FindObjectOfType<TurnManager>().GetComponent<AudioManager>();
+		audio.playSoundEffect(DeathSound);
 		FindObjectOfType<TurnManager>().enemyList.Remove (this);
 		FindObjectOfType<TurnManager>().CheckGameOver ();
         var pm = FindObjectOfType<PathManager>();

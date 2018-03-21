@@ -118,6 +118,17 @@ public class AbilityData{
             return _abilitySprite;
         }
     }
+
+	[SerializeField]
+	private AudioClip _sound;
+	public AudioClip Sound
+	{
+		get
+		{
+			return _sound;
+		}
+			
+	}
     
     /// <summary>
     /// READ BEFORE SETTING THIS DICTIONARY
@@ -256,6 +267,7 @@ public class OtherAbilityValues
 			_fallOffDamage = value;
 		}
 	}
+		
 
 
 }

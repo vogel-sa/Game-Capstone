@@ -129,7 +129,6 @@ public class Abilities : MonoBehaviour {
                         RaycastHit newhit;
                         if (!Physics.Raycast(losRay, out newhit, Vector3.Distance(stats.transform.position + Vector3.up, hitPointAtEyeLevel), LayerMask.GetMask("Obstacle")))
                         {
-                            print("raycsat didn't hit");
                             goodHit = true;
                             var origin = stats.transform.position + Vector3.up;
                             origin.y = 0;

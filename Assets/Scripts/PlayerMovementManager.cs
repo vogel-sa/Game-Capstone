@@ -143,8 +143,6 @@ public class PlayerMovementManager : MonoBehaviour
     private IEnumerator MoveCharacter(ABPath path)
     {
         this.enabled = false;
-		var audio = GetComponent<AudioManager>();
-		audio.playSoundEffect(SelectedCharacterStats.MovementSound);
         #if DEBUG
         for (int i = 0; i < path.vectorPath.Count - 1; i++)
         {

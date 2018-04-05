@@ -28,6 +28,10 @@ public class TurnManager : MonoBehaviour
   	GameObject VictoryScreen;
 	[SerializeField]
 	GameObject TurnChangeScreen;
+	[SerializeField]
+	AudioClip playerSound;
+	[SerializeField]
+	AudioClip enemySound;
 
 	void Awake()
 	{
@@ -91,6 +95,11 @@ public class TurnManager : MonoBehaviour
 			{
 				text.text = "Player Turn Start";
 				TurnChangeScreen.SetActive(true);
+				var audio = GetComponent<AudioManager>();
+				if (audio != null) {
+					audio.playSoundEffect (playerSound);
+				}
+
 				yield return new WaitForSeconds (2f);
 				TurnChangeScreen.SetActive(false);
 				currentTurn = GAMESTATE.PLAYERTURN;
@@ -103,6 +112,10 @@ public class TurnManager : MonoBehaviour
 				OnEnemyTurnStart();
 				text.text = "Enemy Turn Start";
 				TurnChangeScreen.SetActive(true);
+				var audio = GetComponent<AudioManager>();
+				if (audio != null) {
+					audio.playSoundEffect (enemySound);
+				}
 				yield return new WaitForSeconds (2f);
 				TurnChangeScreen.SetActive(false);
 				currentTurn = GAMESTATE.ENEMYTURN;

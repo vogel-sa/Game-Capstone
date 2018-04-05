@@ -267,6 +267,28 @@ public class OtherAbilityValues
 			_fallOffDamage = value;
 		}
 	}
+
+	[SerializeField]
+	private AudioClip _sound2;
+	public AudioClip Sound2
+	{
+		get
+		{
+			return _sound2;
+		}
+
+	}
+
+	[SerializeField]
+	private AudioClip _sound3;
+	public AudioClip Sound3
+	{
+		get
+		{
+			return _sound3;
+		}
+
+	}
 		
 
 

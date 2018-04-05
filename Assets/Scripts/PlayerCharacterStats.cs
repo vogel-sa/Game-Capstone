@@ -160,6 +160,17 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
 
 	}
 
+	[SerializeField]
+	private AudioClip _damageSound;
+	public AudioClip DamageSound
+	{
+		get
+		{
+			return _damageSound;
+		}
+
+	}
+
 
 	[SerializeField]
 	bool _isCoveringFire;
@@ -235,9 +246,15 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
         if (MitigationValue <= damage)
         {
             var dmgtaken = damage - MitigationValue;
-            GetComponent<DamageText>().displayText(dmgtaken, 1.1f);
-            CurrHP = Math.Max(CurrHP - dmgtaken, 0);
+			var audio = GetComponent<AudioManager>();
+			if (audio != null) {
+				audio.playSoundEffect (DamageSound);
+			}
 
+			if (GetComponent<DamageText>() != null) {
+            GetComponent<DamageText>().displayText(dmgtaken, 1.1f);
+			}
+            CurrHP = Math.Max(CurrHP - dmgtaken, 0);
             if (IsDead())
             {
 				
@@ -250,7 +267,9 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
     public void DeadCleanup() {
         var manager = FindObjectOfType<TurnManager>();
 		var audio = manager.GetComponent<AudioManager>();
-		audio.playSoundEffect(DeathSound);
+		if (audio != null) {
+			audio.playSoundEffect (DeathSound);
+		}
         manager.playerList.Remove(this);
         var pm = FindObjectOfType<PathManager>();
         pm.allies.Remove(GetComponent<SingleNodeBlocker>());

@@ -230,7 +230,9 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
 		FindObjectOfType<PathManager>().enemies.Remove(GetComponent<SingleNodeBlocker>());
 		//eventually change to mark for removal
 		var audio = FindObjectOfType<TurnManager>().GetComponent<AudioManager>();
-		audio.playSoundEffect(DeathSound);
+		if (audio != null) {
+			audio.playSoundEffect(DeathSound);
+		}
 		FindObjectOfType<TurnManager>().enemyList.Remove (this);
 		FindObjectOfType<TurnManager>().CheckGameOver ();
         var pm = FindObjectOfType<PathManager>();

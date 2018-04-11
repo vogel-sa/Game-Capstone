@@ -37,6 +37,15 @@ public class Abilities : MonoBehaviour {
         }
     }
 
+	private void fadeOut(AudioManager aud) {
+		float audioVol = 1.0f;
+		if(audioVol > 0.1f)
+		{
+			audioVol -= 0.1f * Time.deltaTime;
+			aud.volume = audioVol;
+		}
+	}
+
     public void BasicShootAbility(PlayerCharacterStats stats) { if (stats.Actionsleft > 0) StartCoroutine(_basicShootAbility(stats)); }
     private IEnumerator _basicShootAbility(PlayerCharacterStats stats)
     {
@@ -47,6 +56,7 @@ public class Abilities : MonoBehaviour {
             var abilData = (from abil in stats.AbilityData where abil.Name == "Shoot" select abil).FirstOrDefault();
             Debug.Log(abilData.Description);
 			var pmm = GetComponent<PlayerMovementManager>();
+			var audio = GetComponent<AudioManager>();
 			pmm.SetQuadsEnabled(false);
 			pmm.enabled = false;
             var range = abilData.OtherValues.Range;
@@ -71,6 +81,10 @@ public class Abilities : MonoBehaviour {
                 yield return null;
             } while (!Input.GetMouseButtonDown(0));
             lineRenderer.gameObject.SetActive(false);
+			if (audio) {
+				audio.playSoundEffect (abilData.Sound);
+			}
+
             // TODO: Animation of ability
             EnemyStats hitStats;
             if (Physics.Raycast(stats.transform.position + Vector3.up, -(direction.normalized), out hit, range, ~LayerMask.GetMask("Player", "Ground", "Ignore Raycast", "Flare")))//, LayerMask.NameToLayer("Enemy")))
@@ -98,8 +112,8 @@ public class Abilities : MonoBehaviour {
         LineOfSight los = null;
         try
         {
-            
             var abilData = (from abil in stats.AbilityData where abil.Name == "Flare" select abil).FirstOrDefault();
+			var audio = GetComponent<AudioManager>();
             DisableButtons(stats);
 			GetComponent<PlayerMovementManager>().SetQuadsEnabled(false);
 			GetComponent<PlayerMovementManager>().enabled = false;
@@ -144,6 +158,12 @@ public class Abilities : MonoBehaviour {
             } while (!(Input.GetMouseButtonDown(0) && distance < los._maxDistance && goodHit));
             Debug.Log("flare dropped");
             GameObject flare = Instantiate(Resources.Load<GameObject>("Prefabs/Flare"));
+
+			if (audio) {
+				audio.playSoundEffect(abilData.Sound);
+				//fadeOut(audio);
+			}
+
             mousePos.y = 1.1f;
             flare.transform.position = hitpoint;//mousePos;
 
@@ -168,6 +188,7 @@ public class Abilities : MonoBehaviour {
         {
             DisableButtons(stats);
             var abilData = (from abil in stats.AbilityData where abil.Name == "Flashlight" select abil).FirstOrDefault();
+			var audio = GetComponent<AudioManager>();
             Debug.Log(abilData.Description);
 			GetComponent<PlayerMovementManager>().SetQuadsEnabled(false);
 			GetComponent<PlayerMovementManager>().enabled = false;
@@ -208,6 +229,9 @@ public class Abilities : MonoBehaviour {
                 }
                 yield return null;
             } while (!Input.GetMouseButtonDown(0));
+			if (audio != null) {
+				audio.playSoundEffect (abilData.Sound);
+			}
             los.gameObject.SetActive(false);
             flashlight.gameObject.SetActive(true);
             genericStatChange(abilData,stats);
@@ -217,8 +241,9 @@ public class Abilities : MonoBehaviour {
         finally
         {
             genericCleanup(stats);
-            if (los) Destroy(los.gameObject);
-            if (flashlight && !flashlight.gameObject.activeSelf) Destroy(flashlight.gameObject);
+			if (los) Destroy (los.gameObject);
+			if (flashlight && !flashlight.gameObject.activeSelf) Destroy (flashlight.gameObject);
+			
         }
     }
 
@@ -229,6 +254,7 @@ public class Abilities : MonoBehaviour {
 		try {
 			DisableButtons(stats);
 			var abilData = (from abil in stats.AbilityData where abil.Name == "CoveringFire" select abil).FirstOrDefault();
+			var audio = GetComponent<AudioManager>();
 			//Debug.Log(abilData.Description);
 			GetComponent<PlayerMovementManager>().SetQuadsEnabled(false);
 			GetComponent<PlayerMovementManager>().enabled = false;
@@ -245,6 +271,9 @@ public class Abilities : MonoBehaviour {
 				yield return null;
 			} while (!Input.GetMouseButtonDown(0));
 			los.gameObject.SetActive(false);
+			if (audio != null) {
+				audio.playSoundEffect (abilData.Sound);
+			}
 			stats.isCoveringFire = true;
 			stats.hasMoved = true;
             genericStatChange(abilData, stats);
@@ -264,6 +293,7 @@ public class Abilities : MonoBehaviour {
 		try {
 			DisableButtons(stats);
 			var abilData = (from abil in stats.AbilityData where abil.Name == "Fortify" select abil).FirstOrDefault();
+			var audio = GetComponent<AudioManager>();
 			GetComponent<PlayerMovementManager>().SetQuadsEnabled(false);
 			GetComponent<PlayerMovementManager>().enabled = false;
 			do
@@ -272,6 +302,9 @@ public class Abilities : MonoBehaviour {
 				yield return null;
 			} while (!Input.GetMouseButtonDown(0));
 			stats.isFortifying = true;
+			if (audio != null) {
+				audio.playSoundEffect (abilData.Sound);
+			}
             genericStatChange(abilData, stats);
 			stats.MitigationValue += abilData.DamageAmount;
 			yield return new WaitForSeconds(.5f);
@@ -291,6 +324,7 @@ public class Abilities : MonoBehaviour {
 		try
 		{
 			var abilData = (from abil in stats.AbilityData where abil.Name == "RapidFire" select abil).FirstOrDefault();
+			var audio = GetComponent<AudioManager>();
 			Debug.Log(abilData.Description);
 			GetComponent<PlayerMovementManager>().SetQuadsEnabled(false);
 			GetComponent<PlayerMovementManager>().enabled = false;
@@ -322,6 +356,9 @@ public class Abilities : MonoBehaviour {
 				yield return null;
 			} while (!Input.GetMouseButtonDown(0));
 			cone.gameObject.SetActive(false);
+			if (audio != null) {
+				audio.playSoundEffect (abilData.Sound);
+			}
 			EnemyStats hitStats;
 			Quaternion startingAngle = Quaternion.AngleAxis(-(cone._maxAngle/2), Vector3.up);
 			int increment = 2;
@@ -372,6 +409,7 @@ public class Abilities : MonoBehaviour {
 		try
 		{
 			var abilData = (from abil in stats.AbilityData where abil.Name == "Shotgun Blast" select abil).FirstOrDefault();
+			var audio = GetComponent<AudioManager>();
 			Debug.Log(abilData.Description);
 			GetComponent<PlayerMovementManager>().SetQuadsEnabled(false);
 			GetComponent<PlayerMovementManager>().enabled = false;
@@ -406,6 +444,9 @@ public class Abilities : MonoBehaviour {
 				yield return null;
 			} while (!Input.GetMouseButtonDown(0));
 			cone.gameObject.SetActive(false);
+			if (audio != null) {
+				audio.playSoundEffect (abilData.Sound);
+			}
 			EnemyStats hitStats;
 			Quaternion startingAngle = Quaternion.AngleAxis(-(cone._maxAngle/2), Vector3.up);
 			int increment = 8;
@@ -474,4 +515,5 @@ public class Abilities : MonoBehaviour {
         else
             GetComponent<PlayerMovementManager>().Select(stats);
     }
+
 }

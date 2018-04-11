@@ -1033,6 +1033,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 430841585}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!84 &456942192
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 1020
+  m_Height: 527
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &485221456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,6 +1175,9 @@ MonoBehaviour:
   playerList: []
   enemyList: []
   VictoryScreen: {fileID: 1767269961}
+  TurnChangeScreen: {fileID: 1827906334}
+  playerSound: {fileID: 8300000, guid: 534d913be47903046941bbf3e4e8680a, type: 3}
+  enemySound: {fileID: 8300000, guid: f364bb4f2f40c8a42889390f2c71ac0c, type: 3}
 --- !u!114 &485221463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1203,8 +1233,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 485221470}
   outlineCamera: {fileID: 673679436}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 1558498285}
-  extraRenderTexture: {fileID: 2071749958}
+  renderTexture: {fileID: 1519635936}
+  extraRenderTexture: {fileID: 456942192}
 --- !u!81 &485221467
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1488,7 +1518,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 1558498285}
+  m_TargetTexture: {fileID: 1519635936}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -1498,6 +1528,201 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
+--- !u!1001 &741273834
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4571046729023890, guid: bed5ba31646b9804d90479909af95426, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -7.3916235
+      objectReference: {fileID: 0}
+    - target: {fileID: 4571046729023890, guid: bed5ba31646b9804d90479909af95426, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4571046729023890, guid: bed5ba31646b9804d90479909af95426, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -14.381819
+      objectReference: {fileID: 0}
+    - target: {fileID: 4571046729023890, guid: bed5ba31646b9804d90479909af95426, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4571046729023890, guid: bed5ba31646b9804d90479909af95426, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4571046729023890, guid: bed5ba31646b9804d90479909af95426, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4571046729023890, guid: bed5ba31646b9804d90479909af95426, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4571046729023890, guid: bed5ba31646b9804d90479909af95426, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114507652485076626, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: eraseRenderer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[4]._ability.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[0]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 485221459}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[0]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BasicShootAbility
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[1]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 485221459}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[1]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RoadFlareAbility
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 485221459}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RapidFire
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._sound
+      value: 
+      objectReference: {fileID: 8300000, guid: 1a155dbd79356324ca675825fed7bbcc, type: 3}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[0]._sound
+      value: 
+      objectReference: {fileID: 8300000, guid: 05195d07e0337464f84b28f2ebebeaee, type: 3}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _movementSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 8e25fc003f330924f847603cc85f6b8a, type: 3}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: edbf201d81b9abf459bcafca0d66bfb0, type: 3}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._name
+      value: CoveringFire
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._damageAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._maxcooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._othervalues._angle
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._othervalues._range
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 485221459}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CoveringFire
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: PlayerCharacterStats, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 288228252}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._description
+      value: Set up a reaction shot.  Take a shot dealing 3 damage to the first enemy
+        within range and sight on the enemy turn
+      objectReference: {fileID: 0}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._abilitySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5a588b96710622f40b453035d6c6242a,
+        type: 3}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _damageSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 50a26196edfb0024ba812b9eff9026bc, type: 3}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[1]._sound
+      value: 
+      objectReference: {fileID: 8300000, guid: e087f0db4c25ad54ab09ce9c6c6dc362, type: 3}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[1]._othervalues._sound2
+      value: 
+      objectReference: {fileID: 8300000, guid: d5ab2009e2cbf904cb95b9cf7922de12, type: 3}
+    - target: {fileID: 114899361186994330, guid: bed5ba31646b9804d90479909af95426,
+        type: 2}
+      propertyPath: _abilityData.Array.data[1]._othervalues._sound3
+      value: 
+      objectReference: {fileID: 8300000, guid: fdbd995268c08c246bec674375ed7670, type: 3}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: bed5ba31646b9804d90479909af95426, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &754677581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1601,253 +1826,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 863141221}
---- !u!1001 &881620262
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4231778708646304, guid: db2658fcf25cca342b93d9ad22e8a0f6, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -3.026694
-      objectReference: {fileID: 0}
-    - target: {fileID: 4231778708646304, guid: db2658fcf25cca342b93d9ad22e8a0f6, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4231778708646304, guid: db2658fcf25cca342b93d9ad22e8a0f6, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -14.681345
-      objectReference: {fileID: 0}
-    - target: {fileID: 4231778708646304, guid: db2658fcf25cca342b93d9ad22e8a0f6, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4231778708646304, guid: db2658fcf25cca342b93d9ad22e8a0f6, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4231778708646304, guid: db2658fcf25cca342b93d9ad22e8a0f6, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4231778708646304, guid: db2658fcf25cca342b93d9ad22e8a0f6, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4231778708646304, guid: db2658fcf25cca342b93d9ad22e8a0f6, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[0]._description
-      value: Fire your shotgun in a spread in front of you, dealing X damage to all
-        enemies caught in the blast
-      objectReference: {fileID: 0}
-    - target: {fileID: 114467017914458182, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 485221460}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[1]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 485221459}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[1]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: FlashlightAbility
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[0]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 485221459}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[0]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: shotgunBlast
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[0]._name
-      value: Shotgun Blast
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[2]._name
-      value: CoveringFire
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[2]._damageAmount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[2]._maxcooldown
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[2]._othervalues._range
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[2]._othervalues._angle
-      value: 360
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[2]._description
-      value: Set up a reaction shot.  Take a shot dealing X damage to the first enemy
-        within range and sight on the enemy turn
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 485221459}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CoveringFire
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: PlayerCharacterStats, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 881620263}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[3]._name
-      value: Fortify
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[3]._damageAmount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[3]._maxcooldown
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[3]._othervalues._duration
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 485221459}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Fortify
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: PlayerCharacterStats, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 881620263}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[3]._description
-      value: Hunker down, reducing the amount of damage this character takes this
-        turn by X.
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[0]._othervalues._angle
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[0]._othervalues._width
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[0]._othervalues._areaofeffect
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[0]._othervalues._initalRange
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[0]._othervalues._fallOffDamage
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[0]._othervalues._initialRange
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-        type: 2}
-      propertyPath: _abilityData.Array.data[2]._abilitySprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 5a588b96710622f40b453035d6c6242a,
-        type: 3}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: db2658fcf25cca342b93d9ad22e8a0f6, type: 2}
-  m_IsPrefabParent: 0
---- !u!114 &881620263 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114180736114845260, guid: db2658fcf25cca342b93d9ad22e8a0f6,
-    type: 2}
-  m_PrefabInternal: {fileID: 881620262}
-  m_Script: {fileID: 11500000, guid: 1f1181aceedd279439c37654b88ffa44, type: 3}
 --- !u!1 &930066759
 GameObject:
   m_ObjectHideFlags: 0
@@ -2411,6 +2389,243 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1064017336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114733193450213888, guid: 009703c746a6b4b478d92f684554995b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1064017333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1064017337
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 222677111441075576, guid: 009703c746a6b4b478d92f684554995b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1064017333}
+--- !u!1 &1088210876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1088210877}
+  m_Layer: 8
+  m_Name: TopLeftBuilding
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1088210877
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1088210876}
+  m_LocalRotation: {x: -0, y: 0.9999905, z: -0, w: -0.004358529}
+  m_LocalPosition: {x: -10.82, y: 0.000038146973, z: 19.11}
+  m_LocalScale: {x: 1, y: 1.5, z: 1}
+  m_Children:
+  - {fileID: 1749857102}
+  - {fileID: 994295016}
+  - {fileID: 527093413}
+  - {fileID: 430841586}
+  - {fileID: 343467159}
+  m_Father: {fileID: 1264269130}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 180.499, z: 0}
+--- !u!1001 &1135532744
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231778708646304, guid: cb7c407d9bb59ed44aaaf155ff08d648, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -3.026694
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231778708646304, guid: cb7c407d9bb59ed44aaaf155ff08d648, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231778708646304, guid: cb7c407d9bb59ed44aaaf155ff08d648, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -14.681345
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231778708646304, guid: cb7c407d9bb59ed44aaaf155ff08d648, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231778708646304, guid: cb7c407d9bb59ed44aaaf155ff08d648, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231778708646304, guid: cb7c407d9bb59ed44aaaf155ff08d648, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231778708646304, guid: cb7c407d9bb59ed44aaaf155ff08d648, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231778708646304, guid: cb7c407d9bb59ed44aaaf155ff08d648, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114649123299161708, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: eraseRenderer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[0]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 485221459}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[0]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: shotgunBlast
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[1]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 485221459}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[1]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FlashlightAbility
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 485221459}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[2]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Fortify
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _movementSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 8e25fc003f330924f847603cc85f6b8a, type: 3}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._name
+      value: CoveringFire
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._damageAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._maxcooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 485221459}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CoveringFire
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: PlayerCharacterStats, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._ability.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1145333657}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._othervalues._range
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._othervalues._angle
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._description
+      value: Set up a reaction shot.  Take a shot dealing 3 damage to the first enemy
+        within range and sight on the enemy turn
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[3]._abilitySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5a588b96710622f40b453035d6c6242a,
+        type: 3}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[0]._sound
+      value: 
+      objectReference: {fileID: 8300000, guid: 8ae0a59ce7ab87e4d875ca65b8768f51, type: 3}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _abilityData.Array.data[1]._sound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9e87a1659217cb14180f2d5d4f9e3213, type: 3}
+    - target: {fileID: 114180736114845260, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+        type: 2}
+      propertyPath: _damageSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 50a26196edfb0024ba812b9eff9026bc, type: 3}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: cb7c407d9bb59ed44aaaf155ff08d648, type: 2}
+  m_IsPrefabParent: 0
+--- !u!114 &1145333657 stripped
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 114733193450213888, guid: 009703c746a6b4b478d92f684554995b,
@@ -3198,6 +3413,21 @@ Prefab:
       propertyPath: manager
       value: 
       objectReference: {fileID: 485221460}
+    - target: {fileID: 114398941303769030, guid: 4aebf087b6caf38459977b7f288ab4bc,
+        type: 2}
+      propertyPath: eraseRenderer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114213749760987062, guid: 4aebf087b6caf38459977b7f288ab4bc,
+        type: 2}
+      propertyPath: _deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 8e25fc003f330924f847603cc85f6b8a, type: 3}
+    - target: {fileID: 114213749760987062, guid: 4aebf087b6caf38459977b7f288ab4bc,
+        type: 2}
+      propertyPath: _attackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 50a26196edfb0024ba812b9eff9026bc, type: 3}
     m_RemovedComponents:
     - {fileID: 114593994967402976, guid: 4aebf087b6caf38459977b7f288ab4bc, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4aebf087b6caf38459977b7f288ab4bc, type: 2}
@@ -3250,6 +3480,103 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1432399574 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1109138234862372, guid: bed5ba31646b9804d90479909af95426,
+    type: 2}
+  m_PrefabInternal: {fileID: 741273834}
+--- !u!82 &1432399575
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432399574}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!114 &1432399576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432399574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e020c92c402016c44bf601e2bb717486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
 --- !u!4 &1441314092 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4009812802009128, guid: 4aebf087b6caf38459977b7f288ab4bc,
@@ -3321,6 +3648,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &1519635936
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 1020
+  m_Height: 527
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1551129241
 GameObject:
   m_ObjectHideFlags: 0
@@ -4577,3 +4931,100 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2075847518}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2143437893 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1031844861047060, guid: cb7c407d9bb59ed44aaaf155ff08d648,
+    type: 2}
+  m_PrefabInternal: {fileID: 1135532744}
+--- !u!114 &2143437894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2143437893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e020c92c402016c44bf601e2bb717486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
+--- !u!82 &2143437895
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2143437893}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0

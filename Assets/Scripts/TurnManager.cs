@@ -26,6 +26,15 @@ public class TurnManager : MonoBehaviour
 	public List<EnemyStats> enemyList;
   	[SerializeField]
   	GameObject VictoryScreen;
+	[SerializeField]
+	GameObject TurnChangeScreen;
+	[SerializeField]
+	AudioClip playerSound;
+	[SerializeField]
+	AudioClip enemySound;
+
+
+	private Text text;
 
 	void Awake()
 	{
@@ -48,6 +57,9 @@ public class TurnManager : MonoBehaviour
 		}
 
         VictoryScreen.SetActive(false);
+		if (TurnChangeScreen) {
+			TurnChangeScreen.SetActive(false);
+		}
 		print ("Reloaded " + this.GetType().ToString());
 	}
 
@@ -81,10 +93,29 @@ public class TurnManager : MonoBehaviour
 
 	private IEnumerator _switchTurn()
 	{
+		if (TurnChangeScreen) {
+			text = TurnChangeScreen.GetComponentInChildren<Text>();
+		}
+
 		switch (currentTurn) {
 
 		case GAMESTATE.ENEMYTURN:
 			{
+				if (text) {
+					text.text = "Player Turn Start";
+				}
+				if (TurnChangeScreen) {
+					TurnChangeScreen.SetActive(true);
+				}
+				var audio = GetComponent<AudioManager>();
+				if (audio != null) {
+					audio.playSoundEffect (playerSound);
+				}
+
+				yield return new WaitForSeconds (2f);
+				if (TurnChangeScreen) {
+					TurnChangeScreen.SetActive(false);
+				}
 				currentTurn = GAMESTATE.PLAYERTURN;
 				OnPlayerTurnStart();
 				break;
@@ -92,6 +123,22 @@ public class TurnManager : MonoBehaviour
 
 		case GAMESTATE.PLAYERTURN:
 			{
+				OnEnemyTurnStart();
+				if (text) {
+					text.text = "Enemy Turn Start";
+				}
+				if (TurnChangeScreen) {
+					TurnChangeScreen.SetActive(true);
+				}
+
+				var audio = GetComponent<AudioManager>();
+				if (audio != null) {
+					audio.playSoundEffect (enemySound);
+				}
+				yield return new WaitForSeconds (2f);
+				if (TurnChangeScreen) {
+					TurnChangeScreen.SetActive(false);
+				}
 				currentTurn = GAMESTATE.ENEMYTURN;
 				OnEnemyTurnStart();
 				break;

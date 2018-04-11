@@ -33,6 +33,11 @@ public class EnemyTurn : MonoBehaviour
 		foreach (var enemy in enemies)
 		{
 			ABPath path = null;
+			var audio = GetComponent<AudioManager>();
+			if (audio != null) {
+				audio.playSoundEffect(enemy.MovementSound);
+			}
+
 			PlayerCharacterStats target = null;
 			var enemypositions = new List<GraphNode> ();
 			foreach (var e in enemies)
@@ -64,6 +69,9 @@ public class EnemyTurn : MonoBehaviour
             if (target)
             {
                 target.TakeDamage(enemy.Atk);
+				if (audio != null) {
+					audio.playSoundEffect (enemy.AttackSound);
+				}
                 continue;
             }
             // Find closest player
@@ -130,6 +138,7 @@ public class EnemyTurn : MonoBehaviour
 				if (Vector3.Distance (AstarData.active.GetNearest (target.transform.position).position,
 					    AstarData.active.GetNearest (enemy.transform.position).position) <= 1f) {
 					target.TakeDamage (enemy.Atk);
+
 					Debug.Log (target.name);
 				}
                 manager.CheckGameOver();

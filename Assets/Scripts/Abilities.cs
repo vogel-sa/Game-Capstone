@@ -81,9 +81,10 @@ public class Abilities : MonoBehaviour {
                 yield return null;
             } while (!Input.GetMouseButtonDown(0));
             lineRenderer.gameObject.SetActive(false);
-			if (audio != null) {
+			if (audio) {
 				audio.playSoundEffect (abilData.Sound);
 			}
+
             // TODO: Animation of ability
             EnemyStats hitStats;
             if (Physics.Raycast(stats.transform.position + Vector3.up, -(direction.normalized), out hit, range, ~LayerMask.GetMask("Player", "Ground", "Ignore Raycast", "Flare")))//, LayerMask.NameToLayer("Enemy")))
@@ -157,17 +158,18 @@ public class Abilities : MonoBehaviour {
             } while (!(Input.GetMouseButtonDown(0) && distance < los._maxDistance && goodHit));
             Debug.Log("flare dropped");
             GameObject flare = Instantiate(Resources.Load<GameObject>("Prefabs/Flare"));
+
 			if (audio) {
-			audio.playSoundEffect(abilData.Sound);
-			yield return new WaitForSeconds (0.5f);
-			audio.playSoundEffect(abilData.OtherValues.Sound2);
-			yield return new WaitForSeconds (0.5f);
-			audio.playSoundEffect(abilData.OtherValues.Sound3);
-			//fadeOut(audio);
+				audio.playSoundEffect(abilData.Sound);
+				yield return new WaitForSeconds (0.5f);
+				audio.playSoundEffect(abilData.OtherValues.Sound2);
+				yield return new WaitForSeconds (0.5f);
+				audio.playSoundEffect(abilData.OtherValues.Sound3);
+				//fadeOut(audio);
 			}
 
             mousePos.y = 1.1f;
-            //flare.transform.position = hitpoint;//mousePos;
+            flare.transform.position = hitpoint;//mousePos;
 
             genericStatChange(abilData, stats);
             yield return null;

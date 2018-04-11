@@ -169,6 +169,16 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
 		}
 	}
 
+	[SerializeField]
+	private AudioClip _damagedSound;
+	public AudioClip DamagedSound
+	{
+		get
+		{
+			return _damagedSound;
+		}
+	}
+
     [SerializeField]
     private float _detectionRadius;
     public float DetectionRadius { get { return _detectionRadius; } }
@@ -188,7 +198,10 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
         CurrHP -= dmg;
 
         GetComponent<DamageText>().displayText(dmg, 1.1f);
-
+		var audio = FindObjectOfType<TurnManager>().GetComponent<AudioManager>();
+		if (audio != null) {
+			audio.playSoundEffect(DamagedSound);
+		}
         if (CurrHP <= 0)
         {
             Die();

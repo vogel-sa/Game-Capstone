@@ -199,7 +199,6 @@ public class PlayerMovementManager : MonoBehaviour
         yield return new WaitUntil(() => finished);
         controlsEnabled = true;
         // TODO: Fix the heirarchy for stats.
-        
         SelectedCharacterStats.hasMoved = true;
 		SelectedCharacterStats.CheckCharacterCannotMove();
 		GetComponent<TurnManager>().AutoEndTurnCheck();

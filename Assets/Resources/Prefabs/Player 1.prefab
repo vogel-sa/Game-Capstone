@@ -154,7 +154,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -170,7 +169,6 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -218,6 +216,20 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1.5, y: 1.5}
   m_BounceIntensity: 1
+  m_FalloffTable:
+    m_Table[0]: 0
+    m_Table[1]: 0
+    m_Table[2]: 0
+    m_Table[3]: 0
+    m_Table[4]: 0
+    m_Table[5]: 0
+    m_Table[6]: 0
+    m_Table[7]: 0
+    m_Table[8]: 0
+    m_Table[9]: 0
+    m_Table[10]: 0
+    m_Table[11]: 0
+    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -370,6 +382,9 @@ MonoBehaviour:
   _maxActions: 1
   _actionsleft: 1
   _portrait: {fileID: 2800000, guid: 632ccb68b00d9034c944617507687eda, type: 3}
+  _movementSound: {fileID: 8300000, guid: 69424ed1a7422fd49a52f3f060d73427, type: 3}
+  _deathSound: {fileID: 0}
+  _damageSound: {fileID: 8300000, guid: 50a26196edfb0024ba812b9eff9026bc, type: 3}
   _isCoveringFire: 0
   _isFortifying: 0
   _abilityData:
@@ -393,9 +408,10 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
     _abilitySprite: {fileID: 21300000, guid: 281954cd1af076349a14f26155eeec70, type: 3}
+    _sound: {fileID: 8300000, guid: 05195d07e0337464f84b28f2ebebeaee, type: 3}
     _othervalues:
       _range: 10
       _width: 0.1
@@ -404,6 +420,8 @@ MonoBehaviour:
       _angle: 0
       _initialRange: 0
       _fallOffDamage: 0
+      _sound2: {fileID: 0}
+      _sound3: {fileID: 0}
   - _name: Flare
     _description: Throw a flare at the targeted location.   The flare illuminates
       the area for 3 turns, showing all enemies that pass through it
@@ -424,9 +442,10 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
     _abilitySprite: {fileID: 21300000, guid: cd1d32c9aba1a8545bf016f7ef6d9d04, type: 3}
+    _sound: {fileID: 8300000, guid: e087f0db4c25ad54ab09ce9c6c6dc362, type: 3}
     _othervalues:
       _range: 7
       _width: 0
@@ -435,6 +454,8 @@ MonoBehaviour:
       _angle: 360
       _initialRange: 0
       _fallOffDamage: 0
+      _sound2: {fileID: 8300000, guid: d5ab2009e2cbf904cb95b9cf7922de12, type: 3}
+      _sound3: {fileID: 8300000, guid: fdbd995268c08c246bec674375ed7670, type: 3}
   - _name: RapidFire
     _description: Pretty much the same as shotgun.
     _damageAmount: 6
@@ -454,9 +475,10 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
     _abilitySprite: {fileID: 21300000, guid: b84ed3e1cd146e64d8a6af4040001d09, type: 3}
+    _sound: {fileID: 8300000, guid: 1a155dbd79356324ca675825fed7bbcc, type: 3}
     _othervalues:
       _range: 7
       _width: 0
@@ -465,25 +487,8 @@ MonoBehaviour:
       _angle: 45
       _initialRange: 0
       _fallOffDamage: 0
-  - _name: 
-    _description: 
-    _damageAmount: 0
-    _maxcooldown: 0
-    _currcooldown: 0
-    _ability:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    _abilitySprite: {fileID: 0}
-    _othervalues:
-      _range: 0
-      _width: 0
-      _duration: 0
-      _areaofeffect: 0
-      _angle: 0
-      _initialRange: 0
-      _fallOffDamage: 0
+      _sound2: {fileID: 0}
+      _sound3: {fileID: 0}
 --- !u!114 &114908889340701136
 MonoBehaviour:
   m_ObjectHideFlags: 1

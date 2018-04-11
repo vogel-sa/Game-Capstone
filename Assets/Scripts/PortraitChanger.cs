@@ -27,7 +27,10 @@ public class PortraitChanger : MonoBehaviour {
         Name = GetComponentInChildren<Text>();
         HPbar = GetComponentInChildren<Slider>();
         HPText = HPTextOBJ.GetComponent<Text>();
-		ActionText = ActionTextOBJ.GetComponent<Text>();
+		if (ActionTextOBJ) {
+			ActionText = ActionTextOBJ.GetComponent<Text>();
+		}
+
 
 	}
 
@@ -50,7 +53,10 @@ public class PortraitChanger : MonoBehaviour {
 			HPbar.maxValue = selectedCharacter.MaxHP;
 			HPbar.value = selectedCharacter.CurrHP;
 			HPText.text = "HP: " + selectedCharacter.CurrHP;
-			ActionText.text = "Actions Left: " + selectedCharacter.Actionsleft;
+			if (ActionText) {
+				ActionText.text = "Actions Left: " + selectedCharacter.Actionsleft;
+			}
+
 
 		}
     }

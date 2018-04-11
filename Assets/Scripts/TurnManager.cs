@@ -33,6 +33,9 @@ public class TurnManager : MonoBehaviour
 	[SerializeField]
 	AudioClip enemySound;
 
+
+	private Text text;
+
 	void Awake()
 	{
         playerList = new List<PlayerCharacterStats>();
@@ -54,7 +57,9 @@ public class TurnManager : MonoBehaviour
 		}
 
         VictoryScreen.SetActive(false);
-		TurnChangeScreen.SetActive(false);
+		if (TurnChangeScreen) {
+			TurnChangeScreen.SetActive(false);
+		}
 		print ("Reloaded " + this.GetType().ToString());
 	}
 
@@ -88,20 +93,29 @@ public class TurnManager : MonoBehaviour
 
 	private IEnumerator _switchTurn()
 	{
-		var text = TurnChangeScreen.GetComponentInChildren<Text>();
+		if (TurnChangeScreen) {
+			text = TurnChangeScreen.GetComponentInChildren<Text>();
+		}
+
 		switch (currentTurn) {
 
 		case GAMESTATE.ENEMYTURN:
 			{
-				text.text = "Player Turn Start";
-				TurnChangeScreen.SetActive(true);
+				if (text) {
+					text.text = "Player Turn Start";
+				}
+				if (TurnChangeScreen) {
+					TurnChangeScreen.SetActive(true);
+				}
 				var audio = GetComponent<AudioManager>();
 				if (audio != null) {
 					audio.playSoundEffect (playerSound);
 				}
 
 				yield return new WaitForSeconds (2f);
-				TurnChangeScreen.SetActive(false);
+				if (TurnChangeScreen) {
+					TurnChangeScreen.SetActive(false);
+				}
 				currentTurn = GAMESTATE.PLAYERTURN;
 				OnPlayerTurnStart();
 				break;
@@ -110,14 +124,21 @@ public class TurnManager : MonoBehaviour
 		case GAMESTATE.PLAYERTURN:
 			{
 				OnEnemyTurnStart();
-				text.text = "Enemy Turn Start";
-				TurnChangeScreen.SetActive(true);
+				if (text) {
+					text.text = "Enemy Turn Start";
+				}
+				if (TurnChangeScreen) {
+					TurnChangeScreen.SetActive(true);
+				}
+
 				var audio = GetComponent<AudioManager>();
 				if (audio != null) {
 					audio.playSoundEffect (enemySound);
 				}
 				yield return new WaitForSeconds (2f);
-				TurnChangeScreen.SetActive(false);
+				if (TurnChangeScreen) {
+					TurnChangeScreen.SetActive(false);
+				}
 				currentTurn = GAMESTATE.ENEMYTURN;
 				break;
 			}

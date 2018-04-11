@@ -139,7 +139,7 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
         }
     }
 
-	[SerializeField]
+    [SerializeField]
 	private AudioClip _movementSound;
 	public AudioClip MovementSound
 	{
@@ -147,7 +147,6 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
 		{
 			return _movementSound;
 		}
-
 	}
 
 	[SerializeField]
@@ -160,7 +159,6 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
 		}
 
 	}
-
 	[SerializeField]
 	private AudioClip _deathSound;
 	public AudioClip DeathSound
@@ -169,7 +167,6 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
 		{
 			return _deathSound;
 		}
-
 	}
 
     [SerializeField]

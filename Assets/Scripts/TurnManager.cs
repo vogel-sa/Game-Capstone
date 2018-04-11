@@ -140,6 +140,7 @@ public class TurnManager : MonoBehaviour
 					TurnChangeScreen.SetActive(false);
 				}
 				currentTurn = GAMESTATE.ENEMYTURN;
+				OnEnemyTurnStart();
 				break;
 			}
 

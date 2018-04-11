@@ -119,7 +119,7 @@ public class AbilityData{
         }
     }
 
-	[SerializeField]
+    [SerializeField]
 	private AudioClip _sound;
 	public AudioClip Sound
 	{
@@ -127,7 +127,6 @@ public class AbilityData{
 		{
 			return _sound;
 		}
-			
 	}
     
     /// <summary>

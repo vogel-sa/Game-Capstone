@@ -257,7 +257,6 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
             CurrHP = Math.Max(CurrHP - dmgtaken, 0);
             if (IsDead())
             {
-				
                 DeadCleanup();
             }
         }

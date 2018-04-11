@@ -142,7 +142,6 @@ public class Abilities : MonoBehaviour {
                         RaycastHit newhit;
                         if (!Physics.Raycast(losRay, out newhit, Vector3.Distance(stats.transform.position + Vector3.up, hitPointAtEyeLevel), LayerMask.GetMask("Obstacle")))
                         {
-                            print("raycsat didn't hit");
                             goodHit = true;
                             var origin = stats.transform.position + Vector3.up;
                             origin.y = 0;
@@ -158,14 +157,13 @@ public class Abilities : MonoBehaviour {
             } while (!(Input.GetMouseButtonDown(0) && distance < los._maxDistance && goodHit));
             Debug.Log("flare dropped");
             GameObject flare = Instantiate(Resources.Load<GameObject>("Prefabs/Flare"));
-			if (audio != null) {
-				
+			if (audio) {
 			audio.playSoundEffect(abilData.Sound);
 			yield return new WaitForSeconds (0.5f);
 			audio.playSoundEffect(abilData.OtherValues.Sound2);
 			yield return new WaitForSeconds (0.5f);
 			audio.playSoundEffect(abilData.OtherValues.Sound3);
-			fadeOut(audio);
+			//fadeOut(audio);
 			}
 
             mousePos.y = 1.1f;

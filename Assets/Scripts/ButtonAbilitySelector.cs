@@ -17,7 +17,7 @@ public class ButtonAbilitySelector : MonoBehaviour {
         _sprites = new Sprite[_buttons.Length];
         for (int i = 0; i < _buttons.Length; i++)
         {
-            _sprites[i] = _buttons[i].GetComponent<Sprite>();
+			_sprites[i] = _buttons[i].GetComponent<Sprite>();
         }
     }
 

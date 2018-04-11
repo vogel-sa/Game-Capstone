@@ -154,6 +154,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -169,6 +170,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -216,20 +218,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1.5, y: 1.5}
   m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -408,9 +396,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    _abilitySprite: {fileID: 21300000, guid: 281954cd1af076349a14f26155eeec70, type: 3}
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    _abilitySprite: {fileID: 21300000, guid: 967e1b0a8f778b6439bab7f0539bf52c, type: 3}
     _sound: {fileID: 8300000, guid: 05195d07e0337464f84b28f2ebebeaee, type: 3}
     _othervalues:
       _range: 10
@@ -420,8 +408,6 @@ MonoBehaviour:
       _angle: 0
       _initialRange: 0
       _fallOffDamage: 0
-      _sound2: {fileID: 0}
-      _sound3: {fileID: 0}
   - _name: Flare
     _description: Throw a flare at the targeted location.   The flare illuminates
       the area for 3 turns, showing all enemies that pass through it
@@ -442,9 +428,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    _abilitySprite: {fileID: 21300000, guid: cd1d32c9aba1a8545bf016f7ef6d9d04, type: 3}
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    _abilitySprite: {fileID: 21300000, guid: cd857e33cc72b9f46a60ba6a5a38f1e7, type: 3}
     _sound: {fileID: 8300000, guid: e087f0db4c25ad54ab09ce9c6c6dc362, type: 3}
     _othervalues:
       _range: 7
@@ -454,8 +440,6 @@ MonoBehaviour:
       _angle: 360
       _initialRange: 0
       _fallOffDamage: 0
-      _sound2: {fileID: 8300000, guid: d5ab2009e2cbf904cb95b9cf7922de12, type: 3}
-      _sound3: {fileID: 8300000, guid: fdbd995268c08c246bec674375ed7670, type: 3}
   - _name: RapidFire
     _description: Pretty much the same as shotgun.
     _damageAmount: 6
@@ -475,9 +459,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    _abilitySprite: {fileID: 21300000, guid: b84ed3e1cd146e64d8a6af4040001d09, type: 3}
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    _abilitySprite: {fileID: 21300000, guid: 41c7d0475cf7f8d4db9d4254f61455ad, type: 3}
     _sound: {fileID: 8300000, guid: 1a155dbd79356324ca675825fed7bbcc, type: 3}
     _othervalues:
       _range: 7
@@ -487,8 +471,6 @@ MonoBehaviour:
       _angle: 45
       _initialRange: 0
       _fallOffDamage: 0
-      _sound2: {fileID: 0}
-      _sound3: {fileID: 0}
 --- !u!114 &114908889340701136
 MonoBehaviour:
   m_ObjectHideFlags: 1

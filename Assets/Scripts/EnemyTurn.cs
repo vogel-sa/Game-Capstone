@@ -34,9 +34,7 @@ public class EnemyTurn : MonoBehaviour
 		{
 			ABPath path = null;
 			var audio = GetComponent<AudioManager>();
-			if (audio != null) {
-				audio.playSoundEffect(enemy.MovementSound);
-			}
+			
 
 			PlayerCharacterStats target = null;
 			var enemypositions = new List<GraphNode> ();
@@ -127,10 +125,15 @@ public class EnemyTurn : MonoBehaviour
 				//Destroy (modifier.gameObject);
                 if (arr.Length >= 4)
                 {
+                    
                     LeanTween.moveSpline(enemy.gameObject, spline, spline.distance / moveSpeed).
                         setOnComplete(() => finished = true).// May want to fiddle with animation states here.
 						//setEase(LeanTweenType.easeInQuad).
                         setOrientToPath(true);
+                        //play audio
+                        if (audio != null) {
+				        audio.playSoundEffect(enemy.MovementSound);
+			}
                     yield return new WaitUntil(() => finished);
                 }
 				enemy.GetComponent<SingleNodeBlocker> ().BlockAtCurrentPosition ();

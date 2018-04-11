@@ -143,6 +143,11 @@ public class PlayerMovementManager : MonoBehaviour
     private IEnumerator MoveCharacter(ABPath path)
     {
         this.enabled = false;
+		var audio = GetComponent<AudioManager>();
+		if (audio) {
+			audio.playSoundEffect(SelectedCharacterStats.MovementSound);
+		}
+
         #if DEBUG
         for (int i = 0; i < path.vectorPath.Count - 1; i++)
         {
@@ -194,7 +199,6 @@ public class PlayerMovementManager : MonoBehaviour
         yield return new WaitUntil(() => finished);
         controlsEnabled = true;
         // TODO: Fix the heirarchy for stats.
-        
         SelectedCharacterStats.hasMoved = true;
 		SelectedCharacterStats.CheckCharacterCannotMove();
 		GetComponent<TurnManager>().AutoEndTurnCheck();

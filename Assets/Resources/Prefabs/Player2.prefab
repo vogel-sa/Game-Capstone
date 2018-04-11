@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114828070730832508}
   - component: {fileID: 114180736114845260}
   - component: {fileID: 114467017914458182}
+  - component: {fileID: 114281431683484032}
   m_Layer: 10
   m_Name: Player2
   m_TagString: Player
@@ -241,6 +242,9 @@ MonoBehaviour:
   _maxActions: 1
   _actionsleft: 1
   _portrait: {fileID: 2800000, guid: 713271f43d2ac5040af931b5ebc09ddd, type: 3}
+  _movementSound: {fileID: 8300000, guid: 69424ed1a7422fd49a52f3f060d73427, type: 3}
+  _deathSound: {fileID: 0}
+  _damageSound: {fileID: 8300000, guid: 50a26196edfb0024ba812b9eff9026bc, type: 3}
   _isCoveringFire: 0
   _isFortifying: 0
   _abilityData:
@@ -266,7 +270,8 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-    _abilitySprite: {fileID: 21300000, guid: affa483705b0ced4688e1de561cf7d6e, type: 3}
+    _abilitySprite: {fileID: 21300000, guid: d834e9067969d8d4a9b318a910104d85, type: 3}
+    _sound: {fileID: 8300000, guid: 8ae0a59ce7ab87e4d875ca65b8768f51, type: 3}
     _othervalues:
       _range: 5
       _width: 0.2
@@ -297,7 +302,8 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-    _abilitySprite: {fileID: 21300000, guid: 802580fae2e71cd4d8087a7d0f3a438d, type: 3}
+    _abilitySprite: {fileID: 21300000, guid: a7ecd4885472b724085df6d613189ce6, type: 3}
+    _sound: {fileID: 8300000, guid: 9e87a1659217cb14180f2d5d4f9e3213, type: 3}
     _othervalues:
       _range: 10
       _width: 0
@@ -328,7 +334,8 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-    _abilitySprite: {fileID: 21300000, guid: bbf25ac6e1fc53c4e9a13b9333c28727, type: 3}
+    _abilitySprite: {fileID: 21300000, guid: d6c909381ac683646af4cee1a941ddac, type: 3}
+    _sound: {fileID: 0}
     _othervalues:
       _range: 0
       _width: 0
@@ -337,25 +344,18 @@ MonoBehaviour:
       _angle: 0
       _initialRange: 0
       _fallOffDamage: 0
-  - _name: 
-    _description: 
-    _damageAmount: 0
-    _maxcooldown: 0
-    _currcooldown: 0
-    _ability:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    _abilitySprite: {fileID: 0}
-    _othervalues:
-      _range: 0
-      _width: 0
-      _duration: 0
-      _areaofeffect: 0
-      _angle: 0
-      _initialRange: 0
-      _fallOffDamage: 0
+--- !u!114 &114281431683484032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1031844861047060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe568ffb5319e2408696cfcfa4e321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageText: {fileID: 0}
 --- !u!114 &114467017914458182
 MonoBehaviour:
   m_ObjectHideFlags: 1

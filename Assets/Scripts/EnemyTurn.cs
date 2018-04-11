@@ -33,6 +33,9 @@ public class EnemyTurn : MonoBehaviour
 		foreach (var enemy in enemies)
 		{
 			ABPath path = null;
+			var audio = GetComponent<AudioManager>();
+			
+
 			PlayerCharacterStats target = null;
 			var enemypositions = new List<GraphNode> ();
 			foreach (var e in enemies)
@@ -64,6 +67,9 @@ public class EnemyTurn : MonoBehaviour
             if (target)
             {
                 target.TakeDamage(enemy.Atk);
+				if (audio != null) {
+					audio.playSoundEffect (enemy.AttackSound);
+				}
                 continue;
             }
             // Find closest player
@@ -119,10 +125,15 @@ public class EnemyTurn : MonoBehaviour
 				//Destroy (modifier.gameObject);
                 if (arr.Length >= 4)
                 {
+                    
                     LeanTween.moveSpline(enemy.gameObject, spline, spline.distance / moveSpeed).
                         setOnComplete(() => finished = true).// May want to fiddle with animation states here.
 						//setEase(LeanTweenType.easeInQuad).
                         setOrientToPath(true);
+                        //play audio
+                        if (audio != null) {
+				        audio.playSoundEffect(enemy.MovementSound);
+			}
                     yield return new WaitUntil(() => finished);
                 }
 				enemy.GetComponent<SingleNodeBlocker> ().BlockAtCurrentPosition ();
@@ -130,6 +141,7 @@ public class EnemyTurn : MonoBehaviour
 				if (Vector3.Distance (AstarData.active.GetNearest (target.transform.position).position,
 					    AstarData.active.GetNearest (enemy.transform.position).position) <= 1f) {
 					target.TakeDamage (enemy.Atk);
+
 					Debug.Log (target.name);
 				}
                 manager.CheckGameOver();

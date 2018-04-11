@@ -161,10 +161,6 @@ public class Abilities : MonoBehaviour {
 
 			if (audio) {
 				audio.playSoundEffect(abilData.Sound);
-				yield return new WaitForSeconds (0.5f);
-				audio.playSoundEffect(abilData.OtherValues.Sound2);
-				yield return new WaitForSeconds (0.5f);
-				audio.playSoundEffect(abilData.OtherValues.Sound3);
 				//fadeOut(audio);
 			}
 

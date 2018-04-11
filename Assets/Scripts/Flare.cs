@@ -6,21 +6,36 @@ using UnityEngine;
 public class Flare : MonoBehaviour {
     [SerializeField]
     public int turns = 3;
+	[SerializeField]
+	private AudioClip light, sizzle;
+
+	private AudioSource source;
 
     void OnEnable()
     {
+		source = GetComponent<AudioSource> ();
         FindObjectOfType<TurnManager>().OnTurnChange += Countdown;
+		StartCoroutine (playSounds ());
     }
+
+	private IEnumerator playSounds()
+	{
+		if (light) {
+			source.clip = light;
+			source.Play ();
+		}
+		yield return new WaitForSeconds (light.length);
+		if (sizzle) {
+			source.Stop ();
+			source.clip = sizzle;
+			source.Play();
+		}
+	}
 
     void OnDisable()
     {
         FindObjectOfType<TurnManager>().OnTurnChange -= Countdown;
     }
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
 
     void OnCollisionEnter(Collision col)
     {

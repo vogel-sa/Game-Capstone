@@ -191,7 +191,14 @@ public class PlayerMovementManager : MonoBehaviour
 		//Destroy (modifier.gameObject);
 
         LeanTween.moveSpline(selected.gameObject, spline, spline.distance / moveSpeed).
-            setOnComplete(() => finished = true). // May want to fiddle with animation states here.
+            setOnStart(() => {
+                selected.GetComponentInChildren<Animator>().SetTrigger("Walk");
+            }).
+            setOnComplete(() =>
+            {
+                finished = true;
+                selected.GetComponentInChildren<Animator>().SetTrigger("Cancel");
+            }). // May want to fiddle with animation states here.
             setEase(LeanTweenType.easeInOutQuad).
             setOrientToPath(true);
         //.setOnStart()

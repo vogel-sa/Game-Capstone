@@ -7457,7 +7457,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1335076267377970}
-  m_LocalRotation: {x: -0.5000002, y: 0.49999982, z: 0.49999988, w: 0.50000006}
+  m_LocalRotation: {x: -0.50000024, y: 0.49999985, z: 0.4999999, w: 0.5000001}
   m_LocalPosition: {x: -8.36363, y: 6.692522, z: 14.98547}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -8156,7 +8156,7 @@ MonoBehaviour:
   _isFortifying: 0
   _abilityData:
   - _name: Shoot
-    _description: Fire a single rifle shot in a targeted direction, and deal 5 damage
+    _description: Fire a single rifle shot in a targeted direction, and deal 4 damage
       to the first target hit
     _damageAmount: 4
     _maxcooldown: 0
@@ -8220,7 +8220,7 @@ MonoBehaviour:
       _initialRange: 0
       _fallOffDamage: 0
   - _name: RapidFire
-    _description: Pretty much the same as shotgun.
+    _description: 'Shoot All enemies in a cone in front of you for 6 damage '
     _damageAmount: 6
     _maxcooldown: 3
     _currcooldown: 0

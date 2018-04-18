@@ -44,7 +44,7 @@ public class PlayerMovementManager : MonoBehaviour
     public bool controlsEnabled = true; // Is the character moving? If so, lock controls and turn off quads.
 
     private ABPath path;
-    private float moveSpeed = 5f;
+    private float moveSpeed = 2f;
 
     private GridGraph gg;
 

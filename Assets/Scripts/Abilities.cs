@@ -84,12 +84,14 @@ public class Abilities : MonoBehaviour
             } while (!Input.GetMouseButtonDown(0));
             lineRenderer.gameObject.SetActive(false);
             stats.GetComponentInChildren<Animator>().SetTrigger("ShootSingle");
+
+            yield return new WaitForSeconds(1f);
+
             if (audio)
             {
                 audio.playSoundEffect(abilData.Sound);
             }
 
-            // TODO: Animation of ability
             EnemyStats hitStats;
             if (Physics.Raycast(stats.transform.position + Vector3.up, -(direction.normalized), out hit, range, ~LayerMask.GetMask("Player", "Ground", "Ignore Raycast", "Flare")))//, LayerMask.NameToLayer("Enemy")))
             {
@@ -101,12 +103,15 @@ public class Abilities : MonoBehaviour
             }
             Debug.Log("Bang");
             genericStatChange(abilData, stats);
-            yield return new WaitForSeconds(.5f);// Change to wait until animation over, possibly wait for enemy reaction (i.e. reaction shot, death anim, etc.);
+            // Change to wait until animation over, possibly wait for enemy reaction (i.e. reaction shot, death anim, etc.);
+
         }
         finally
         {
             genericCleanup(stats);
             if (lineRenderer) Destroy(lineRenderer.gameObject);
+            
+            stats.GetComponentInChildren<Animator>().ResetTrigger("ShootSingle");
         }
     }
 
@@ -163,6 +168,11 @@ public class Abilities : MonoBehaviour
                 yield return null;
             } while (!(Input.GetMouseButtonDown(0) && distance < los._maxDistance && goodHit));
             Debug.Log("flare dropped");
+
+            stats.GetComponentInChildren<Animator>().SetTrigger("Throw");
+            yield return new WaitForSeconds(1f);
+
+
             GameObject flare = Instantiate(Resources.Load<GameObject>("Prefabs/Flare"));
 
             if (audio)
@@ -280,6 +290,7 @@ public class Abilities : MonoBehaviour
                 yield return null;
             } while (!Input.GetMouseButtonDown(0));
             los.gameObject.SetActive(false);
+
             if (audio != null)
             {
                 audio.playSoundEffect(abilData.Sound);
@@ -357,6 +368,7 @@ public class Abilities : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1)) yield break;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
                 {
                     var mousePos = new Vector3(hit.point.x, stats.transform.position.y + 1/*aimLine.transform.position.y*/, hit.point.z);
@@ -369,8 +381,12 @@ public class Abilities : MonoBehaviour
                 }
                 yield return null;
             } while (!Input.GetMouseButtonDown(0));
+
             cone.gameObject.SetActive(false);
             stats.GetComponentInChildren<Animator>().SetTrigger("ShootMulti");
+
+            yield return new WaitForSeconds(1f);
+
             if (audio != null)
             {
                 audio.playSoundEffect(abilData.Sound);
@@ -383,6 +399,7 @@ public class Abilities : MonoBehaviour
             var direction2 = angle * Vector3.forward;
             var pos = cone.transform.position;
             List<EnemyStats> enemies = new List<EnemyStats>();
+
             for (var i = 0; i < (cone._maxAngle / increment); i++)
             {
                 if (Physics.Raycast(stats.transform.position + Vector3.up, direction2, out hit, range, ~LayerMask.GetMask("Player", "Ground", "Ignore Raycast", "Flare")))//, LayerMask.NameToLayer("Enemy")))
@@ -465,6 +482,8 @@ public class Abilities : MonoBehaviour
             } while (!Input.GetMouseButtonDown(0));
             cone.gameObject.SetActive(false);
             stats.GetComponentInChildren<Animator>().SetTrigger("ShootSingle");
+
+            yield return new WaitForSeconds(1f);
             if (audio != null)
             {
                 audio.playSoundEffect(abilData.Sound);
@@ -476,6 +495,7 @@ public class Abilities : MonoBehaviour
             var angle = cone.transform.rotation * startingAngle;
             var direction2 = angle * Vector3.forward;
             var pos = cone.transform.position;
+
             List<EnemyStats> enemies = new List<EnemyStats>();
             for (var i = 0; i < (cone._maxAngle / increment); i++)
             {

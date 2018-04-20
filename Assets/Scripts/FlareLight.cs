@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider), typeof(Light))]
@@ -40,10 +41,10 @@ public class FlareLight : MonoBehaviour {
 #endif
     void OnTriggerStay(Collider col)
     {
-        if (LayerMask.LayerToName(col.gameObject.layer) == "Enemy" && !col.GetComponent<MeshRenderer>().enabled && RaySweep(col))
+        if (LayerMask.LayerToName(col.gameObject.layer) == "Enemy" && !col.GetComponentInChildren<SkinnedMeshRenderer>().enabled && RaySweep(col))
         {
-            col.GetComponent<MeshRenderer>().enabled = true;
-            col.GetComponent<cakeslice.Outline>().enabled = true;
+            col.GetComponentsInChildren<SkinnedMeshRenderer>().ToList().ForEach(x => x.enabled = true);
+            col.GetComponentsInChildren<cakeslice.Outline>().ToList().ForEach(x => x.enabled = true);
         }
     }
 
@@ -51,8 +52,8 @@ public class FlareLight : MonoBehaviour {
     {
         if (LayerMask.LayerToName(col.gameObject.layer) == "Enemy")
         {
-            col.GetComponent<MeshRenderer>().enabled = false;
-            col.GetComponent<cakeslice.Outline>().enabled = false;
+            col.GetComponentsInChildren<SkinnedMeshRenderer>().ToList().ForEach(x => x.enabled = false);
+            col.GetComponentsInChildren<cakeslice.Outline>().ToList().ForEach(x => x.enabled = false);
         }
     }
 

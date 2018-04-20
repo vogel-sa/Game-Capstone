@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Light), typeof(ConeCollider))]
@@ -53,7 +54,8 @@ public class StreetLight : MonoBehaviour {
 	// Update is called once per frame
 	void OnTriggerStay (Collider col) {
 		if (LayerMask.LayerToName (col.gameObject.layer) == "Enemy") {
-			col.GetComponent<MeshRenderer> ().enabled = true;
-		}
+            col.GetComponentsInChildren<SkinnedMeshRenderer>().ToList().ForEach(x => x.enabled = true);
+            col.GetComponentsInChildren<cakeslice.Outline>().ToList().ForEach(x => x.enabled = true);
+        }
 	}
 }

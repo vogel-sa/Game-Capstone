@@ -66,8 +66,10 @@ public class EnemyTurn : MonoBehaviour
             }
             if (target)
             {
+                enemy.GetComponentInChildren<Animator>().SetTrigger("Attack");
+                yield return new WaitForSeconds(1);
                 target.TakeDamage(enemy.Atk);
-				if (audio != null) {
+                if (audio != null) {
 					audio.playSoundEffect (enemy.AttackSound);
 				}
                 continue;
@@ -127,8 +129,15 @@ public class EnemyTurn : MonoBehaviour
                 {
                     
                     LeanTween.moveSpline(enemy.gameObject, spline, spline.distance / moveSpeed).
-                        setOnComplete(() => finished = true).// May want to fiddle with animation states here.
-						//setEase(LeanTweenType.easeInQuad).
+                        setOnStart(() =>
+                        {
+                            enemy.GetComponentInChildren<Animator>().SetTrigger("Walk");
+                        }).
+                        setOnComplete(() =>
+                        {
+                            finished = true;
+                            enemy.GetComponentInChildren<Animator>().SetTrigger("Cancel");
+                        }).
                         setOrientToPath(true);
                         //play audio
                         if (audio != null) {
@@ -140,8 +149,14 @@ public class EnemyTurn : MonoBehaviour
 				yield return new WaitForSeconds (.2f);
 				if (Vector3.Distance (AstarData.active.GetNearest (target.transform.position).position,
 					    AstarData.active.GetNearest (enemy.transform.position).position) <= 1f) {
-					target.TakeDamage (enemy.Atk);
-
+                    enemy.GetComponentInChildren<Animator>().SetTrigger("Attack");
+                    yield return new WaitForSeconds(1);
+                    if (audio != null)
+                    {
+                        audio.playSoundEffect(enemy.AttackSound);
+                    }
+                    target.TakeDamage (enemy.Atk);
+                    
 					Debug.Log (target.name);
 				}
                 manager.CheckGameOver();

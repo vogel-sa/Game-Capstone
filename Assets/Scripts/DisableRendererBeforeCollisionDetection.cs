@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(MeshRenderer))]
 public class DisableRendererBeforeCollisionDetection : MonoBehaviour {
 
 	/// <summary>
@@ -9,7 +8,7 @@ public class DisableRendererBeforeCollisionDetection : MonoBehaviour {
     /// </summary>
 	void FixedUpdate()
     {
-        GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<SkinnedMeshRenderer>().enabled = false;
         GetComponent<cakeslice.Outline>().enabled = false;
 	}
 }

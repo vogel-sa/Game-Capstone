@@ -12,10 +12,10 @@ public class LastKnownLocation : MonoBehaviour {
         set
         {
             _stats = value;
-            rend = stats.GetComponentInChildren<MeshRenderer>();
+            rend = stats.GetComponentInChildren<SkinnedMeshRenderer>();
         }
     }
-    private MeshRenderer rend;
+    private SkinnedMeshRenderer rend;
     private MeshRenderer myRend;
     Vector3 pos;
 	// Use this for initialization

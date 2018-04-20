@@ -153,6 +153,8 @@ ModelImporter:
     100290: joint9
     100292: transform1
     100294: transform2
+    100296: bone_hip
+    100298: root_joint
     400000: bone_ankle_l
     400002: bone_ankle_r
     400004: bone_arm_r
@@ -301,6 +303,8 @@ ModelImporter:
     400290: joint9
     400292: transform1
     400294: transform2
+    400296: bone_hip
+    400298: root_joint
     7400000: Take 001
     9500000: //RootNode
   externalObjects: {}
@@ -329,7 +333,35 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 78
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 
 [RequireComponent(typeof(SphereCollider), typeof(Light))]
 public class RaycastIfInLightSphere : MonoBehaviour
@@ -40,12 +41,12 @@ public class RaycastIfInLightSphere : MonoBehaviour
 #endif
     void OnTriggerStay(Collider col)
     {
-		if (LayerMask.LayerToName(col.gameObject.layer) == "Enemy" && !col.GetComponent<MeshRenderer>().enabled)
+		if (LayerMask.LayerToName(col.gameObject.layer) == "Enemy" && !col.GetComponentInChildren<SkinnedMeshRenderer>().enabled)
         {
             if (RaySweep(col))
             {
-                col.GetComponent<MeshRenderer>().enabled = true;
-                col.GetComponent<cakeslice.Outline>().enabled = true;
+                col.GetComponentsInChildren<SkinnedMeshRenderer>().ToList().ForEach(x => x.enabled = true);
+                col.GetComponentsInChildren<cakeslice.Outline>().ToList().ForEach(x => x.enabled = true);
             }
         }
     }
@@ -54,8 +55,8 @@ public class RaycastIfInLightSphere : MonoBehaviour
     {
 		if (LayerMask.LayerToName(col.gameObject.layer) == "Enemy")
         {
-            col.GetComponent<MeshRenderer>().enabled = false;
-            col.GetComponent<cakeslice.Outline>().enabled = false;
+            col.GetComponentsInChildren<SkinnedMeshRenderer>().ToList().ForEach(x => x.enabled = false);
+            col.GetComponentsInChildren<cakeslice.Outline>().ToList().ForEach(x => x.enabled = false);
         }
     }
 

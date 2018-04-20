@@ -199,12 +199,9 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
 
         GetComponent<DamageText>().displayText(dmg, 1.1f);
 		var audio = FindObjectOfType<TurnManager>().GetComponent<AudioManager>();
-		if (audio != null) {
-			audio.playSoundEffect(DamagedSound);
-		}
         if (CurrHP <= 0)
         {
-            Die();
+            StartCoroutine(Die());
         }
     }
 
@@ -233,21 +230,24 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
         lkl.stats = this;
     }
 
-    private void Die()
+    private IEnumerator Die()
     {
-        gameObject.SetActive(false);
         GetComponent<SingleNodeBlocker>().Unblock();
 		FindObjectOfType<PathManager>().enemies.Remove(GetComponent<SingleNodeBlocker>());
-		//eventually change to mark for removal
-		var audio = FindObjectOfType<TurnManager>().GetComponent<AudioManager>();
+        FindObjectOfType<TurnManager>().enemyList.Remove(this);
+        FindObjectOfType<TurnManager>().CheckGameOver();
+        var pm = FindObjectOfType<PathManager>();
+        pm.allies.Remove(GetComponent<SingleNodeBlocker>());
+
+        yield return new WaitForSeconds(1);
+        GetComponentInChildren<Animator>().SetBool("Die", true);
+        //eventually change to mark for removal
+        var audio = FindObjectOfType<TurnManager>().GetComponent<AudioManager>();
 		if (audio != null) {
 			audio.playSoundEffect(DeathSound);
 		}
-		FindObjectOfType<TurnManager>().enemyList.Remove (this);
-		FindObjectOfType<TurnManager>().CheckGameOver ();
-        var pm = FindObjectOfType<PathManager>();
-        pm.allies.Remove(GetComponent<SingleNodeBlocker>());
-        Destroy(lastKnownLocation);
+        yield return new WaitForSeconds(5);
+        gameObject.SetActive(false);
         
     }
 		

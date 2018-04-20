@@ -27,7 +27,7 @@ public class EnemyPortraitChanger : MonoBehaviour {
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Enemy")) && hit.transform.GetComponent<Renderer>().enabled == true)
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Enemy")) && hit.transform.GetComponentInChildren<Renderer>().enabled == true)
         {
             var obj = hit.transform;
             while (obj.parent && LayerMask.LayerToName(obj.parent.gameObject.layer) == "Enemy")

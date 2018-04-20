@@ -2541,7 +2541,7 @@ GameObject:
   - component: {fileID: 135106612766172740}
   - component: {fileID: 114828972200036412}
   - component: {fileID: 114529010198347052}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: Player Light
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -7982,7 +7982,7 @@ Animator:
   m_GameObject: {fileID: 1708227904627704}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 1ff928d6933b539409b5d59bf39d88c5, type: 3}
-  m_Controller: {fileID: 9100000, guid: b6ffe34f25a51a8408a3be6c8356fec2, type: 2}
+  m_Controller: {fileID: 9100000, guid: c6ec08e2081dff843aae8ae4f06e7b56, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -8322,7 +8322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 2
   segments: 90
-  lightIntensity: 2
+  lightIntensity: 3.5
   raycastIgnore:
     serializedVersion: 2
     m_Bits: 1028

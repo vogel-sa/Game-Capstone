@@ -271,18 +271,18 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
         manager.playerList.Remove(this);
         var pm = FindObjectOfType<PathManager>();
         pm.allies.Remove(GetComponent<SingleNodeBlocker>());
-        gameObject.SetActive(false);
-        manager.CheckGameOver();
-        GetComponentInChildren<Animator>().SetTrigger("Die");
+        
+        GetComponentInChildren<Animator>().SetBool("Die", true);
         yield return new WaitForSeconds(1);
 
 		if (audio != null) {
 			audio.playSoundEffect (DeathSound);
 		}
         yield return new WaitForSeconds(5);
-        
+        gameObject.SetActive(false);
+        manager.CheckGameOver();    
         //Destroy(this.gameObject);
-        
+
     }
 
 	public void CheckCharacterCannotMove()

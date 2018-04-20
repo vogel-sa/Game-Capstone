@@ -8148,7 +8148,7 @@ MonoBehaviour:
   hasMoved: 0
   _maxActions: 1
   _actionsleft: 1
-  _portrait: {fileID: 2800000, guid: 632ccb68b00d9034c944617507687eda, type: 3}
+  _portrait: {fileID: 2800000, guid: ea24740264ac6274b82d18725f733302, type: 3}
   _movementSound: {fileID: 8300000, guid: 69424ed1a7422fd49a52f3f060d73427, type: 3}
   _deathSound: {fileID: 0}
   _damageSound: {fileID: 8300000, guid: 50a26196edfb0024ba812b9eff9026bc, type: 3}
@@ -8263,7 +8263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 2
   segments: 90
-  lightIntensity: 2
+  lightIntensity: 3.5
   raycastIgnore:
     serializedVersion: 2
     m_Bits: 1028
@@ -8287,7 +8287,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 532f4069571aee1499cf5a562c646447, type: 3}
     m_FontSize: 10
     m_FontStyle: 0
     m_BestFit: 1

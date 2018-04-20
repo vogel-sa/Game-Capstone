@@ -1,19 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using UnityEngine.SceneManagement;
 
 public class ObjectiveMarker : MonoBehaviour {
 
-	[SerializeField]
-	private int numCharacters;
+	private int numCharacters
+    {
+        get
+        {
+            return FindObjectsOfType<PlayerCharacterStats>()
+                .ToList()
+                .Where(x => x.CurrHP > 0)
+                .Count();
+        }
+    }
 	[SerializeField]
 	HashSet<PlayerCharacterStats> charactersInObjective = new HashSet<PlayerCharacterStats>();
 	[SerializeField]
 	private GameObject VictoryScreen;
 
 
-	void OnTriggerEnter(Collider col)
+    void OnTriggerEnter(Collider col)
 	{
 		if (col.gameObject.tag == "Player")
 			charactersInObjective.Add (col.GetComponentInParent<PlayerCharacterStats>());

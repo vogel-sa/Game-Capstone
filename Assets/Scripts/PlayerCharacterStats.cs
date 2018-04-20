@@ -245,6 +245,7 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
     {
         if (MitigationValue <= damage)
         {
+            GetComponentInChildren<Animator>().SetTrigger("TakeDamage");
             var dmgtaken = damage - MitigationValue;
 			var audio = GetComponent<AudioManager>();
 			if (audio != null) {
@@ -257,23 +258,31 @@ public class PlayerCharacterStats : MonoBehaviour, ICharacterStats
             CurrHP = Math.Max(CurrHP - dmgtaken, 0);
             if (IsDead())
             {
-                DeadCleanup();
+                StartCoroutine(DeadCleanup());
             }
         }
     }
 
 
-    public void DeadCleanup() {
+    public IEnumerator DeadCleanup() {
+
         var manager = FindObjectOfType<TurnManager>();
 		var audio = manager.GetComponent<AudioManager>();
-		if (audio != null) {
-			audio.playSoundEffect (DeathSound);
-		}
         manager.playerList.Remove(this);
         var pm = FindObjectOfType<PathManager>();
         pm.allies.Remove(GetComponent<SingleNodeBlocker>());
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
         manager.CheckGameOver();
+        GetComponentInChildren<Animator>().SetTrigger("Die");
+        yield return new WaitForSeconds(1);
+
+		if (audio != null) {
+			audio.playSoundEffect (DeathSound);
+		}
+        yield return new WaitForSeconds(5);
+        
+        //Destroy(this.gameObject);
+        
     }
 
 	public void CheckCharacterCannotMove()

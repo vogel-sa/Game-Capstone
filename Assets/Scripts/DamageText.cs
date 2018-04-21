@@ -16,7 +16,14 @@ public class DamageText : MonoBehaviour {
 
     public void displayText(int damage, float time)
     {
-        if ((gameObject.tag =="Player"  || gameObject.tag == "Enemy") && GetComponentInChildren<MeshRenderer>().enabled)
+        if ((gameObject.tag =="Player"))
+        {
+            if (GetComponentInChildren<MeshRenderer>().enabled)
+            {
+                StartCoroutine(displayCoRoutine(damage, time));
+            }
+        }
+        else if((gameObject.tag == "Enemy" && GetComponentInChildren<SkinnedMeshRenderer>().enabled))
         {
             StartCoroutine(displayCoRoutine(damage, time));
         }

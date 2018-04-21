@@ -463,6 +463,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4779866266064536}
   - component: {fileID: 95190359518016742}
+  - component: {fileID: 136905958425388986}
+  - component: {fileID: 54770961318449066}
   m_Layer: 11
   m_Name: enemy_rig
   m_TagString: Untagged
@@ -872,24 +874,6 @@ GameObject:
   - component: {fileID: 4158698583141584}
   m_Layer: 11
   m_Name: bone_cheek_l
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1369878809339970
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4858801162627290}
-  - component: {fileID: 33519465557281148}
-  - component: {fileID: 136906241859016708}
-  - component: {fileID: 54177407469349590}
-  m_Layer: 11
-  m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2379,7 +2363,6 @@ Transform:
   m_LocalPosition: {x: -9.8, y: 0, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4858801162627290}
   - {fileID: 224392801200746820}
   - {fileID: 4779866266064536}
   m_Father: {fileID: 0}
@@ -3980,7 +3963,7 @@ Transform:
   - {fileID: 4540155597246266}
   - {fileID: 4910107888839706}
   m_Father: {fileID: 4009812802009128}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4787917894590130
 Transform:
@@ -4105,19 +4088,6 @@ Transform:
   m_Children:
   - {fileID: 4525466835324840}
   m_Father: {fileID: 4272962143241588}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4858801162627290
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1369878809339970}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4009812802009128}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4877034709779694
@@ -4471,19 +4441,12 @@ Transform:
   m_Father: {fileID: 4453431117161046}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &33519465557281148
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1369878809339970}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54177407469349590
+--- !u!54 &54770961318449066
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1369878809339970}
+  m_GameObject: {fileID: 1175926368437724}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -4491,7 +4454,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 14
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!95 &95190359518016742
 Animator:
@@ -4704,19 +4667,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2267b303e8df6914eb985274a6a4399e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &136906241859016708
+--- !u!136 &136905958425388986
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1369878809339970}
+  m_GameObject: {fileID: 1175926368437724}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!137 &137220928266936566
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -5011,7 +4974,7 @@ RectTransform:
   m_Children:
   - {fileID: 224138401084449620}
   m_Father: {fileID: 4009812802009128}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

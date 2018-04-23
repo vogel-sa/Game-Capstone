@@ -246,7 +246,7 @@ public class EnemyStats : MonoBehaviour, ICharacterStats
 		if (audio != null) {
 			audio.playSoundEffect(DeathSound);
 		}
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
         gameObject.SetActive(false);
         
     }

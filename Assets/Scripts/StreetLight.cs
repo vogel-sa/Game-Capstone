@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(Light), typeof(ConeCollider))]
+[RequireComponent(typeof(Light))]
 public class StreetLight : MonoBehaviour {
 
 	Light lt;
 	VolumetricLight vl;
 	ConeCollider cone;
 
-	[SerializeField, Range(.01f, 179f)]
-	private int angle = 30;
+    [SerializeField, Range(.01f, 179f)]
+    private int angle;
 	public int Angle
 	{ get
 		{
@@ -23,8 +23,8 @@ public class StreetLight : MonoBehaviour {
 			lt.spotAngle = value;
 		}
 	}
-	[SerializeField]
-	private float range = 10;
+    [SerializeField]
+    private float range;
 	public float Range
 	{
 		get
@@ -39,16 +39,18 @@ public class StreetLight : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-		cone = GetComponent<ConeCollider>();
-		if (!cone) cone = gameObject.AddComponent<ConeCollider>();
-		lt = GetComponent<Light>();
-		if (!lt) lt = gameObject.AddComponent<Light>();
-		vl = GetComponent<VolumetricLight> ();
-		if (!vl) vl = gameObject.AddComponent<VolumetricLight> ();
-		cone.Angle = angle / 2;
-		cone.Distance = range;
-		cone.IsTrigger = true;
-		cone.Init();
+        //cone = GetComponent<ConeCollider>();
+        //if (!cone) cone = gameObject.AddComponent<ConeCollider>();
+        //lt = GetComponent<Light>();
+        //if (!lt) lt = gameObject.AddComponent<Light>();
+        //vl = GetComponent<VolumetricLight>();
+        //if (!vl) vl = gameObject.AddComponent<VolumetricLight>();
+        //cone.Angle = angle;
+        //cone.Distance = range / 2;
+        //cone.IsTrigger = true;
+        //cone.Init();
+
+        //transform.rotation = Quaternion.Euler(90, 0, 0);
 	}
 	
 	// Update is called once per frame
